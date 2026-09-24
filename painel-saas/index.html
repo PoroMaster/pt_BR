@@ -70,7 +70,7 @@ button{cursor:pointer}
 aside{background:var(--side);color:var(--side-ink);padding-block:20px;padding-inline:14px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow:auto}
 aside .brand{color:#fff;font-size:18px;padding-inline:6px}
 .ws-switch{width:100%;display:flex;align-items:center;gap:10px;background:var(--side-active);border:1px solid #243452;border-radius:10px;padding:8px 10px;color:#fff;text-align:left}
-.ws-dot{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:600;color:#0b1220;flex:none}
+.ws-dot{width:26px;height:26px;border-radius:7px;object-fit:cover;display:grid;place-items:center;font-weight:600;color:#0b1220;flex:none}
 .ws-switch small{display:block;color:var(--side-ink-2);font-size:11px}
 .ws-menu{display:grid;gap:4px;background:var(--side-active);border-radius:10px;padding:6px}
 .ws-menu button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:6px 8px;border-radius:6px;text-align:left}
@@ -100,7 +100,11 @@ main{padding-block:28px 48px;padding-inline:clamp(16px,3vw,40px);min-width:0}
 .kpi .d{font-size:12px;color:var(--ink-3)}
 .up{color:var(--ok)} .down{color:var(--bad)}
 
-.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;color:#fff}
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;color:#fff;object-fit:cover;background:var(--panel-2)}
+img.avatar.icon{background:#0a1a1d;object-fit:contain}
+.emb{width:22px;height:22px;object-fit:contain;flex:none}
+.kpi-ico{width:34px;height:34px;object-fit:contain;float:right}
+.big-emb{width:76px;height:76px;object-fit:contain;margin-left:auto}
 .who{display:flex;align-items:center;gap:10px;min-width:0}
 .who b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .who small{color:var(--ink-3);display:block}
@@ -114,7 +118,7 @@ tbody tr.click{cursor:pointer}
 tbody tr.click:hover{background:var(--panel-2)}
 td.r,th.r{text-align:right}
 
-.rank{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.04em;padding:2px 9px;border-radius:999px;background:var(--gold-soft);color:var(--gold);white-space:nowrap}
+.rank{display:inline-flex;align-items:center;gap:5px;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.04em;padding:1px 10px 1px 3px;border-radius:999px;background:var(--gold-soft);color:var(--gold);white-space:nowrap}
 .pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--panel-2);color:var(--ink-2);white-space:nowrap}
 .pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.teal{background:var(--teal-soft);color:var(--teal)}
 .pos{font-family:var(--mono);color:var(--ink-3);width:28px}
@@ -139,7 +143,8 @@ td.r,th.r{text-align:right}
 
 .inline-num{width:90px;border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:5px 8px;text-align:right;font-family:var(--mono)}
 .ladder{display:flex;flex-wrap:wrap;gap:8px}
-.ladder div{border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:110px}
+.ladder div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:120px;display:grid;justify-items:center;text-align:center;gap:2px}
+.ladder img{width:56px;height:56px;object-fit:contain}
 .ladder b{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--gold);display:block}
 
 .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -216,7 +221,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "forja-dados-v1";
+const STORE = "forja-dados-v2";
 let db = null, seed = null, session = { conta: null, ws: null, view: "inicio" };
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -224,7 +229,18 @@ const fmt = n => n.toLocaleString("pt-BR");
 const PALETTE = ["#b8862b","#2f8f84","#6a5acd","#c0504d","#3f7cc0","#8a6d3b","#4c9a5a","#a35d9a","#5d6f8a"];
 function color(id){ let h=0; for(const c of id) h=(h*31+c.charCodeAt(0))>>>0; return PALETTE[h%PALETTE.length]; }
 function initials(n){ return n.split(/\s+/).map(p=>p[0]).join("").slice(0,2).toUpperCase(); }
-function avatar(m, size){ return `<span class="avatar" style="background:${color(m.id||m.nome)}${size?`;width:${size}px;height:${size}px`:""}">${esc(initials(m.nome))}</span>`; }
+const BASE = /\/painel-saas\//.test(location.pathname) ? "../" : "";
+const src = p => esc(BASE + p);
+function avatar(m, size){
+  const dim = size ? `width:${size}px;height:${size}px;` : "";
+  if (m.foto) return `<img class="avatar" src="${src(m.foto)}" alt="" style="${dim}" loading="lazy">`;
+  const ico = m.setor && ws() && ws().setores && ws().setores[m.setor];
+  if (ico) return `<img class="avatar icon" src="${src(ico)}" alt="" style="${dim}" loading="lazy">`;
+  return `<span class="avatar" style="background:${color(m.id||m.nome)};${dim}">${esc(initials(m.nome))}</span>`;
+}
+function rankChip(r){ return `<span class="rank">${r.img?`<img class="emb" src="${src(r.img)}" alt="">`:""}${esc(r.nome)}</span>`; }
+function wsDot(w, px){ const d=px?`width:${px}px;height:${px}px;font-size:11px;`:""; return w.logo ? `<img class="ws-dot" src="${src(w.logo)}" alt="" style="${d}">` : `<span class="ws-dot" style="background:${w.cor};${d}">${esc(w.nome[0])}</span>`; }
+function ico(c,k){ return c.icones && c.icones[k] ? `<img class="kpi-ico" src="${src(c.icones[k])}" alt="">` : ""; }
 function when(iso){
   const d = new Date(iso), now = new Date("2026-09-24T18:00:00");
   const h = Math.round((now - d) / 36e5);
@@ -276,8 +292,8 @@ const VIEWS = [
 function render(){
   const c = ws(), me = meIn(c), adm = isAdmin(c);
   if(VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
-  $("#ws-btn").innerHTML = `<span class="ws-dot" style="background:${c.cor}">${esc(c.nome[0])}</span><span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
-  $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}"><span class="ws-dot" style="background:${w.cor};width:20px;height:20px;font-size:11px">${esc(w.nome[0])}</span>${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:20px;text-align:center">+</span>Criar comunidade</button>`;
+  $("#ws-btn").innerHTML = `${wsDot(c)}<span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
+  $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}">${wsDot(w,20)}${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:20px;text-align:center">+</span>Criar comunidade</button>`;
   const p = pending(c).length;
   let navHtml = `<div class="label">Comunidade</div>`;
   for(const v of VIEWS.filter(v=>!v.admin)) navHtml += navBtn(v, v.id==="verificacoes"&&p?p:0);
@@ -289,7 +305,7 @@ function render(){
   $("#side").classList.remove("open");
   bindView(c);
 }
-function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><span style="width:18px;text-align:center;opacity:.8">${v.ico}</span>${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
+function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><span style="min-width:18px;text-align:center;opacity:.8;white-space:nowrap">${v.ico}</span>${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
 
 document.addEventListener("click", e=>{
   const v = e.target.closest("[data-view]"); if(v){ session.view=v.dataset.view; render(); window.scrollTo(0,0); return; }
@@ -326,10 +342,10 @@ function vInicio(c){
   const me=meIn(c), {r,next}=rankOf(c,me.pontos);
   return head(`Olá, ${esc(me.nome)}`, `Resumo da ${esc(c.nome)} na semana de ${weekLabels(tot.length).at(-1)}.`) +
   `<div class="grid kpis">
-    <div class="card kpi"><div class="label">Pontos na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
+    <div class="card kpi">${ico(c,"pontos")}<div class="label">Pontos na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
     <div class="card kpi"><div class="label">Membros ativos</div><div class="v">${ativos}<span style="font-size:16px;color:var(--ink-3)">/${c.membros.length}</span></div><div class="d">pontuaram nesta semana</div></div>
-    <div class="card kpi"><div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
-    <div class="card kpi"><div class="label">Seu rank</div><div class="v" style="font-size:20px;margin-top:10px"><span class="rank">${esc(r.nome)}</span></div><div class="d">${next?`faltam ${fmt(next.min-me.pontos)} pts para ${esc(next.nome)}`:"rank máximo"}</div></div>
+    <div class="card kpi">${ico(c,"pendente")}<div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
+    <div class="card kpi"><div class="label">Seu rank</div><div class="v" style="font-size:20px;margin-top:10px">${rankChip(r)}</div><div class="d">${next?`faltam ${fmt(next.min-me.pontos)} pts para ${esc(next.nome)}`:"rank máximo"}</div></div>
   </div>
   <div class="grid two" style="margin-top:16px">
     <div class="card"><h2>Pontos da equipe por semana <span class="label">últimas 8 semanas</span></h2>${chart(tot)}</div>
@@ -351,7 +367,7 @@ function vRanking(c){
     <tbody>${list.map((m,i)=>{ const {r}=rankOf(c,m.pontos); return `<tr class="click" data-member="${m.id}">
       <td class="pos ${i<3?"top":""}">${i+1}</td>
       <td><div class="who">${avatar(m)}<span><b>${esc(m.nome)}</b><small>${esc(m.setor)}</small></span></div></td>
-      <td><span class="rank">${esc(r.nome)}</span></td>
+      <td>${rankChip(r)}</td>
       <td class="hide-sm"><div class="bar"><i style="width:${(m.pontos/max*100).toFixed(1)}%"></i></div></td>
       <td class="r num up">+${fmt(m.semanas.at(-1))}</td>
       <td class="r num">${fmt(m.pontos)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
@@ -392,8 +408,8 @@ function memberDetail(c,m){
   const spark = (()=>{ const v=m.semanas, mx=Math.max(...v)||1, W=300,H=48; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`).join(" ");
     const [lx,ly]=pts.split(" ").at(-1).split(","); return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="48" aria-label="Pontos por semana"><polygon points="0,${H} ${pts} ${W},${H}" style="fill:var(--gold-soft)"/><polyline points="${pts}" style="fill:none;stroke:var(--gold);stroke-width:2"/><circle cx="${lx}" cy="${ly}" r="3.5" style="fill:var(--gold)"/></svg>`; })();
   return `<div class="grid" style="gap:18px">
-    <div class="top" style="display:flex;align-items:center;gap:14px">${avatar(m,56)}<div><h2 style="font-size:20px;margin:0">${esc(m.nome)}</h2><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="rank">${esc(r.nome)}</span><span class="pill teal">${esc(m.setor)}</span><span class="pill">${esc(m.cargo)}</span></div></div></div>
-    <div class="stats"><div><span class="label">Pontos</span><b>${fmt(m.pontos)}</b></div><div><span class="label">Posição</span><b>${pos}º</b></div><div><span class="label">${esc(c.moeda)}</span><b>${fmt(m.moedas)}</b></div></div>
+    <div class="top" style="display:flex;align-items:center;gap:14px">${avatar(m,56)}<div><h2 style="font-size:20px;margin:0">${esc(m.nome)}</h2><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">${rankChip(r)}<span class="pill teal">${esc(m.setor)}</span><span class="pill">${esc(m.cargo)}</span></div></div>${r.img?`<img class="big-emb" src="${src(r.img)}" alt="Emblema ${esc(r.nome)}">`:""}</div>
+    <div class="stats"><div><span class="label">Pontos</span><b>${fmt(m.pontos)}</b></div><div><span class="label">Posição</span><b>${pos}º</b></div><div><span class="label">${esc(c.moeda)}</span><b style="display:flex;align-items:center;gap:6px">${c.icones&&c.icones.moeda?`<img src="${src(c.icones.moeda)}" alt="" style="width:22px;height:22px">`:""}${fmt(m.moedas)}</b></div></div>
     <div class="usage"><div style="display:flex;justify-content:space-between"><span class="label">Progresso para ${next?esc(next.nome):"o topo"}</span><span class="num">${pct}%</span></div><div class="bar"><i style="width:${pct}%"></i></div><span class="note">${next?`${fmt(next.min-m.pontos)} pontos restantes`:"Rank máximo alcançado"}</span></div>
     <div><span class="label">Últimas 8 semanas</span>${spark}</div>
     <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
@@ -425,7 +441,7 @@ function vMembros(c){
       <td><button class="who" data-member="${m.id}" style="background:none;border:0;padding:0;text-align:left">${avatar(m)}<span><b>${esc(m.nome)}</b><small>desde ${m.desde.slice(0,4)}</small></span></button></td>
       <td><select data-role="${m.id}" aria-label="Cargo de ${esc(m.nome)}" style="border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:4px" ${m.cargo==="Dono"?"disabled":""}>${["Dono","Admin","Membro"].map(r=>`<option ${r===m.cargo?"selected":""} ${r==="Dono"&&m.cargo!=="Dono"?"disabled":""}>${r}</option>`).join("")}</select></td>
       <td><span class="pill teal">${esc(m.setor)}</span></td>
-      <td><span class="rank">${esc(rankOf(c,m.pontos).r.nome)}</span></td>
+      <td>${rankChip(rankOf(c,m.pontos).r)}</td>
       <td class="r"><input class="inline-num" type="number" min="0" step="10" value="${m.pontos}" data-pts="${m.id}" aria-label="Pontos de ${esc(m.nome)}"></td></tr>`).join("")}</tbody>
   </table></div></div>`;
 }
@@ -437,7 +453,7 @@ function vRegras(c){
     <thead><tr><th>Ação</th><th>Setor</th><th class="r">Pontos</th></tr></thead>
     <tbody>${c.regras.map(r=>`<tr><td>${esc(r.acao)}</td><td><span class="pill teal">${esc(r.setor)}</span></td><td class="r"><input class="inline-num" type="number" min="0" value="${r.pontos}" data-rule="${r.id}" aria-label="Pontos para ${esc(r.acao)}"></td></tr>`).join("")}</tbody>
   </table></div></div>
-  <div class="card"><h2>Escada de ranks</h2><div class="ladder">${c.ranks.map(k=>`<div><b>${esc(k.nome)}</b><span class="num note">${fmt(k.min)}+ pts</span> <span class="note">· ${c.membros.filter(m=>rankOf(c,m.pontos).r===k).length} membros</span></div>`).join("")}</div></div>
+  <div class="card"><h2>Escada de ranks</h2><div class="ladder">${c.ranks.map(k=>`<div>${k.img?`<img src="${src(k.img)}" alt="">`:""}<b>${esc(k.nome)}</b><span class="num note">${fmt(k.min)}+ pts</span><span class="note">${c.membros.filter(m=>rankOf(c,m.pontos).r===k).length} membros</span></div>`).join("")}</div></div>
   </div>`;
 }
 
