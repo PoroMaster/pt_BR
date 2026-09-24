@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="br">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Painel - Login</title>
+<link rel="icon" href="image/tester.ico">
+<link href="css/bootstrap-admin.css" rel="stylesheet">
+<link rel="stylesheet" href="font-awesome/css/all.css">
+<style>
+body { background: #101010; min-height: 100vh; display: flex; align-items: center; justify-content: center; margin: 0; }
+#login-box { width: 320px; padding: 30px; background: #222; border-radius: 12px; color: #ddd; box-shadow: 0 0 20px #000; }
+#login-box h3 { text-align: center; margin: 0 0 20px; }
+#login-box .form-control { margin-bottom: 12px; }
+#login-error-msg { color: #d9534f; text-align: center; opacity: 0; margin-top: 10px; }
+</style>
+</head>
+<body>
+<div id="login-box">
+<h3><i class="fa fa-lock"></i> Painel PoroMaster</h3>
+<form id="login-form">
+<input type="text" name="username" class="form-control" placeholder="Usuário" autocomplete="username">
+<input type="password" name="password" class="form-control" placeholder="Senha" autocomplete="current-password">
+<button type="submit" id="login-form-submit" class="btn btn-primary btn-block">Entrar</button>
+</form>
+<p id="login-error-msg">Usuário ou senha inválidos</p>
+</div>
+<script src="fantome-fantom.js"></script>
+</body>
+</html>

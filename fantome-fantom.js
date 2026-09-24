@@ -64,7 +64,7 @@ var tester = "Tester"
 var designer = "Designer"
 
 // Verificação
-const urlhref = "https://modskinbr.github.io/L.S.P.-UT/verification.html"
+const urlhref = "verification.html"
 
 // Url do Perfil //
 var url = "image/Profile/"
@@ -243,7 +243,7 @@ const ID05 = {
 };
 
 // Login //
-loginButton.addEventListener("click", (e) => {
+if (loginButton) loginButton.addEventListener("click", (e) => {
     e.preventDefault();
     const username = loginForm.username.value;
     const password = loginForm.password.value;

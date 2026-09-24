@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="pt"><head>
+  <script defer="" src="fantome-fantom.js"></script>
+    <link href="css/bootstrap-admin.css" rel="stylesheet">
+    <link rel="icon" href="image/tester.ico">
+    <title>Verificação</title>
+    <!-- Add custom CSS here -->
+    <link href="css/sb-admin.css" rel="stylesheet">
+    <link rel="stylesheet" href="font-awesome/css/all.css">
+  </head>
+<body>
+<style>
+.loader {
+  border: 5px solid #f3f3f3;
+  border-radius: 100%;
+  border-top: 5px solid gray;
+  width: 20px;
+  height: 20px;
+  -webkit-animation: spin 1s linear infinite; /* Safari */
+  animation: spin 1s linear infinite;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+  0% { -webkit-transform: rotate(0deg); }
+  100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+i {
+    width: 20px;
+    height: 15px;
+    text-align: center;
+ }
+</style>
+<div style="
+    background: black;
+    color: #f3f3f3;
+    position: fixed;
+    width: -webkit-fill-available;
+    height: -webkit-fill-available;
+    display: grid;
+    align-content: space-around;
+    justify-content: center;
+    font-size: 25px;
+    text-align: -webkit-center;
+    font-family: cursive;
+    margin-top: -50px;
+"><div>
+<p id="text_con" style="
+    background-color: #232222;
+    border-radius: 50px;
+">Terminando...</p>
+<div style="
+    background: #3f3e3e;
+    border-radius: 10px;
+    width: 300px;
+    height: 300px;
+">
+     <img src="image/tester.ico" style="width: 64px;"><h6 class="loader" style="
+"></h6><p>Validando Informaçoes</p>
+ <p>Aguarde um Momento...</p><i class="fa fa-user" style="
+    color: lightseagreen;
+"></i><p id="name_user"></p></div>
+</div></div>
+              <script>
+let timeout;
+mF();
+function mF() {
+document.getElementById("text_con").innerText = "Validando...";
+timeout = setTimeout(profile, 5000);
+}
+const en = localStorage["userdate"];
+const br = localStorage["data1"];
+const user = br + "\n" + en;
+const valir = localStorage["validate"];
+function profile() {
+if ( valir == null ) {
+document.getElementById("text_con").innerText = "Voce esta acessando uma pagina invalida!";
+document.getElementById("name_user").innerText = "Redirecionando... (5s)";
+document.getElementById("text_con").style.width = "510px";
+timeout = setTimeout(time4, 1000);
+} else {
+document.getElementById("text_con").innerText = "Verificado!";
+timeout = setTimeout(tF, 5000);
+}
+}
+
+function time4(){
+document.getElementById("name_user").innerText = "Redirecionando... (4s)";
+timeout = setTimeout(time3, 1000);
+}
+function time3(){
+document.getElementById("name_user").innerText = "Redirecionando... (3s)";
+timeout = setTimeout(time2, 1000);
+}
+function time2(){
+document.getElementById("name_user").innerText = "Redirecionando... (2s)";
+timeout = setTimeout(time1, 1000);
+}
+function time1(){
+document.getElementById("name_user").innerText = "Redirecionando... (1s)";
+timeout = setTimeout(time0, 1000);
+}
+function time0(){
+document.getElementById("name_user").innerText = "Redirecionando... (0s)";
+location.href = "login.html";
+}
+
+function tF() {
+document.getElementById("text_con").innerText = "Terminando...";
+document.getElementById("name_user").innerText = user;
+timeout = setTimeout(endx, 5000);
+}
+
+function endx() {
+location.href = "painel.html";
+}
+              </script>
+  
+
+</body></html>
