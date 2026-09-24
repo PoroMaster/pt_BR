@@ -1,0 +1,91 @@
+{
+  "_nota": "Banco de dados de exemplo do protótipo. Pessoas, pontos e atividades são fictícios, inspirados no painel L.S.P. UT original.",
+  "contas": [
+    { "id": "u1", "nome": "Luckey", "email": "luckey@poromaster.dev" },
+    { "id": "u2", "nome": "Jake", "email": "jake@poromaster.dev" },
+    { "id": "u3", "nome": "Khyago", "email": "khyago@poromaster.dev" }
+  ],
+  "comunidades": [
+    {
+      "id": "poromaster",
+      "nome": "PoroMaster",
+      "descricao": "Equipe do ModSkin brasileiro",
+      "plano": "pro",
+      "cor": "#c8a24a",
+      "moeda": "Moedas",
+      "ranks": [
+        { "nome": "Ferro", "min": 0 },
+        { "nome": "Bronze", "min": 100 },
+        { "nome": "Prata", "min": 250 },
+        { "nome": "Ouro", "min": 500 },
+        { "nome": "Platina", "min": 900 },
+        { "nome": "Diamante", "min": 1400 },
+        { "nome": "Mestre", "min": 2000 },
+        { "nome": "Grão-Mestre", "min": 2800 },
+        { "nome": "Desafiante", "min": 3800 }
+      ],
+      "regras": [
+        { "id": "r1", "acao": "Verificação de campeão aprovada", "pontos": 40, "setor": "Testadores" },
+        { "id": "r2", "acao": "Bug reportado e confirmado", "pontos": 25, "setor": "Testadores" },
+        { "id": "r3", "acao": "Tarefa do dia concluída", "pontos": 10, "setor": "Testadores" },
+        { "id": "r4", "acao": "Divulgação em rede social", "pontos": 15, "setor": "Academia" },
+        { "id": "r5", "acao": "Vídeo mostrando o ModSkin", "pontos": 80, "setor": "Academia" },
+        { "id": "r6", "acao": "Ajuda a usuário no suporte", "pontos": 8, "setor": "Federativa" },
+        { "id": "r7", "acao": "Participação em evento", "pontos": 20, "setor": "Federativa" }
+      ],
+      "membros": [
+        { "id": "m1", "conta": "u1", "nome": "Luckey", "cargo": "Dono", "setor": "Dev", "pontos": 4120, "moedas": 860, "semanas": [210, 260, 190, 320, 280, 350, 300, 410], "desde": "2022-01-15" },
+        { "id": "m2", "nome": "Bruch", "cargo": "Admin", "setor": "Dev", "pontos": 2950, "moedas": 540, "semanas": [150, 120, 180, 200, 160, 230, 210, 190], "desde": "2022-01-20" },
+        { "id": "m3", "conta": "u2", "nome": "Jake", "cargo": "Admin", "setor": "Moderação", "pontos": 1780, "moedas": 310, "semanas": [90, 110, 100, 140, 120, 95, 130, 150], "desde": "2022-02-03" },
+        { "id": "m4", "nome": "Finger", "cargo": "Membro", "setor": "Suporte", "pontos": 1210, "moedas": 220, "semanas": [60, 80, 70, 95, 110, 85, 90, 120], "desde": "2022-02-11" },
+        { "id": "m5", "nome": "Kawai Foxxy", "cargo": "Membro", "setor": "Suporte", "pontos": 980, "moedas": 190, "semanas": [40, 70, 65, 80, 60, 90, 75, 88], "desde": "2022-03-01" },
+        { "id": "m6", "conta": "u3", "nome": "Khyago", "cargo": "Membro", "setor": "Testadores", "pontos": 1540, "moedas": 280, "semanas": [120, 90, 140, 100, 150, 130, 160, 170], "desde": "2022-02-24" },
+        { "id": "m7", "nome": "TaikunX3", "cargo": "Membro", "setor": "Testadores", "pontos": 640, "moedas": 110, "semanas": [30, 55, 40, 60, 45, 70, 50, 65], "desde": "2022-05-09" },
+        { "id": "m8", "nome": "imnotChinna", "cargo": "Membro", "setor": "Criadores", "pontos": 2230, "moedas": 400, "semanas": [80, 240, 60, 90, 320, 70, 110, 260], "desde": "2022-04-18" },
+        { "id": "m9", "nome": "Hatcubinho", "cargo": "Membro", "setor": "Apoiadores", "pontos": 310, "moedas": 60, "semanas": [0, 20, 30, 10, 40, 25, 35, 30], "desde": "2022-08-02" }
+      ],
+      "envios": [
+        { "id": "e1", "membro": "m7", "regra": "r1", "detalhe": "Ahri — Espírito Florescente: cromas e VFX conferidos", "quando": "2026-09-24T14:10:00", "status": "pendente" },
+        { "id": "e2", "membro": "m6", "regra": "r2", "detalhe": "Skin de Aphelios some ao trocar de croma no lobby", "quando": "2026-09-24T11:42:00", "status": "pendente" },
+        { "id": "e3", "membro": "m8", "regra": "r5", "detalhe": "Vídeo \"Top 10 skins do patch\" com link para download", "quando": "2026-09-23T21:05:00", "status": "pendente" },
+        { "id": "e4", "membro": "m5", "regra": "r6", "detalhe": "Resolveu erro de instalação de 3 usuários no Discord", "quando": "2026-09-23T18:30:00", "status": "pendente" },
+        { "id": "e5", "membro": "m4", "regra": "r4", "detalhe": "Post no grupo de LoL do Facebook", "quando": "2026-09-22T16:00:00", "status": "aprovado" }
+      ],
+      "atividade": [
+        { "quando": "2026-09-24T09:15:00", "texto": "Khyago subiu para Diamante" },
+        { "quando": "2026-09-23T22:40:00", "texto": "Jake aprovou 4 verificações de Finger" },
+        { "quando": "2026-09-23T20:00:00", "texto": "Versão 13.6.1 publicada por Luckey" },
+        { "quando": "2026-09-22T16:05:00", "texto": "Finger ganhou 15 pontos por divulgação" }
+      ]
+    },
+    {
+      "id": "tradutores",
+      "nome": "Tradutores ModSkin",
+      "descricao": "Equipe que traduz o site e o cliente",
+      "plano": "gratis",
+      "cor": "#2bb5a6",
+      "moeda": "Créditos",
+      "ranks": [
+        { "nome": "Aprendiz", "min": 0 },
+        { "nome": "Tradutor", "min": 150 },
+        { "nome": "Revisor", "min": 400 },
+        { "nome": "Coordenador", "min": 900 }
+      ],
+      "regras": [
+        { "id": "t1", "acao": "Página traduzida", "pontos": 30, "setor": "Tradução" },
+        { "id": "t2", "acao": "Revisão de tradução", "pontos": 15, "setor": "Revisão" }
+      ],
+      "membros": [
+        { "id": "n1", "conta": "u1", "nome": "Luckey", "cargo": "Dono", "setor": "Coordenação", "pontos": 520, "moedas": 90, "semanas": [40, 60, 30, 70, 50, 80, 60, 90], "desde": "2022-11-15" },
+        { "id": "n2", "nome": "Diogo Teixeira", "cargo": "Membro", "setor": "Espanhol", "pontos": 460, "moedas": 70, "semanas": [30, 50, 60, 40, 70, 55, 65, 80], "desde": "2022-11-15" },
+        { "id": "n3", "nome": "Selin", "cargo": "Membro", "setor": "Turco", "pontos": 180, "moedas": 25, "semanas": [0, 10, 20, 30, 15, 35, 30, 40], "desde": "2022-12-01" }
+      ],
+      "envios": [
+        { "id": "f1", "membro": "n2", "regra": "t1", "detalhe": "FAQ traduzido para es_AR", "quando": "2026-09-24T10:00:00", "status": "pendente" }
+      ],
+      "atividade": [
+        { "quando": "2026-09-24T10:00:00", "texto": "Diogo Teixeira enviou o FAQ em espanhol" }
+      ]
+    }
+  ]
+}

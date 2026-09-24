@@ -1,0 +1,491 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Painel Forja</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{
+  --bg:#f3f5f8; --panel:#ffffff; --panel-2:#eef1f5; --line:#d9dee6;
+  --ink:#152033; --ink-2:#4a5870; --ink-3:#7a869a;
+  --gold:#9a7422; --gold-soft:#f3ead3; --teal:#147e73; --teal-soft:#dcf1ee;
+  --ok:#1f8a4c; --ok-soft:#e1f3e8; --warn:#a86a00; --warn-soft:#fbefd6; --bad:#b53b3b; --bad-soft:#f8e2e2;
+  --side:#0f1a2b; --side-ink:#c9d2e0; --side-ink-2:#8593a8; --side-active:#1b2a42;
+  --display:"Cinzel",Georgia,serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+  --r:10px;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  color-scheme:dark;
+  --bg:#0b1220; --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
+  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#7c89a0;
+  --gold:#d6b25c; --gold-soft:#2c2616; --teal:#3cc4b4; --teal-soft:#10302d;
+  --ok:#4cc17e; --ok-soft:#12301f; --warn:#e0a53a; --warn-soft:#33260c; --bad:#e2716f; --bad-soft:#3a1818;
+  --side:#070c16; --side-ink:#c9d2e0; --side-ink-2:#7f8ca3; --side-active:#16223a;
+}}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#0b1220; --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
+  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#7c89a0;
+  --gold:#d6b25c; --gold-soft:#2c2616; --teal:#3cc4b4; --teal-soft:#10302d;
+  --ok:#4cc17e; --ok-soft:#12301f; --warn:#e0a53a; --warn-soft:#33260c; --bad:#e2716f; --bad-soft:#3a1818;
+  --side:#070c16; --side-ink:#c9d2e0; --side-ink-2:#7f8ca3; --side-active:#16223a;
+}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0}
+html,body{height:100%}
+body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--body)}
+h1,h2,h3{margin:0;text-wrap:balance}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600}
+
+/* Login */
+#login{min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:32px;background:var(--side)}
+.login-card{width:100%;max-width:420px;background:var(--panel);border-radius:14px;padding:32px;display:grid;gap:20px;border:1px solid var(--line)}
+.brand{font-family:var(--display);font-weight:700;letter-spacing:.06em;font-size:22px;display:flex;align-items:center;gap:10px}
+.brand-mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#7a5a14);color:#fff;font-size:15px}
+.login-card p{margin:0;color:var(--ink-2)}
+.field{display:grid;gap:6px}
+.field input,.field select{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:10px 12px;width:100%}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;justify-content:center}
+.btn:hover{background:var(--panel-2)}
+.btn-primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.btn-primary:hover{background:var(--ink-2)}
+.btn-ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
+.btn-bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
+.btn-sm{padding:5px 10px;font-size:13px}
+.demo-accounts{display:grid;gap:8px}
+.demo-acc{display:flex;align-items:center;gap:12px;border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--panel);text-align:left;width:100%}
+.demo-acc:hover{border-color:var(--gold)}
+.demo-acc small{display:block;color:var(--ink-3)}
+.divider{display:flex;align-items:center;gap:10px;color:var(--ink-3);font-size:12px}
+.divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
+.note{font-size:12px;color:var(--ink-3)}
+
+/* Shell */
+#app{display:grid;grid-template-columns:240px 1fr;min-height:100%}
+aside{background:var(--side);color:var(--side-ink);padding-block:20px;padding-inline:14px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .brand{color:#fff;font-size:18px;padding-inline:6px}
+.ws-switch{width:100%;display:flex;align-items:center;gap:10px;background:var(--side-active);border:1px solid #243452;border-radius:10px;padding:8px 10px;color:#fff;text-align:left}
+.ws-dot{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;font-weight:600;color:#0b1220;flex:none}
+.ws-switch small{display:block;color:var(--side-ink-2);font-size:11px}
+.ws-menu{display:grid;gap:4px;background:var(--side-active);border-radius:10px;padding:6px}
+.ws-menu button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:6px 8px;border-radius:6px;text-align:left}
+.ws-menu button:hover{background:#22324f}
+nav{display:grid;gap:2px}
+nav .label{color:var(--side-ink-2);padding:10px 8px 4px}
+nav button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:8px 10px;border-radius:8px;text-align:left;width:100%}
+nav button:hover{background:var(--side-active)}
+nav button[aria-current="page"]{background:var(--side-active);color:#fff;box-shadow:inset 2px 0 0 var(--gold)}
+nav .count{margin-left:auto;background:var(--gold);color:#0b1220;border-radius:999px;font-size:11px;padding:0 7px;font-weight:600}
+.me{margin-top:auto;display:flex;align-items:center;gap:10px;padding:8px;border-top:1px solid #1d2a42;padding-top:14px}
+.me small{display:block;color:var(--side-ink-2)}
+.me button{margin-left:auto;background:none;border:1px solid #2a3a58;color:var(--side-ink);border-radius:6px;padding:3px 8px;font-size:12px}
+
+main{padding-block:28px 48px;padding-inline:clamp(16px,3vw,40px);min-width:0}
+.head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:22px}
+.head h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
+.head p{margin:4px 0 0;color:var(--ink-2)}
+.mobile-bar{display:none}
+
+.grid{display:grid;gap:16px}
+.kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
+.two{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
+.card h2{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.kpi .v{font-size:28px;font-weight:500;margin-top:4px;font-family:var(--mono);font-variant-numeric:tabular-nums}
+.kpi .d{font-size:12px;color:var(--ink-3)}
+.up{color:var(--ok)} .down{color:var(--bad)}
+
+.avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;color:#fff}
+.who{display:flex;align-items:center;gap:10px;min-width:0}
+.who b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who small{color:var(--ink-3);display:block}
+
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse}
+th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
+td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+tr:last-child td{border-bottom:0}
+tbody tr.click{cursor:pointer}
+tbody tr.click:hover{background:var(--panel-2)}
+td.r,th.r{text-align:right}
+
+.rank{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.04em;padding:2px 9px;border-radius:999px;background:var(--gold-soft);color:var(--gold);white-space:nowrap}
+.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--panel-2);color:var(--ink-2);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.teal{background:var(--teal-soft);color:var(--teal)}
+.pos{font-family:var(--mono);color:var(--ink-3);width:28px}
+.pos.top{color:var(--gold);font-weight:600}
+.bar{height:6px;background:var(--panel-2);border-radius:99px;overflow:hidden;min-width:80px}
+.bar i{display:block;height:100%;background:var(--gold);border-radius:99px}
+
+.feed{display:grid;gap:12px;margin:0;padding:0;list-style:none}
+.feed li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
+.feed .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);margin-top:7px}
+.feed small{color:var(--ink-3);display:block}
+
+.queue{display:grid;gap:10px}
+.sub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel)}
+.sub .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.sub .acts{display:flex;gap:6px}
+.sub.done{opacity:.65}
+
+.tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
+.tabs button{background:none;border:0;padding:8px 12px;color:var(--ink-2);border-bottom:2px solid transparent;white-space:nowrap}
+.tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--gold);font-weight:600}
+
+.inline-num{width:90px;border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:5px 8px;text-align:right;font-family:var(--mono)}
+.ladder{display:flex;flex-wrap:wrap;gap:8px}
+.ladder div{border:1px solid var(--line);border-radius:8px;padding:8px 12px;min-width:110px}
+.ladder b{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--gold);display:block}
+
+.plans{grid-template-columns:repeat(3,minmax(0,1fr))}
+.plan{display:grid;gap:10px;align-content:start}
+.plan.current{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.plan .price{font-size:30px;font-family:var(--mono)}
+.plan ul{margin:0;padding-left:18px;color:var(--ink-2);display:grid;gap:4px}
+.usage{display:grid;gap:6px}
+
+textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px;resize:vertical}
+
+/* Drawer */
+.scrim{position:fixed;inset:0;background:rgba(5,10,20,.5);display:flex;justify-content:flex-end;z-index:10}
+.drawer{width:min(440px,100%);height:100%;background:var(--panel);padding:24px;overflow:auto;display:grid;gap:18px;align-content:start;border-left:1px solid var(--line)}
+.drawer .top{display:flex;align-items:center;gap:14px}
+.drawer .top .avatar{width:56px;height:56px;font-size:18px}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.stats div{background:var(--panel-2);border-radius:8px;padding:10px}
+.stats b{display:block;font-family:var(--mono);font-size:18px;font-weight:500}
+.give{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.give select{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:8px}
+
+.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;z-index:20;font-weight:500;max-width:calc(100% - 32px)}
+.chart text{fill:var(--ink-3);font:11px var(--mono)}
+.chart .grid-l{stroke:var(--line)}
+.chart .b{fill:var(--gold);opacity:.35}
+.chart .b.last{opacity:1}
+.chart .v{fill:var(--ink);font-weight:500}
+
+@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.plans{grid-template-columns:1fr}}
+@media (max-width:760px){
+  #app{grid-template-columns:1fr}
+  aside{position:fixed;inset:0 auto 0 0;width:260px;z-index:15;transform:translateX(-100%);transition:transform .2s;height:100%;padding-top:calc(20px + env(safe-area-inset-top,0px))}
+  aside.open{transform:none}
+  .mobile-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
+  .hide-sm{display:none}
+  .sub{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){aside{transition:none}}
+</style>
+
+<section id="login">
+  <div class="login-card">
+    <div class="brand"><span class="brand-mark">F</span>Forja</div>
+    <div>
+      <h1 style="font-size:20px;font-weight:600">Entre no painel da sua equipe</h1>
+      <p>Pontos, ranks e verificações para comunidades que trabalham juntas.</p>
+    </div>
+    <form id="login-form" class="grid" style="gap:12px">
+      <div class="field"><label class="label" for="login-email">E-mail</label><input id="login-email" type="email" placeholder="voce@equipe.com" autocomplete="username"></div>
+      <div class="field"><label class="label" for="login-pass">Senha</label><input id="login-pass" type="password" placeholder="••••••••" autocomplete="current-password"></div>
+      <button class="btn btn-primary" type="submit">Entrar</button>
+      <p id="login-err" class="note" hidden style="color:var(--bad)"></p>
+    </form>
+    <div class="divider">ou entre com uma conta de demonstração</div>
+    <div class="demo-accounts" id="demo-accounts"></div>
+    <p class="note">Protótipo: não existe senha de verdade. Numa versão real, o login seria feito no servidor, com senha criptografada ou "Entrar com Discord".</p>
+  </div>
+</section>
+
+<div id="app" hidden>
+  <aside id="side">
+    <div class="brand"><span class="brand-mark">F</span>Forja</div>
+    <div>
+      <button class="ws-switch" id="ws-btn" aria-expanded="false"></button>
+      <div class="ws-menu" id="ws-menu" hidden></div>
+    </div>
+    <nav id="nav"></nav>
+    <div class="me" id="me"></div>
+  </aside>
+  <main id="main"></main>
+</div>
+<div id="layer"></div>
+
+<script>
+(function(){
+const STORE = "forja-dados-v1";
+let db = null, seed = null, session = { conta: null, ws: null, view: "inicio" };
+const $ = s => document.querySelector(s);
+const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => n.toLocaleString("pt-BR");
+const PALETTE = ["#b8862b","#2f8f84","#6a5acd","#c0504d","#3f7cc0","#8a6d3b","#4c9a5a","#a35d9a","#5d6f8a"];
+function color(id){ let h=0; for(const c of id) h=(h*31+c.charCodeAt(0))>>>0; return PALETTE[h%PALETTE.length]; }
+function initials(n){ return n.split(/\s+/).map(p=>p[0]).join("").slice(0,2).toUpperCase(); }
+function avatar(m, size){ return `<span class="avatar" style="background:${color(m.id||m.nome)}${size?`;width:${size}px;height:${size}px`:""}">${esc(initials(m.nome))}</span>`; }
+function when(iso){
+  const d = new Date(iso), now = new Date("2026-09-24T18:00:00");
+  const h = Math.round((now - d) / 36e5);
+  if (h < 1) return "agora"; if (h < 24) return `há ${h} h`;
+  const days = Math.round(h/24); return days === 1 ? "ontem" : `há ${days} dias`;
+}
+function save(){ try{ localStorage.setItem(STORE, JSON.stringify(db)); }catch(e){} }
+function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
+
+function ws(){ return db.comunidades.find(c=>c.id===session.ws); }
+function rankOf(c, pts){ let r=c.ranks[0], next=null; for(const k of c.ranks){ if(pts>=k.min) r=k; else { next=k; break; } } return {r,next}; }
+function meIn(c){ return c.membros.find(m=>m.conta===session.conta); }
+function isAdmin(c){ const m=meIn(c); return m && (m.cargo==="Dono"||m.cargo==="Admin"); }
+function myWorkspaces(){ return db.comunidades.filter(c=>c.membros.some(m=>m.conta===session.conta)); }
+function pending(c){ return c.envios.filter(e=>e.status==="pendente"); }
+
+/* ---------- login ---------- */
+function renderLogin(){
+  $("#demo-accounts").innerHTML = db.contas.map(a=>{
+    const roles = db.comunidades.map(c=>{ const m=c.membros.find(x=>x.conta===a.id); return m ? `${m.cargo} em ${c.nome}` : null; }).filter(Boolean).join(" · ");
+    return `<button class="demo-acc" data-acc="${a.id}">${avatar({id:a.id,nome:a.nome})}<span><b>${esc(a.nome)}</b><small>${esc(roles)}</small></span></button>`;
+  }).join("");
+}
+$("#demo-accounts").addEventListener("click", e=>{ const b=e.target.closest("[data-acc]"); if(b) login(b.dataset.acc); });
+$("#login-form").addEventListener("submit", e=>{
+  e.preventDefault();
+  const email = $("#login-email").value.trim().toLowerCase();
+  const acc = db.contas.find(a=>a.email===email);
+  const err = $("#login-err");
+  if(!acc){ err.hidden=false; err.textContent="Não encontramos esse e-mail. Use uma das contas de demonstração abaixo."; return; }
+  login(acc.id);
+});
+function login(id){
+  session.conta=id; session.ws=myWorkspaces()[0].id; session.view="inicio";
+  $("#login").hidden=true; $("#app").hidden=false; render();
+}
+
+/* ---------- shell ---------- */
+const VIEWS = [
+  {id:"inicio", nome:"Visão geral", ico:"◆"},
+  {id:"ranking", nome:"Ranking", ico:"▲"},
+  {id:"verificacoes", nome:"Verificações", ico:"✓"},
+  {id:"perfil", nome:"Meu perfil", ico:"●"},
+  {id:"membros", nome:"Membros", ico:"☰", admin:true},
+  {id:"regras", nome:"Regras e ranks", ico:"⚙", admin:true},
+  {id:"plano", nome:"Plano e uso", ico:"$", admin:true},
+  {id:"dados", nome:"Dados (JSON)", ico:"{ }", admin:true}
+];
+function render(){
+  const c = ws(), me = meIn(c), adm = isAdmin(c);
+  if(VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
+  $("#ws-btn").innerHTML = `<span class="ws-dot" style="background:${c.cor}">${esc(c.nome[0])}</span><span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
+  $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}"><span class="ws-dot" style="background:${w.cor};width:20px;height:20px;font-size:11px">${esc(w.nome[0])}</span>${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:20px;text-align:center">+</span>Criar comunidade</button>`;
+  const p = pending(c).length;
+  let navHtml = `<div class="label">Comunidade</div>`;
+  for(const v of VIEWS.filter(v=>!v.admin)) navHtml += navBtn(v, v.id==="verificacoes"&&p?p:0);
+  if(adm){ navHtml += `<div class="label">Administração</div>`; for(const v of VIEWS.filter(v=>v.admin)) navHtml += navBtn(v,0); }
+  $("#nav").innerHTML = navHtml;
+  $("#me").innerHTML = `${avatar(me)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)}</small></span><button id="logout">Sair</button>`;
+  const views = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:()=>vPerfil(me), membros:vMembros, regras:vRegras, plano:vPlano, dados:vDados};
+  $("#main").innerHTML = `<div class="mobile-bar"><button class="btn btn-sm" id="menu-btn" aria-label="Abrir menu">☰ Menu</button><b>${esc(c.nome)}</b></div>` + views[session.view](c);
+  $("#side").classList.remove("open");
+  bindView(c);
+}
+function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><span style="width:18px;text-align:center;opacity:.8">${v.ico}</span>${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
+
+document.addEventListener("click", e=>{
+  const v = e.target.closest("[data-view]"); if(v){ session.view=v.dataset.view; render(); window.scrollTo(0,0); return; }
+  if(e.target.closest("#ws-btn")){ const m=$("#ws-menu"); m.hidden=!m.hidden; $("#ws-btn").setAttribute("aria-expanded", String(!m.hidden)); return; }
+  const w = e.target.closest("[data-ws]");
+  if(w){ if(w.dataset.ws==="__new"){ toast("Numa versão real, aqui você criaria uma nova comunidade."); } else { session.ws=w.dataset.ws; session.view="inicio"; render(); } $("#ws-menu").hidden=true; return; }
+  if(e.target.closest("#logout")){ session.conta=null; $("#app").hidden=true; $("#login").hidden=false; return; }
+  if(e.target.closest("#menu-btn")){ $("#side").classList.add("open"); return; }
+  const mb = e.target.closest("[data-member]"); if(mb){ openMember(mb.dataset.member); return; }
+  if(e.target.classList.contains("scrim") || e.target.closest("[data-close]")){ $("#layer").innerHTML=""; }
+});
+document.addEventListener("keydown", e=>{ if(e.key==="Escape") $("#layer").innerHTML=""; });
+
+/* ---------- views ---------- */
+function head(t, sub, extra=""){ return `<div class="head"><div><h1>${t}</h1>${sub?`<p>${sub}</p>`:""}</div>${extra}</div>`; }
+
+function weekTotals(c){ const n=c.membros[0].semanas.length; return Array.from({length:n},(_,i)=>c.membros.reduce((s,m)=>s+m.semanas[i],0)); }
+function weekLabels(n){ const end=new Date("2026-09-21T12:00:00"); return Array.from({length:n},(_,i)=>{ const d=new Date(end); d.setDate(d.getDate()-7*(n-1-i)); return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}`; }); }
+function chart(vals){
+  const W=560,H=190,pl=40,pr=8,pt=16,pb=24, max=Math.ceil(Math.max(...vals)/500)*500||100;
+  const iw=W-pl-pr, ih=H-pt-pb, bw=iw/vals.length, labels=weekLabels(vals.length);
+  let g=""; for(let k=0;k<=4;k++){ const v=max*k/4, y=pt+ih-ih*k/4; g+=`<line class="grid-l" x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}"/><text x="${pl-6}" y="${y+4}" text-anchor="end">${fmt(v)}</text>`; }
+  vals.forEach((v,i)=>{ const h=ih*v/max, x=pl+i*bw+bw*.18, y=pt+ih-h, last=i===vals.length-1;
+    g+=`<rect class="b${last?" last":""}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*.64).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/>`;
+    g+=`<text x="${(x+bw*.32).toFixed(1)}" y="${H-6}" text-anchor="middle">${labels[i]}</text>`;
+    if(last) g+=`<text class="v" x="${(x+bw*.32).toFixed(1)}" y="${(y-5).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`; });
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Pontos da equipe por semana">${g}</svg>`;
+}
+
+function vInicio(c){
+  const tot=weekTotals(c), last=tot.at(-1), prev=tot.at(-2), diff=Math.round((last-prev)/prev*100);
+  const ativos=c.membros.filter(m=>m.semanas.at(-1)>0).length, pend=pending(c);
+  const top=[...c.membros].sort((a,b)=>b.semanas.at(-1)-a.semanas.at(-1)).slice(0,5);
+  const me=meIn(c), {r,next}=rankOf(c,me.pontos);
+  return head(`Olá, ${esc(me.nome)}`, `Resumo da ${esc(c.nome)} na semana de ${weekLabels(tot.length).at(-1)}.`) +
+  `<div class="grid kpis">
+    <div class="card kpi"><div class="label">Pontos na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
+    <div class="card kpi"><div class="label">Membros ativos</div><div class="v">${ativos}<span style="font-size:16px;color:var(--ink-3)">/${c.membros.length}</span></div><div class="d">pontuaram nesta semana</div></div>
+    <div class="card kpi"><div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
+    <div class="card kpi"><div class="label">Seu rank</div><div class="v" style="font-size:20px;margin-top:10px"><span class="rank">${esc(r.nome)}</span></div><div class="d">${next?`faltam ${fmt(next.min-me.pontos)} pts para ${esc(next.nome)}`:"rank máximo"}</div></div>
+  </div>
+  <div class="grid two" style="margin-top:16px">
+    <div class="card"><h2>Pontos da equipe por semana <span class="label">últimas 8 semanas</span></h2>${chart(tot)}</div>
+    <div class="card"><h2>Destaques da semana</h2>
+      <div class="grid" style="gap:10px">${top.map((m,i)=>`<button class="who" data-member="${m.id}" style="background:none;border:0;padding:0;text-align:left;width:100%"><span class="pos ${i===0?"top":""}">${i+1}</span>${avatar(m)}<span style="flex:1;min-width:0"><b>${esc(m.nome)}</b><small>${esc(m.setor)}</small></span><span class="num">+${fmt(m.semanas.at(-1))}</span></button>`).join("")}</div>
+    </div>
+  </div>
+  <div class="grid two" style="margin-top:16px">
+    <div class="card"><h2>Fila de verificações <button class="btn btn-sm" data-view="verificacoes">Ver todas</button></h2>${pend.length?pend.slice(0,3).map(e=>subRow(c,e,false)).join(""):`<p class="note">Nada pendente.</p>`}</div>
+    <div class="card"><h2>Atividade recente</h2><ul class="feed">${c.atividade.slice(0,6).map(a=>`<li><span class="dot"></span><span>${esc(a.texto)}<small>${when(a.quando)}</small></span></li>`).join("")}</ul></div>
+  </div>`;
+}
+
+function vRanking(c){
+  const list=[...c.membros].sort((a,b)=>b.pontos-a.pontos), max=list[0].pontos;
+  return head("Ranking", `Todos os ${c.membros.length} membros, por pontos acumulados. Clique em alguém para ver o perfil.`) +
+  `<div class="card"><div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Membro</th><th>Rank</th><th class="hide-sm">Progresso</th><th class="r">Semana</th><th class="r">Pontos</th></tr></thead>
+    <tbody>${list.map((m,i)=>{ const {r}=rankOf(c,m.pontos); return `<tr class="click" data-member="${m.id}">
+      <td class="pos ${i<3?"top":""}">${i+1}</td>
+      <td><div class="who">${avatar(m)}<span><b>${esc(m.nome)}</b><small>${esc(m.setor)}</small></span></div></td>
+      <td><span class="rank">${esc(r.nome)}</span></td>
+      <td class="hide-sm"><div class="bar"><i style="width:${(m.pontos/max*100).toFixed(1)}%"></i></div></td>
+      <td class="r num up">+${fmt(m.semanas.at(-1))}</td>
+      <td class="r num">${fmt(m.pontos)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
+}
+
+function subRow(c,e,actions){
+  const m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra);
+  const st = e.status==="pendente"?"warn":e.status==="aprovado"?"ok":"bad";
+  const adm = isAdmin(c);
+  return `<div class="sub ${e.status!=="pendente"?"done":""}" style="margin-bottom:8px">
+    <div style="min-width:0"><div class="who">${avatar(m)}<span style="min-width:0"><b>${esc(e.detalhe)}</b></span></div>
+    <div class="meta"><span>${esc(m.nome)}</span>·<span>${esc(rg.acao)}</span>·<span class="num">+${rg.pontos} pts</span>·<span>${when(e.quando)}</span><span class="pill ${st}">${e.status}</span></div></div>
+    ${actions && adm && e.status==="pendente" ? `<div class="acts"><button class="btn btn-sm btn-ok" data-approve="${e.id}">Aprovar</button><button class="btn btn-sm btn-bad" data-reject="${e.id}">Recusar</button></div>` : ""}
+  </div>`;
+}
+let verifTab="pendente";
+function vVerif(c){
+  const me=meIn(c), adm=isAdmin(c);
+  const list=c.envios.filter(e=>verifTab==="todas"?true:e.status==="pendente");
+  return head("Verificações", adm?"Aprove o que a equipe enviou. Os pontos entram na hora.":"Envie o que você fez para um admin aprovar.") +
+  `<div class="grid two">
+    <div><div class="tabs" role="tablist"><button role="tab" data-tab="pendente" aria-selected="${verifTab==="pendente"}">Pendentes (${pending(c).length})</button><button role="tab" data-tab="todas" aria-selected="${verifTab==="todas"}">Histórico</button></div>
+      <div class="queue">${list.length?list.map(e=>subRow(c,e,true)).join(""):`<p class="note">Nenhuma verificação pendente.</p>`}</div></div>
+    <form class="card grid" id="send-form" style="gap:12px;align-content:start">
+      <h2>Enviar verificação</h2>
+      <div class="field"><label class="label" for="send-rule">O que você fez</label><select id="send-rule">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)} (+${r.pontos})</option>`).join("")}</select></div>
+      <div class="field"><label class="label" for="send-detail">Detalhes</label><input id="send-detail" placeholder="Ex.: Jinx — Arcane, cromas conferidos" required></div>
+      <button class="btn btn-primary" type="submit">Enviar como ${esc(me.nome)}</button>
+    </form>
+  </div>`;
+}
+
+function vPerfil(m){ return head("Meu perfil", "Como a equipe vê você.") + `<div class="card" style="max-width:640px">${memberDetail(ws(), m)}</div>`; }
+function memberDetail(c,m){
+  const {r,next}=rankOf(c,m.pontos), pos=[...c.membros].sort((a,b)=>b.pontos-a.pontos).findIndex(x=>x.id===m.id)+1;
+  const pct = next ? Math.round((m.pontos-r.min)/(next.min-r.min)*100) : 100;
+  const hist = c.envios.filter(e=>e.membro===m.id);
+  const spark = (()=>{ const v=m.semanas, mx=Math.max(...v)||1, W=300,H=48; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`).join(" ");
+    const [lx,ly]=pts.split(" ").at(-1).split(","); return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="48" aria-label="Pontos por semana"><polygon points="0,${H} ${pts} ${W},${H}" style="fill:var(--gold-soft)"/><polyline points="${pts}" style="fill:none;stroke:var(--gold);stroke-width:2"/><circle cx="${lx}" cy="${ly}" r="3.5" style="fill:var(--gold)"/></svg>`; })();
+  return `<div class="grid" style="gap:18px">
+    <div class="top" style="display:flex;align-items:center;gap:14px">${avatar(m,56)}<div><h2 style="font-size:20px;margin:0">${esc(m.nome)}</h2><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px"><span class="rank">${esc(r.nome)}</span><span class="pill teal">${esc(m.setor)}</span><span class="pill">${esc(m.cargo)}</span></div></div></div>
+    <div class="stats"><div><span class="label">Pontos</span><b>${fmt(m.pontos)}</b></div><div><span class="label">Posição</span><b>${pos}º</b></div><div><span class="label">${esc(c.moeda)}</span><b>${fmt(m.moedas)}</b></div></div>
+    <div class="usage"><div style="display:flex;justify-content:space-between"><span class="label">Progresso para ${next?esc(next.nome):"o topo"}</span><span class="num">${pct}%</span></div><div class="bar"><i style="width:${pct}%"></i></div><span class="note">${next?`${fmt(next.min-m.pontos)} pontos restantes`:"Rank máximo alcançado"}</span></div>
+    <div><span class="label">Últimas 8 semanas</span>${spark}</div>
+    <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
+    <p class="note">Membro desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
+  </div>`;
+}
+function openMember(id){
+  const c=ws(), m=c.membros.find(x=>x.id===id), adm=isAdmin(c);
+  $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}">
+    <div style="display:flex;justify-content:flex-end"><button class="btn btn-sm" data-close>Fechar</button></div>
+    ${memberDetail(c,m)}
+    ${adm?`<div class="card" style="background:var(--panel-2)"><h2>Dar pontos manualmente</h2><div class="give"><select id="give-rule">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)} (+${r.pontos})</option>`).join("")}</select><button class="btn btn-primary btn-sm" data-give="${m.id}">Dar pontos</button></div></div>`:""}
+  </div></div>`;
+  const g=$("[data-give]"); if(g) g.addEventListener("click",()=>{ const rg=c.regras.find(r=>r.id===$("#give-rule").value); addPoints(c,m,rg.pontos,`${m.nome} ganhou ${rg.pontos} pontos: ${rg.acao.toLowerCase()}`); openMember(id); render(); toast(`+${rg.pontos} pontos para ${m.nome}`); });
+}
+function addPoints(c,m,pts,texto){
+  const before=rankOf(c,m.pontos).r.nome;
+  m.pontos+=pts; m.semanas[m.semanas.length-1]+=pts; m.moedas+=Math.round(pts/5);
+  c.atividade.unshift({quando:"2026-09-24T18:00:00",texto});
+  const after=rankOf(c,m.pontos).r.nome; if(after!==before) c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${m.nome} subiu para ${after}`});
+  save();
+}
+
+function vMembros(c){
+  return head("Membros", "Cargos, setores e pontos. Edite os pontos direto na tabela.", `<button class="btn" id="invite">+ Convidar membro</button>`) +
+  `<div class="card"><div class="table-wrap"><table>
+    <thead><tr><th>Membro</th><th>Cargo</th><th>Setor</th><th>Rank</th><th class="r">Pontos</th></tr></thead>
+    <tbody>${c.membros.map(m=>`<tr>
+      <td><button class="who" data-member="${m.id}" style="background:none;border:0;padding:0;text-align:left">${avatar(m)}<span><b>${esc(m.nome)}</b><small>desde ${m.desde.slice(0,4)}</small></span></button></td>
+      <td><select data-role="${m.id}" aria-label="Cargo de ${esc(m.nome)}" style="border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:4px" ${m.cargo==="Dono"?"disabled":""}>${["Dono","Admin","Membro"].map(r=>`<option ${r===m.cargo?"selected":""} ${r==="Dono"&&m.cargo!=="Dono"?"disabled":""}>${r}</option>`).join("")}</select></td>
+      <td><span class="pill teal">${esc(m.setor)}</span></td>
+      <td><span class="rank">${esc(rankOf(c,m.pontos).r.nome)}</span></td>
+      <td class="r"><input class="inline-num" type="number" min="0" step="10" value="${m.pontos}" data-pts="${m.id}" aria-label="Pontos de ${esc(m.nome)}"></td></tr>`).join("")}</tbody>
+  </table></div></div>`;
+}
+
+function vRegras(c){
+  return head("Regras e ranks", "O que vale ponto e em que ponto cada rank começa. Cada comunidade define as suas.") +
+  `<div class="grid" style="gap:16px">
+  <div class="card"><h2>Ações que dão pontos</h2><div class="table-wrap"><table>
+    <thead><tr><th>Ação</th><th>Setor</th><th class="r">Pontos</th></tr></thead>
+    <tbody>${c.regras.map(r=>`<tr><td>${esc(r.acao)}</td><td><span class="pill teal">${esc(r.setor)}</span></td><td class="r"><input class="inline-num" type="number" min="0" value="${r.pontos}" data-rule="${r.id}" aria-label="Pontos para ${esc(r.acao)}"></td></tr>`).join("")}</tbody>
+  </table></div></div>
+  <div class="card"><h2>Escada de ranks</h2><div class="ladder">${c.ranks.map(k=>`<div><b>${esc(k.nome)}</b><span class="num note">${fmt(k.min)}+ pts</span> <span class="note">· ${c.membros.filter(m=>rankOf(c,m.pontos).r===k).length} membros</span></div>`).join("")}</div></div>
+  </div>`;
+}
+
+function vPlano(c){
+  const lim = c.plano==="pro" ? 50 : 10;
+  const plans=[
+    {id:"gratis",nome:"Grátis",preco:"R$ 0",itens:["Até 10 membros","1 comunidade","Ranking e verificações"]},
+    {id:"pro",nome:"Pro",preco:"R$ 29",itens:["Até 50 membros","Bot do Discord que dá pontos sozinho","Regras e ranks personalizados","Histórico completo"]},
+    {id:"guilda",nome:"Guilda",preco:"R$ 89",itens:["Membros ilimitados","Várias comunidades","Domínio próprio e sua marca","Exportação e API"]}
+  ];
+  return head("Plano e uso", `A ${esc(c.nome)} está no plano ${c.plano==="pro"?"Pro":"Grátis"}.`) +
+  `<div class="card usage" style="margin-bottom:16px;max-width:520px"><div style="display:flex;justify-content:space-between"><span class="label">Membros usados</span><span class="num">${c.membros.length} / ${lim}</span></div><div class="bar"><i style="width:${Math.min(100,c.membros.length/lim*100)}%;background:${c.membros.length/lim>.8?"var(--warn)":"var(--teal)"}"></i></div></div>
+  <div class="grid plans">${plans.map(p=>`<div class="card plan ${p.id===c.plano?"current":""}"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:16px">${p.nome}</b>${p.id===c.plano?`<span class="pill ok">Plano atual</span>`:""}</div><div><span class="price">${p.preco}</span><span class="note"> /mês</span></div><ul>${p.itens.map(i=>`<li>${i}</li>`).join("")}</ul>${p.id===c.plano?"":`<button class="btn" data-plan="${p.id}">Mudar para ${p.nome}</button>`}</div>`).join("")}</div>
+  <p class="note" style="margin-top:14px">Preços fictícios, só para ilustrar o modelo.</p>`;
+}
+
+function vDados(c){
+  return head("Dados (JSON)", "Todo o painel roda em cima deste arquivo. As mudanças ficam salvas só neste navegador.", `<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="copy-json">Copiar JSON</button><button class="btn btn-bad" id="reset-json">Restaurar dados de exemplo</button></div>`) +
+  `<div class="card"><textarea class="json" id="json-box" readonly aria-label="JSON do banco de dados">${esc(JSON.stringify(db,null,2))}</textarea></div>`;
+}
+
+/* ---------- bindings ---------- */
+function bindView(c){
+  document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{ verifTab=b.dataset.tab; render(); }));
+  document.querySelectorAll("[data-approve],[data-reject]").forEach(b=>b.addEventListener("click",()=>{
+    const ok=!!b.dataset.approve, e=c.envios.find(x=>x.id===(b.dataset.approve||b.dataset.reject)), m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra), me=meIn(c);
+    e.status= ok?"aprovado":"recusado";
+    if(ok) addPoints(c,m,rg.pontos,`${me.nome} aprovou: ${m.nome} +${rg.pontos} pts (${rg.acao.toLowerCase()})`);
+    else { c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${me.nome} recusou uma verificação de ${m.nome}`}); save(); }
+    render(); toast(ok?`Aprovado. ${m.nome} ganhou ${rg.pontos} pontos.`:`Verificação de ${m.nome} recusada.`);
+  }));
+  const f=$("#send-form"); if(f) f.addEventListener("submit",e=>{ e.preventDefault(); const me=meIn(c), d=$("#send-detail").value.trim(); if(!d) return;
+    c.envios.unshift({id:"e"+Date.now(),membro:me.id,regra:$("#send-rule").value,detalhe:d,quando:"2026-09-24T18:00:00",status:"pendente"});
+    c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${me.nome} enviou uma verificação`}); save(); verifTab="pendente"; render(); toast("Verificação enviada para aprovação."); });
+  document.querySelectorAll("[data-pts]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pts), v=Math.max(0,parseInt(i.value,10)||0); m.pontos=v; save(); render(); toast(`Pontos de ${m.nome} atualizados para ${fmt(v)}.`); }));
+  document.querySelectorAll("[data-role]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.role); m.cargo=s.value; save(); render(); toast(`${m.nome} agora é ${s.value}.`); }));
+  document.querySelectorAll("[data-rule]").forEach(i=>i.addEventListener("change",()=>{ const r=c.regras.find(x=>x.id===i.dataset.rule); r.pontos=Math.max(0,parseInt(i.value,10)||0); save(); toast(`"${r.acao}" agora vale ${r.pontos} pontos.`); }));
+  document.querySelectorAll("[data-plan]").forEach(b=>b.addEventListener("click",()=>{ c.plano=b.dataset.plan==="guilda"?"pro":b.dataset.plan; save(); render(); toast("Plano alterado (simulação, nada foi cobrado)."); }));
+  const inv=$("#invite"); if(inv) inv.addEventListener("click",()=>toast("Numa versão real, isto gera um link de convite para o Discord."));
+  const cp=$("#copy-json"); if(cp) cp.addEventListener("click",()=>{ const box=$("#json-box"); navigator.clipboard.writeText(box.value).then(()=>toast("JSON copiado."),()=>{ box.focus(); box.select(); toast("Selecionei o texto. Use Ctrl+C para copiar."); }); });
+  const rs=$("#reset-json"); if(rs) rs.addEventListener("click",()=>{ if(rs.dataset.confirm){ db=structuredClone(seed); try{localStorage.removeItem(STORE);}catch(e){} render(); toast("Dados de exemplo restaurados."); } else { rs.dataset.confirm="1"; rs.textContent="Clique de novo para confirmar"; } });
+}
+
+/* ---------- boot ---------- */
+fetch("data.json").then(r=>r.json()).then(j=>{
+  seed=j; db=structuredClone(j);
+  try{ const s=localStorage.getItem(STORE); if(s) db=JSON.parse(s); }catch(e){}
+  renderLogin();
+}).catch(()=>{ $(".login-card").insertAdjacentHTML("beforeend",`<p class="note" style="color:var(--bad)">Não consegui carregar o data.json. Abra o painel por um servidor (ex.: python3 -m http.server) em vez de abrir o arquivo direto.</p>`); });
+})();
+</script>
