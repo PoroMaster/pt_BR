@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Museu da L.S.P. UT</title>
+<link rel="icon" href="../image/tester.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@700;800&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+:root{--bg:#010a13;--painel:#0a1428;--linha:#463714;--ouro:#c8aa6e;--ouro-claro:#f0e6d2;--txt:#cdbe91;--txt2:#a09b8c;--azul:#0ac8b9}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--txt2);font:15px/1.6 "IBM Plex Sans",system-ui,sans-serif}
+a{color:var(--ouro)}
+.topo{text-align:center;padding:64px 16px 36px;background:radial-gradient(ellipse at 50% 0%,#0f2a3d,transparent 70%)}
+.topo img{width:72px;height:72px;border-radius:50%;border:2px solid var(--ouro);padding:6px;background:var(--bg)}
+h1{margin:14px 0 6px;font:800 clamp(28px,5vw,44px)/1.1 Cinzel,serif;letter-spacing:.08em;color:var(--ouro-claro);text-transform:uppercase}
+.topo p{max-width:640px;margin:0 auto;color:var(--txt2)}
+main{max-width:1040px;margin:0 auto;padding:0 16px 64px}
+.linha{position:relative;display:grid;gap:40px;padding-left:34px}
+.linha::before{content:"";position:absolute;left:10px;top:8px;bottom:8px;width:2px;background:linear-gradient(var(--ouro),var(--linha))}
+.era{position:relative;display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.1fr);gap:24px;align-items:center;background:linear-gradient(180deg,rgba(10,20,40,.9),rgba(1,10,19,.9));border:1px solid var(--linha);padding:22px}
+.era::before{content:"";position:absolute;left:-30px;top:30px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:2px solid var(--ouro);box-shadow:0 0 10px rgba(200,170,110,.6)}
+.ano{font:800 34px Cinzel,serif;color:var(--ouro);letter-spacing:.06em;line-height:1}
+.era h2{margin:6px 0 10px;font:700 19px Cinzel,serif;color:var(--ouro-claro);letter-spacing:.04em}
+.era ul{margin:0 0 16px;padding-left:18px}
+.era li{margin-bottom:4px}
+.era figure{margin:0;border:1px solid var(--linha);overflow:hidden;background:#000}
+.era figure img{display:block;width:100%;height:auto}
+.btn{display:inline-block;padding:10px 20px;border:2px solid transparent;background:linear-gradient(180deg,#0a323c,#091428) padding-box,linear-gradient(180deg,var(--ouro-claro),var(--ouro) 40%,#785a28) border-box;color:#cdfafa;font:700 13px "IBM Plex Sans",sans-serif;letter-spacing:.1em;text-transform:uppercase;text-decoration:none}
+.btn:hover{color:#fff;box-shadow:0 0 18px rgba(10,200,185,.4)}
+.marco{font-size:13px;color:var(--txt)}
+.nota{margin-top:48px;padding:16px 18px;border:1px dashed var(--linha);font-size:13px}
+footer{text-align:center;font-size:12px;padding:0 16px 32px;color:#5b5a56}
+@media (max-width:760px){.era{grid-template-columns:1fr}.era figure{order:-1}}
+</style>
+</head>
+<body>
+<header class="topo">
+  <img src="../image/tester.ico" alt="">
+  <h1>Museu da L.S.P. UT</h1>
+  <p>O painel da staff do ModSkin PoroMaster, do começo ao remaster. Cada era abre do jeito que era, com os perfis e os textos originais.</p>
+</header>
+<main>
+  <div class="linha">
+
+    <section class="era">
+      <div>
+        <div class="ano">2020</div>
+        <h2>O começo</h2>
+        <p class="marco">29/12/2020 · Luckey cria a L.S.P. UT. A staff se organiza no Discord, com os primeiros testers e a Federativa.</p>
+      </div>
+      <div class="marco">Sem painel ainda: tudo acontecia no servidor do Discord.</div>
+    </section>
+
+    <section class="era">
+      <div>
+        <div class="ano">2022</div>
+        <h2>Painel do Tester</h2>
+        <ul>
+          <li>Site <code>modskinbr/L.S.P.-UT</code>, com 1.210 commits no ano</li>
+          <li>9 perfis: Porito, Gece, Kawai Foxy, Mono, Fehtheworld, Krap, Trick, Buddha e JasonMiler</li>
+          <li>Pontos, Nível, Sequência, Rank Mítico, Imunidade e Rebaixamento</li>
+          <li>EXP-Beta, Bug Report, Bate-papo da staff e o "Melhor do Mês"</li>
+        </ul>
+        <a class="btn" href="2022/entrar.html">Abrir como era (mar/2022)</a>
+      </div>
+      <figure><img src="img/2022.png" alt="Painel do Tester de 2022 com Melhor do Mês, betas e atividades recentes"></figure>
+    </section>
+
+    <section class="era">
+      <div>
+        <div class="ano">2023</div>
+        <h2>Painel PoroMaster</h2>
+        <ul>
+          <li>Repositório <code>PoroMaster/pt_BR</code>, janeiro de 2023</li>
+          <li>5 perfis: Luckey, Jake, imnotChinna, Khyago e TaikunX3</li>
+          <li>Reputação por P.P. a partir de 30, Maestrias, Pontos Míticos, Destaque e Imunidade</li>
+          <li>Academia, Federativa, Testadores e Progresso</li>
+        </ul>
+        <a class="btn" href="2023/entrar.html">Abrir como era (jan/2023)</a>
+      </div>
+      <figure><img src="img/2023.png" alt="Painel PoroMaster de 2023 com os setores Academia, Federativa e Testadores"></figure>
+    </section>
+
+    <section class="era">
+      <div>
+        <div class="ano">2026</div>
+        <h2>O remaster</h2>
+        <ul>
+          <li>Visual do cliente do LoL, tela de carregamento e painel Social</li>
+          <li>Os 5 perfis de 2023 começando do zero</li>
+          <li>Betas, verificações, reputação com demissão em 0 P.P.</li>
+          <li>Baú Hextech, Forja, Coleção e editor de perfil: o que o painel poderia ter sido</li>
+        </ul>
+        <a class="btn" href="../painel-saas/index.html">Abrir o remaster</a>
+      </div>
+      <figure><img src="img/2026.png" alt="Remaster de 2026 com o visual do cliente do LoL"></figure>
+    </section>
+
+  </div>
+  <p class="nota">Peças de museu: as senhas originais foram removidas e o login virou "entrar como". Imagens que vinham do Discord foram salvas localmente; o chat ao vivo (RumbleTalk) e alguns serviços externos não existem mais e aparecem vazios. Nada aqui é oficial da Riot Games.</p>
+</main>
+<footer>2020 – 2026 · ModSkin L.S.P. UT</footer>
+</body>
+</html>
