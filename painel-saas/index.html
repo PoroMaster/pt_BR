@@ -744,7 +744,7 @@ function bioHtml(m){
 
 /* ---------- sons do cliente (CommunityDragon) ---------- */
 const SFX = {purchase:"button-purchase-chest-click", chest:"tray-receive-chest_generic", key:"tray-receive-material_key", intro:"open_cm-intro", idle:"open_cm-idle", outro:"open_cm-outro", keyIn:"reveal-material_key", ack:"reveal-acknowledge", upIntro:"upgrade-intro", upOutro:"upgrade-outro", upMax:"upgrade-bar-max", click:"grid-click", hover:"grid-hover", coins:"blue-essence-fill", dup:"disenchant-outro",
-  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate", ovo:"hextech_egg_open_mythic", craft:"crafter-button-click", portal:"portal_open_masterwork-outro", orb:"open_worlds_large_orb-outro", portalIn:"portal_open_masterwork-intro"};
+  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate", promo:"open_cm_promotion-outro", craft:"crafter-button-click", portal:"portal_open_masterwork-outro", orb:"open_worlds_large_orb-outro", portalIn:"portal_open_masterwork-intro"};
 /* o cliente usa o mesmo som para Lendária, Mítica e Ultimate; aqui cada uma ganha camadas próprias */
 /* tempo de recarga dos botões com animação e som, para não empilhar sons com cliques rápidos */
 const trava = {};
@@ -752,15 +752,15 @@ const travado = k => (trava[k]||0) > Date.now();
 function travar(k, ms){ trava[k] = Date.now() + ms; setTimeout(()=>{ if (!travado(k) && !session.ed) render(); }, ms + 30); }
 const recarga = k => travado(k) ? `disabled data-recarga style="--trava:${trava[k]-Date.now()}ms"` : "";
 /* o cliente usa o mesmo som para Lendária, Mítica e Ultimate; aqui cada uma ganha camadas próprias.
-   [som, atraso ms, volume, início em s]: o início faz o pico de cada som cair junto com a revelação */
+   [som, atraso ms, volume, início em s, duração em s]: o início faz o pico cair junto com a revelação e a duração corta a cauda longa */
 const SOM_RAR = {
-  mitica:   [["r_mitica",0,.8],["ovo",0,.85,3.95]],
-  ultimate: [["orb",0,1,1.45],["r_ultimate",0,.9],["portal",0,.8,1.15],["upMax",650,.75]]
+  mitica:   [["r_mitica",0,.8],["promo",0,.85,.7,1.5]],
+  ultimate: [["orb",0,1,1.45,1.7],["r_ultimate",0,.9],["portal",0,.75,1.15,1.4],["upMax",650,.7]]
 };
-function somRar(r){ const l = SOM_RAR[r]; if (!l) return som("r_"+r); l.forEach(([k,ms,vol,ini])=>setTimeout(()=>som(k,{vol,ini}), ms)); }
+function somRar(r){ const l = SOM_RAR[r]; if (!l) return som("r_"+r); l.forEach(([k,ms,vol,ini,dur])=>setTimeout(()=>som(k,{vol,ini,dur}), ms)); }
 /* carga antes da revelação da Ultimate: o pico do portal cai no instante em que a carta vira */
 function preRar(r, antes){ if (r!=="ultimate") return; const pico = 1150;
-  if (antes >= pico) setTimeout(()=>som("portalIn",{vol:.85}), antes - pico); else som("portalIn",{vol:.85, ini:(pico-antes)/1000}); }
+  if (antes >= pico) setTimeout(()=>som("portalIn",{vol:.85, dur:1.75}), antes - pico); else som("portalIn",{vol:.85, ini:(pico-antes)/1000, dur:antes/1000 + .6}); }
 const VID = {comum:"none", epica:"epic", lendaria:"legendary", mitica:"mythic", ultimate:"ultimate"};
 let mudo = false; try{ mudo = localStorage.getItem("lsp-mudo")==="1"; }catch(e){}
 const somUrl = k => BASE + "painel-saas/midia/som/sfx-loot-" + SFX[k] + ".ogg";
@@ -769,11 +769,12 @@ const vidUrl = n => BASE + "painel-saas/midia/video/" + n + ".webm";
 let actx = null; const buffers = {};
 function carregarSom(k){ try{ actx = actx || new (window.AudioContext||window.webkitAudioContext)(); }catch(e){ return null; }
   return buffers[k] || (buffers[k] = fetch(somUrl(k)).then(r=>r.arrayBuffer()).then(b=>actx.decodeAudioData(b)).catch(()=>{ delete buffers[k]; return null; })); }
-const aquecerSons = () => ["orb","portal","portalIn","ovo"].forEach(carregarSom);
-async function somDe(k, vol, ini){ const p = carregarSom(k); if (!p) return; if (actx.state==="suspended") actx.resume().catch(()=>{});
-  const d = await p; if (!d || mudo) return; const f = actx.createBufferSource(), g = actx.createGain(); f.buffer = d; g.gain.value = vol; f.connect(g).connect(actx.destination); f.start(0, Math.min(ini, d.duration-.05)); }
-function som(k, {vol=.7, loop=false, ini=0}={}){ if (mudo) return null;
-  if (ini){ somDe(k, vol, ini); return null; }
+const aquecerSons = () => ["orb","portal","portalIn","promo"].forEach(carregarSom);
+async function somDe(k, vol, ini, dur){ const p = carregarSom(k); if (!p) return; if (actx.state==="suspended") actx.resume().catch(()=>{});
+  const d = await p; if (!d || mudo) return; const f = actx.createBufferSource(), g = actx.createGain(); f.buffer = d; g.gain.value = vol; f.connect(g).connect(actx.destination); const t = actx.currentTime; f.start(t, Math.min(ini, d.duration-.05));
+  if (dur){ g.gain.setValueAtTime(vol, t + Math.max(0, dur-.35)); g.gain.linearRampToValueAtTime(0, t + dur); f.stop(t + dur + .05); } }
+function som(k, {vol=.7, loop=false, ini=0, dur=0}={}){ if (mudo) return null;
+  if (ini || dur){ somDe(k, vol, ini, dur); return null; }
   try{ const a=new Audio(somUrl(k)); a.volume=vol; a.loop=loop; a.play().catch(()=>{}); return a; }catch(e){ return null; } }
 let ultimoHover = 0;
 document.addEventListener("mouseover", e=>{ const t=e.target.closest(".item,.btn-hex,.btn-blue"); if(!t || t.contains(e.relatedTarget)) return; const n=Date.now(); if(n-ultimoHover>90){ ultimoHover=n; som("hover",{vol:.18}); } });
