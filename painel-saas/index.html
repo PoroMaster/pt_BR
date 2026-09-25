@@ -178,36 +178,134 @@ td.r,th.r{text-align:right}
 .coin small{color:var(--ink-3);font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 
 /* Cosmetics */
-.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
-.item{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;display:grid;text-align:left;padding:0;border-top:3px solid var(--rc)}
-.item .pic{aspect-ratio:16/9;background:#0b1220 center/cover no-repeat;max-width:100%}
-.item .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:10px}
-.item{grid-template-rows:auto 1fr}
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:12px}
+.item{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;display:grid;grid-template-rows:auto 1fr;text-align:left;padding:0;border-top:3px solid var(--rc)}
 .item .body{padding:10px 12px;display:grid;gap:6px;grid-template-rows:auto auto 1fr}
 .item .body > .btn{align-self:end}
 .item b{font-weight:600;line-height:1.3}
 .item.sel{outline:2px solid var(--gold);outline-offset:1px}
+.pic{aspect-ratio:16/9;max-width:100%;background:#0a1a1d center/cover no-repeat;display:grid;place-items:center;overflow:hidden;position:relative}
+.pic > img{max-width:72%;max-height:78%;object-fit:contain}
+.pic.sent > img{max-height:88%}
+.pic.icone > img{border-radius:50%;max-height:74%;box-shadow:0 0 0 2px rgba(255,255,255,.12)}
 .rar{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--rc)}
 .rar img{width:16px;height:16px}
 .lvl{display:inline-flex;gap:3px}
 .lvl i{width:10px;height:10px;border-radius:2px;background:var(--panel-2);border:1px solid var(--line);transform:rotate(45deg)}
 .lvl i.on{background:var(--rc);border-color:var(--rc)}
+.evo-tag{font-size:11px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:3px}
 .forge{display:grid;gap:14px;align-content:start}
-.forge .pic{aspect-ratio:16/9;border-radius:8px;background:#0b1220 center/cover no-repeat}
-.forge .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:16px}
+.forge .pic{border-radius:8px;aspect-ratio:16/10}
+.forge .pic.flash{animation:forged .9s ease-out}
+.evo{display:flex;gap:6px;align-items:center;overflow-x:auto;padding-bottom:4px}
+.evo .st{flex:none;width:58px;display:grid;justify-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-align:center;line-height:1.2}
+.evo .st .pic{width:58px;aspect-ratio:1;border-radius:8px;border:2px solid transparent}
+.evo .st.on .pic{border-color:var(--rc)}
+.evo .st.lock{opacity:.45;filter:grayscale(.6)}
+.evo .arrow{color:var(--ink-3);flex:none}
+@keyframes forged{0%{filter:brightness(2.2) saturate(1.6);transform:scale(1.04)}100%{filter:none;transform:none}}
 
-/* LootBox roulette */
-.roleta{position:relative;overflow:hidden;border-radius:10px;background:#0a111d;border:1px solid var(--line);height:170px}
-.roleta .strip{display:flex;gap:10px;padding:14px 0;position:absolute;left:0;top:0;will-change:transform}
-.roleta .slot{width:130px;height:140px;flex:none;border-radius:8px;background:#121b2c;border-bottom:4px solid var(--rc);display:grid;grid-template-rows:1fr auto;overflow:hidden;color:#e6ebf3}
-.roleta .slot .pic{background:#0b1220 center/cover no-repeat}
-.roleta .slot .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:8px}
-.roleta .slot span{font-size:11.5px;padding:5px 7px;line-height:1.25;height:38px;overflow:hidden}
-.roleta .marker{position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--gold);transform:translateX(-50%);box-shadow:0 0 12px var(--gold);z-index:2}
-.roleta .marker::before,.roleta .marker::after{content:"";position:absolute;left:50%;transform:translateX(-50%);border:8px solid transparent}
-.roleta .marker::before{top:0;border-top-color:var(--gold)}
-.roleta .marker::after{bottom:0;border-bottom-color:var(--gold)}
-.roleta .idle{position:absolute;inset:0;display:grid;place-items:center;color:#aab6c9;z-index:1;text-align:center;padding:16px}
+/* Bordas animadas */
+.ring{position:relative;display:inline-grid;place-items:center;border-radius:50%;padding:4px;flex:none;isolation:isolate}
+.ring::before,.ring::after{content:"";position:absolute;inset:0;border-radius:50%;z-index:-1}
+.ring > .avatar{border:2px solid var(--panel)}
+.b-aco::before{background:linear-gradient(135deg,#eef1f5,#7d8796 45%,#eef1f5 55%,#5b6574)}
+.b-poro::before{background:repeating-conic-gradient(#fff 0 12deg,#bfe3ff 12deg 24deg);animation:spin 18s linear infinite}
+.b-hextech::before{background:conic-gradient(#1f8fb8,#e8c66a,#1f8fb8,#e8c66a,#1f8fb8);animation:spin 4s linear infinite;box-shadow:0 0 10px rgba(76,192,232,.6)}
+.b-pulso::before{background:conic-gradient(#3cc4b4,#bff5ee,#3cc4b4);animation:pulseRing 1.8s ease-in-out infinite}
+.b-chama::before{background:conic-gradient(#ff4d2e,#ffcf4a,#c23b3b,#ff8a2e,#ff4d2e);animation:spin 2s linear infinite;box-shadow:0 0 14px rgba(255,106,46,.75)}
+.b-sakura::before{background:conic-gradient(#ffb7d5,#ff6fa8,#fff0f6,#ff9cc4,#ffb7d5);animation:spin 6s linear infinite;box-shadow:0 0 12px rgba(255,140,190,.7)}
+.b-vazio::before{background:conic-gradient(#8a45c4,#1a0630,#d38cff,#1a0630,#8a45c4);animation:spin 3s linear infinite;box-shadow:0 0 16px rgba(182,126,240,.8)}
+.b-vazio::after{inset:-5px;border:2px dashed rgba(211,140,255,.7);animation:spin 7s linear infinite reverse}
+.b-prisma::before{background:conic-gradient(#ff3d3d,#ffb13d,#fff13d,#3dff7a,#3de2ff,#6a5cff,#ff3dd8,#ff3d3d);animation:spin 2.4s linear infinite,glowRing 1.6s ease-in-out infinite alternate}
+.b-prisma::after{inset:-6px;background:radial-gradient(circle,transparent 58%,rgba(255,255,255,.35) 60%,transparent 66%);animation:pulseRing 2s ease-in-out infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes pulseRing{0%,100%{box-shadow:0 0 0 0 rgba(60,196,180,.6)}50%{box-shadow:0 0 0 6px rgba(60,196,180,0),0 0 16px 4px rgba(60,196,180,.5)}}
+@keyframes glowRing{from{box-shadow:0 0 8px rgba(255,255,255,.4)}to{box-shadow:0 0 22px rgba(255,255,255,.9)}}
+
+/* Emotes: animação e aura */
+.em{object-fit:contain;display:inline-block;vertical-align:middle}
+.anim-flutuar{animation:flutuar 2.6s ease-in-out infinite}
+.anim-pular{animation:pular 1.4s cubic-bezier(.3,.6,.4,1) infinite}
+.anim-balancar{animation:balancar 1.8s ease-in-out infinite;transform-origin:50% 90%}
+.anim-pulsar{animation:pulsar 1.6s ease-in-out infinite}
+.anim-girar{animation:girar 3.2s ease-in-out infinite}
+@keyframes flutuar{0%,100%{transform:translateY(0)}50%{transform:translateY(-8%)}}
+@keyframes pular{0%,100%{transform:translateY(0) scale(1,1)}30%{transform:translateY(-16%) scale(.96,1.04)}55%{transform:translateY(0) scale(1.06,.94)}}
+@keyframes balancar{0%,100%{transform:rotate(-7deg)}50%{transform:rotate(7deg)}}
+@keyframes pulsar{0%,100%{transform:scale(1)}50%{transform:scale(1.09)}}
+@keyframes girar{0%{transform:rotate(0) scale(1)}50%{transform:rotate(180deg) scale(1.08)}100%{transform:rotate(360deg) scale(1)}}
+.aura-azul{--aura:#3fb5ff} .aura-vermelha{--aura:#ff4545} .aura-roxa{--aura:#b45cff} .aura-dourada{--aura:#ffcc3d}
+[class*="aura-"]{filter:drop-shadow(0 0 3px var(--aura)) drop-shadow(0 0 9px var(--aura));animation:auraPulse 1.8s ease-in-out infinite}
+[class*="aura-"].anim-flutuar{animation:auraPulse 1.8s ease-in-out infinite,flutuar 2.6s ease-in-out infinite}
+[class*="aura-"].anim-pular{animation:auraPulse 1.8s ease-in-out infinite,pular 1.4s cubic-bezier(.3,.6,.4,1) infinite}
+[class*="aura-"].anim-balancar{animation:auraPulse 1.8s ease-in-out infinite,balancar 1.8s ease-in-out infinite}
+[class*="aura-"].anim-pulsar{animation:auraPulse 1.8s ease-in-out infinite,pulsar 1.6s ease-in-out infinite}
+.aura-dourada{filter:drop-shadow(0 0 3px #fff3b0) drop-shadow(0 0 8px var(--aura)) drop-shadow(0 0 18px var(--aura))}
+@keyframes auraPulse{0%,100%{filter:drop-shadow(0 0 2px var(--aura)) drop-shadow(0 0 7px var(--aura))}50%{filter:drop-shadow(0 0 5px var(--aura)) drop-shadow(0 0 16px var(--aura))}}
+
+/* Hextech: bandeja, kit e abertura */
+.hex-card{background:radial-gradient(ellipse at 20% 0%,#16324a 0%,#0a1322 60%);color:#e6ebf3;border-color:#1f3550}
+.hex-card .note{color:#9fb0c6}
+.tray{display:flex;flex-wrap:wrap;gap:12px;align-items:stretch}
+.mat{display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.05);border:1px solid rgba(200,162,74,.35);border-radius:10px;padding:10px 14px;min-width:170px}
+.mat img{width:56px;height:56px;object-fit:contain}
+.mat b{display:block;font:500 24px var(--mono)}
+.mat small{color:#9fb0c6}
+.hex-actions{display:flex;flex-wrap:wrap;gap:10px;margin-left:auto;align-items:center}
+.btn-hex{background:linear-gradient(180deg,#e8c66a,#a67c21);color:#1b1305;border:1px solid #f3dc8f;font-weight:600;box-shadow:0 0 12px rgba(232,198,106,.35)}
+.btn-hex:hover:not(:disabled){filter:brightness(1.1);background:linear-gradient(180deg,#e8c66a,#a67c21)}
+.btn-blue{background:linear-gradient(180deg,#3fb5e8,#1b6f9a);color:#fff;border:1px solid #7fd3f5;font-weight:600;box-shadow:0 0 12px rgba(63,181,232,.35)}
+.btn-blue:hover:not(:disabled){filter:brightness(1.1);background:linear-gradient(180deg,#3fb5e8,#1b6f9a)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
+.chips button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--ink-2)}
+.chips button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
+.fx{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:25;display:flex;gap:8px;pointer-events:none;background:radial-gradient(ellipse,#0b1a2cdd,#0b1a2c00 70%);padding:6px 20px}
+.fx video{width:150px;height:150px}
+.hx{position:fixed;inset:0;z-index:30;background:radial-gradient(ellipse at 50% 45%,#153a5a 0%,#07101d 55%,#02060c 100%);display:grid;place-items:center;overflow:hidden;color:#e6ebf3;padding-inline:16px}
+.hx .stage{position:relative;width:min(560px,92vw);aspect-ratio:1;display:grid;place-items:center}
+.hx .stage video{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;pointer-events:none}
+.hx .stage video.wide{width:min(980px,150vw)}
+.hx .key{position:absolute;width:26%;left:50%;top:50%;opacity:0;transform:translate(160%,130%) rotate(-35deg) scale(.8);transition:transform .95s cubic-bezier(.25,.8,.25,1),opacity .35s;filter:drop-shadow(0 0 14px #7ff) drop-shadow(0 0 30px #3fb5e8);z-index:3}
+.hx .key.in{opacity:1;transform:translate(-50%,-38%) rotate(0) scale(1)}
+.hx .key.turn{transition:transform .35s ease-in,opacity .35s;transform:translate(-50%,-30%) rotate(90deg) scale(.7);opacity:0}
+.hx .flash{position:absolute;inset:-50vmax;background:radial-gradient(circle,#fff 0%,#bdf 30%,transparent 60%);opacity:0;pointer-events:none;z-index:4}
+.hx .flash.on{animation:boom .8s ease-out}
+@keyframes boom{0%{opacity:0;transform:scale(.3)}15%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
+.hx .shake{animation:shake .45s ease-in-out 2}
+@keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,-2px)}80%{transform:translate(3px,2px)}}
+.hx .top{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;display:flex;gap:8px;z-index:6}
+.hx .top button{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#e6ebf3;border-radius:8px;padding:6px 12px}
+.hx .hint{position:absolute;bottom:calc(28px + env(safe-area-inset-bottom,0px));left:0;right:0;text-align:center;color:#9fb0c6;font-size:13px;letter-spacing:.06em;text-transform:uppercase}
+.reveal{display:grid;justify-items:center;gap:10px;text-align:center;animation:rise .6s ease-out}
+@keyframes rise{from{opacity:0;transform:translateY(20px) scale(.95)}to{opacity:1;transform:none}}
+.card-r{position:relative;width:min(270px,70vw);aspect-ratio:3/4}
+.card-r .art{position:absolute;left:9%;right:9%;top:5%;height:66%;border-radius:12px;overflow:hidden;box-shadow:0 0 36px var(--rc),0 0 0 2px var(--rc);background:#0a1a1d}
+.card-r .art .pic{width:100%;height:100%;aspect-ratio:auto}
+.card-r video{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.card-r .art .pic > img{max-width:82%;max-height:82%}
+.card-r .art .pic > .em{width:78%!important;height:78%!important}
+.card-r .art .ring{transform:scale(2.2)}
+.reveal h2{font:700 22px var(--display);letter-spacing:.04em;margin:0;max-width:80vw}
+.reveal .rar{font-size:14px}
+.reveal .rar img{width:22px;height:22px}
+.reveal .badge{font-size:12.5px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08)}
+.reveal .acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}
+
+/* Perfil estilo Discord */
+.bio{white-space:pre-wrap;word-break:break-word;background:var(--panel-2);border-radius:10px;padding:12px 14px;line-height:1.6}
+.bio .em{width:28px;height:28px;vertical-align:-8px;margin-inline:1px}
+.vitrine{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.vitrine > div{background:var(--panel-2);border-radius:10px;padding:10px;display:grid;justify-items:center;gap:6px;text-align:center;min-height:130px;align-content:center}
+.vitrine img{max-width:90px;max-height:80px;object-fit:contain}
+.vitrine small{font-size:11.5px;color:var(--ink-3);line-height:1.3}
+.edit{display:grid;gap:12px;align-content:start}
+.edit textarea{width:100%;min-height:96px;border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:10px;resize:vertical;font:inherit}
+.picker{display:flex;flex-wrap:wrap;gap:4px}
+.picker button{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:3px;width:40px;height:40px;display:grid;place-items:center}
+.picker button img{width:30px;height:30px;object-fit:contain}
+.slots{display:grid;gap:8px}
+.slot-row{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:8px}
 
 .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
 .plan{display:grid;gap:10px;align-content:start}
@@ -270,7 +368,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
   .stats3{grid-template-columns:1fr}
   main{background-attachment:scroll}
 }
-@media (prefers-reduced-motion:reduce){aside{transition:none}}
+@media (prefers-reduced-motion:reduce){aside{transition:none}.ring::before,.ring::after,.em,[class*="anim-"],[class*="aura-"]{animation:none!important}.hx .key{transition:none}}
 </style>
 
 <section id="login">
@@ -308,11 +406,11 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v5";
+const STORE = "lsp-painel-v7";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
-const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, spinning:false };
+const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, lojaTipo:"todos", abrindo:false, hx:0 };
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -365,16 +463,55 @@ function tags(m){
   if (imune(m)) list.push(["Imune a rebaixamento", S.imunidade.img]);
   return list.length ? `<span class="tags">${list.map(([n,i])=>`<img src="${src(i)}" alt="${esc(n)}" title="${esc(n)}">`).join("")}</span>` : "";
 }
-function who(m, sub){ return `<span class="who">${avatar(m)}<span class="nm"><b>${esc(m.nome)}</b>${tags(m)}${sub!==undefined?`<small>${sub}</small>`:""}</span></span>`; }
+function who(m, sub){ return `<span class="who">${avatarR(m,32)}<span class="nm"><b>${esc(m.nome)}</b>${tags(m)}${sub!==undefined?`<small>${sub}</small>`:""}</span></span>`; }
 function rew(r){
   const keys = [["pp",S.reputacao.icone,"P.P."],["pm",S.miticos.icone,"Pontos Míticos"],["moedas",S.moedas.moedas.img,"Moedas"],["essencia",S.moedas.essencia.img,"Essência Mítica"],["fragmentos",S.moedas.fragmentos.img,"Fragmentos"],["estelares",S.moedas.estelares.img,"Fragmentos Estelares"]];
   return `<span class="rew">${keys.filter(([k])=>r[k]).map(([k,i,n])=>`<span title="${n}"><img src="${src(i)}" alt="">${r[k]>0?"+":""}${r[k]}</span>`).join("")}</span>`;
 }
 function rarTag(id){ const r=rar(id); return `<span class="rar" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
-function lvl(n, id){ return `<span class="lvl" style="${rc(id)}" aria-label="Nível ${n} de ${S.forja.nivel_max}">${Array.from({length:S.forja.nivel_max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
-const TIPO = {tema:"tema", icone:"ícone", emote:"emote"};
-const contain = it => it.tipo!=="tema";
-function pic(it, extra=""){ return `<div class="pic${contain(it)?" icon":""} ${extra}" style="${bg(it.img)}"></div>`; }
+function lvl(n, id, max=S.forja.nivel_max){ return `<span class="lvl" style="${rc(id)}" aria-label="Estágio ${n} de ${max}">${Array.from({length:max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
+const TIPO = {tema:"tema", borda:"borda", icone:"ícone", sentinela:"sentinela", emote:"emote"};
+const TIPOS_PL = {todos:"Todos", tema:"Temas", borda:"Bordas", icone:"Ícones", sentinela:"Sentinelas", emote:"Emotes"};
+const evolui = it => !!(it.evolucoes && it.evolucoes.length);
+const nivelDe = (m, id) => { const x = m.inventario.find(y=>y.item===id); return x ? x.nivel : 1; };
+/* visual do cosmético no nível: nas linhas de evolução, cada nível troca nome, imagem, estilo ou aura */
+function vis(it, nivel=1){
+  if (!evolui(it)) return {nome:it.nome, img:it.img, estilo:it.estilo, aura:null, anim:it.anim};
+  const e = it.evolucoes[clamp(nivel,1,it.evolucoes.length)-1];
+  return {nome:e.nome, img:e.img||it.img, estilo:e.estilo||it.estilo, aura:e.aura||null, anim:it.anim};
+}
+const POSE = {nome:"Poro", foto:"assets/users/02.png", id:"poro"};
+function emo(it, nivel, size){ const v=vis(it,nivel); return `<img class="em ${v.anim?"anim-"+v.anim:""} ${v.aura?"aura-"+v.aura:""}" src="${src(v.img)}" alt="${esc(v.nome)}" title="${esc(v.nome)}" style="width:${size}px;height:${size}px">`; }
+function ring(inner, estilo){ return estilo ? `<span class="ring b-${esc(estilo)}">${inner}</span>` : inner; }
+/* arte do cosmético para cartões, vitrine e revelação */
+function pic(it, nivel=1, extra=""){
+  const v = vis(it, nivel);
+  if (it.tipo==="tema") return `<div class="pic ${extra}" style="${bg(v.img)}"></div>`;
+  if (it.tipo==="borda") return `<div class="pic ${extra}">${ring(avatar(POSE,58), v.estilo)}</div>`;
+  if (it.tipo==="emote") return `<div class="pic ${extra}">${emo(it,nivel,76)}</div>`;
+  return `<div class="pic ${it.tipo==="sentinela"?"sent":"icone"} ${extra}"><img src="${src(v.img)}" alt=""></div>`;
+}
+function equip(m, tipo){ const id = m.equipado && m.equipado[tipo]; return id ? item(id) : null; }
+function avatarR(m, size){ const b = equip(m,"borda"); return ring(avatar(m,size), b && vis(b, nivelDe(m,b.id)).estilo); }
+/* biografia: :codigo: vira o emote, se a pessoa tiver esse emote */
+function bioHtml(m){
+  const own = new Set(m.inventario.map(x=>x.item));
+  return esc(m.bio||"").replace(/:([a-z0-9_]+):/g, (all, code)=>{ const it = db.cosmeticos.find(c=>c.tipo==="emote" && c.codigo===code); return it && own.has(it.id) ? emo(it, nivelDe(m,it.id), 28) : all; });
+}
+
+/* ---------- sons do cliente (CommunityDragon) ---------- */
+const SFX = {purchase:"button-purchase-chest-click", chest:"tray-receive-chest_generic", key:"tray-receive-material_key", intro:"open_cm-intro", idle:"open_cm-idle", outro:"open_cm-outro", keyIn:"reveal-material_key", ack:"reveal-acknowledge", upIntro:"upgrade-intro", upOutro:"upgrade-outro", upMax:"upgrade-bar-max", click:"grid-click", hover:"grid-hover", coins:"blue-essence-fill", dup:"disenchant-outro",
+  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate"};
+const VID = {comum:"none", epica:"epic", lendaria:"legendary", mitica:"mythic", ultimate:"ultimate"};
+let mudo = false; try{ mudo = localStorage.getItem("lsp-mudo")==="1"; }catch(e){}
+const somUrl = k => BASE + "painel-saas/midia/som/sfx-loot-" + SFX[k] + ".ogg";
+const vidUrl = n => BASE + "painel-saas/midia/video/" + n + ".webm";
+function som(k, {vol=.7, loop=false}={}){ if (mudo) return null; try{ const a=new Audio(somUrl(k)); a.volume=vol; a.loop=loop; a.play().catch(()=>{}); return a; }catch(e){ return null; } }
+let ultimoHover = 0;
+document.addEventListener("mouseover", e=>{ const t=e.target.closest(".item,.btn-hex,.btn-blue"); if(!t || t.contains(e.relatedTarget)) return; const n=Date.now(); if(n-ultimoHover>90){ ultimoHover=n; som("hover",{vol:.18}); } });
+const wait = ms => new Promise(r=>setTimeout(r,ms));
+const reduz = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+function tocar(v, maxMs){ return new Promise(res=>{ let ok=false; const fim=()=>{ if(!ok){ ok=true; res(); } }; v.addEventListener("ended",fim,{once:true}); v.addEventListener("error",fim,{once:true}); setTimeout(fim,maxMs); v.play().catch(fim); }); }
 
 function log(c, texto){ c.atividade.unshift({quando:NOW_ISO, texto}); }
 /* aplica recompensas e cuida de maestria, alerta e elo */
@@ -454,7 +591,7 @@ function render(){
   let nav = `<div class="label">Comunidade</div>` + VIEWS.filter(v=>!v.admin).map(v=>navBtn(v, v.id==="verificacoes"&&adm?p:0)).join("");
   if (adm) nav += `<div class="label">Administração</div>` + VIEWS.filter(v=>v.admin).map(v=>navBtn(v,0)).join("");
   $("#nav").innerHTML = nav;
-  $("#me").innerHTML = `${avatar(me)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)} · ${esc(me.acesso)}</small></span><button id="logout">Sair</button>`;
+  $("#me").innerHTML = `${avatarR(me,32)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)} · ${esc(me.acesso)}</small></span><button id="mute" title="${mudo?"Ativar sons":"Silenciar sons"}" aria-label="${mudo?"Ativar sons":"Silenciar sons"}">${mudo?"🔇":"🔊"}</button><button id="logout" style="margin-left:4px">Sair</button>`;
   const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
   $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
   const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
@@ -468,6 +605,7 @@ document.addEventListener("click", e=>{
   if(e.target.closest("#ws-btn")){ const m=$("#ws-menu"); m.hidden=!m.hidden; $("#ws-btn").setAttribute("aria-expanded", String(!m.hidden)); return; }
   const w = e.target.closest("[data-ws]");
   if(w){ if(w.dataset.ws==="__new") toast("Numa versão real, aqui você criaria uma nova comunidade."); else { session.ws=w.dataset.ws; session.view="inicio"; session.forjaSel=null; render(); } $("#ws-menu").hidden=true; return; }
+  if(e.target.closest("#mute")){ mudo=!mudo; try{ localStorage.setItem("lsp-mudo", mudo?"1":"0"); }catch(err){} render(); if(!mudo) som("click",{vol:.5}); return; }
   if(e.target.closest("#logout")){ session.conta=null; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
   if(e.target.closest("#menu-btn")){ $("#side").classList.add("open"); return; }
   const mb = e.target.closest("[data-member]"); if(mb){ openMember(mb.dataset.member); return; }
@@ -573,9 +711,7 @@ function vVerif(c, me, adm){
 }
 
 function profile(c, m, opts={}){
-  const ban = m.equipado && m.equipado.tema && item(m.equipado.tema);
-  const ic = m.equipado && m.equipado.icone && item(m.equipado.icone);
-  const em = m.equipado && m.equipado.emote && item(m.equipado.emote);
+  const tema = equip(m,"tema"), ic = equip(m,"icone"), em = equip(m,"emote"), sent = equip(m,"sentinela");
   const pos = [...c.membros].filter(x=>x.pp!=null).sort((a,b)=>b.pp-a.pp).findIndex(x=>x.id===m.id)+1;
   const hist = c.envios.filter(e=>e.membro===m.id);
   const spark = (()=>{ const v=m.contrib, mx=Math.max(...v)||1, W=300,H=46; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`); const [lx,ly]=pts.at(-1).split(",");
@@ -586,16 +722,19 @@ function profile(c, m, opts={}){
   if (podePromover(m)) flags.push(`<span class="flag gold"><img src="${src(S.reputacao.icone)}" alt="">Pode subir para ${esc(S.cargos[cargoIdx(m)+1].nome)}</span>`);
   (m.tags||[]).forEach(t=>{ const tg=S.tags.find(x=>x.nome===t); if(tg) flags.push(`<span class="flag" style="background:var(--panel-2)"><img src="${src(tg.img)}" alt="">${esc(t)}: ${esc(tg.nota)}</span>`); });
   const coins = ["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("");
+  const vit = (it, rot) => it ? `<div>${it.tipo==="emote"?emo(it,nivelDe(m,it.id),72):`<img src="${src(vis(it,nivelDe(m,it.id)).img)}" alt="" ${it.tipo==="icone"?'style="border-radius:50%"':""}>`}<small><b>${esc(vis(it,nivelDe(m,it.id)).nome)}</b><br>${rot}</small></div>` : `<div><small>Sem ${rot.toLowerCase()}</small></div>`;
   return `<div class="prof">
-    <div class="banner" style="${ban?bg(ban.img):""}"></div>
-    <div class="idrow"><div class="ava">${avatar(m,84)}${ic?`<img class="medal" src="${src(ic.img)}" alt="${esc(ic.nome)}" title="${esc(ic.nome)}">`:""}</div>
-      <div style="padding-bottom:4px;min-width:0;flex:1"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div>${em?`<img class="emote" src="${src(em.img)}" alt="${esc(em.nome)}" title="${esc(em.nome)}">`:""}</div>
+    <div class="banner" style="${tema?bg(tema.img):""}"></div>
+    <div class="idrow"><div class="ava">${avatarR(m,84)}${ic?`<img class="medal" src="${src(vis(ic,nivelDe(m,ic.id)).img)}" alt="${esc(ic.nome)}" title="${esc(vis(ic,nivelDe(m,ic.id)).nome)}">`:""}</div>
+      <div style="padding-bottom:4px;min-width:0;flex:1"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div>${em?`<span style="align-self:flex-end">${emo(em,nivelDe(m,em.id),64)}</span>`:""}</div>
     <div class="inner">
+      ${m.bio||opts.editavel?`<div class="bio" id="bio-view">${bioHtml(m)||`<span class="note">Escreva algo sobre você ao lado.</span>`}</div>`:""}
+      <div><span class="label">Vitrine</span><div class="vitrine" style="margin-top:6px">${vit(em,"Emote")}${vit(sent,"Sentinela")}${vit(ic,"Ícone")}</div></div>
       <div class="stats3">${statRep(m)}${statElo(m)}${statDest(m)}</div>
       ${flags.length?`<div class="flags">${flags.join("")}</div>`:""}
       <div class="wallet">${coins}</div>
       <div><span class="label">Contribuições nas últimas 8 semanas</span>${spark}</div>
-      <div><span class="label">Cosméticos (${m.inventario.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div class="${contain(it)?"icon":""}" style="${bg(it.img)};${rc(it.raridade)}" title="${esc(it.nome)} · Nv. ${x.nivel}"></div>`; }).join("")}</div></div>
+      <div><span class="label">Coleção (${m.inventario.length} de ${db.cosmeticos.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div title="${esc(vis(it,x.nivel).nome)}" style="${rc(it.raridade)};width:64px;border-radius:6px;overflow:hidden;border-bottom:3px solid var(--rc)">${pic(it,x.nivel)}</div>`; }).join("")}</div></div>
       <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
       <p class="note">Na staff desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
       ${opts.admin ? adminBox(c,m) : ""}
@@ -615,41 +754,64 @@ function openMember(id){
   $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}"><div style="position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px;z-index:2"><button class="btn btn-sm" data-close>Fechar</button></div><div style="margin-top:-52px">${profile(c,m,{admin:isAdmin(c) && m.conta!==session.conta})}</div></div></div>`;
   bindAdmin(c, ()=>{ openMember(id); render(); });
 }
-function vPerfil(c, me){ return head("Meu perfil", "Como a staff vê você. O fundo do perfil é o seu tema equipado. Troque tema e ícone na Forja.", `<button class="btn" data-view="forja">Personalizar na Forja</button>`) + `<div class="card" style="max-width:720px;padding:0;overflow:hidden">${profile(c,me)}</div>`; }
+function vPerfil(c, me){
+  const own = t => me.inventario.map(x=>item(x.item)).filter(it=>it.tipo===t);
+  const slot = (t, rot, opcional) => `<div class="slot-row"><label class="label" for="eq-${t}">${rot}</label><select class="sel" id="eq-${t}" data-eqsel="${t}">${opcional?`<option value="">Nenhum</option>`:""}${own(t).map(it=>`<option value="${it.id}" ${me.equipado&&me.equipado[t]===it.id?"selected":""}>${esc(vis(it,nivelDe(me,it.id)).nome)}</option>`).join("")}</select></div>`;
+  const emotes = own("emote");
+  return head("Meu perfil", "Personalize como a staff vê você: biografia com emotes, borda animada, ícone, sentinela e tema.", `<button class="btn" data-view="forja">Aprimorar na Forja</button>`) +
+  `<div class="grid two"><div class="card" style="padding:0;overflow:hidden">${profile(c,me,{editavel:true})}</div>
+   <div class="card edit"><h2>Editar perfil</h2>
+     <div class="field"><label class="label" for="bio-edit">Biografia</label><textarea id="bio-edit" maxlength="190" placeholder="Conte algo sobre você. Use :codigo: para emotes.">${esc(me.bio||"")}</textarea><span class="note" id="bio-count">${(me.bio||"").length}/190</span></div>
+     <div><span class="label">Seus emotes (clique para inserir)</span><div class="picker" style="margin-top:6px">${emotes.map(it=>`<button type="button" data-emo="${esc(it.codigo)}" title=":${esc(it.codigo)}:">${emo(it,nivelDe(me,it.id),30)}</button>`).join("")||`<span class="note">Você ainda não tem emotes. Compre no Mercado.</span>`}</div></div>
+     <button class="btn btn-primary" id="bio-save">Salvar biografia</button>
+     <div class="slots"><span class="label">Equipados</span>${slot("tema","Tema")}${slot("borda","Borda",1)}${slot("icone","Ícone",1)}${slot("emote","Emote",1)}${slot("sentinela","Sentinela",1)}</div>
+   </div></div>`;
+}
 
 function walletBar(m){ return `<div class="wallet" style="margin-bottom:16px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("")}</div>`; }
 function vMercado(c, me){
-  const loja = db.cosmeticos.filter(it=>it.preco);
+  const H = S.hextech, t = session.lojaTipo;
+  const loja = db.cosmeticos.filter(it=>it.preco && (t==="todos"||it.tipo===t));
   const has = id => me.inventario.some(x=>x.item===id);
-  const pool = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
-  const custo = S.lootbox.custo_essencia;
-  return head("Mercado", "Moedas compram temas e cosméticos comuns. Essência Mítica abre LootBoxes, que podem dar os raros.") + walletBar(me) +
-  `<div class="card" style="margin-bottom:16px"><h2><span class="loot-head"><img src="${src(S.lootbox.img)}" alt=""><span>Baú Hextech<br><span class="note">Abre com Essência Mítica</span></span></span><span class="note">Chances: ${S.raridades.map(r=>`${r.nome} ${r.peso}%`).join(" · ")}</span></h2>
-    <div class="roleta" id="roleta"><div class="marker"></div><div class="strip" id="strip"></div><div class="idle" id="roleta-idle">Abra o baú e gire a roleta para ganhar um cosmético aleatório.<br>Se vier um repetido, ele vira fragmentos.</div></div>
-    <div class="row" style="margin-top:12px;justify-content:space-between"><span class="note" id="loot-result">Custa ${custo} Essência Mítica. Você tem ${me.carteira.essencia}.</span><button class="btn btn-gold" id="open-loot" ${me.carteira.essencia<custo?"disabled":""}>Abrir baú (${custo} <img class="ico" style="width:18px;height:18px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica">)</button></div>
+  const podeAbrir = me.materiais.baus>0 && me.materiais.chaves>0;
+  return head("Mercado", "Moedas compram temas e cosméticos comuns. Essência Mítica compra o Kit Hextech: abra o baú com a chave para ganhar cosméticos de qualquer raridade.") + walletBar(me) +
+  `<div class="card hex-card" style="margin-bottom:16px"><h2 style="color:#f3dc8f">Hextech <span class="note">Chances: ${S.raridades.map(r=>`${r.nome} ${r.peso}%`).join(" · ")}</span></h2>
+    <div class="tray">
+      <div class="mat"><img src="${src(H.bau.img)}" alt=""><span><b id="n-baus">${me.materiais.baus}</b><small>${esc(H.bau.nome)}</small></span></div>
+      <div class="mat"><img src="${src(H.chave.img)}" alt=""><span><b id="n-chaves">${me.materiais.chaves}</b><small>${esc(H.chave.nome)}</small></span></div>
+      <div class="hex-actions">
+        <button class="btn btn-blue" id="buy-kit" ${me.carteira.essencia<H.kit_custo_essencia?"disabled":""}>Comprar Kit Hextech · ${H.kit_custo_essencia} <img class="ico" style="width:20px;height:20px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica"></button>
+        <button class="btn btn-hex" id="open-chest" ${podeAbrir?"":"disabled"}>Abrir baú com a chave</button>
+      </div>
+    </div>
+    <p class="note" style="margin-top:10px">${esc(H.nota)} Você tem ${me.carteira.essencia} Essência Mítica.</p>
   </div>
-  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span></h2>
+  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span><span class="note">${db.cosmeticos.filter(x=>has(x.id)).length} de ${db.cosmeticos.length} cosméticos na sua coleção</span></h2>
+    <div class="chips">${Object.entries(TIPOS_PL).map(([k,n])=>`<button data-loja="${k}" aria-pressed="${t===k}">${n}</button>`).join("")}</div>
     <div class="items">${loja.map(it=>`<div class="item" style="${rc(it.raridade)}">${pic(it)}<div class="body"><b>${esc(it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
-      ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")}</div>
-    <p class="note" style="margin-top:12px">Cosméticos Épicos ou mais raros só saem na LootBox: ${pool.filter(it=>!it.preco).map(it=>esc(it.nome)).join(", ")}.</p>
+      ${evolui(it)?`<span class="evo-tag">⬆ Evolui na Forja: ${it.evolucoes.length} estágios</span>`:""}
+      ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")||`<p class="note">Nada à venda nesta categoria. Procure nos baús Hextech.</p>`}</div>
   </div>`;
 }
 function vForja(c, me){
   const inv = me.inventario;
-  if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = inv[0] && inv[0].item;
-  const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = S.forja.nivel_max;
+  if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
+  const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = it.evolucoes ? it.evolucoes.length : 1;
   const custo = r.custo * sel.nivel, moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
-  const eq = me.equipado && me.equipado[it.tipo] === it.id;
-  return head("Forja", "Suba o nível dos seus cosméticos. Comuns e Épicos usam Fragmentos; Lendários ou acima só sobem com Fragmentos Estelares.") + walletBar(me) +
+  const eq = me.equipado && me.equipado[it.tipo] === it.id, v = vis(it, sel.nivel);
+  const ordem = [...inv].sort((a,b)=> (evolui(item(b.item))-evolui(item(a.item))));
+  const onde = {tema:"como tema do painel", borda:"como borda da foto", icone:"como ícone", emote:"como emote do perfil", sentinela:"na vitrine do perfil"};
+  return head("Forja", "Aprimorar muda o visual do cosmético para o próximo estágio da linha dele. Só cosméticos com linha de evolução podem ser aprimorados.") + walletBar(me) +
   `<div class="grid two">
-    <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens</span></h2>
-      <div class="items">${inv.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t)}<div class="body"><b>${esc(t.nome)}</b><div class="row" style="justify-content:space-between">${lvl(x.nivel,t.raridade)}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
+    <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens · ${inv.filter(x=>evolui(item(x.item))).length} evoluem</span></h2>
+      <div class="items">${ordem.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.nivel)}<div class="body"><b>${esc(vis(t,x.nivel).nome)}</b><div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
     <div class="card forge" style="${rc(it.raridade)}">
-      ${pic(it)}
-      <div><h2 style="margin-bottom:4px">${esc(it.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
-      <div class="row" style="justify-content:space-between"><span class="label">Nível</span><span class="row">${lvl(sel.nivel,it.raridade)}<span class="num">${sel.nivel}/${max}</span></span></div>
-      ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Próximo nível custa</span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar para o nível ${sel.nivel+1}</button></div>` : `<p class="note">Nível máximo alcançado.</p>`}
-      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":it.tipo==="emote"?"como emote do perfil":"como ícone"}`}</button>
+      ${pic(it, sel.nivel, "forge-pic")}
+      <div><h2 style="margin-bottom:4px">${esc(v.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
+      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<div class="st ${i+1===sel.nivel?"on":""} ${i+1>sel.nivel?"lock":""}" style="${rc(it.raridade)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}</span></div>`).join("")}</div></div>
+        ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Evoluir para <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar</button></div>` : `<p class="note">Estágio final alcançado.</p>`}`
+      : `<p class="note">Este cosmético não tem linha de evolução, então não pode ser aprimorado. Procure os que têm o selo ⬆ na loja.</p>`}
+      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${onde[it.tipo]}`}</button>
     </div>
   </div>`;
 }
@@ -699,9 +861,9 @@ function vSistema(c){
   <div class="card"><h2>Economia de cosméticos</h2>
     <div class="grid halves" style="gap:16px">
       <div class="grid" style="gap:8px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="row" style="flex-wrap:nowrap;align-items:flex-start"><img class="ico-lg" src="${src(S.moedas[k].img)}" alt=""><span><b>${esc(S.moedas[k].nome)}</b><br><span class="note">${esc(S.moedas[k].nota)}</span></span></div>`).join("")}</div>
-      <div class="table-wrap"><table><thead><tr><th>Raridade</th><th class="r">Chance</th><th>Sobe com</th><th class="r">Custo/nível</th><th class="r">Repetido vira</th></tr></thead>
-        <tbody>${S.raridades.map(r=>`<tr><td>${rarTag(r.id)}</td><td class="r num">${r.peso}%</td><td><span class="cell"><img class="ico" style="width:18px;height:18px" src="${src(S.moedas[r.frag].img)}" alt="">${esc(S.moedas[r.frag].nome)}</span></td><td class="r num">${r.custo} × nível</td><td class="r num">${r.duplicata}</td></tr>`).join("")}</tbody></table>
-        <p class="note" style="margin-top:8px">LootBox custa ${S.lootbox.custo_essencia} Essência Mítica. Nível máximo: ${S.forja.nivel_max}.</p></div>
+      <div class="table-wrap"><table><thead><tr><th>Raridade</th><th class="r">Chance</th><th>Sobe com</th><th class="r">Custo por evolução</th><th class="r">Repetido vira</th></tr></thead>
+        <tbody>${S.raridades.map(r=>`<tr><td>${rarTag(r.id)}</td><td class="r num">${r.peso}%</td><td><span class="cell"><img class="ico" style="width:18px;height:18px" src="${src(S.moedas[r.frag].img)}" alt="">${esc(S.moedas[r.frag].nome)}</span></td><td class="r num">${r.custo} × estágio</td><td class="r num">${r.duplicata}</td></tr>`).join("")}</tbody></table>
+        <p class="note" style="margin-top:8px">O Kit Hextech (baú + chave) custa ${S.hextech.kit_custo_essencia} Essência Mítica. Só cosméticos com linha de evolução podem ser aprimorados; cada estágio custa o valor da raridade × estágio atual.</p></div>
     </div></div>
   </div>`;
 }
@@ -723,38 +885,78 @@ function vDados(){
   `<div class="card"><textarea class="json" id="json-box" readonly aria-label="JSON do banco de dados">${esc(JSON.stringify(db,null,2))}</textarea></div>`;
 }
 
-/* ---------- LootBox ---------- */
+/* ---------- Hextech: kit, baú e revelação ---------- */
 function sortear(pool){ const tot=pool.reduce((s,it)=>s+rar(it.raridade).peso,0); let r=Math.random()*tot; for(const it of pool){ r-=rar(it.raridade).peso; if(r<=0) return it; } return pool.at(-1); }
-function abrirLoot(c, me){
-  if (session.spinning) return;
-  const custo = S.lootbox.custo_essencia; if (me.carteira.essencia < custo) return;
-  session.spinning = true; me.carteira.essencia -= custo; save();
-  const pool = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
-  const win = sortear(pool), N = 46, W = 40;
-  const cells = Array.from({length:N}, (_,i)=> i===W ? win : sortear(pool));
-  const strip = $("#strip"); $("#roleta-idle").hidden = true; $("#open-loot").disabled = true;
-  strip.style.transition = "none"; strip.style.transform = "translateX(0)";
-  strip.innerHTML = cells.map(it=>`<div class="slot" style="${rc(it.raridade)}">${pic(it)}<span>${esc(it.nome)}</span></div>`).join("");
-  const box = $("#roleta").clientWidth, cw = 140, jitter = (Math.random()-.5)*90;
-  const x = -(W*cw + 65 - box/2 + jitter);
-  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
-  requestAnimationFrame(()=>requestAnimationFrame(()=>{
-    strip.style.transition = reduce ? "none" : "transform 5.2s cubic-bezier(.08,.72,.16,1)";
-    strip.style.transform = `translateX(${x}px)`;
-    const done = ()=>{ session.spinning=false; ganhar(c, me, win); };
-    if (reduce) done(); else strip.addEventListener("transitionend", done, {once:true});
-  }));
+function comprarKit(c, me){
+  const custo = S.hextech.kit_custo_essencia; if (me.carteira.essencia < custo) return;
+  me.carteira.essencia -= custo; me.materiais.baus++; me.materiais.chaves++;
+  log(c, `${me.nome} comprou um Kit Hextech`); save();
+  som("purchase");
+  const fx = document.createElement("div"); fx.className="fx";
+  fx.innerHTML = `<video muted playsinline src="${vidUrl("resource_add_chest_generic")}"></video><video muted playsinline src="${vidUrl("resource_add_material_key")}"></video>`;
+  document.body.appendChild(fx);
+  const [v1,v2] = fx.querySelectorAll("video");
+  setTimeout(()=>{ v1.play().catch(()=>{}); som("chest"); }, 150);
+  setTimeout(()=>{ v2.play().catch(()=>{}); som("key"); }, 650);
+  setTimeout(()=>fx.remove(), 2700);
+  render(); toast("Kit Hextech comprado: 1 baú e 1 chave.");
 }
-function ganhar(c, me, it){
-  const r = rar(it.raridade), ja = me.inventario.find(x=>x.item===it.id);
-  let msg;
-  if (ja){ me.carteira[r.frag] += r.duplicata; msg = `${it.nome} (${r.nome}) repetido: virou ${r.duplicata} ${S.moedas[r.frag].nome}.`; }
-  else { me.inventario.push({item:it.id, nivel:1}); msg = `Você ganhou ${it.nome} (${r.nome})!`; log(c, `${me.nome} tirou ${it.nome} (${r.nome}) na LootBox`); }
+async function abrirBau(c, me){
+  if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
+  session.abrindo = true; const token = ++session.hx;
+  me.materiais.baus--; me.materiais.chaves--;
+  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial"));
   save();
-  const res = $("#loot-result"); if (res) res.innerHTML = `<b>${esc(msg)}</b> Restam ${me.carteira.essencia} Essência Mítica.`;
-  $$(".wallet").forEach(w=>w.outerHTML = walletBar(me));
-  const btn = $("#open-loot"); if (btn) btn.disabled = me.carteira.essencia < S.lootbox.custo_essencia;
-  toast(msg);
+  const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
+  ov.innerHTML = `<div class="top"><button data-hx-mute>${mudo?"🔇":"🔊"}</button><button data-hx-skip>Pular</button></div>
+    <div class="stage" id="hx-stage">
+      <video id="v-intro" muted playsinline src="${vidUrl("open_cm_intro")}"></video>
+      <video id="v-loop" muted playsinline loop src="${vidUrl("open_cm_loop")}" hidden></video>
+      <video id="v-outro" class="wide" muted playsinline src="${vidUrl("open_cm_outro")}" hidden></video>
+      <img class="key" id="hx-key" src="${src(S.hextech.chave.img)}" alt="">
+      <div class="flash" id="hx-flash"></div>
+    </div><div class="hint" id="hx-hint">Preparando o baú…</div>`;
+  document.body.appendChild(ov);
+  let idle = null;
+  const vivo = () => token===session.hx && document.body.contains(ov);
+  const fimCena = () => { if (idle){ idle.pause(); idle=null; } };
+  ov.querySelector("[data-hx-skip]").onclick = () => { if(!vivo()) return; session.hx++; fimCena(); revelar(c, me, it, ov); };
+  ov.querySelector("[data-hx-mute]").onclick = e => { mudo=!mudo; try{ localStorage.setItem("lsp-mudo", mudo?"1":"0"); }catch(err){} e.target.textContent = mudo?"🔇":"🔊"; if(mudo) fimCena(); };
+  if (reduz()) { revelar(c, me, it, ov); return; }
+  const vI=ov.querySelector("#v-intro"), vL=ov.querySelector("#v-loop"), vO=ov.querySelector("#v-outro"), key=ov.querySelector("#hx-key"), hint=ov.querySelector("#hx-hint"), stage=ov.querySelector("#hx-stage");
+  som("intro"); await tocar(vI, 2200); if(!vivo()) return;
+  vI.hidden = true; vL.hidden = false; vL.play().catch(()=>{}); idle = som("idle",{vol:.45, loop:true});
+  hint.textContent = "Usando a Chave Hextech…";
+  await wait(250); if(!vivo()) return; key.classList.add("in");
+  await wait(1000); if(!vivo()) return; som("keyIn"); key.classList.add("turn"); stage.classList.add("shake");
+  await wait(750); if(!vivo()) return;
+  fimCena(); vL.hidden = true; vO.hidden = false; hint.textContent = "";
+  ov.querySelector("#hx-flash").classList.add("on"); som("outro");
+  await tocar(vO, 2400); if(!vivo()) return;
+  revelar(c, me, it, ov);
+}
+function revelar(c, me, it, ov){
+  const r = rar(it.raridade), ja = me.inventario.find(x=>x.item===it.id);
+  let badge;
+  if (ja){ me.carteira[r.frag] += r.duplicata; badge = `Repetido: virou ${r.duplicata} ${S.moedas[r.frag].nome}`; }
+  else { me.inventario.push({item:it.id, nivel:1}); badge = evolui(it) ? `Novo! Evolui em ${it.evolucoes.length} estágios na Forja` : "Novo!"; log(c, `${me.nome} tirou ${it.nome} (${r.nome}) num Baú Hextech`); }
+  save();
+  const podeMais = me.materiais.baus>0 && me.materiais.chaves>0;
+  ov.querySelector("#hx-stage").outerHTML = `<div class="reveal" style="${rc(it.raridade)}">
+      <div class="card-r"><div class="art">${pic(it,1)}</div><video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
+      <h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>
+      <div class="acts">${!ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${podeMais?`<button class="btn btn-blue" data-hx-again>Abrir outro (${me.materiais.baus} baús, ${me.materiais.chaves} chaves)</button>`:""}<button class="btn" data-hx-close style="background:rgba(255,255,255,.1);color:#e6ebf3;border-color:rgba(255,255,255,.25)">Continuar</button></div>
+    </div>`;
+  const hint = ov.querySelector("#hx-hint"); if (hint) hint.textContent = "";
+  const sk = ov.querySelector("[data-hx-skip]"); if (sk) sk.remove();
+  const vr = ov.querySelector("#v-rev");
+  vr.addEventListener("ended", ()=>{ vr.src = vidUrl("reveal_"+VID[it.raridade]+"_loop"); vr.loop = true; vr.play().catch(()=>{}); }, {once:true});
+  vr.play().catch(()=>{});
+  som("r_"+it.raridade); if (ja) setTimeout(()=>som("dup",{vol:.6}), 900);
+  const fechar = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; render(); };
+  ov.querySelector("[data-hx-close]").onclick = fechar;
+  const eq = ov.querySelector("[data-hx-equip]"); if (eq) eq.onclick = () => { me.equipado[it.tipo]=it.id; save(); toast(`${it.nome} equipado.`); fechar(); };
+  const ag = ov.querySelector("[data-hx-again]"); if (ag) ag.onclick = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; abrirBau(c, me); };
 }
 
 /* ---------- eventos ---------- */
@@ -785,12 +987,25 @@ function bindView(c, me){
   $$("[data-acesso]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.acesso); m.acesso=s.value; save(); render(); toast(`${m.nome} agora tem acesso ${s.value}.`); }));
   $$("[data-cargo]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.cargo); m.cargo=s.value; if(s.value==="Dev") m.pp=null; else if(m.pp==null) m.pp=S.reputacao.inicial; save(); render(); toast(`${m.nome} agora é ${s.value}.`); }));
   $$("[data-rrule]").forEach(i=>i.addEventListener("change",()=>{ const r=c.regras.find(x=>x.id===i.dataset.rrule); const v=parseInt(i.value,10)||0; if(v) r.recompensa[i.dataset.rkey]=v; else delete r.recompensa[i.dataset.rkey]; save(); toast(`"${r.acao}" atualizada.`); }));
-  $$("[data-buy]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.buy); if(me.carteira.moedas<it.preco) return; me.carteira.moedas-=it.preco; me.inventario.push({item:it.id,nivel:1}); log(c, `${me.nome} comprou ${it.nome}`); save(); render(); toast(`${it.nome} comprado. Equipe na Forja.`); }));
-  const ol=$("#open-loot"); if(ol) ol.addEventListener("click",()=>abrirLoot(c, me));
-  $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; render(); }));
+  $$("[data-buy]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.buy); if(me.carteira.moedas<it.preco) return; me.carteira.moedas-=it.preco; me.inventario.push({item:it.id,nivel:1}); log(c, `${me.nome} comprou ${it.nome}`); save(); som("coins",{vol:.6}); render(); toast(`${it.nome} comprado. Equipe no seu perfil.`); }));
+  $$("[data-loja]").forEach(b=>b.addEventListener("click",()=>{ session.lojaTipo=b.dataset.loja; som("click",{vol:.4}); render(); }));
+  const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
+  const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
+  $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; som("click",{vol:.5}); render(); }));
   $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=r.custo*x.nivel;
-    if(me.carteira[r.frag]<custo || x.nivel>=S.forja.nivel_max) return; me.carteira[r.frag]-=custo; x.nivel++; log(c, `${me.nome} aprimorou ${it.nome} para o nível ${x.nivel}`); save(); render(); toast(`${it.nome} agora está no nível ${x.nivel}.`); }));
-  $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); render(); toast(`${it.nome} equipado.`); }));
+    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++;
+    const nome = vis(it,x.nivel).nome; log(c, `${me.nome} evoluiu ${it.nome} para ${nome}`); save();
+    som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
+    render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Evoluiu para ${nome}!`); }));
+  $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); som("click",{vol:.5}); render(); toast(`${it.nome} equipado.`); }));
+  $$("[data-eqsel]").forEach(s=>s.addEventListener("change",()=>{ const t=s.dataset.eqsel; if(s.value) me.equipado[t]=s.value; else delete me.equipado[t]; save(); som("click",{vol:.5}); render(); toast("Perfil atualizado."); }));
+  const be=$("#bio-edit");
+  if(be){
+    const upd=()=>{ const prev=me.bio; me.bio=be.value; $("#bio-view").innerHTML=bioHtml(me)||`<span class="note">Escreva algo sobre você ao lado.</span>`; me.bio=prev; $("#bio-count").textContent=`${be.value.length}/190`; };
+    be.addEventListener("input", upd);
+    $$("[data-emo]").forEach(b=>b.addEventListener("click",()=>{ const code=`:${b.dataset.emo}:`, i=be.selectionStart??be.value.length; if(be.value.length+code.length>190) return; be.value=be.value.slice(0,i)+code+be.value.slice(be.selectionEnd??i); be.focus(); be.selectionStart=be.selectionEnd=i+code.length; som("click",{vol:.4}); upd(); }));
+    $("#bio-save").addEventListener("click",()=>{ me.bio=be.value.trim(); save(); render(); toast("Biografia salva."); });
+  }
   $$("[data-plan]").forEach(b=>b.addEventListener("click",()=>{ c.plano=b.dataset.plan==="guilda"?"pro":b.dataset.plan; save(); render(); toast("Plano alterado (simulação, nada foi cobrado)."); }));
   const inv=$("#invite"); if(inv) inv.addEventListener("click",()=>toast("Numa versão real, isto gera um link de convite para o Discord."));
   const cp=$("#copy-json"); if(cp) cp.addEventListener("click",()=>{ const box=$("#json-box"); navigator.clipboard.writeText(box.value).then(()=>toast("JSON copiado."),()=>{ box.focus(); box.select(); toast("Selecionei o texto. Use Ctrl+C para copiar."); }); });

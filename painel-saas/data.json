@@ -299,11 +299,17 @@
       "nivel_max": 5,
       "nota": "Custo para subir de nível = custo da raridade x nível atual."
     },
-    "lootbox": {
-      "custo_essencia": 3,
-      "img": "painel-saas/img/wiki/Hextech_Crafting_Chest.png",
-      "img_aberta": "painel-saas/img/wiki/Hextech_Crafting_Masterwork_Chest.png",
-      "nota": "Roleta aleatória. Cosmético repetido vira fragmentos."
+    "hextech": {
+      "kit_custo_essencia": 3,
+      "bau": {
+        "nome": "Baú Hextech",
+        "img": "painel-saas/img/wiki/Hextech_Crafting_Chest.png"
+      },
+      "chave": {
+        "nome": "Chave Hextech",
+        "img": "painel-saas/img/wiki/Hextech_Crafting_Key.png"
+      },
+      "nota": "O Kit Hextech (1 baú + 1 chave) custa Essência Mítica. Use a chave para abrir o baú. Cosmético repetido vira fragmentos."
     },
     "promocao": {
       "fragmentos": 13,
@@ -330,176 +336,800 @@
       "nome": "Tema Oficial",
       "tipo": "tema",
       "raridade": "comum",
-      "img": "image/background.png",
-      "preco": 0
+      "preco": 0,
+      "img": "image/background.png"
+    },
+    {
+      "id": "tema-demacia",
+      "nome": "Tema Demacia",
+      "tipo": "tema",
+      "raridade": "comum",
+      "preco": 400,
+      "img": "painel-saas/midia/cd/tema_demacia.jpg"
+    },
+    {
+      "id": "tema-piltover",
+      "nome": "Tema Piltover",
+      "tipo": "tema",
+      "raridade": "comum",
+      "preco": 400,
+      "img": "painel-saas/midia/cd/tema_piltover.jpg"
+    },
+    {
+      "id": "tema-freljord",
+      "nome": "Tema Freljord",
+      "tipo": "tema",
+      "raridade": "comum",
+      "preco": 400,
+      "img": "painel-saas/midia/cd/tema_freljord.jpg"
     },
     {
       "id": "tema-ionia",
       "nome": "Tema Ionia",
       "tipo": "tema",
       "raridade": "epica",
-      "img": "painel-saas/img/ionia.jpg",
-      "preco": 600
+      "preco": 600,
+      "img": "painel-saas/img/ionia.jpg"
+    },
+    {
+      "id": "tema-noxus",
+      "nome": "Tema Noxus",
+      "tipo": "tema",
+      "raridade": "epica",
+      "preco": 600,
+      "img": "painel-saas/midia/cd/tema_noxus.jpg"
+    },
+    {
+      "id": "tema-zaun",
+      "nome": "Tema Zaun",
+      "tipo": "tema",
+      "raridade": "epica",
+      "preco": 600,
+      "img": "painel-saas/midia/cd/tema_zaun.jpg"
     },
     {
       "id": "tema-sentina",
       "nome": "Tema Águas de Sentina",
       "tipo": "tema",
       "raridade": "lendaria",
-      "img": "image/back.png",
-      "preco": 900
+      "preco": 900,
+      "img": "image/back.png"
+    },
+    {
+      "id": "tema-shurima",
+      "nome": "Tema Shurima",
+      "tipo": "tema",
+      "raridade": "lendaria",
+      "preco": 900,
+      "img": "painel-saas/midia/cd/tema_shurima.jpg"
+    },
+    {
+      "id": "tema-targon",
+      "nome": "Tema Targon",
+      "tipo": "tema",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/tema_targon.jpg"
+    },
+    {
+      "id": "tema-sombras",
+      "nome": "Tema Ilhas das Sombras",
+      "tipo": "tema",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/tema_sombras.jpg"
+    },
+    {
+      "id": "borda-arcana",
+      "nome": "Borda Arcana",
+      "tipo": "borda",
+      "raridade": "epica",
+      "preco": null,
+      "evolucoes": [
+        {
+          "nome": "Borda Arcana: Aço",
+          "estilo": "aco"
+        },
+        {
+          "nome": "Borda Arcana: Pulso",
+          "estilo": "pulso"
+        },
+        {
+          "nome": "Borda Arcana: Hextech",
+          "estilo": "hextech"
+        },
+        {
+          "nome": "Borda Arcana: Vazio",
+          "estilo": "vazio"
+        },
+        {
+          "nome": "Borda Arcana: Prisma",
+          "estilo": "prisma"
+        }
+      ]
+    },
+    {
+      "id": "borda-aco",
+      "nome": "Borda de Aço",
+      "tipo": "borda",
+      "raridade": "comum",
+      "preco": 200,
+      "estilo": "aco"
+    },
+    {
+      "id": "borda-poro",
+      "nome": "Borda Poro",
+      "tipo": "borda",
+      "raridade": "comum",
+      "preco": 250,
+      "estilo": "poro"
+    },
+    {
+      "id": "borda-hextech",
+      "nome": "Borda Hextech",
+      "tipo": "borda",
+      "raridade": "epica",
+      "preco": null,
+      "estilo": "hextech"
+    },
+    {
+      "id": "borda-pulso",
+      "nome": "Borda Pulso Arcano",
+      "tipo": "borda",
+      "raridade": "epica",
+      "preco": null,
+      "estilo": "pulso"
+    },
+    {
+      "id": "borda-chama",
+      "nome": "Borda Chama de Noxus",
+      "tipo": "borda",
+      "raridade": "lendaria",
+      "preco": null,
+      "estilo": "chama"
+    },
+    {
+      "id": "borda-sakura",
+      "nome": "Borda Florescer Espiritual",
+      "tipo": "borda",
+      "raridade": "lendaria",
+      "preco": null,
+      "estilo": "sakura"
+    },
+    {
+      "id": "borda-vazio",
+      "nome": "Borda do Vazio",
+      "tipo": "borda",
+      "raridade": "mitica",
+      "preco": null,
+      "estilo": "vazio"
+    },
+    {
+      "id": "borda-prisma",
+      "nome": "Borda Prisma Estelar",
+      "tipo": "borda",
+      "raridade": "ultimate",
+      "preco": null,
+      "estilo": "prisma"
     },
     {
       "id": "icone-poro",
       "nome": "Ícone Poro",
       "tipo": "icone",
       "raridade": "comum",
-      "img": "assets/users/02.png",
-      "preco": 250
+      "preco": 250,
+      "evolucoes": [
+        {
+          "nome": "Ícone Poro Iniciante",
+          "img": "painel-saas/midia/cd/icon_3521.jpg"
+        },
+        {
+          "nome": "Ícone Poro Cavalheiro",
+          "img": "painel-saas/midia/cd/icon_744.jpg"
+        },
+        {
+          "nome": "Ícone Poro Máquina de Combate",
+          "img": "painel-saas/midia/cd/icon_743.jpg"
+        },
+        {
+          "nome": "Ícone Poro Fliperama",
+          "img": "painel-saas/midia/cd/icon_2094.jpg"
+        },
+        {
+          "nome": "Ícone Poro Gamer",
+          "img": "painel-saas/midia/cd/icon_4226.jpg"
+        }
+      ]
+    },
+    {
+      "id": "icone-realeza",
+      "nome": "Ícone Realeza Poro",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "preco": null,
+      "evolucoes": [
+        {
+          "nome": "Ícone Poro Sakura",
+          "img": "painel-saas/midia/cd/icon_1626.jpg"
+        },
+        {
+          "nome": "Ícone Poro Pirata",
+          "img": "painel-saas/midia/cd/icon_3493.jpg"
+        },
+        {
+          "nome": "Ícone Poro Barão",
+          "img": "painel-saas/midia/cd/icon_3233.jpg"
+        },
+        {
+          "nome": "Ícone Rei Poro",
+          "img": "painel-saas/midia/cd/icon_1441.jpg"
+        },
+        {
+          "nome": "Ícone Rainha Poro",
+          "img": "painel-saas/midia/cd/icon_3901.jpg"
+        }
+      ]
+    },
+    {
+      "id": "icone-poro-classico",
+      "nome": "Ícone Poro do PoroMaster",
+      "tipo": "icone",
+      "raridade": "comum",
+      "preco": 200,
+      "img": "assets/users/02.png"
+    },
+    {
+      "id": "icone-poro-rena",
+      "nome": "Ícone Poro Rena",
+      "tipo": "icone",
+      "raridade": "comum",
+      "preco": 250,
+      "img": "painel-saas/midia/cd/icon_3232.jpg"
+    },
+    {
+      "id": "icone-piltover",
+      "nome": "Ícone de Piltover",
+      "tipo": "icone",
+      "raridade": "comum",
+      "preco": 300,
+      "img": "painel-saas/midia/cd/icon_1448.jpg"
+    },
+    {
+      "id": "icone-zaun",
+      "nome": "Ícone de Zaun",
+      "tipo": "icone",
+      "raridade": "comum",
+      "preco": 300,
+      "img": "painel-saas/midia/cd/icon_1449.jpg"
     },
     {
       "id": "icone-rosa",
       "nome": "Ícone Brasão da Rosa",
       "tipo": "icone",
       "raridade": "comum",
-      "img": "painel-saas/img/wiki/Crest_Of_The_Rose_profileicon.jpg",
-      "preco": 300
+      "preco": 300,
+      "img": "painel-saas/img/wiki/Crest_Of_The_Rose_profileicon.jpg"
     },
     {
       "id": "icone-academia",
       "nome": "Ícone Academia de Batalha",
       "tipo": "icone",
       "raridade": "comum",
-      "img": "painel-saas/img/wiki/Battle_Academia_profileicon.png",
-      "preco": 300
+      "preco": 300,
+      "img": "painel-saas/img/wiki/Battle_Academia_profileicon.png"
+    },
+    {
+      "id": "icone-porofissional",
+      "nome": "Ícone Porofissional",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_4149.jpg"
+    },
+    {
+      "id": "icone-dj-poro",
+      "nome": "Ícone DJ Poro",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_5710.jpg"
+    },
+    {
+      "id": "icone-poro-estelar",
+      "nome": "Ícone Poro Guardião Estelar",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_1446.jpg"
+    },
+    {
+      "id": "icone-vazio",
+      "nome": "Ícone do Vazio",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_3369.jpg"
     },
     {
       "id": "icone-aspectos",
       "nome": "Ícone Convergência dos Aspectos",
       "tipo": "icone",
       "raridade": "epica",
-      "img": "painel-saas/img/wiki/Aspects_Converge_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/Aspects_Converge_profileicon.jpg"
     },
     {
       "id": "icone-heartsteel",
       "nome": "Ícone HEARTSTEEL",
       "tipo": "icone",
       "raridade": "epica",
-      "img": "painel-saas/img/wiki/HEARTSTEEL_Brand_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/HEARTSTEEL_Brand_profileicon.jpg"
+    },
+    {
+      "id": "icone-poronauta",
+      "nome": "Ícone Poronauta",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_4081.jpg"
+    },
+    {
+      "id": "icone-poro-chamas",
+      "nome": "Ícone Poro em Chamas",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_3872.jpg"
     },
     {
       "id": "icone-lucian",
       "nome": "Ícone Lucian Velho Oeste",
       "tipo": "icone",
       "raridade": "lendaria",
-      "img": "painel-saas/img/wiki/High_Noon_Lucian_Mythic_Chroma_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/High_Noon_Lucian_Mythic_Chroma_profileicon.jpg"
     },
     {
       "id": "icone-mf",
       "nome": "Ícone Miss Fortune MVP",
       "tipo": "icone",
       "raridade": "lendaria",
-      "img": "painel-saas/img/wiki/MVP_T1_Miss_Fortune_Signature_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/MVP_T1_Miss_Fortune_Signature_profileicon.jpg"
+    },
+    {
+      "id": "icone-poro-negro",
+      "nome": "Ícone Poro Estrela Negra",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_1447.jpg"
+    },
+    {
+      "id": "icone-teclado",
+      "nome": "Ícone Poro Rei do Teclado",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_5755.jpg"
     },
     {
       "id": "icone-riven",
       "nome": "Ícone Riven Alvorecer",
       "tipo": "icone",
       "raridade": "mitica",
-      "img": "painel-saas/img/wiki/Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg"
     },
     {
       "id": "icone-zed",
       "nome": "Ícone Zed Matador de Galáxias",
       "tipo": "icone",
       "raridade": "mitica",
-      "img": "painel-saas/img/wiki/Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg"
     },
     {
       "id": "icone-maestria",
       "nome": "Ícone Maestria 7",
       "tipo": "icone",
       "raridade": "mitica",
-      "img": "image/banco_de_dados/Rank_7.png",
-      "preco": null
+      "preco": null,
+      "img": "image/banco_de_dados/Rank_7.png"
     },
     {
       "id": "icone-veigar",
       "nome": "Ícone Veigar Chefão Final",
       "tipo": "icone",
       "raridade": "ultimate",
-      "img": "painel-saas/img/wiki/Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg",
-      "preco": null
+      "preco": null,
+      "img": "painel-saas/img/wiki/Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg"
     },
     {
       "id": "icone-urf",
       "nome": "Ícone Imperador Urf",
       "tipo": "icone",
       "raridade": "ultimate",
-      "img": "image/banco_de_dados/Imperador.png",
-      "preco": null
+      "preco": null,
+      "img": "image/banco_de_dados/Imperador.png"
+    },
+    {
+      "id": "sent-poro",
+      "nome": "Sentinela Poro",
+      "tipo": "sentinela",
+      "raridade": "comum",
+      "preco": 300,
+      "evolucoes": [
+        {
+          "nome": "Sentinela Poro",
+          "img": "painel-saas/midia/cd/ward_33.png"
+        },
+        {
+          "nome": "Sentinela Poro Cavalheiro",
+          "img": "painel-saas/midia/cd/ward_35.png"
+        },
+        {
+          "nome": "Sentinela Poro Máquina de Combate",
+          "img": "painel-saas/midia/cd/ward_36.png"
+        },
+        {
+          "nome": "Sentinela Poro Fliperama",
+          "img": "painel-saas/midia/cd/ward_85.png"
+        },
+        {
+          "nome": "Sentinela Poro Fã de Games",
+          "img": "painel-saas/midia/cd/ward_252.png"
+        }
+      ]
+    },
+    {
+      "id": "sent-el-poro",
+      "nome": "Sentinela El Poro",
+      "tipo": "sentinela",
+      "raridade": "comum",
+      "preco": 350,
+      "img": "painel-saas/midia/cd/ward_58.png"
+    },
+    {
+      "id": "sent-astronauta",
+      "nome": "Sentinela Poro Astronauta",
+      "tipo": "sentinela",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_34.png"
+    },
+    {
+      "id": "sent-vamporo",
+      "nome": "Sentinela Vamporo",
+      "tipo": "sentinela",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_70.png"
+    },
+    {
+      "id": "sent-submundo",
+      "nome": "Sentinela Poro do Submundo",
+      "tipo": "sentinela",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_38.png"
+    },
+    {
+      "id": "sent-estelar",
+      "nome": "Sentinela Guardiã Estelar",
+      "tipo": "sentinela",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_63.png"
+    },
+    {
+      "id": "sent-dragao",
+      "nome": "Sentinela Poro Matador de Dragões",
+      "tipo": "sentinela",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_37.png"
+    },
+    {
+      "id": "sent-rainha",
+      "nome": "Sentinela Rainha Poro",
+      "tipo": "sentinela",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_123.png"
+    },
+    {
+      "id": "sent-durandal",
+      "nome": "Sentinela Durandal da Academia",
+      "tipo": "sentinela",
+      "raridade": "ultimate",
+      "preco": null,
+      "img": "painel-saas/midia/cd/ward_136.png"
+    },
+    {
+      "id": "emote-poro",
+      "nome": "Emote Poro",
+      "tipo": "emote",
+      "raridade": "comum",
+      "preco": 100,
+      "codigo": "poro",
+      "anim": "flutuar",
+      "evolucoes": [
+        {
+          "nome": "Emote Poro da Paz",
+          "img": "painel-saas/midia/cd/emote_1498.png"
+        },
+        {
+          "nome": "Emote Poro Bochechudo",
+          "img": "painel-saas/midia/cd/emote_1499.png"
+        },
+        {
+          "nome": "Emote Poro Dorminhoco",
+          "img": "painel-saas/midia/cd/emote_3173.png"
+        },
+        {
+          "nome": "Emote Andando de Poro",
+          "img": "painel-saas/midia/cd/emote_3210.png"
+        },
+        {
+          "nome": "Emote Poropido",
+          "img": "painel-saas/midia/cd/emote_3126.png"
+        }
+      ]
+    },
+    {
+      "id": "emote-gg",
+      "nome": "Emote GG <3",
+      "tipo": "emote",
+      "raridade": "comum",
+      "preco": 120,
+      "img": "painel-saas/midia/cd/emote_3124.png",
+      "codigo": "gg"
     },
     {
       "id": "emote-flex",
       "nome": "Emote Pose de Força",
       "tipo": "emote",
       "raridade": "comum",
+      "preco": 150,
       "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
-      "preco": 150
+      "codigo": "flex",
+      "evolucoes": [
+        {
+          "nome": "Emote Pose de Força",
+          "img": "painel-saas/img/wiki/Big_Flex_Emote.png"
+        },
+        {
+          "nome": "Emote Pose de Força com Aura Azul",
+          "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
+          "aura": "azul"
+        },
+        {
+          "nome": "Emote Pose de Força com Aura Vermelha",
+          "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
+          "aura": "vermelha"
+        },
+        {
+          "nome": "Emote Pose de Força com Aura Roxa",
+          "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
+          "aura": "roxa"
+        },
+        {
+          "nome": "Emote Pose de Força com Aura Dourada",
+          "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
+          "aura": "dourada"
+        }
+      ]
     },
     {
       "id": "emote-espiada",
       "nome": "Emote Só uma Espiada",
       "tipo": "emote",
       "raridade": "comum",
+      "preco": 150,
       "img": "painel-saas/img/wiki/Just_A_Peek_Emote.png",
-      "preco": 150
+      "codigo": "espiada"
     },
     {
       "id": "emote-trabalho",
       "nome": "Emote De Volta ao Trabalho",
       "tipo": "emote",
-      "raridade": "comum",
+      "raridade": "lendaria",
+      "preco": null,
       "img": "painel-saas/img/wiki/Back_To_Business_Emote.png",
-      "preco": 200
+      "codigo": "trabalho",
+      "anim": "pulsar"
+    },
+    {
+      "id": "emote-morde",
+      "nome": "Emote Mordekaiser",
+      "tipo": "emote",
+      "raridade": "comum",
+      "preco": 200,
+      "codigo": "morde",
+      "evolucoes": [
+        {
+          "nome": "Emote Mordekaiser de Ferro",
+          "img": "painel-saas/midia/cd/emote_3248.png"
+        },
+        {
+          "nome": "Emote Mordekaiser de Diamante",
+          "img": "painel-saas/midia/cd/emote_3253.png"
+        },
+        {
+          "nome": "Emote Mordekaiser Grão-Mestre",
+          "img": "painel-saas/midia/cd/emote_3255.png"
+        },
+        {
+          "nome": "Emote Mordekaiser Mestre",
+          "img": "painel-saas/midia/cd/emote_3254.png"
+        },
+        {
+          "nome": "Emote Mordekaiser Desafiante",
+          "img": "painel-saas/midia/cd/emote_3256.png"
+        }
+      ]
     },
     {
       "id": "emote-brinde",
       "nome": "Emote Um Brinde",
       "tipo": "emote",
       "raridade": "comum",
+      "preco": 200,
       "img": "painel-saas/img/wiki/Cheers_Dears_Emote.png",
-      "preco": 200
+      "codigo": "brinde"
+    },
+    {
+      "id": "emote-carinho",
+      "nome": "Emote Carinho no Poro",
+      "tipo": "emote",
+      "raridade": "comum",
+      "preco": 150,
+      "img": "painel-saas/midia/cd/emote_5009.png",
+      "codigo": "carinho"
+    },
+    {
+      "id": "emote-infusao",
+      "nome": "Emote Infusão de Poro",
+      "tipo": "emote",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_4551.png",
+      "codigo": "infusao",
+      "anim": "flutuar"
+    },
+    {
+      "id": "emote-revigorado",
+      "nome": "Emote Poro Revigorado",
+      "tipo": "emote",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_4956.png",
+      "codigo": "revigorado",
+      "anim": "pular"
+    },
+    {
+      "id": "emote-emoteemo",
+      "nome": "Emote Emoteemo",
+      "tipo": "emote",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_3212.png",
+      "codigo": "emoteemo",
+      "anim": "pular",
+      "evolucoes": [
+        {
+          "nome": "Emote Emoteemo",
+          "img": "painel-saas/midia/cd/emote_3212.png"
+        },
+        {
+          "nome": "Emote Emoteemo com Aura Azul",
+          "img": "painel-saas/midia/cd/emote_3212.png",
+          "aura": "azul"
+        },
+        {
+          "nome": "Emote Emoteemo com Aura Vermelha",
+          "img": "painel-saas/midia/cd/emote_3212.png",
+          "aura": "vermelha"
+        },
+        {
+          "nome": "Emote Emoteemo com Aura Roxa",
+          "img": "painel-saas/midia/cd/emote_3212.png",
+          "aura": "roxa"
+        },
+        {
+          "nome": "Emote Emoteemo com Aura Dourada",
+          "img": "painel-saas/midia/cd/emote_3212.png",
+          "aura": "dourada"
+        }
+      ]
     },
     {
       "id": "emote-petala",
       "nome": "Emote Leve como Pétala",
       "tipo": "emote",
       "raridade": "epica",
+      "preco": null,
       "img": "painel-saas/img/wiki/Light_As_A_Petal_Emote.png",
-      "preco": null
+      "codigo": "petala",
+      "anim": "flutuar"
     },
     {
       "id": "emote-comigo",
       "nome": "Emote Fica Comigo",
       "tipo": "emote",
       "raridade": "epica",
+      "preco": null,
       "img": "painel-saas/img/wiki/Be_With_Me_Emote.png",
-      "preco": null
+      "codigo": "fica_comigo",
+      "anim": "pulsar"
+    },
+    {
+      "id": "emote-espectral",
+      "nome": "Emote Poro Espectral",
+      "tipo": "emote",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_5124.png",
+      "codigo": "espectral",
+      "anim": "balancar"
+    },
+    {
+      "id": "emote-vamporo",
+      "nome": "Emote Vamporo",
+      "tipo": "emote",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_3106.png",
+      "codigo": "vamporo",
+      "anim": "balancar"
     },
     {
       "id": "emote-guma",
       "nome": "Emote Deusa Guma",
       "tipo": "emote",
       "raridade": "lendaria",
+      "preco": null,
       "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
-      "preco": null
+      "codigo": "guma",
+      "anim": "pulsar",
+      "evolucoes": [
+        {
+          "nome": "Emote Deusa Guma",
+          "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png"
+        },
+        {
+          "nome": "Emote Deusa Guma com Aura Azul",
+          "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
+          "aura": "azul"
+        },
+        {
+          "nome": "Emote Deusa Guma com Aura Vermelha",
+          "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
+          "aura": "vermelha"
+        },
+        {
+          "nome": "Emote Deusa Guma com Aura Roxa",
+          "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
+          "aura": "roxa"
+        },
+        {
+          "nome": "Emote Deusa Guma com Aura Dourada",
+          "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
+          "aura": "dourada"
+        }
+      ]
+    },
+    {
+      "id": "emote-bolinho",
+      "nome": "Emote Bolinho do Teemo",
+      "tipo": "emote",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_3797.png",
+      "codigo": "bolinho_teemo",
+      "anim": "girar"
     }
   ],
   "comunidades": [
@@ -627,22 +1257,53 @@
             },
             {
               "item": "icone-riven",
-              "nivel": 2
+              "nivel": 1
             },
             {
               "item": "emote-flex",
-              "nivel": 3
+              "nivel": 2
             },
             {
               "item": "emote-guma",
+              "nivel": 4
+            },
+            {
+              "item": "emote-poro",
+              "nivel": 2
+            },
+            {
+              "item": "emote-gg",
               "nivel": 1
+            },
+            {
+              "item": "borda-chama",
+              "nivel": 1
+            },
+            {
+              "item": "borda-arcana",
+              "nivel": 3
+            },
+            {
+              "item": "sent-rainha",
+              "nivel": 1
+            },
+            {
+              "item": "sent-poro",
+              "nivel": 3
             }
           ],
           "equipado": {
             "tema": "tema-sentina",
             "icone": "icone-urf",
-            "emote": "emote-guma"
+            "emote": "emote-guma",
+            "borda": "borda-arcana",
+            "sentinela": "sent-poro"
           },
+          "materiais": {
+            "baus": 2,
+            "chaves": 2
+          },
+          "bio": "Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:",
           "contrib": [
             14,
             18,
@@ -689,6 +1350,11 @@
             "tema": "tema-oficial",
             "icone": "icone-poro"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             10,
             8,
@@ -735,13 +1401,32 @@
             {
               "item": "emote-trabalho",
               "nivel": 1
+            },
+            {
+              "item": "emote-morde",
+              "nivel": 3
+            },
+            {
+              "item": "borda-hextech",
+              "nivel": 1
+            },
+            {
+              "item": "sent-vamporo",
+              "nivel": 1
             }
           ],
           "equipado": {
             "tema": "tema-ionia",
             "icone": "icone-rosa",
-            "emote": "emote-trabalho"
+            "emote": "emote-trabalho",
+            "borda": "borda-hextech",
+            "sentinela": "sent-vamporo"
           },
+          "materiais": {
+            "baus": 1,
+            "chaves": 0
+          },
+          "bio": "Moderador. Corrijo texto torto :trabalho:",
           "contrib": [
             6,
             9,
@@ -781,6 +1466,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             4,
             6,
@@ -820,6 +1510,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             3,
             5,
@@ -860,13 +1555,28 @@
             {
               "item": "emote-espiada",
               "nivel": 1
+            },
+            {
+              "item": "borda-pulso",
+              "nivel": 1
+            },
+            {
+              "item": "sent-astronauta",
+              "nivel": 2
             }
           ],
           "equipado": {
             "tema": "tema-oficial",
             "icone": "icone-maestria",
-            "emote": "emote-espiada"
+            "emote": "emote-espiada",
+            "borda": "borda-pulso",
+            "sentinela": "sent-astronauta"
           },
+          "materiais": {
+            "baus": 1,
+            "chaves": 1
+          },
+          "bio": "Tester caçador de bugs :espiada: 100 P.P. e contando.",
           "contrib": [
             9,
             7,
@@ -906,6 +1616,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             3,
             4,
@@ -946,6 +1661,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             2,
             12,
@@ -986,6 +1706,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             0,
             1,
@@ -1138,6 +1863,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             2,
             3,
@@ -1179,6 +1909,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             2,
             2,
@@ -1217,6 +1952,11 @@
           "equipado": {
             "tema": "tema-oficial"
           },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
           "contrib": [
             0,
             1,
