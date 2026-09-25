@@ -334,8 +334,12 @@ td.r,th.r{text-align:right}
 .chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:12px}
 .chips button{border:1px solid var(--line);background:var(--panel);border-radius:999px;padding:4px 12px;font-size:13px;color:var(--ink-2)}
 .chips button[aria-pressed="true"]{background:var(--ink);color:var(--panel);border-color:var(--ink)}
-.fx{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);z-index:25;display:flex;gap:8px;pointer-events:none;background:radial-gradient(ellipse,#0b1a2cdd,#0b1a2c00 70%);padding:6px 20px}
-.fx video{width:150px;height:150px}
+.voo{position:fixed;z-index:40;pointer-events:none;object-fit:contain;filter:drop-shadow(0 0 18px rgba(240,213,140,.85)) drop-shadow(0 8px 16px rgba(0,0,0,.6))}
+.fx-tile{position:fixed;z-index:41;pointer-events:none}
+.mat.pop{animation:mat-pop .9s ease-out}
+.mat.pop img{animation:mat-img .9s ease-out}
+@keyframes mat-pop{0%{box-shadow:0 0 0 0 rgba(240,213,140,.9);border-color:#f0d58c}60%{box-shadow:0 0 0 10px rgba(240,213,140,0),0 0 30px rgba(240,213,140,.5)}100%{box-shadow:none}}
+@keyframes mat-img{0%{transform:scale(1)}30%{transform:scale(1.35)}100%{transform:scale(1)}}
 .hx{position:fixed;inset:0;z-index:30;background:radial-gradient(ellipse at 50% 45%,#153a5a 0%,#07101d 55%,#02060c 100%);display:grid;place-items:center;overflow:hidden;color:#e6ebf3;padding-inline:16px}
 .hx .stage{position:relative;width:min(560px,92vw);aspect-ratio:1;display:grid;place-items:center}
 .hx .stage video{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);width:100%;pointer-events:none}
@@ -1077,19 +1081,41 @@ function vDados(){
 
 /* ---------- Hextech: kit, baú e revelação ---------- */
 function sortear(pool){ const tot=pool.reduce((s,it)=>s+rar(it.raridade).peso,0); let r=Math.random()*tot; for(const it of pool){ r-=rar(it.raridade).peso; if(r<=0) return it; } return pool.at(-1); }
+function voarPara(img, origem, contador, video, somK, atraso, pousou){
+  const tile = contador && contador.closest(".mat");
+  if (!origem || !tile) { pousou(); return; }
+  setTimeout(() => {
+    const alvo = tile.querySelector("img"), a = origem.getBoundingClientRect(), b = alvo.getBoundingClientRect(), tam = 128;
+    const ax = a.left + a.width/2, ay = a.top + a.height/2, bx = b.left + b.width/2, by = b.top + b.height/2;
+    const el = document.createElement("img"); el.className = "voo"; el.src = src(img); el.alt = "";
+    el.style.cssText = `left:${ax-tam/2}px;top:${ay-tam/2}px;width:${tam}px;height:${tam}px`;
+    document.body.appendChild(el); som(somK);
+    const chegar = () => { el.remove(); pousou();
+      tile.classList.remove("pop"); void tile.offsetWidth; tile.classList.add("pop");
+      const v = document.createElement("video"); v.className = "fx-tile"; v.muted = true; v.playsInline = true; v.src = vidUrl(video);
+      const vt = 260; v.style.cssText = `left:${bx-vt/2}px;top:${by-vt/2}px;width:${vt}px;height:${vt}px`;
+      document.body.appendChild(v); v.play().catch(()=>{}); setTimeout(()=>v.remove(), 2100); };
+    if (matchMedia("(prefers-reduced-motion: reduce)").matches) { chegar(); return; }
+    el.animate([
+      { transform:"translate(0,0) scale(.2)", opacity:0 },
+      { transform:"translate(0,-90px) scale(1.3)", opacity:1, offset:.3 },
+      { transform:"translate(0,-90px) scale(1.15)", opacity:1, offset:.55 },
+      { transform:`translate(${bx-ax}px,${by-ay}px) scale(${b.width/tam})`, opacity:1 }
+    ], { duration:1300, easing:"cubic-bezier(.4,0,.3,1)" }).onfinish = chegar;
+  }, atraso);
+}
 function comprarKit(c, me){
   const custo = S.hextech.kit_custo_essencia; if (me.carteira.essencia < custo) return;
   me.carteira.essencia -= custo; me.materiais.baus++; me.materiais.chaves++;
   log(c, `${me.nome} comprou um Kit Hextech`); save();
   som("purchase");
-  const fx = document.createElement("div"); fx.className="fx";
-  fx.innerHTML = `<video muted playsinline src="${vidUrl("resource_add_chest_generic")}"></video><video muted playsinline src="${vidUrl("resource_add_material_key")}"></video>`;
-  document.body.appendChild(fx);
-  const [v1,v2] = fx.querySelectorAll("video");
-  setTimeout(()=>{ v1.play().catch(()=>{}); som("chest"); }, 150);
-  setTimeout(()=>{ v2.play().catch(()=>{}); som("key"); }, 650);
-  setTimeout(()=>fx.remove(), 2700);
-  render(); toast("1 baú e 1 chave foram para o seu inventário.", {titulo:"Kit Hextech comprado!", imgs:[S.hextech.bau.img, S.hextech.chave.img]});
+  render();
+  /* o baú e a chave saem do botão, crescem e voam até os contadores do Hextech */
+  const botao = $("#buy-kit"), nb = $("#n-baus"), nc = $("#n-chaves");
+  if (nb) nb.textContent = me.materiais.baus - 1;
+  if (nc) nc.textContent = me.materiais.chaves - 1;
+  voarPara(S.hextech.bau.img, botao, nb, "resource_add_chest_generic", "chest", 120, () => { if (nb) nb.textContent = me.materiais.baus; });
+  voarPara(S.hextech.chave.img, botao, nc, "resource_add_material_key", "key", 620, () => { if (nc) nc.textContent = me.materiais.chaves; });
 }
 async function abrirBau(c, me){
   if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
