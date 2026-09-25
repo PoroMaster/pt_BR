@@ -138,6 +138,10 @@ cosmeticos = [
     cos("tema-shurima", "Tema Shurima", "tema", "lendaria", C + "tema_shurima.jpg", 900),
     cos("tema-targon", "Tema Targon", "tema", "mitica", C + "tema_targon.jpg"),
     cos("tema-sombras", "Tema Ilhas das Sombras", "tema", "mitica", C + "tema_sombras.jpg"),
+    cos("tema-bandopolis", "Tema Bandópolis", "tema", "comum", C + "tema_bandopolis.jpg", 400),
+    cos("tema-ixtal", "Tema Ixtal", "tema", "epica", C + "tema_ixtal.jpg", 600),
+    cos("tema-ionia-mistica", "Tema Ionia Mística", "tema", "lendaria", C + "tema_ionia2.jpg", 900),
+    cos("tema-vazio", "Tema O Vazio", "tema", "ultimate", C + "tema_vazio.jpg"),
 
     # Bordas animadas em volta da foto (CSS). A Borda Arcana evolui na Forja.
     cos("borda-arcana", "Borda Arcana", "borda", "epica", evolucoes=evo_borda(
@@ -151,6 +155,12 @@ cosmeticos = [
     cos("borda-sakura", "Borda Florescer Espiritual", "borda", "lendaria", estilo="sakura"),
     cos("borda-vazio", "Borda do Vazio", "borda", "mitica", estilo="vazio"),
     cos("borda-prisma", "Borda Prisma Estelar", "borda", "ultimate", estilo="prisma"),
+    cos("borda-ouro", "Borda de Ouro", "borda", "comum", preco=300, estilo="ouro"),
+    cos("borda-gelo", "Borda Gelo de Freljord", "borda", "comum", preco=350, estilo="gelo"),
+    cos("borda-zaun", "Borda Química de Zaun", "borda", "epica", estilo="zaun"),
+    cos("borda-sol", "Borda Solari de Targon", "borda", "lendaria", estilo="sol"),
+    cos("borda-nevoa", "Borda Névoa Negra", "borda", "mitica", estilo="nevoa"),
+    cos("borda-estelar", "Borda Guardiã Estelar", "borda", "ultimate", estilo="estelar"),
 
     # Ícones de perfil (medalhão na foto)
     cos("icone-poro", "Ícone Poro", "icone", "comum", preco=250, evolucoes=evo(
@@ -166,23 +176,13 @@ cosmeticos = [
     cos("icone-piltover", "Ícone de Piltover", "icone", "comum", C + "icon_1448.jpg", 300),
     cos("icone-zaun", "Ícone de Zaun", "icone", "comum", C + "icon_1449.jpg", 300),
     cos("icone-rosa", "Ícone Brasão da Rosa", "icone", "comum", W + "Crest_Of_The_Rose_profileicon.jpg", 300),
-    cos("icone-academia", "Ícone Academia de Batalha", "icone", "comum", W + "Battle_Academia_profileicon.png", 300),
     cos("icone-porofissional", "Ícone Porofissional", "icone", "epica", C + "icon_4149.jpg"),
     cos("icone-dj-poro", "Ícone DJ Poro", "icone", "epica", C + "icon_5710.jpg"),
     cos("icone-poro-estelar", "Ícone Poro Guardião Estelar", "icone", "epica", C + "icon_1446.jpg"),
-    cos("icone-vazio", "Ícone do Vazio", "icone", "epica", C + "icon_3369.jpg"),
-    cos("icone-aspectos", "Ícone Convergência dos Aspectos", "icone", "epica", W + "Aspects_Converge_profileicon.jpg"),
     cos("icone-heartsteel", "Ícone HEARTSTEEL", "icone", "epica", W + "HEARTSTEEL_Brand_profileicon.jpg"),
     cos("icone-poronauta", "Ícone Poronauta", "icone", "lendaria", C + "icon_4081.jpg"),
     cos("icone-poro-chamas", "Ícone Poro em Chamas", "icone", "lendaria", C + "icon_3872.jpg"),
-    cos("icone-lucian", "Ícone Lucian Velho Oeste", "icone", "lendaria", W + "High_Noon_Lucian_Mythic_Chroma_profileicon.jpg"),
-    cos("icone-mf", "Ícone Miss Fortune MVP", "icone", "lendaria", W + "MVP_T1_Miss_Fortune_Signature_profileicon.jpg"),
-    cos("icone-poro-negro", "Ícone Poro Estrela Negra", "icone", "mitica", C + "icon_1447.jpg"),
     cos("icone-teclado", "Ícone Poro Rei do Teclado", "icone", "mitica", C + "icon_5755.jpg"),
-    cos("icone-riven", "Ícone Riven Alvorecer", "icone", "mitica", W + "Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg"),
-    cos("icone-zed", "Ícone Zed Matador de Galáxias", "icone", "mitica", W + "Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg"),
-    cos("icone-maestria", "Ícone Maestria 7", "icone", "mitica", B + "Rank_7.png"),
-    cos("icone-veigar", "Ícone Veigar Chefão Final", "icone", "ultimate", W + "Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg"),
     cos("icone-urf", "Ícone Imperador Urf", "icone", "ultimate", B + "Imperador.png"),
 
     # Sentinelas: aparecem na vitrine do perfil
@@ -198,6 +198,12 @@ cosmeticos = [
     cos("sent-dragao", "Sentinela Poro Matador de Dragões", "sentinela", "lendaria", C + "ward_37.png"),
     cos("sent-rainha", "Sentinela Rainha Poro", "sentinela", "mitica", C + "ward_123.png"),
     cos("sent-durandal", "Sentinela Durandal da Academia", "sentinela", "ultimate", C + "ward_136.png"),
+    cos("sent-olho-dragao", "Sentinela Olho do Dragão", "sentinela", "comum", C + "ward_76.png", 350),
+    cos("sent-arcane", "Sentinela Arcane", "sentinela", "epica", C + "ward_218.png"),
+    cos("sent-pulsefire", "Sentinela Pulsefire", "sentinela", "epica", C + "ward_77.png"),
+    cos("sent-lua-sangrenta", "Sentinela Lua Sangrenta", "sentinela", "lendaria", C + "ward_132.png"),
+    cos("sent-florescer", "Sentinela Florescer Espiritual", "sentinela", "lendaria", C + "ward_230.png"),
+    cos("sent-guardias", "Sentinela Guardiãs Estelares", "sentinela", "mitica", C + "ward_188.png"),
 
     # Emotes: ao lado do nome e na biografia (:codigo:). Os raros são animados.
     cos("emote-poro", "Emote Poro", "emote", "comum", preco=100, codigo="poro", anim="flutuar", evolucoes=evo(
@@ -214,8 +220,6 @@ cosmeticos = [
         ("Emote Mordekaiser Grão-Mestre", C + "emote_3255.png"), ("Emote Mordekaiser Mestre", C + "emote_3254.png"),
         ("Emote Mordekaiser Desafiante", C + "emote_3256.png"))),
     cos("emote-brinde", "Emote Um Brinde", "emote", "comum", W + "Cheers_Dears_Emote.png", 200, codigo="brinde"),
-    cos("emote-carinho", "Emote Carinho no Poro", "emote", "comum", C + "emote_5009.png", 150, codigo="carinho"),
-    cos("emote-infusao", "Emote Infusão de Poro", "emote", "epica", C + "emote_4551.png", codigo="infusao", anim="flutuar"),
     cos("emote-revigorado", "Emote Poro Revigorado", "emote", "epica", C + "emote_4956.png", codigo="revigorado", anim="pular"),
     cos("emote-emoteemo", "Emote Emoteemo", "emote", "epica", C + "emote_3212.png", codigo="emoteemo", anim="pular", evolucoes=evo_aura("Emote Emoteemo", C + "emote_3212.png")),
     cos("emote-petala", "Emote Leve como Pétala", "emote", "epica", W + "Light_As_A_Petal_Emote.png", codigo="petala", anim="flutuar"),
@@ -264,7 +268,7 @@ poromaster = {
     "membros": [
         membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 7, 26, 9],
                [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
-               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-riven", 1), ("emote-flex", 2), ("emote-guma", 4),
+               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-poronauta", 1), ("emote-flex", 2), ("emote-guma", 4),
                                ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-rainha", 1), ("sent-poro", 3)),
                equipado={"tema": "tema-sentina", "icone": "icone-urf", "emote": "emote-guma", "borda": "borda-arcana", "sentinela": "sent-poro"},
                materiais=(2, 2), bio="Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:"),
@@ -284,8 +288,8 @@ poromaster = {
                inventario=inv(("tema-oficial", 1)), equipado={"tema": "tema-oficial"}),
         membro("m6", "Khyago", "Membro", "Tester", 100, 64, 3, [410, 4, 11, 3],
                [9, 7, 11, 8, 12, 10, 13, 14], "2022-02-24", foto="image/Profile/03.png", conta="u3",
-               inventario=inv(("tema-oficial", 1), ("icone-maestria", 1), ("emote-espiada", 1), ("borda-pulso", 1), ("sent-astronauta", 2)),
-               equipado={"tema": "tema-oficial", "icone": "icone-maestria", "emote": "emote-espiada", "borda": "borda-pulso", "sentinela": "sent-astronauta"},
+               inventario=inv(("tema-oficial", 1), ("icone-teclado", 1), ("emote-espiada", 1), ("borda-pulso", 1), ("sent-astronauta", 2)),
+               equipado={"tema": "tema-oficial", "icone": "icone-teclado", "emote": "emote-espiada", "borda": "borda-pulso", "sentinela": "sent-astronauta"},
                materiais=(1, 1), bio="Tester caçador de bugs :espiada: 100 P.P. e contando."),
         membro("m7", "TaikunX3", "Membro", "Tester", 27, 12, 0, [90, 0, 2, 0],
                [3, 4, 2, 5, 1, 2, 0, 3], "2022-05-09", foto="image/Profile/02.png", penalidade=True),

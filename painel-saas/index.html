@@ -231,6 +231,16 @@ td.r,th.r{text-align:right}
 .b-vazio::after{inset:-5px;border:2px dashed rgba(211,140,255,.7);animation:spin 7s linear infinite reverse}
 .b-prisma::before{background:conic-gradient(#ff3d3d,#ffb13d,#fff13d,#3dff7a,#3de2ff,#6a5cff,#ff3dd8,#ff3d3d);animation:spin 2.4s linear infinite,glowRing 1.6s ease-in-out infinite alternate}
 .b-prisma::after{inset:-6px;background:radial-gradient(circle,transparent 58%,rgba(255,255,255,.35) 60%,transparent 66%);animation:pulseRing 2s ease-in-out infinite}
+.b-ouro::before{background:linear-gradient(135deg,#fff3b0,#c8a24a 40%,#7a5a14 60%,#f3dc8f)}
+.b-gelo::before{background:conic-gradient(#e8f7ff,#7fd3f5,#ffffff,#4aa8d8,#e8f7ff);animation:spin 9s linear infinite;box-shadow:0 0 10px rgba(127,211,245,.6)}
+.b-zaun::before{background:conic-gradient(#7dff5a,#1c3a12,#c8ff3d,#1c3a12,#7dff5a);animation:spin 3.5s linear infinite,toxico 1.4s ease-in-out infinite}
+.b-sol::before{background:repeating-conic-gradient(#ffd24a 0 10deg,#ff8a1f 10deg 20deg);animation:spin 5s linear infinite;box-shadow:0 0 18px rgba(255,190,60,.8)}
+.b-sol::after{inset:-7px;background:radial-gradient(circle,transparent 60%,rgba(255,210,74,.45) 64%,transparent 72%);animation:pulseRing 2.2s ease-in-out infinite}
+.b-nevoa::before{background:conic-gradient(#2dffc4,#06241c,#58ffd6,#0b0f0e,#2dffc4);animation:spin 4s linear infinite reverse;box-shadow:0 0 18px rgba(45,255,196,.6)}
+.b-nevoa::after{inset:-6px;border:2px dotted rgba(88,255,214,.7);animation:spin 5s linear infinite}
+.b-estelar::before{background:conic-gradient(#ff9ce0,#ffe38a,#8ad8ff,#c79cff,#ff9ce0);animation:spin 3s linear infinite,glowRing 1.4s ease-in-out infinite alternate}
+.b-estelar::after{inset:-8px;background:radial-gradient(circle at 20% 20%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 80% 30%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 70% 85%,#fff 0 1.5px,transparent 2px),radial-gradient(circle at 15% 75%,#fff 0 1.5px,transparent 2px);animation:spin 6s linear infinite reverse}
+@keyframes toxico{0%,100%{box-shadow:0 0 6px rgba(125,255,90,.5)}50%{box-shadow:0 0 18px rgba(200,255,61,.9)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes pulseRing{0%,100%{box-shadow:0 0 0 0 rgba(60,196,180,.6)}50%{box-shadow:0 0 0 6px rgba(60,196,180,0),0 0 16px 4px rgba(60,196,180,.5)}}
 @keyframes glowRing{from{box-shadow:0 0 8px rgba(255,255,255,.4)}to{box-shadow:0 0 22px rgba(255,255,255,.9)}}
@@ -415,7 +425,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v7";
+const STORE = "lsp-painel-v8";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
