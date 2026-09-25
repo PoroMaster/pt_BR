@@ -74,6 +74,42 @@ img{max-width:100%}
 .kit-qtd input::-webkit-inner-spin-button,.kit-qtd input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
 .sobe{position:fixed;z-index:42;pointer-events:none;transform:translate(-50%,0);font:800 22px var(--display);color:#f0d58c;text-shadow:0 0 10px rgba(240,213,140,.8),0 2px 4px #000;animation:sobe 1.3s ease-out forwards}
 @keyframes sobe{0%{opacity:0;transform:translate(-50%,6px) scale(.7)}20%{opacity:1;transform:translate(-50%,-8px) scale(1.15)}100%{opacity:0;transform:translate(-50%,-44px) scale(1)}}
+/* animação de compra de pack */
+.pk-ov{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,rgba(18,26,44,.9),rgba(2,5,10,.98) 70%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .35s;overflow:hidden}
+.pk-ov.carga{opacity:1}
+.pk-ov.sai{opacity:0}
+.pk-palco{position:relative;display:grid;justify-items:center;gap:14px;width:min(980px,calc(100vw - 32px));max-height:100dvh;overflow:auto;padding:28px 0}
+.pk-raios{position:fixed;left:50%;top:40%;width:220vmax;height:220vmax;margin:-110vmax 0 0 -110vmax;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--rc) 35%,transparent) 0deg 6deg,transparent 6deg 18deg);mask:radial-gradient(circle,#000 0,transparent 45%);-webkit-mask:radial-gradient(circle,#000 0,transparent 45%);opacity:0;pointer-events:none}
+.pk-ov.impacto .pk-raios{opacity:.9;animation:pk-gira 14s linear infinite}
+.pk-nucleo{position:fixed;left:50%;top:40%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:radial-gradient(circle,#fff,var(--rc) 40%,transparent 70%);opacity:0;pointer-events:none}
+.pk-ov.carga .pk-nucleo{animation:pk-carga 1.2s ease-in forwards}
+.pk-ov.impacto .pk-nucleo{animation:pk-flash .6s ease-out forwards}
+.pk-capa{width:min(560px,86vw);aspect-ratio:16/9;border-radius:14px;background:#0a1a1d center/cover no-repeat;border:2px solid var(--rc);box-shadow:0 0 0 1px rgba(0,0,0,.5),0 0 60px var(--rc),0 20px 50px rgba(0,0,0,.7);opacity:0;transform:scale(2.8);filter:blur(12px) brightness(3)}
+.pk-ov.impacto .pk-capa{animation:pk-bate .5s cubic-bezier(.2,.9,.3,1.25) forwards}
+.pk-ov.impacto .pk-palco{animation:pk-treme .5s ease-out}
+.pk-titulo{text-align:center;opacity:0;transform:scale(1.6);letter-spacing:.5em}
+.pk-titulo small{display:block;color:var(--rc);font-weight:700;letter-spacing:.35em;text-transform:uppercase;font-size:13px;text-shadow:0 0 12px var(--rc)}
+.pk-titulo h1{margin:4px 0 0;font:900 clamp(34px,7vw,74px)/1 var(--display);color:#fff;text-transform:uppercase;text-shadow:0 0 24px var(--rc),0 0 60px var(--rc),0 4px 0 rgba(0,0,0,.6)}
+.pk-ov.titulo .pk-titulo{animation:pk-titulo .55s cubic-bezier(.2,1,.3,1) forwards}
+.pk-itens{display:flex;flex-wrap:wrap;justify-content:center;gap:10px;min-height:10px}
+.pk-card{width:132px;display:grid;justify-items:center;gap:4px;padding:10px 8px;border-radius:12px;background:rgba(10,26,29,.9);border:1.5px solid var(--rc);box-shadow:0 0 20px color-mix(in srgb,var(--rc) 45%,transparent);text-align:center;opacity:0;transform:translateY(-120px) scale(.4) rotate(calc((var(--i) - var(--n)/2) * 8deg))}
+.pk-card.on{animation:pk-card .55s cubic-bezier(.2,1.4,.4,1) forwards}
+.pk-card .pic{width:84px;height:84px;aspect-ratio:auto;border-radius:10px}
+.pk-card b{font-size:12px;color:#eef2f7;line-height:1.25}
+.pk-card small{font-size:10.5px;color:#9fb0c6}
+.pk-card .rar{font-size:11.5px}
+.pk-acts{display:flex;gap:8px;flex-wrap:wrap;justify-content:center;opacity:0;pointer-events:none;transition:opacity .4s}
+.pk-ov.fim .pk-acts{opacity:1;pointer-events:auto}
+.pk-pular{position:fixed;top:calc(14px + env(safe-area-inset-top,0px));right:16px;background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.2);color:#e6ebf3;border-radius:8px;padding:6px 12px;z-index:2}
+.pk-ov.fim .pk-capa{opacity:1;transform:none;filter:none}
+.pk-ov.fim .pk-titulo{opacity:1;transform:none;letter-spacing:.04em}
+@keyframes pk-carga{0%{opacity:0;transform:scale(.3)}70%{opacity:1;transform:scale(2.2)}100%{opacity:1;transform:scale(.6)}}
+@keyframes pk-flash{0%{opacity:1;transform:scale(1)}100%{opacity:0;transform:scale(60)}}
+@keyframes pk-bate{0%{opacity:0;transform:scale(2.8);filter:blur(12px) brightness(3)}60%{opacity:1;transform:scale(.94);filter:blur(0) brightness(1.6)}100%{opacity:1;transform:none;filter:none}}
+@keyframes pk-treme{0%,100%{transform:none}15%{transform:translate(-10px,6px)}30%{transform:translate(9px,-7px)}45%{transform:translate(-7px,-4px)}60%{transform:translate(5px,5px)}80%{transform:translate(-2px,2px)}}
+@keyframes pk-titulo{0%{opacity:0;transform:scale(1.6);letter-spacing:.5em;filter:blur(6px)}100%{opacity:1;transform:none;letter-spacing:.04em;filter:none}}
+@keyframes pk-card{0%{opacity:0}100%{opacity:1;transform:none}}
+@keyframes pk-gira{to{transform:rotate(360deg)}}
 .btn-ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .btn-bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
 .btn-sm{padding:5px 10px;font-size:13px}
@@ -1401,6 +1437,42 @@ function kitAjustar(me, n){
 }
 function subirTexto(el, txt){ const r = el.getBoundingClientRect(), t = document.createElement("div"); t.className = "sobe"; t.textContent = txt;
   t.style.cssText = `left:${r.left + r.width/2}px;top:${r.top}px`; document.body.appendChild(t); setTimeout(()=>t.remove(), 1300); }
+/* compra de pack: tela cheia no estilo "ultimate kill" do TFT (carga, impacto, raios, nome gigante e os itens saindo em leque) */
+function animacaoPack(pk, novos){
+  aquecerSons();
+  const its = novos.map(item).sort((a,b)=>ordemRar(a.raridade)-ordemRar(b.raridade));
+  const topo = its.at(-1);
+  const ov = document.createElement("div"); ov.className = "pk-ov"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label", `${pk.nome} desbloqueado`);
+  ov.style.setProperty("--rc", `var(--r-${topo.raridade}, #e8c35e)`);
+  ov.innerHTML = `<div class="pk-palco" style="${rc(topo.raridade)}">
+      <div class="pk-raios"></div><div class="pk-nucleo"></div>
+      <div class="pk-capa" style="${bg(pk.capa)}"></div>
+      <div class="pk-titulo"><small>Pack desbloqueado</small><h1>${esc(pk.nome.replace(/^Pack /,""))}</h1></div>
+      <div class="pk-itens">${its.map((it,i)=>`<div class="pk-card ${ult(it)?"ult":""}" style="${rc(it.raridade)};--i:${i};--n:${its.length}">${pic(it,1,"",56)}<b>${esc(it.nome)}</b>${rarTag(it.raridade)}${evolui(it)?`<small>${it.evolucoes.length} estágios na Forja</small>`:""}</div>`).join("")}</div>
+      <div class="pk-acts"><button class="btn btn-hex" data-pk-forja>Evoluir na Forja</button><button class="btn" data-pk-ok style="background:rgba(255,255,255,.1);color:#e6ebf3;border-color:rgba(255,255,255,.25)">Continuar</button></div>
+    </div><button class="pk-pular" data-pk-pular>Pular</button>`;
+  document.body.appendChild(ov);
+  const tm = [], em = (ms, f) => tm.push(setTimeout(()=>{ if (ov.isConnected) f(); }, ms));
+  const fim = () => { tm.forEach(clearTimeout); ov.classList.add("carga","impacto","titulo","itens","fim"); ov.querySelectorAll(".pk-card").forEach(c=>c.classList.add("on")); const pl = ov.querySelector("[data-pk-pular]"); if (pl) pl.remove(); };
+  const fechar = () => { tm.forEach(clearTimeout); ov.classList.add("sai"); setTimeout(()=>ov.remove(), 350); };
+  ov.querySelector("[data-pk-pular]").onclick = () => { fim(); somRar(topo.raridade); };
+  ov.querySelector("[data-pk-ok]").onclick = () => { som("ack",{vol:.6}); fechar(); };
+  ov.querySelector("[data-pk-forja]").onclick = () => { som("ack",{vol:.6}); fechar(); session.view = "forja"; session.forjaSel = its.find(evolui)?.id || its[0].id; session.novaLinha = true; render(); };
+  ov.addEventListener("click", e => { if (ov.classList.contains("fim") && e.target === ov) fechar(); });
+  if (reduz()){ fim(); return; }
+  /* 1. carga: o pico do portal cai no impacto */
+  const IMPACTO = 1200;
+  em(30, ()=>ov.classList.add("carga")); preRar("ultimate", IMPACTO);
+  /* 2. impacto: capa bate na tela, clarão, tremor e explosão */
+  em(IMPACTO, ()=>{ ov.classList.add("impacto"); som("orb",{vol:1, ini:1.45, dur:1.8}); som("r_ultimate",{vol:.85}); });
+  /* 3. nome gigante */
+  em(IMPACTO + 380, ()=>{ ov.classList.add("titulo"); som("portal",{vol:.6, ini:1.15, dur:1.2}); });
+  /* 4. itens saindo em leque, um a um */
+  const t0 = IMPACTO + 1000;
+  em(t0, ()=>ov.classList.add("itens"));
+  ov.querySelectorAll(".pk-card").forEach((cd,i)=> em(t0 + i*170, ()=>{ cd.classList.add("on"); som(raro(its[i])?"chest":"click",{vol:raro(its[i])?.7:.5}); }));
+  em(t0 + its.length*170 + 350, ()=>{ fim(); if (raro(topo)) somRar(topo.raridade); });
+}
 function comprarKit(c, me){
   const custo = S.hextech.kit_custo_essencia, n = kitQtd(me); if (travado("kit") || kitMax(me) < 1) return;
   travar("kit", 1900);
@@ -1571,8 +1643,8 @@ function bindView(c, me){
   $$("[data-pack]").forEach(b=>b.addEventListener("click",()=>{ const pk=db.packs.find(x=>x.id===b.dataset.pack); if(travado("pack") || me.carteira[pk.moeda]<pk.preco) return; travar("pack", 1200);
     const novos = pk.itens.filter(id=>!me.inventario.some(x=>x.item===id)); if(!novos.length) return;
     me.carteira[pk.moeda]-=pk.preco; novos.forEach(id=>me.inventario.push({item:id, nivel:1}));
-    log(c, `${me.nome} comprou o ${pk.nome}`); save(); som("purchase"); setTimeout(()=>som("r_lendaria",{vol:.6}),350);
-    const y=scrollY; render(); scrollTo(0,y); toast(`${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`, {titulo:`${pk.nome} liberado!`, imgs: novos.slice(0,3).map(id=>vis(item(id),1).img).filter(Boolean)}); }));
+    log(c, `${me.nome} comprou o ${pk.nome}`); save(); som("purchase",{vol:.8});
+    const y=scrollY; render(); scrollTo(0,y); animacaoPack(pk, novos); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   $$("[data-kq]").forEach(b=>b.addEventListener("click",()=>{ const v=b.dataset.kq; kitAjustar(me, v==="max" ? kitMax(me) : kitQtd(me) + +v); som("hover",{vol:.35}); }));
   const kn=$("#kit-n"); if(kn){ kn.addEventListener("input",()=>{ if (kn.value!=="") kitAjustar(me, parseInt(kn.value,10)); }); kn.addEventListener("change",()=>kitAjustar(me, parseInt(kn.value,10))); kn.addEventListener("keydown",e=>{ if(e.key==="Enter") comprarKit(c, me); }); }
