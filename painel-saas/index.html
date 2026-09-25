@@ -303,7 +303,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v3";
+const STORE = "lsp-painel-v4";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -566,7 +566,7 @@ function vVerif(c, me, adm){
 }
 
 function profile(c, m, opts={}){
-  const ban = m.equipado && m.equipado.banner && item(m.equipado.banner);
+  const ban = m.equipado && m.equipado.tema && item(m.equipado.tema);
   const ic = m.equipado && m.equipado.icone && item(m.equipado.icone);
   const pos = [...c.membros].filter(x=>x.pp!=null).sort((a,b)=>b.pp-a.pp).findIndex(x=>x.id===m.id)+1;
   const hist = c.envios.filter(e=>e.membro===m.id);
@@ -607,7 +607,7 @@ function openMember(id){
   $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}"><div style="position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px;z-index:2"><button class="btn btn-sm" data-close>Fechar</button></div><div style="margin-top:-52px">${profile(c,m,{admin:isAdmin(c) && m.conta!==session.conta})}</div></div></div>`;
   bindAdmin(c, ()=>{ openMember(id); render(); });
 }
-function vPerfil(c, me){ return head("Meu perfil", "Como a staff vê você. Troque banner, ícone e tema na Forja.", `<button class="btn" data-view="forja">Personalizar na Forja</button>`) + `<div class="card" style="max-width:720px;padding:0;overflow:hidden">${profile(c,me)}</div>`; }
+function vPerfil(c, me){ return head("Meu perfil", "Como a staff vê você. O fundo do perfil é o seu tema equipado. Troque tema e ícone na Forja.", `<button class="btn" data-view="forja">Personalizar na Forja</button>`) + `<div class="card" style="max-width:720px;padding:0;overflow:hidden">${profile(c,me)}</div>`; }
 
 function walletBar(m){ return `<div class="wallet" style="margin-bottom:16px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("")}</div>`; }
 function vMercado(c, me){
@@ -641,7 +641,7 @@ function vForja(c, me){
       <div><h2 style="margin-bottom:4px">${esc(it.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${esc(it.tipo==="icone"?"ícone":it.tipo)}</span></div></div>
       <div class="row" style="justify-content:space-between"><span class="label">Nível</span><span class="row">${lvl(sel.nivel,it.raridade)}<span class="num">${sel.nivel}/${max}</span></span></div>
       ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Próximo nível custa</span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar para o nível ${sel.nivel+1}</button></div>` : `<p class="note">Nível máximo alcançado.</p>`}
-      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":it.tipo==="banner"?"no perfil":"como ícone"}`}</button>
+      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":"como ícone"}`}</button>
     </div>
   </div>`;
 }

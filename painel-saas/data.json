@@ -348,60 +348,12 @@
       "preco": 900
     },
     {
-      "id": "banner-classico",
-      "nome": "Banner Cliente Clássico",
-      "tipo": "banner",
-      "raridade": "comum",
-      "img": "assets/banner.png",
-      "preco": 200
-    },
-    {
-      "id": "banner-instalador",
-      "nome": "Banner Instalador",
-      "tipo": "banner",
-      "raridade": "comum",
-      "img": "assets/download_03.png",
-      "preco": 150
-    },
-    {
-      "id": "banner-colecao",
-      "nome": "Banner Coleção",
-      "tipo": "banner",
-      "raridade": "comum",
-      "img": "assets/sobre02.png",
-      "preco": 150
-    },
-    {
-      "id": "banner-feerica",
-      "nome": "Banner Feérica",
-      "tipo": "banner",
-      "raridade": "epica",
-      "img": "assets/download_01.png",
-      "preco": null
-    },
-    {
-      "id": "banner-fliperama",
-      "nome": "Banner Fliperama",
-      "tipo": "banner",
-      "raridade": "epica",
-      "img": "assets/download_02.png",
-      "preco": null
-    },
-    {
-      "id": "banner-guardia",
-      "nome": "Banner Guardiã Estelar",
-      "tipo": "banner",
-      "raridade": "lendaria",
-      "img": "assets/sobre01.png",
-      "preco": null
-    },
-    {
       "id": "icone-poro",
       "nome": "Ícone Poro",
       "tipo": "icone",
-      "raridade": "epica",
+      "raridade": "comum",
       "img": "assets/users/02.png",
-      "preco": null
+      "preco": 250
     },
     {
       "id": "icone-maestria",
@@ -536,14 +488,6 @@
               "nivel": 1
             },
             {
-              "item": "banner-guardia",
-              "nivel": 2
-            },
-            {
-              "item": "banner-classico",
-              "nivel": 4
-            },
-            {
               "item": "icone-poro",
               "nivel": 4
             },
@@ -554,7 +498,6 @@
           ],
           "equipado": {
             "tema": "tema-sentina",
-            "banner": "banner-guardia",
             "icone": "icone-urf"
           },
           "contrib": [
@@ -595,17 +538,12 @@
               "nivel": 1
             },
             {
-              "item": "banner-instalador",
-              "nivel": 2
-            },
-            {
               "item": "icone-poro",
               "nivel": 1
             }
           ],
           "equipado": {
             "tema": "tema-oficial",
-            "banner": "banner-instalador",
             "icone": "icone-poro"
           },
           "contrib": [
@@ -646,15 +584,10 @@
             {
               "item": "tema-ionia",
               "nivel": 2
-            },
-            {
-              "item": "banner-fliperama",
-              "nivel": 1
             }
           ],
           "equipado": {
-            "tema": "tema-ionia",
-            "banner": "banner-fliperama"
+            "tema": "tema-ionia"
           },
           "contrib": [
             6,
@@ -729,15 +662,10 @@
             {
               "item": "tema-oficial",
               "nivel": 1
-            },
-            {
-              "item": "banner-colecao",
-              "nivel": 1
             }
           ],
           "equipado": {
-            "tema": "tema-oficial",
-            "banner": "banner-colecao"
+            "tema": "tema-oficial"
           },
           "contrib": [
             3,
@@ -773,17 +701,12 @@
               "nivel": 1
             },
             {
-              "item": "banner-feerica",
-              "nivel": 2
-            },
-            {
               "item": "icone-maestria",
               "nivel": 1
             }
           ],
           "equipado": {
             "tema": "tema-oficial",
-            "banner": "banner-feerica",
             "icone": "icone-maestria"
           },
           "contrib": [
@@ -860,15 +783,10 @@
             {
               "item": "tema-oficial",
               "nivel": 1
-            },
-            {
-              "item": "banner-classico",
-              "nivel": 1
             }
           ],
           "equipado": {
-            "tema": "tema-oficial",
-            "banner": "banner-classico"
+            "tema": "tema-oficial"
           },
           "contrib": [
             2,
