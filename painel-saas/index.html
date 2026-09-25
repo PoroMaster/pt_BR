@@ -741,7 +741,7 @@ function bioHtml(m){
 
 /* ---------- sons do cliente (CommunityDragon) ---------- */
 const SFX = {purchase:"button-purchase-chest-click", chest:"tray-receive-chest_generic", key:"tray-receive-material_key", intro:"open_cm-intro", idle:"open_cm-idle", outro:"open_cm-outro", keyIn:"reveal-material_key", ack:"reveal-acknowledge", upIntro:"upgrade-intro", upOutro:"upgrade-outro", upMax:"upgrade-bar-max", click:"grid-click", hover:"grid-hover", coins:"blue-essence-fill", dup:"disenchant-outro",
-  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate", ovo:"hextech_egg_open_mythic", portal:"portal_open_masterwork-outro"};
+  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate", ovo:"hextech_egg_open_mythic", craft:"crafter-button-click", portal:"portal_open_masterwork-outro"};
 /* o cliente usa o mesmo som para Lendária, Mítica e Ultimate; aqui cada uma ganha camadas próprias */
 const SOM_RAR = {mitica:[["r_mitica",0,.7],["ovo",120,.75]], ultimate:[["portal",0,.8],["r_ultimate",180,.75],["ovo",420,.6],["upMax",900,.7]]};
 function somRar(r){ const l = SOM_RAR[r]; if (!l) return som("r_"+r); l.forEach(([k,ms,vol])=>setTimeout(()=>som(k,{vol}), ms)); }
@@ -1532,9 +1532,11 @@ function bindView(c, me){
   $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=custoEvo(it,x.nivel);
     if(!evolui(it) || ranq(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
     const nome = vis(it,x.nivel).nome; log(c, `${me.nome} desbloqueou ${nome}`); save();
-    som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
+    /* igual a desbloquear um fragmento de skin no cliente: botão de criar, fragmentos sendo gastos, revelação da raridade */
+    som("craft",{vol:.8}); setTimeout(()=>som("coins",{vol:.55}), 180); setTimeout(()=>somRar(it.raridade), 700);
+    if (x.nivel>=it.evolucoes.length) setTimeout(()=>som("upMax",{vol:.7}), 1500);
     render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`${nome} já pode ser usado no seu perfil.`, {titulo:"Estágio desbloqueado!", ...imgsDe(it, x.nivel)}); }));
-  $$("[data-usar]").forEach(b=>b.addEventListener("click",()=>{ const it=item(session.forjaSel), x=me.inventario.find(y=>y.item===it.id), n=+b.dataset.usar; if(!x || n>x.nivel) return; x.ativo=n; session.forjaPrev=null; save(); som("upOutro",{vol:.5}); render(); toast(`Agora usando: ${vis(it,n).nome}.`); }));
+  $$("[data-usar]").forEach(b=>b.addEventListener("click",()=>{ const it=item(session.forjaSel), x=me.inventario.find(y=>y.item===it.id), n=+b.dataset.usar; if(!x || n>x.nivel) return; x.ativo=n; session.forjaPrev=null; save(); som("ack",{vol:.6}); render(); toast(`Agora usando: ${vis(it,n).nome}.`); }));
   $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); som("click",{vol:.5}); render(); toast(`${it.nome} equipado.`, imgsDe(it, nivelDe(me,it.id))); }));
   $$("[data-eqsel]").forEach(s=>s.addEventListener("change",()=>{ const t=s.dataset.eqsel; if(s.value) me.equipado[t]=s.value; else delete me.equipado[t]; save(); som("click",{vol:.5}); render(); toast("Perfil atualizado."); }));
   const be=$("#bio-edit");
