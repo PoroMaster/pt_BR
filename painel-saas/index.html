@@ -111,6 +111,45 @@ img{max-width:100%}
 @keyframes pk-titulo{0%{opacity:0;transform:scale(1.6);letter-spacing:.5em;filter:blur(6px)}100%{opacity:1;transform:none;letter-spacing:.04em;filter:none}}
 @keyframes pk-card{0%{opacity:0}100%{opacity:1;transform:none}}
 @keyframes pk-gira{to{transform:rotate(360deg)}}
+/* coleção */
+.col-topo{display:grid;gap:14px;margin-bottom:16px}
+.col-geral{display:grid;gap:8px}
+.col-geral > div{display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+.col-num{font:800 30px var(--display)}.col-num small{font-size:16px;color:var(--ink-3)}
+.col-barra{display:block;height:6px;border-radius:99px;background:var(--panel-2);overflow:hidden;width:100%}
+.col-barra.grande{height:10px}
+.col-barra i{display:block;height:100%;background:linear-gradient(90deg,var(--gold),#f0d58c);border-radius:inherit}
+.col-tipos{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:8px}
+.col-tipo{display:grid;grid-template-columns:1fr auto;gap:4px 8px;align-items:center;text-align:left;padding:8px 10px;border-radius:10px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);cursor:pointer}
+.col-tipo .col-barra{grid-column:1/-1}
+.col-tipo b{font:600 12.5px var(--mono);color:var(--ink-2)}
+.col-tipo[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
+.col-rars{display:flex;flex-wrap:wrap;gap:6px}
+.col-rar{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:99px;border:1px solid var(--line);background:var(--panel-2);color:var(--ink);cursor:pointer;font-size:13px}
+.col-rar img{width:18px;height:18px}
+.col-rar b{font:600 12px var(--mono);color:var(--ink-3)}
+.col-rar[aria-pressed="true"]{border-color:var(--rc);box-shadow:0 0 0 1px var(--rc);color:var(--rc)}
+.col-rar.limpar{color:var(--ink-3)}
+.col-tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:10px}
+.col-tools input[type=search]{flex:1 1 240px;min-width:0}
+.col-tools select.sel{width:auto}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{background:var(--panel-2);border:0;padding:8px 12px;color:var(--ink-2);cursor:pointer;font-size:13px}
+.seg button + button{border-left:1px solid var(--line)}
+.seg button[aria-pressed="true"]{background:var(--ink);color:var(--panel);font-weight:600}
+#col-grade{display:grid;gap:10px}
+.col-count{margin:0}
+.col-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:10px}
+.col-card{position:relative;display:grid;justify-items:center;align-content:start;gap:5px;padding:10px 8px;border-radius:12px;border:1px solid var(--line);border-bottom:3px solid var(--rc);background:var(--panel-2);color:var(--ink);text-align:center;cursor:pointer;min-width:0}
+.col-card:hover{border-color:var(--gold)}
+.col-card .pic{width:100%;max-width:120px;aspect-ratio:1;border-radius:10px}
+.col-card b{font-size:12.5px;line-height:1.25;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.col-card small{font-size:11.5px;color:var(--ink-3);line-height:1.3}
+.col-card small.ok{color:var(--ok)}
+.col-card .col-barra{height:4px;max-width:110px}
+.col-card.falta .pic{filter:grayscale(.9) brightness(.55)}
+.col-card.falta b{color:var(--ink-2)}
+.col-lock{position:absolute;top:8px;right:8px;font-size:13px;z-index:2}
 .btn-ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .btn-bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
 .btn-sm{padding:5px 10px;font-size:13px}
@@ -891,6 +930,7 @@ const VIEWS = [
   {id:"verificacoes", nome:"Verificações", ico:"image/banco_de_dados/Tester.png"},
   {id:"perfil", nome:"Meu perfil", ico:"image/banco_de_dados/Destaque_4.png"},
   {id:"mercado", nome:"Mercado", ico:"image/banco_de_dados/Moedas.png"},
+  {id:"colecao", nome:"Coleção", ico:"painel-saas/img/wiki/Hextech_Crafting_Chest.png"},
   {id:"forja", nome:"Forja", ico:"image/banco_de_dados/Star_Shards.png"},
   {id:"membros", nome:"Membros", ico:"image/banco_de_dados/Mod.png", admin:true},
   {id:"sistema", nome:"Regras e sistema", ico:"image/banco_de_dados/Pontos_Prestigios.png", admin:true},
@@ -912,7 +952,7 @@ function render(){
   $("#me").innerHTML = `${avatarR(me,32)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)} · ${esc(me.acesso)}</small></span><button id="mute" title="${mudo?"Ativar sons":"Silenciar sons"}" aria-label="${mudo?"Ativar sons":"Silenciar sons"}">${mudo?"🔇":"🔊"}</button><button id="logout" style="margin-left:4px">Sair</button>`;
   const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
   $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
-  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
+  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
   const rolagem = $$("#main .evo, #main .mini-evo").map(el=>el.scrollLeft);
   $("#main").innerHTML = `<div class="mobile-bar"><button class="btn btn-sm" id="menu-btn" aria-label="Abrir menu">☰ Menu</button><b>${esc(c.nome)}</b></div>` + V[session.view](c, me, adm);
   $("#side").classList.remove("open");
@@ -1296,6 +1336,62 @@ function rotulo(it, i){
   if (e.elo) return e.elo;
   return e.nome.replace(/^(Skin|Friaca \d{4})\s*-\s*/, "").replace(/^(Emote|Ícone|Sentinela|Borda Arcana:)\s+/, "");
 }
+/* ---------- coleção: tudo o que existe, o que você tem e o que falta ---------- */
+const ORIGENS = {loja:"Loja (Moedas)", bau:"Baú Hextech", pack:"Packs temáticos", ranqueada:"Ranqueada"};
+const origemDe = it => it.ranqueada ? "ranqueada" : it.pack ? "pack" : it.preco!=null ? "loja" : "bau";
+function comoPegar(it){
+  const o = origemDe(it);
+  if (o==="loja") return `Loja · ${fmt(it.preco)} Moedas`;
+  if (o==="pack") return `${packDe(it)?.nome || "Pack"} (ou Baú)`;
+  if (o==="ranqueada") return `Ranqueada: chegue em ${it.evolucoes[0].elo}`;
+  return "Baú Hextech";
+}
+function colLista(me){
+  const f = session.col, q = semAcento(f.busca.trim()), own = new Map(me.inventario.map(x=>[x.item,x]));
+  return db.cosmeticos.filter(it => it.id!=="tema-oficial"
+    && (f.tipo==="todos" || it.tipo===f.tipo) && (f.rar==="todas" || it.raridade===f.rar)
+    && (f.origem==="todas" || origemDe(it)===f.origem)
+    && (f.posse==="todos" || (f.posse==="tenho") === own.has(it.id))
+    && (!q || semAcento(it.nome).includes(q) || (evolui(it) && it.evolucoes.some(e=>semAcento(e.nome).includes(q)))))
+    .sort((a,b)=> (own.has(a.id)-own.has(b.id)) * (f.posse==="todos" ? 1 : 0) || ordemRar(b.raridade)-ordemRar(a.raridade) || a.nome.localeCompare(b.nome,"pt-BR"));
+}
+function colGradeHtml(me){
+  const f = session.col, l = colLista(me), own = new Map(me.inventario.map(x=>[x.item,x])), vis_ = l.slice(0, f.lim);
+  const card = it => { const x = own.get(it.id), n = evolui(it) ? it.evolucoes.length : 1, nv = x ? nivelDe(me,it.id) : 1;
+    return `<button type="button" class="col-card ${x?"":"falta"} ${ult(it)?"ult":""}" style="${rc(it.raridade)}" data-col="${it.id}" title="${esc(it.nome)}">
+      ${x?"":`<span class="col-lock">🔒</span>`}${pic(it, nv, "", 56)}
+      <b>${esc(x && evolui(it) ? vis(it,nv).nome : it.nome)}</b>${rarTag(it.raridade)}
+      ${x ? `<small class="ok">${evolui(it)?`${x.nivel}/${n} estágios`:"Na coleção"}</small>${evolui(it)?`<span class="col-barra"><i style="width:${Math.round(x.nivel/n*100)}%"></i></span>`:""}` : `<small>${esc(comoPegar(it))}</small>`}
+    </button>`; };
+  return `<p class="note col-count">${l.length} ${l.length===1?"cosmético":"cosméticos"}${l.length>vis_.length?` · mostrando ${vis_.length}`:""}</p>
+    <div class="col-grid">${vis_.map(card).join("") || `<p class="note" style="grid-column:1/-1">Nada com esses filtros.${f.posse==="falta"?" Parabéns, você já tem tudo daqui!":""}</p>`}</div>
+    ${l.length>vis_.length?`<button type="button" class="btn" data-col-mais style="justify-self:center">Mostrar mais (${l.length-vis_.length})</button>`:""}`;
+}
+function vColecao(c, me){
+  session.col = session.col || {busca:"", tipo:"todos", rar:"todas", origem:"todas", posse:"falta", lim:120};
+  const f = session.col, own = new Set(me.inventario.map(x=>x.item));
+  const todos = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
+  const prog = (lista) => { const t = lista.length, h = lista.filter(it=>own.has(it.id)).length; return {t, h, p: t ? Math.round(h/t*100) : 0}; };
+  const geral = prog(todos);
+  const estT = todos.reduce((n,it)=>n+(evolui(it)?it.evolucoes.length:1),0), estH = me.inventario.reduce((n,x)=>{ const it=item(x.item); return it && it.id!=="tema-oficial" ? n+(evolui(it)?x.nivel:1) : n; },0);
+  const barraTipo = ([k,nome]) => { const p = prog(todos.filter(it=>it.tipo===k)); return `<button type="button" class="col-tipo" data-col-tipo="${k}" aria-pressed="${f.tipo===k}"><span>${nome}</span><b>${p.h}/${p.t}</b><span class="col-barra"><i style="width:${p.p}%"></i></span></button>`; };
+  const barraRar = r => { const p = prog(todos.filter(it=>it.raridade===r.id)); return `<button type="button" class="col-rar" data-col-rar="${r.id}" aria-pressed="${f.rar===r.id}" style="${rc(r.id)}"><img src="${src(r.img)}" alt=""><span>${esc(r.nome)}</span><b>${p.h}/${p.t}</b></button>`; };
+  const seg = (k, v, rot) => `<button type="button" data-col-posse="${v}" aria-pressed="${f.posse===v}">${rot}</button>`;
+  return head("Coleção", "Tudo o que existe no painel: o que você já tem, o que falta e de onde cada cosmético sai.") +
+  `<div class="card col-topo">
+     <div class="col-geral"><div><span class="label">Sua coleção</span><b class="col-num">${geral.h}<small>/${geral.t}</small></b><span class="note">${geral.p}% dos cosméticos · ${estH} de ${estT} estágios liberados</span></div>
+       <span class="col-barra grande"><i style="width:${geral.p}%"></i></span></div>
+     <div class="col-tipos"><button type="button" class="col-tipo" data-col-tipo="todos" aria-pressed="${f.tipo==="todos"}"><span>Todos</span><b>${geral.h}/${geral.t}</b><span class="col-barra"><i style="width:${geral.p}%"></i></span></button>${Object.entries(TIPOS_PL).filter(([k])=>k!=="todos").map(barraTipo).join("")}</div>
+     <div class="col-rars">${S.raridades.map(barraRar).join("")}${f.rar!=="todas"?`<button type="button" class="col-rar limpar" data-col-rar="todas">Todas as raridades</button>`:""}</div>
+   </div>
+   <div class="card"><div class="col-tools">
+       <input type="search" id="col-busca" class="sel" placeholder="Buscar cosmético ou estágio…" value="${esc(f.busca)}" aria-label="Buscar na coleção">
+       <div class="seg" role="group" aria-label="Posse">${seg("posse","falta","Falta pegar")}${seg("posse","tenho","Já tenho")}${seg("posse","todos","Todos")}</div>
+       <select class="sel" id="col-origem" aria-label="Origem"><option value="todas">Todas as origens</option>${Object.entries(ORIGENS).map(([k,n])=>`<option value="${k}" ${f.origem===k?"selected":""}>${n}</option>`).join("")}</select>
+     </div>
+     <div id="col-grade">${colGradeHtml(me)}</div></div>`;
+}
+
 function vForja(c, me){
   const inv = me.inventario;
   if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
@@ -1618,6 +1714,22 @@ function bindAdmin(c, after){
   const pr=$("[data-promo]"); if(pr) pr.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===pr.dataset.promo); promover(c,m); after(); toast(`${m.nome} agora é ${m.cargo} e ganhou ${S.promocao.fragmentos} Fragmentos.`); });
 }
 function bindView(c, me){
+  if (session.view==="colecao"){
+    const redesenha = () => { const g = $("#col-grade"); if (g) g.innerHTML = colGradeHtml(me); };
+    const cb = $("#col-busca"); if (cb) cb.addEventListener("input", ()=>{ session.col.busca = cb.value; session.col.lim = 120; redesenha(); });
+    const co = $("#col-origem"); if (co) co.addEventListener("change", ()=>{ session.col.origem = co.value; session.col.lim = 120; render(); });
+    $$("[data-col-tipo]").forEach(b=>b.addEventListener("click",()=>{ session.col.tipo = b.dataset.colTipo; session.col.lim = 120; som("click",{vol:.4}); render(); }));
+    $$("[data-col-rar]").forEach(b=>b.addEventListener("click",()=>{ const r = b.dataset.colRar; session.col.rar = session.col.rar===r ? "todas" : r; session.col.lim = 120; som("click",{vol:.4}); render(); }));
+    $$("[data-col-posse]").forEach(b=>b.addEventListener("click",()=>{ session.col.posse = b.dataset.colPosse; session.col.lim = 120; som("click",{vol:.4}); render(); }));
+    $("#col-grade").addEventListener("click", e=>{
+      if (e.target.closest("[data-col-mais]")){ session.col.lim += 120; redesenha(); return; }
+      const cd = e.target.closest("[data-col]"); if (!cd) return; const it = item(cd.dataset.col), tem = me.inventario.some(x=>x.item===it.id);
+      som("click",{vol:.5});
+      if (tem){ session.view = "forja"; session.forjaSel = it.id; session.forjaTipo = "todos"; session.novaLinha = true; }
+      else { session.view = "mercado"; const o = origemDe(it); if (o==="loja") session.lojaTipo = it.tipo; }
+      render(); scrollTo(0,0);
+    });
+  }
   $$("[data-tab]").forEach(b=>b.addEventListener("click",()=>{ session.verifTab=b.dataset.tab; render(); }));
   $$("[data-rank]").forEach(b=>b.addEventListener("click",()=>{ session.rankBy=b.dataset.rank; render(); }));
   $$("[data-approve],[data-reject]").forEach(b=>b.addEventListener("click",()=>{
