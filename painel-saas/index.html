@@ -197,12 +197,13 @@ td.r,th.r{text-align:right}
 .forge{display:grid;gap:14px;align-content:start}
 .forge .pic{border-radius:8px;aspect-ratio:16/10}
 .forge .pic.flash{animation:forged .9s ease-out}
-.evo{display:flex;gap:6px;align-items:center;overflow-x:auto;padding-bottom:4px}
-.evo .st{flex:none;width:58px;display:grid;justify-items:center;gap:3px;font-size:10.5px;color:var(--ink-3);text-align:center;line-height:1.2}
-.evo .st .pic{width:58px;aspect-ratio:1;border-radius:8px;border:2px solid transparent}
+.evo{display:flex;gap:4px;align-items:flex-start;overflow-x:auto;padding-bottom:4px}
+.evo .st{flex:none;width:60px;display:grid;justify-items:center;align-content:start;gap:4px;font-size:10.5px;color:var(--ink-3);text-align:center;line-height:1.25}
+.evo .st .rot{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.evo .st .pic{width:54px;aspect-ratio:1;border-radius:8px;border:2px solid transparent;flex:none}
 .evo .st.on .pic{border-color:var(--rc)}
 .evo .st.lock{opacity:.45;filter:grayscale(.6)}
-.evo .arrow{color:var(--ink-3);flex:none}
+.evo .arrow{color:var(--ink-3);flex:none;margin-top:18px;font-size:12px}
 .evo .st{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}
 .evo .st:hover .pic{border-color:var(--gold)}
 .evo .st.prev .pic{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-soft)}
@@ -815,6 +816,12 @@ function miniPerfil(m, it, nivel){
   const sentHtml = it.tipo==="sentinela" ? `<img src="${src(v.img)}" alt="" style="height:64px;margin-left:auto">` : "";
   return `<div class="mini ${temaImg?"tema":""}" style="${temaImg?bg(temaImg):""}"><span class="ava">${ring(avatar(m,52), estilo)}${icImg?`<img class="medal" src="${src(icImg)}" alt="">`:""}</span><span><b>${esc(m.nome)}</b><br><small>${esc(m.cargo)}</small></span>${emHtml?`<span style="margin-left:${sentHtml?"8px":"auto"}">${emHtml}</span>`:""}${sentHtml}</div>`;
 }
+/* nome curto de um estágio da linha de evolução */
+function rotulo(it, i){
+  const e = it.evolucoes[i];
+  if (it.evolucoes.some(x=>x.aura)) return e.aura ? "Aura " + e.aura[0].toUpperCase() + e.aura.slice(1) : "Sem aura";
+  return e.nome.replace(/^(Emote|Ícone|Sentinela|Borda Arcana:)\s+/, "");
+}
 function vForja(c, me){
   const inv = me.inventario;
   if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
@@ -834,7 +841,7 @@ function vForja(c, me){
       ${prev?`<div class="prev-bar"><span>👁 Pré-visualização: estágio ${prev} de ${max}${prev>sel.nivel?" (ainda bloqueado)":" (desbloqueado)"}</span><span class="row" style="gap:6px">${prev<=sel.nivel?`<button class="btn btn-sm btn-gold" data-usar="${prev}">Usar este estágio</button>`:""}<button class="btn btn-sm" data-prev="0">Voltar ao que está em uso</button></span></div>`:""}
       ${pic(it, nv, "forge-pic")}
       <div><h2 style="margin-bottom:4px">${esc(v.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
-      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===ativo?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}${i+1===ativo?"<br><b>em uso</b>":i+1>sel.nivel?"<br>🔒":""}</span></button>`).join("")}</div><p class="note" style="margin-top:4px">${sel.nivel} de ${max} estágios desbloqueados. Clique num estágio para ver como fica; os desbloqueados podem ser usados a qualquer momento.</p></div>
+      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===ativo?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span class="rot">${esc(rotulo(it,i))}</span>${i+1===ativo?"<b>em uso</b>":i+1>sel.nivel?"<span>🔒</span>":""}</button>`).join("")}</div><p class="note" style="margin-top:4px">${sel.nivel} de ${max} estágios desbloqueados. Clique num estágio para ver como fica; os desbloqueados podem ser usados a qualquer momento.</p></div>
         <div><span class="label">Como fica no seu perfil</span><div style="margin-top:6px">${miniPerfil(me, it, nv)}</div></div>
         ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Desbloquear <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar (desbloquear estágio ${sel.nivel+1})</button></div>` : `<p class="note">Todos os estágios desbloqueados.</p>`}`
       : `<p class="note">Este cosmético não tem linha de evolução, então não pode ser aprimorado. Procure os que têm o selo ⬆ na loja.</p>`}
