@@ -4394,8 +4394,8 @@
             "sentinela": "sent-poro"
           },
           "materiais": {
-            "baus": 2,
-            "chaves": 2
+            "baus": 25,
+            "chaves": 25
           },
           "bio": "Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:",
           "contrib": [
@@ -4513,8 +4513,8 @@
             "sentinela": "sent-poro"
           },
           "materiais": {
-            "baus": 1,
-            "chaves": 0
+            "baus": 6,
+            "chaves": 5
           },
           "bio": "Moderador. Corrijo texto torto :trabalho:",
           "contrib": [
@@ -4663,8 +4663,8 @@
             "sentinela": "sent-poro"
           },
           "materiais": {
-            "baus": 1,
-            "chaves": 1
+            "baus": 10,
+            "chaves": 10
           },
           "bio": "Tester caçador de bugs :espiada: 100 P.P. e contando.",
           "contrib": [
