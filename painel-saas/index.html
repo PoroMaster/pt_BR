@@ -196,7 +196,10 @@ td.r,th.r{text-align:right}
 .pilha > .frente{position:absolute;inset:0;z-index:2;display:grid;place-items:center}
 .pilha > .frente > img{height:78%;width:auto;max-width:72%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
 .pilha.icone > .frente > img{border-radius:50%;height:74%;aspect-ratio:1;box-shadow:0 0 0 2px rgba(255,255,255,.18),0 6px 16px rgba(0,0,0,.6);filter:none}
-.pilha .sombra{position:absolute;top:50%;left:var(--l);height:var(--h,62%);transform:translate(-50%,-50%) scale(var(--s));opacity:var(--o);filter:brightness(.75) saturate(.7) blur(.3px);z-index:1;pointer-events:none;display:grid;place-items:center}
+.forge-pic.pilha{--k:1.2}
+.forge-pic.pilha > .frente > img{height:64%}
+.forge-pic.pilha .sombra:not(.b){height:54%}
+.pilha .sombra{position:absolute;top:50%;left:calc(50% + var(--off) * var(--k,1));height:var(--h,62%);transform:translate(-50%,-50%) scale(var(--s));opacity:var(--o);filter:brightness(.75) saturate(.7) blur(.3px);z-index:1;pointer-events:none;display:grid;place-items:center}
 .pilha .sombra{aspect-ratio:1;width:auto}
 .pilha .sombra:not(.b) img{height:100%!important;width:100%!important;max-width:none!important;object-fit:contain}
 .pilha.icone .sombra img{border-radius:50%}
@@ -584,7 +587,7 @@ function pilha(it, nivel=1, extra=""){
   for (let k=1; k<=tot; k++) if (k!==nivel) outros.push(k);
   const n = Math.min(4, outros.length), escolhidos = Array.from({length:n}, (_,i)=> outros[Math.round(i*(outros.length-1)/Math.max(1,n-1))]);
   const camada = (k, i) => { const lado = i%2 ? 1 : -1, dist = Math.floor(i/2)+1, v = vis(it,k);
-    const est = `--l:${50 + lado*(8+dist*14)}%;--s:${1-dist*.14};--o:${.62-dist*.14}`;
+    const est = `--off:${lado*(8+dist*14)}%;--s:${1-dist*.14};--o:${.62-dist*.14}`;
     if (it.tipo==="borda") return `<span class="sombra b" style="${est};--o:${.8-dist*.2}">${ring(avatar(POSE,44), v.estilo, 3)}</span>`;
     return `<span class="sombra" style="${est}"><img src="${src(v.img)}" alt=""></span>`; };
   const frente = it.tipo==="borda" ? ring(avatar(POSE,58), vis(it,nivel).estilo, 4) : it.tipo==="emote" ? emo(it,nivel,76) : `<img src="${src(vis(it,nivel).img)}" alt="">`;
