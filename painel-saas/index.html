@@ -195,6 +195,17 @@ td.r,th.r{text-align:right}
 .lvl i.on{background:var(--rc);border-color:var(--rc)}
 .evo-tag{font-size:11px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:3px}
 .mini-evo{display:flex;gap:3px;flex-wrap:wrap}
+.packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
+.pack{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);display:grid;grid-template-rows:auto 1fr}
+.pack .capa{aspect-ratio:16/7;background:#0a1a1d center/cover;position:relative;display:flex;align-items:flex-end;padding:12px}
+.pack .capa::after{content:"";position:absolute;inset:0;background:linear-gradient(0deg,rgba(5,10,20,.85),rgba(5,10,20,0) 65%)}
+.pack .capa h3{position:relative;z-index:1;color:#fff;font:700 18px var(--display);letter-spacing:.03em;margin:0;text-shadow:0 1px 4px #000}
+.pack .corpo{padding:12px 14px;display:grid;gap:10px;align-content:space-between}
+.pack .conteudo{display:grid;gap:6px}
+.pack .linha{display:flex;align-items:center;gap:8px;font-size:12.5px}
+.pack .linha .pic{width:40px;height:40px;aspect-ratio:1;border-radius:8px;flex:none}
+.pack .linha .pic > img,.pack .linha .pic > .em{max-width:88%;max-height:88%;width:auto!important;height:auto!important}
+.pack .linha .pic .ring{transform:scale(.55)}
 .mini-evo button{width:26px;height:26px;padding:0;border-radius:6px;border:2px solid var(--line);background:#0a1a1d;overflow:hidden;display:grid;place-items:center}
 .mini-evo button[aria-pressed="true"]{border-color:var(--rc)}
 .mini-evo .pic{width:100%;height:100%;aspect-ratio:auto}
@@ -431,7 +442,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v9";
+const STORE = "lsp-painel-v10";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -498,6 +509,8 @@ function lvl(n, id, max=S.forja.nivel_max){ return `<span class="lvl" style="${r
 const TIPO = {tema:"tema", borda:"borda", icone:"ícone", sentinela:"sentinela", emote:"emote"};
 const TIPOS_PL = {todos:"Todos", tema:"Temas", borda:"Bordas", icone:"Ícones", sentinela:"Sentinelas", emote:"Emotes"};
 const evolui = it => !!(it.evolucoes && it.evolucoes.length);
+const dePack = it => !!it.pack;
+const custoEvo = (it, nivel) => it.custo_fixo || rar(it.raridade).custo * nivel;
 /* nivel = estágios desbloqueados; ativo = estágio em uso (dá para voltar a qualquer um já desbloqueado) */
 const nivelDe = (m, id) => { const x = m.inventario.find(y=>y.item===id); return x ? (x.ativo || x.nivel) : 1; };
 /* visual do cosmético no nível: nas linhas de evolução, cada nível troca nome, imagem, estilo ou aura */
@@ -803,7 +816,7 @@ function vMercado(c, me){
   /* vitrine: 15 por categoria. Primeiro os vendidos por Moedas, depois raros de raridades variadas. */
   const VITRINE = 15;
   const vitrine = tipo => {
-    const todos = db.cosmeticos.filter(it=>it.tipo===tipo);
+    const todos = db.cosmeticos.filter(it=>it.tipo===tipo && !dePack(it));
     const venda = todos.filter(it=>it.preco!=null);
     const raros = S.raridades.map(r=>todos.filter(it=>it.preco==null && it.raridade===r.id));
     const esc = [...venda];
@@ -811,7 +824,7 @@ function vMercado(c, me){
     return esc.sort((a,b)=> (ordemR[a.raridade]-ordemR[b.raridade]) || ((a.preco??1e9)-(b.preco??1e9)));
   };
   const loja = (t==="todos" ? ordemT : [t]).flatMap(vitrine);
-  const fora = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n + db.cosmeticos.filter(it=>it.tipo===tp).length - vitrine(tp).length, 0);
+  const fora = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n + db.cosmeticos.filter(it=>it.tipo===tp && !dePack(it)).length - vitrine(tp).length, 0);
   const qtd = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n+vitrine(tp).length,0);
   const has = id => me.inventario.some(x=>x.item===id);
   const podeAbrir = me.materiais.baus>0 && me.materiais.chaves>0;
@@ -826,6 +839,14 @@ function vMercado(c, me){
       </div>
     </div>
     <p class="note" style="margin-top:10px">${esc(H.nota)} Você tem ${me.carteira.essencia} Essência Mítica.</p>
+  </div>
+  <div class="card" style="margin-bottom:16px"><h2>Packs temáticos <span class="note">${db.packs.length} coleções · cada uma traz linhas de evolução pelos campeões da temática</span></h2>
+    <div class="packs">${db.packs.map(pk=>{ const its = pk.itens.map(item), falta = its.filter(it=>!has(it.id)), moeda = S.moedas[pk.moeda];
+      return `<div class="pack"><div class="capa" style="${bg(pk.capa)}"><h3>${esc(pk.nome)}</h3></div><div class="corpo">
+        <p class="note" style="margin:0">${esc(pk.descricao)}</p>
+        <div class="conteudo">${its.map(it=>`<div class="linha" style="${rc(it.raridade)}">${pic(it, evolui(it)?it.evolucoes.length:1)}<span style="min-width:0"><b>${esc(it.nome)}</b><br><span class="note">${TIPO[it.tipo]}${evolui(it)?` · ${it.evolucoes.length} estágios`:""}${has(it.id)?" · já é seu":""}</span></span></div>`).join("")}</div>
+        ${falta.length ? `<button class="btn ${pk.moeda==="essencia"?"btn-blue":"btn-primary"}" data-pack="${pk.id}" ${me.carteira[pk.moeda]<pk.preco?"disabled":""}><img class="ico" style="width:18px;height:18px" src="${src(moeda.img)}" alt="">Comprar por ${fmt(pk.preco)} ${esc(moeda.nome)}</button>` : `<button class="btn" disabled>Coleção completa</button>`}
+      </div></div>`; }).join("")}</div>
   </div>
   <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span><span class="note">${db.cosmeticos.filter(x=>has(x.id)).length} de ${db.cosmeticos.length} cosméticos na sua coleção · comuns e temas com Moedas, os raros só no Baú Hextech</span></h2>
     <div class="chips">${Object.entries(TIPOS_PL).map(([k,n])=>`<button data-loja="${k}" aria-pressed="${t===k}">${n} (${qtd(k)})</button>`).join("")}</div>
@@ -858,7 +879,7 @@ function vForja(c, me){
   const inv = me.inventario;
   if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
   const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = it.evolucoes ? it.evolucoes.length : 1;
-  const custo = r.custo * sel.nivel, moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
+  const custo = custoEvo(it, sel.nivel), moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
   const eq = me.equipado && me.equipado[it.tipo] === it.id;
   const ativo = sel.ativo || sel.nivel;
   const prev = evolui(it) && session.forjaPrev && session.forjaPrev!==ativo ? session.forjaPrev : null;
@@ -971,7 +992,7 @@ async function abrirBau(c, me){
   if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
   session.abrindo = true; const token = ++session.hx;
   me.materiais.baus--; me.materiais.chaves--;
-  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial"));
+  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !dePack(x)));
   save();
   const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
   ov.innerHTML = `<div class="top"><button data-hx-mute>${mudo?"🔇":"🔊"}</button><button data-hx-skip>Pular</button></div>
@@ -1058,11 +1079,16 @@ function bindView(c, me){
   $$("[data-buy]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.buy); if(me.carteira.moedas<it.preco) return; me.carteira.moedas-=it.preco; me.inventario.push({item:it.id,nivel:1}); log(c, `${me.nome} comprou ${it.nome}`); save(); som("coins",{vol:.6}); render(); toast(`${it.nome} comprado. Equipe no seu perfil.`); }));
   $$("[data-loja]").forEach(b=>b.addEventListener("click",()=>{ session.lojaTipo=b.dataset.loja; som("click",{vol:.4}); render(); }));
   $$("[data-mprev]").forEach(b=>b.addEventListener("click",()=>{ const [id,n]=b.dataset.mprev.split(":"); session.lojaPrev[id]=+n; som("hover",{vol:.4}); const y=scrollY; render(); scrollTo(0,y); }));
+  $$("[data-pack]").forEach(b=>b.addEventListener("click",()=>{ const pk=db.packs.find(x=>x.id===b.dataset.pack); if(me.carteira[pk.moeda]<pk.preco) return;
+    const novos = pk.itens.filter(id=>!me.inventario.some(x=>x.item===id)); if(!novos.length) return;
+    me.carteira[pk.moeda]-=pk.preco; novos.forEach(id=>me.inventario.push({item:id, nivel:1}));
+    log(c, `${me.nome} comprou o ${pk.nome}`); save(); som("purchase"); setTimeout(()=>som("r_lendaria",{vol:.6}),350);
+    const y=scrollY; render(); scrollTo(0,y); toast(`${pk.nome}: ${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
   $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; som("click",{vol:.5}); render(); }));
   $$("[data-prev]").forEach(b=>b.addEventListener("click",()=>{ const n=+b.dataset.prev; session.forjaPrev = n||null; som("hover",{vol:.4}); render(); }));
-  $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=r.custo*x.nivel;
+  $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=custoEvo(it,x.nivel);
     if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
     const nome = vis(it,x.nivel).nome; log(c, `${me.nome} desbloqueou ${nome}`); save();
     som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);

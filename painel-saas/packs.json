@@ -1,0 +1,934 @@
+{
+ "packs": [
+  {
+   "id": "fliperama",
+   "nome": "Pack Fliperama",
+   "capa": "painel-saas/midia/regiao/tema_pack_fliperama.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Fliperama: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-fliperama",
+    "emote-pack-fliperama",
+    "sent-pack-fliperama",
+    "tema-pack-fliperama"
+   ]
+  },
+  {
+   "id": "congregacao",
+   "nome": "Pack Congregação das Bruxas",
+   "capa": "painel-saas/midia/regiao/tema_pack_congregacao.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Congregação das Bruxas: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-congregacao",
+    "emote-pack-congregacao",
+    "sent-pack-congregacao",
+    "tema-pack-congregacao"
+   ]
+  },
+  {
+   "id": "florescer",
+   "nome": "Pack Florescer Espiritual",
+   "capa": "painel-saas/midia/packs/icon_4644.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Florescer Espiritual: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-florescer",
+    "emote-pack-florescer",
+    "sent-pack-florescer"
+   ]
+  },
+  {
+   "id": "academia",
+   "nome": "Pack Academia de Batalha",
+   "capa": "painel-saas/midia/packs/icon_4897.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Academia de Batalha: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-academia",
+    "emote-pack-academia",
+    "sent-pack-academia"
+   ]
+  },
+  {
+   "id": "lua-sangrenta",
+   "nome": "Pack Lua Sangrenta",
+   "capa": "painel-saas/midia/packs/icon_3890.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Lua Sangrenta: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-lua-sangrenta",
+    "emote-pack-lua-sangrenta",
+    "sent-pack-lua-sangrenta"
+   ]
+  },
+  {
+   "id": "projeto",
+   "nome": "Pack PROJETO",
+   "capa": "painel-saas/midia/regiao/tema_pack_projeto.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção PROJETO: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-projeto",
+    "emote-pack-projeto",
+    "sent-pack-projeto",
+    "tema-pack-projeto"
+   ]
+  },
+  {
+   "id": "velho-oeste",
+   "nome": "Pack Velho Oeste",
+   "capa": "painel-saas/midia/packs/icon_5331.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção Velho Oeste: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-velho-oeste",
+    "emote-pack-velho-oeste",
+    "sent-pack-velho-oeste"
+   ]
+  },
+  {
+   "id": "kda",
+   "nome": "Pack K/DA",
+   "capa": "painel-saas/midia/regiao/tema_pack_kda.jpg",
+   "moeda": "essencia",
+   "preco": 8,
+   "descricao": "Coleção K/DA: linhas de evolução que passam pelos campeões da temática.",
+   "itens": [
+    "icone-pack-kda",
+    "sent-pack-kda",
+    "tema-pack-kda"
+   ]
+  }
+ ],
+ "cosmeticos": [
+  {
+   "id": "icone-pack-fliperama",
+   "nome": "Ícone Fliperama",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "fliperama",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Barão Fliperama",
+     "img": "painel-saas/midia/packs/icon_687.jpg"
+    },
+    {
+     "nome": "Ícone Corki Fliperama",
+     "img": "painel-saas/midia/packs/icon_1295.jpg"
+    },
+    {
+     "nome": "Ícone Ahri Fliperama",
+     "img": "painel-saas/midia/packs/icon_1296.jpg"
+    },
+    {
+     "nome": "Ícone Ezreal Fliperama",
+     "img": "painel-saas/midia/packs/icon_1297.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama",
+     "img": "painel-saas/midia/packs/icon_2094.jpg"
+    },
+    {
+     "nome": "Ícone Kai'Sa Fliperama",
+     "img": "painel-saas/midia/packs/icon_4197.jpg"
+    },
+    {
+     "nome": "Ícone Caitlyn Fliperama",
+     "img": "painel-saas/midia/packs/icon_4198.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama Pixelado",
+     "img": "painel-saas/midia/packs/icon_4200.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama Corrompido",
+     "img": "painel-saas/midia/packs/icon_4201.jpg"
+    },
+    {
+     "nome": "Ícone Miss Fortune Fliperama",
+     "img": "painel-saas/midia/packs/icon_4202.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-fliperama",
+   "nome": "Emote Fliperama",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "fliperama",
+   "custo_fixo": 2,
+   "codigo": "fliperama",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Barão Fliperama",
+     "img": "painel-saas/midia/packs/emote_1509.png"
+    },
+    {
+     "nome": "Emote Dabgu animado",
+     "img": "painel-saas/midia/packs/emote_3277.png"
+    },
+    {
+     "nome": "Emote K.O. animado",
+     "img": "painel-saas/midia/packs/emote_3278.png"
+    },
+    {
+     "nome": "Emote Game Over",
+     "img": "painel-saas/midia/packs/emote_3279.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-fliperama",
+   "nome": "Sentinela Fliperama",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "fliperama",
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Sentinela Poro Fliperama",
+     "img": "painel-saas/midia/packs/ward_85.png"
+    },
+    {
+     "nome": "Sentinela Fliperama 2019",
+     "img": "painel-saas/midia/packs/ward_139.png"
+    }
+   ]
+  },
+  {
+   "id": "tema-pack-fliperama",
+   "nome": "Tema Fliperama",
+   "tipo": "tema",
+   "raridade": "mitica",
+   "preco": null,
+   "pack": "fliperama",
+   "img": "painel-saas/midia/regiao/tema_pack_fliperama.jpg"
+  },
+  {
+   "id": "icone-pack-congregacao",
+   "nome": "Ícone Congregação das Bruxas",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "congregacao",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Morgana Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_4537.jpg"
+    },
+    {
+     "nome": "Ícone Zyra Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_4538.jpg"
+    },
+    {
+     "nome": "Ícone LeBlanc Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_4539.jpg"
+    },
+    {
+     "nome": "Ícone Zyra Congregação das Bruxas Edição de Prestígio",
+     "img": "painel-saas/midia/packs/icon_4540.jpg"
+    },
+    {
+     "nome": "Ícone Congregação das Bruxas 2020",
+     "img": "painel-saas/midia/packs/icon_4541.jpg"
+    },
+    {
+     "nome": "Ícone Evelynn Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_5034.jpg"
+    },
+    {
+     "nome": "Ícone Cassiopeia Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_5037.jpg"
+    },
+    {
+     "nome": "Ícone Ahri Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_5038.jpg"
+    },
+    {
+     "nome": "Ícone Ashe Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/icon_5039.jpg"
+    },
+    {
+     "nome": "Ícone LeBlanc Congregação das Bruxas (Prestígio)",
+     "img": "painel-saas/midia/packs/icon_5040.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-congregacao",
+   "nome": "Emote Congregação das Bruxas",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "congregacao",
+   "custo_fixo": 2,
+   "codigo": "congregacao",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote E aí",
+     "img": "painel-saas/midia/packs/emote_3685.png"
+    },
+    {
+     "nome": "Emote Olhe nos meus olhos",
+     "img": "painel-saas/midia/packs/emote_3686.png"
+    },
+    {
+     "nome": "Emote A caçada começa!",
+     "img": "painel-saas/midia/packs/emote_3687.png"
+    },
+    {
+     "nome": "Emote Toque do Vento",
+     "img": "painel-saas/midia/packs/emote_5167.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-congregacao",
+   "nome": "Sentinela Congregação das Bruxas",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "congregacao",
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Sentinela Congregação das Bruxas",
+     "img": "painel-saas/midia/packs/ward_213.png"
+    },
+    {
+     "nome": "Sentinela Congregação das Bruxas 2023",
+     "img": "painel-saas/midia/packs/ward_245.png"
+    }
+   ]
+  },
+  {
+   "id": "tema-pack-congregacao",
+   "nome": "Tema Congregação das Bruxas",
+   "tipo": "tema",
+   "raridade": "mitica",
+   "preco": null,
+   "pack": "congregacao",
+   "img": "painel-saas/midia/regiao/tema_pack_congregacao.jpg"
+  },
+  {
+   "id": "icone-pack-florescer",
+   "nome": "Ícone Florescer Espiritual",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "florescer",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Florescer Espiritual 2020",
+     "img": "painel-saas/midia/packs/icon_4629.jpg"
+    },
+    {
+     "nome": "Ícone Thresh Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4632.jpg"
+    },
+    {
+     "nome": "Ícone Vayne Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4633.jpg"
+    },
+    {
+     "nome": "Ícone Yasuo Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4634.jpg"
+    },
+    {
+     "nome": "Ícone Teemo Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4635.jpg"
+    },
+    {
+     "nome": "Ícone Teemo Florescer Espiritual Edição de Prestígio",
+     "img": "painel-saas/midia/packs/icon_4636.jpg"
+    },
+    {
+     "nome": "Ícone Lillia Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4637.jpg"
+    },
+    {
+     "nome": "Ícone Riven Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4642.jpg"
+    },
+    {
+     "nome": "Ícone Cassiopeia Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4643.jpg"
+    },
+    {
+     "nome": "Ícone Ahri Florescer Espiritual",
+     "img": "painel-saas/midia/packs/icon_4644.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-florescer",
+   "nome": "Emote Florescer Espiritual",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "florescer",
+   "custo_fixo": 2,
+   "codigo": "florescer",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Me carrega!",
+     "img": "painel-saas/midia/packs/emote_3489.png"
+    },
+    {
+     "nome": "Emote Hihihi!",
+     "img": "painel-saas/midia/packs/emote_3490.png"
+    },
+    {
+     "nome": "Emote Iááá!",
+     "img": "painel-saas/midia/packs/emote_3491.png"
+    },
+    {
+     "nome": "Emote Sonhando com você",
+     "img": "painel-saas/midia/packs/emote_3492.png"
+    },
+    {
+     "nome": "Emote Uma longa estrada",
+     "img": "painel-saas/midia/packs/emote_3493.png"
+    },
+    {
+     "nome": "Emote Pegadinha!",
+     "img": "painel-saas/midia/packs/emote_3494.png"
+    },
+    {
+     "nome": "Emote Inseparáveis",
+     "img": "painel-saas/midia/packs/emote_3495.png"
+    },
+    {
+     "nome": "Emote Vem comigo...",
+     "img": "painel-saas/midia/packs/emote_3496.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-florescer",
+   "nome": "Sentinela Florescer Espiritual",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "florescer",
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Sentinela Kanmei Florescer Espiritual 2020",
+     "img": "painel-saas/midia/packs/ward_200.png"
+    },
+    {
+     "nome": "Sentinela Akana Florescer Espiritual 2020",
+     "img": "painel-saas/midia/packs/ward_201.png"
+    },
+    {
+     "nome": "Sentinela Florescer Espiritual 2022",
+     "img": "painel-saas/midia/packs/ward_230.png"
+    },
+    {
+     "nome": "Sentinela Florescer Espiritual 2025",
+     "img": "painel-saas/midia/packs/ward_256.png"
+    }
+   ]
+  },
+  {
+   "id": "icone-pack-academia",
+   "nome": "Ícone Academia de Batalha",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "academia",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4098.jpg"
+    },
+    {
+     "nome": "Ícone Ezreal Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4099.jpg"
+    },
+    {
+     "nome": "Ícone Lux Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4100.jpg"
+    },
+    {
+     "nome": "Ícone Jayce Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4101.jpg"
+    },
+    {
+     "nome": "Ícone Katarina Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4104.jpg"
+    },
+    {
+     "nome": "Ícone Jayce Academia de Batalha (Formal)",
+     "img": "painel-saas/midia/packs/icon_4105.jpg"
+    },
+    {
+     "nome": "Ícone Graves Professor da Academia (Formal)",
+     "img": "painel-saas/midia/packs/icon_4106.jpg"
+    },
+    {
+     "nome": "Ícone Yuumi Diretora da Academia (Formal)",
+     "img": "painel-saas/midia/packs/icon_4107.jpg"
+    },
+    {
+     "nome": "Ícone Katarina Academia de Batalha (Formal)",
+     "img": "painel-saas/midia/packs/icon_4108.jpg"
+    },
+    {
+     "nome": "Ícone Yone Academia de Batalha",
+     "img": "painel-saas/midia/packs/icon_4897.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-academia",
+   "nome": "Emote Academia de Batalha",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "academia",
+   "custo_fixo": 2,
+   "codigo": "academia",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote B-Baka!",
+     "img": "painel-saas/midia/packs/emote_3268.png"
+    },
+    {
+     "nome": "Emote Pra você, bebê",
+     "img": "painel-saas/midia/packs/emote_3269.png"
+    },
+    {
+     "nome": "Emote Choquei animado",
+     "img": "painel-saas/midia/packs/emote_3600.png"
+    },
+    {
+     "nome": "Emote De canto de olho",
+     "img": "painel-saas/midia/packs/emote_4846.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-academia",
+   "nome": "Sentinela Academia de Batalha",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "academia",
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Sentinela Durandal da Academia de Batalha",
+     "img": "painel-saas/midia/packs/ward_136.png"
+    },
+    {
+     "nome": "Sentinela Carteira da Academia de Batalha",
+     "img": "painel-saas/midia/packs/ward_138.png"
+    },
+    {
+     "nome": "Sentinela Academia de Batalha",
+     "img": "painel-saas/midia/packs/ward_258.png"
+    }
+   ]
+  },
+  {
+   "id": "icone-pack-lua-sangrenta",
+   "nome": "Ícone Lua Sangrenta",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "lua-sangrenta",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_750.jpg"
+    },
+    {
+     "nome": "Ícone Kennen Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1107.jpg"
+    },
+    {
+     "nome": "Ícone Yasuo Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1108.jpg"
+    },
+    {
+     "nome": "Ícone Jhin Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1588.jpg"
+    },
+    {
+     "nome": "Ícone Diana Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1589.jpg"
+    },
+    {
+     "nome": "Ícone Twisted Fate Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1590.jpg"
+    },
+    {
+     "nome": "Ícone Talon Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_1591.jpg"
+    },
+    {
+     "nome": "Ícone Lua Sangrenta Nascente",
+     "img": "painel-saas/midia/packs/icon_1592.jpg"
+    },
+    {
+     "nome": "Ícone Pyke Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_3889.jpg"
+    },
+    {
+     "nome": "Ícone Aatrox Lua Sangrenta",
+     "img": "painel-saas/midia/packs/icon_3890.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-lua-sangrenta",
+   "nome": "Emote Lua Sangrenta",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "lua-sangrenta",
+   "custo_fixo": 2,
+   "codigo": "lua_sangrenta",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Florescer da fortuna",
+     "img": "painel-saas/midia/packs/emote_10049.png"
+    },
+    {
+     "nome": "Emote HA-HA.",
+     "img": "painel-saas/midia/packs/emote_10055.png"
+    },
+    {
+     "nome": "Emote Vou te devorar!",
+     "img": "painel-saas/midia/packs/emote_10117.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-lua-sangrenta",
+   "nome": "Sentinela Lua Sangrenta",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "lua-sangrenta",
+   "img": "painel-saas/midia/packs/ward_132.png"
+  },
+  {
+   "id": "icone-pack-projeto",
+   "nome": "Ícone PROJETO",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "projeto",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone PROJETO",
+     "img": "painel-saas/midia/packs/icon_909.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Yi",
+     "img": "painel-saas/midia/packs/icon_910.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Zed",
+     "img": "painel-saas/midia/packs/icon_911.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Leona",
+     "img": "painel-saas/midia/packs/icon_912.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Fiora",
+     "img": "painel-saas/midia/packs/icon_913.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Lucian",
+     "img": "painel-saas/midia/packs/icon_914.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Poro",
+     "img": "painel-saas/midia/packs/icon_985.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Ashe Reconhecimento",
+     "img": "painel-saas/midia/packs/icon_1225.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Ashe",
+     "img": "painel-saas/midia/packs/icon_1227.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Ekko",
+     "img": "painel-saas/midia/packs/icon_1228.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-projeto",
+   "nome": "Emote PROJETO",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "projeto",
+   "custo_fixo": 2,
+   "codigo": "projeto",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote PROJETO: Caçadores",
+     "img": "painel-saas/midia/packs/emote_3108.png"
+    },
+    {
+     "nome": "Emote Prestenção!",
+     "img": "painel-saas/midia/packs/emote_3334.png"
+    },
+    {
+     "nome": "Emote Calabokinha",
+     "img": "painel-saas/midia/packs/emote_3335.png"
+    },
+    {
+     "nome": "Emote Bang!",
+     "img": "painel-saas/midia/packs/emote_3336.png"
+    },
+    {
+     "nome": "Emote Vai, me impressiona!",
+     "img": "painel-saas/midia/packs/emote_3648.png"
+    },
+    {
+     "nome": "Emote Muahaha!",
+     "img": "painel-saas/midia/packs/emote_3649.png"
+    },
+    {
+     "nome": "Emote Cálculo questionável",
+     "img": "painel-saas/midia/packs/emote_3650.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-projeto",
+   "nome": "Sentinela PROJETO",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "projeto",
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Sentinela PROJETO: Retaliação",
+     "img": "painel-saas/midia/packs/ward_189.png"
+    },
+    {
+     "nome": "Sentinela PROJETO 2021",
+     "img": "painel-saas/midia/packs/ward_211.png"
+    }
+   ]
+  },
+  {
+   "id": "tema-pack-projeto",
+   "nome": "Tema PROJETO",
+   "tipo": "tema",
+   "raridade": "mitica",
+   "preco": null,
+   "pack": "projeto",
+   "img": "painel-saas/midia/regiao/tema_pack_projeto.jpg"
+  },
+  {
+   "id": "icone-pack-velho-oeste",
+   "nome": "Ícone Velho Oeste",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "velho-oeste",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Lucian Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_3595.jpg"
+    },
+    {
+     "nome": "Ícone Urgot Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_3596.jpg"
+    },
+    {
+     "nome": "Ícone Thresh Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_3597.jpg"
+    },
+    {
+     "nome": "Ícone Velho Oeste Gótico",
+     "img": "painel-saas/midia/packs/icon_3598.jpg"
+    },
+    {
+     "nome": "Ícone Velho Oeste 2019",
+     "img": "painel-saas/midia/packs/icon_4377.jpg"
+    },
+    {
+     "nome": "Ícone Senna Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_4616.jpg"
+    },
+    {
+     "nome": "Ícone Irelia Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_4617.jpg"
+    },
+    {
+     "nome": "Ícone Velho Oeste 2020",
+     "img": "painel-saas/midia/packs/icon_4618.jpg"
+    },
+    {
+     "nome": "Ícone Essências Míticas Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_5318.jpg"
+    },
+    {
+     "nome": "Ícone Prestígio Talon Velho Oeste",
+     "img": "painel-saas/midia/packs/icon_5331.jpg"
+    }
+   ]
+  },
+  {
+   "id": "emote-pack-velho-oeste",
+   "nome": "Emote Velho Oeste",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "velho-oeste",
+   "custo_fixo": 2,
+   "codigo": "velho_oeste",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Bão d+ da conta! Animado",
+     "img": "painel-saas/midia/packs/emote_3407.png"
+    },
+    {
+     "nome": "Emote Êta lasquêra!",
+     "img": "painel-saas/midia/packs/emote_3408.png"
+    },
+    {
+     "nome": "Emote Nada pessoal!",
+     "img": "painel-saas/midia/packs/emote_3478.png"
+    },
+    {
+     "nome": "Emote Chegou a hora...",
+     "img": "painel-saas/midia/packs/emote_3479.png"
+    },
+    {
+     "nome": "Emote Agora não!",
+     "img": "painel-saas/midia/packs/emote_3480.png"
+    },
+    {
+     "nome": "Emote Fim da festa!",
+     "img": "painel-saas/midia/packs/emote_3855.png"
+    },
+    {
+     "nome": "Emote Ás na Manga",
+     "img": "painel-saas/midia/packs/emote_3856.png"
+    },
+    {
+     "nome": "Emote Meus agradecimentos",
+     "img": "painel-saas/midia/packs/emote_3857.png"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-velho-oeste",
+   "nome": "Sentinela Velho Oeste MSI 2022",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "velho-oeste",
+   "img": "painel-saas/midia/packs/ward_225.png"
+  },
+  {
+   "id": "icone-pack-kda",
+   "nome": "Ícone K/DA",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "pack": "kda",
+   "custo_fixo": 4,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ahri K/DA",
+     "img": "painel-saas/midia/packs/icon_3795.jpg"
+    },
+    {
+     "nome": "Ícone Evelynn K/DA",
+     "img": "painel-saas/midia/packs/icon_3796.jpg"
+    },
+    {
+     "nome": "Ícone Kai'Sa K/DA",
+     "img": "painel-saas/midia/packs/icon_3797.jpg"
+    },
+    {
+     "nome": "Ícone Akali K/DA",
+     "img": "painel-saas/midia/packs/icon_3798.jpg"
+    },
+    {
+     "nome": "Ícone K/DA",
+     "img": "painel-saas/midia/packs/icon_3799.jpg"
+    },
+    {
+     "nome": "Ícone K/DA (dourado)",
+     "img": "painel-saas/midia/packs/icon_3800.jpg"
+    },
+    {
+     "nome": "Ícone K/DA ALL OUT 2020",
+     "img": "painel-saas/midia/packs/icon_4759.jpg"
+    },
+    {
+     "nome": "Ícone Seraphine K/DA ALL OUT Indie",
+     "img": "painel-saas/midia/packs/icon_4793.jpg"
+    },
+    {
+     "nome": "Ícone Seraphine K/DA ALL OUT Superstar",
+     "img": "painel-saas/midia/packs/icon_4794.jpg"
+    },
+    {
+     "nome": "Ícone Kai'Sa K/DA ALL OUT Edição de Prestígio",
+     "img": "painel-saas/midia/packs/icon_4795.jpg"
+    }
+   ]
+  },
+  {
+   "id": "sent-pack-kda",
+   "nome": "Sentinela K/DA ALL OUT",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "pack": "kda",
+   "img": "painel-saas/midia/packs/ward_205.png"
+  },
+  {
+   "id": "tema-pack-kda",
+   "nome": "Tema K/DA",
+   "tipo": "tema",
+   "raridade": "mitica",
+   "preco": null,
+   "pack": "kda",
+   "img": "painel-saas/midia/regiao/tema_pack_kda.jpg"
+  }
+ ]
+}

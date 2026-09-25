@@ -98,6 +98,7 @@ sistema = {
 }
 
 W = "painel-saas/img/wiki/"  # imagens da wiki do League of Legends (wiki.leagueoflegends.com)
+R = "painel-saas/midia/regiao/"  # arte oficial das regiões de Runeterra (League Displays)
 C = "painel-saas/midia/cd/"     # arquivos do cliente do LoL, via CommunityDragon (raw.communitydragon.org)
 
 
@@ -128,20 +129,20 @@ def evo_borda(*estagios):
 cosmeticos = [
     # Temas: fundo do painel e do perfil. Comprados com Moedas.
     cos("tema-oficial", "Tema Oficial", "tema", "comum", "image/background.png", 0),
-    cos("tema-demacia", "Tema Demacia", "tema", "comum", C + "tema_demacia.jpg", 400),
-    cos("tema-piltover", "Tema Piltover", "tema", "comum", C + "tema_piltover.jpg", 400),
-    cos("tema-freljord", "Tema Freljord", "tema", "comum", C + "tema_freljord.jpg", 400),
+    cos("tema-demacia", "Tema Demacia", "tema", "comum", R + "tema_demacia.jpg", 400),
+    cos("tema-piltover", "Tema Piltover", "tema", "comum", R + "tema_piltover.jpg", 400),
+    cos("tema-freljord", "Tema Freljord", "tema", "comum", R + "tema_freljord.jpg", 400),
     cos("tema-ionia", "Tema Ionia", "tema", "epica", "painel-saas/img/ionia.jpg", 600),
-    cos("tema-noxus", "Tema Noxus", "tema", "epica", C + "tema_noxus.jpg", 600),
-    cos("tema-zaun", "Tema Zaun", "tema", "epica", C + "tema_zaun.jpg", 600),
+    cos("tema-noxus", "Tema Noxus", "tema", "epica", R + "tema_noxus.jpg", 600),
+    cos("tema-zaun", "Tema Zaun", "tema", "epica", R + "tema_zaun.jpg", 600),
     cos("tema-sentina", "Tema Águas de Sentina", "tema", "lendaria", "image/back.png", 900),
-    cos("tema-shurima", "Tema Shurima", "tema", "lendaria", C + "tema_shurima.jpg", 900),
-    cos("tema-targon", "Tema Targon", "tema", "mitica", C + "tema_targon.jpg"),
-    cos("tema-sombras", "Tema Ilhas das Sombras", "tema", "mitica", C + "tema_sombras.jpg"),
-    cos("tema-bandopolis", "Tema Bandópolis", "tema", "comum", C + "tema_bandopolis.jpg", 400),
-    cos("tema-ixtal", "Tema Ixtal", "tema", "epica", C + "tema_ixtal.jpg", 600),
-    cos("tema-ionia-mistica", "Tema Ionia Mística", "tema", "lendaria", C + "tema_ionia2.jpg", 900),
-    cos("tema-vazio", "Tema O Vazio", "tema", "ultimate", C + "tema_vazio.jpg"),
+    cos("tema-shurima", "Tema Shurima", "tema", "lendaria", R + "tema_shurima.jpg", 900),
+    cos("tema-targon", "Tema Targon", "tema", "mitica", R + "tema_targon.jpg"),
+    cos("tema-sombras", "Tema Ilhas das Sombras", "tema", "mitica", R + "tema_sombras.jpg"),
+    cos("tema-bandopolis", "Tema Bandópolis", "tema", "comum", R + "tema_bandopolis.jpg", 400),
+    cos("tema-ixtal", "Tema Ixtal", "tema", "epica", R + "tema_ixtal.jpg", 600),
+    cos("tema-ionia-mistica", "Tema Ionia Mística", "tema", "lendaria", R + "tema_ionia2.jpg", 900),
+    cos("tema-vazio", "Tema O Vazio", "tema", "ultimate", R + "tema_vazio.jpg"),
 
     # Bordas animadas em volta da foto (CSS). A Borda Arcana evolui na Forja.
     cos("borda-arcana", "Borda Arcana", "borda", "epica", evolucoes=evo_borda(
@@ -204,7 +205,6 @@ cosmeticos = [
     cos("sent-astronauta", "Sentinela Poro Astronauta", "sentinela", "epica", C + "ward_34.png"),
     cos("sent-vamporo", "Sentinela Vamporo", "sentinela", "epica", C + "ward_70.png"),
     cos("sent-submundo", "Sentinela Poro do Submundo", "sentinela", "epica", C + "ward_38.png"),
-    cos("sent-estelar", "Sentinela Guardiã Estelar", "sentinela", "lendaria", C + "ward_63.png"),
     cos("sent-dragao", "Sentinela Poro Matador de Dragões", "sentinela", "lendaria", C + "ward_37.png"),
     cos("sent-rainha", "Sentinela Rainha Poro", "sentinela", "mitica", C + "ward_123.png"),
     cos("sent-durandal", "Sentinela Durandal da Academia", "sentinela", "ultimate", C + "ward_136.png"),
@@ -213,7 +213,8 @@ cosmeticos = [
     cos("sent-pulsefire", "Sentinela Pulsefire", "sentinela", "epica", C + "ward_77.png"),
     cos("sent-lua-sangrenta", "Sentinela Lua Sangrenta", "sentinela", "lendaria", C + "ward_132.png"),
     cos("sent-florescer", "Sentinela Florescer Espiritual", "sentinela", "lendaria", C + "ward_230.png"),
-    cos("sent-guardias", "Sentinela Guardiãs Estelares", "sentinela", "mitica", C + "ward_188.png"),
+    cos("sent-kanmei", "Sentinela Kanmei", "sentinela", "mitica", C + "ward_200.png"),
+    cos("sent-akana", "Sentinela Akana", "sentinela", "epica", C + "ward_201.png"),
 
     # Emotes: ao lado do nome e na biografia (:codigo:). Os raros são animados.
     cos("emote-poro", "Emote Poro", "emote", "comum", preco=100, codigo="poro", anim="flutuar", evolucoes=evo(
@@ -239,7 +240,38 @@ cosmeticos = [
     cos("emote-espectral", "Emote Poro Espectral", "emote", "lendaria", C + "emote_5124.png", codigo="espectral", anim="balancar"),
     cos("emote-vamporo", "Emote Vamporo", "emote", "lendaria", C + "emote_3106.png", codigo="vamporo", anim="balancar"),
     cos("emote-guma", "Emote Deusa Guma", "emote", "lendaria", W + "Guma-Goddess_Emote.png", codigo="guma", anim="pulsar", evolucoes=evo_aura("Emote Deusa Guma", W + "Guma-Goddess_Emote.png")),
+    # Pack Guardiãs Estelares: itens exclusivos, só vêm no pack
+    cos("icone-guardias", "Ícone Guardiãs Estelares", "icone", "epica", pack="guardias", custo_fixo=4, evolucoes=evo(
+        ("Ícone Marca da Guardiã", C + "icon_1381.jpg"), ("Ícone Lux Guardiã Estelar", C + "icon_5863.jpg"),
+        ("Ícone Jinx Guardiã Estelar", C + "icon_5864.jpg"), ("Ícone Janna Guardiã Estelar", C + "icon_5865.jpg"),
+        ("Ícone Lulu Guardiã Estelar", C + "icon_5866.jpg"), ("Ícone Poppy Guardiã Estelar", C + "icon_5867.jpg"),
+        ("Ícone Seraphine Guardiã Estelar", C + "icon_5868.jpg"), ("Ícone Orianna Guardiã Estelar", C + "icon_5869.jpg"),
+        ("Ícone Senna Guardiã Estelar", C + "icon_5873.jpg"), ("Ícone Kai'Sa Guardiã Estelar", C + "icon_5419.jpg"),
+        ("Ícone Ekko Guardião Estelar", C + "icon_5420.jpg"), ("Ícone Sona Guardiã Estelar", C + "icon_5421.jpg"),
+        ("Ícone Nilah Guardiã Estelar", C + "icon_5422.jpg"), ("Ícone Emblema das Guardiãs", C + "icon_5872.jpg"))),
+    cos("emote-guardias", "Emote Guardiãs Estelares", "emote", "lendaria", pack="guardias", custo_fixo=2, codigo="guardias", anim="flutuar", evolucoes=evo(
+        ("Emote Kai'Sa: Iti, que fofinho!", C + "emote_3931.png"), ("Emote Ekko: Peguei você!", C + "emote_3932.png"),
+        ("Emote Sona: Que gracinha!", C + "emote_3933.png"), ("Emote Nilah: Quanta alegria!", C + "emote_3934.png"),
+        ("Emote Akali: Quem vem agora?", C + "emote_3939.png"), ("Emote Taliyah: Só pedrada!", C + "emote_3940.png"),
+        ("Emote Rell: Mais uma coisinha...", C + "emote_3941.png"), ("Emote Quinn: Perfeição", C + "emote_3942.png"),
+        ("Emote Morgana: Você não me escapa!", C + "emote_3943.png"))),
+    cos("sent-guardias-linha", "Sentinela Guardiãs Estelares", "sentinela", "lendaria", pack="guardias", evolucoes=evo(
+        ("Sentinela Guardiã Estelar", C + "ward_63.png"), ("Sentinela Guardiãs Estelares 2019", C + "ward_188.png"),
+        ("Sentinela Guardiãs Estelares 2022", C + "ward_227.png"))),
+    cos("tema-guardias", "Tema Academia das Guardiãs", "tema", "mitica", R + "tema_guardias.jpg", pack="guardias"),
     cos("emote-bolinho", "Emote Bolinho do Teemo", "emote", "mitica", C + "emote_3797.png", codigo="bolinho_teemo", anim="girar")
+]
+
+
+packs = [
+    {"id": "guardias", "nome": "Pack Guardiãs Estelares", "capa": R + "tema_guardias.jpg",
+     "descricao": "Coleção temática com linhas de evolução que passam por todas as Guardiãs Estelares.",
+     "moeda": "essencia", "preco": 8,
+     "itens": ["icone-guardias", "emote-guardias", "sent-guardias-linha", "tema-guardias", "borda-estelar"]},
+    {"id": "poro", "nome": "Pack Poro", "capa": C + "icon_4226.jpg",
+     "descricao": "Tudo de Poro com desconto: as três linhas de evolução do Poro, a borda e o ícone do PoroMaster.",
+     "moeda": "moedas", "preco": 700,
+     "itens": ["icone-poro", "sent-poro", "emote-poro", "borda-poro", "icone-poro-classico"]}
 ]
 
 
@@ -278,7 +310,7 @@ poromaster = {
         {"id": "r8", "acao": "Mérito dado pelo dono", "setor": "Dono", "recompensa": {"estelares": 2, "essencia": 1}, "so_admin": True}
     ],
     "membros": [
-        membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 7, 26, 9],
+        membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 10, 26, 9],
                [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
                inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-poronauta", 1), ("emote-flex", 2), ("emote-guma", 4),
                                ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-rainha", 1), ("sent-poro", 3)),
@@ -363,8 +395,17 @@ dados = {
     ],
     "sistema": sistema,
     "cosmeticos": cosmeticos,
+    "packs": packs,
     "comunidades": [poromaster, tradutores]
 }
+
+# packs temáticos gerados por gerar-packs.py a partir dos dados do cliente do LoL
+extra = os.path.join(os.path.dirname(os.path.abspath(__file__)), "packs.json")
+if os.path.exists(extra):
+    with open(extra, encoding="utf-8") as f:
+        gerado = json.load(f)
+    dados["packs"] += gerado["packs"]
+    dados["cosmeticos"] += gerado["cosmeticos"]
 
 saida = os.path.join(os.path.dirname(os.path.abspath(__file__)), "data.json")
 with open(saida, "w", encoding="utf-8") as f:
