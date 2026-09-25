@@ -84,7 +84,7 @@ sistema = {
         {"id": "ultimate", "nome": "Ultimate", "cor": "Laranja", "img": B + "Destaque_4.png", "peso": 2, "frag": "estelares", "custo": 5, "duplicata": 8}
     ],
     "forja": {"nivel_max": 5, "nota": "Custo para subir de nível = custo da raridade x nível atual."},
-    "lootbox": {"custo_essencia": 3, "nota": "Roleta aleatória. Cosmético repetido vira fragmentos."},
+    "lootbox": {"custo_essencia": 3, "img": "painel-saas/img/wiki/Hextech_Crafting_Chest.png", "img_aberta": "painel-saas/img/wiki/Hextech_Crafting_Masterwork_Chest.png", "nota": "Roleta aleatória. Cosmético repetido vira fragmentos."},
     "promocao": {"fragmentos": 13, "nota": "Ao subir de cargo, P.P., Pontos Míticos e destaque voltam ao início e o membro recebe 13 Fragmentos."},
     "subir_maestria": {"moedas": 50, "essencia": 1},
     "penalidade": {"pp": -10},
@@ -92,13 +92,34 @@ sistema = {
     "erro": {"img": "image/notConnected.png"}
 }
 
+W = "painel-saas/img/wiki/"  # imagens da wiki do League of Legends (wiki.leagueoflegends.com)
+
 cosmeticos = [
+    # Temas: fundo do painel e do perfil. Comprados com Moedas.
     {"id": "tema-oficial", "nome": "Tema Oficial", "tipo": "tema", "raridade": "comum", "img": "image/background.png", "preco": 0},
-    {"id": "tema-ionia", "nome": "Tema Ionia", "tipo": "tema", "raridade": "epica", "img": "image/back2.jpg", "preco": 600},
+    {"id": "tema-ionia", "nome": "Tema Ionia", "tipo": "tema", "raridade": "epica", "img": "painel-saas/img/ionia.jpg", "preco": 600},
     {"id": "tema-sentina", "nome": "Tema Águas de Sentina", "tipo": "tema", "raridade": "lendaria", "img": "image/back.png", "preco": 900},
+    # Ícones de perfil
     {"id": "icone-poro", "nome": "Ícone Poro", "tipo": "icone", "raridade": "comum", "img": "assets/users/02.png", "preco": 250},
+    {"id": "icone-rosa", "nome": "Ícone Brasão da Rosa", "tipo": "icone", "raridade": "comum", "img": W + "Crest_Of_The_Rose_profileicon.jpg", "preco": 300},
+    {"id": "icone-academia", "nome": "Ícone Academia de Batalha", "tipo": "icone", "raridade": "comum", "img": W + "Battle_Academia_profileicon.png", "preco": 300},
+    {"id": "icone-aspectos", "nome": "Ícone Convergência dos Aspectos", "tipo": "icone", "raridade": "epica", "img": W + "Aspects_Converge_profileicon.jpg", "preco": None},
+    {"id": "icone-heartsteel", "nome": "Ícone HEARTSTEEL", "tipo": "icone", "raridade": "epica", "img": W + "HEARTSTEEL_Brand_profileicon.jpg", "preco": None},
+    {"id": "icone-lucian", "nome": "Ícone Lucian Velho Oeste", "tipo": "icone", "raridade": "lendaria", "img": W + "High_Noon_Lucian_Mythic_Chroma_profileicon.jpg", "preco": None},
+    {"id": "icone-mf", "nome": "Ícone Miss Fortune MVP", "tipo": "icone", "raridade": "lendaria", "img": W + "MVP_T1_Miss_Fortune_Signature_profileicon.jpg", "preco": None},
+    {"id": "icone-riven", "nome": "Ícone Riven Alvorecer", "tipo": "icone", "raridade": "mitica", "img": W + "Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg", "preco": None},
+    {"id": "icone-zed", "nome": "Ícone Zed Matador de Galáxias", "tipo": "icone", "raridade": "mitica", "img": W + "Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg", "preco": None},
     {"id": "icone-maestria", "nome": "Ícone Maestria 7", "tipo": "icone", "raridade": "mitica", "img": B + "Rank_7.png", "preco": None},
-    {"id": "icone-urf", "nome": "Ícone Imperador Urf", "tipo": "icone", "raridade": "ultimate", "img": B + "Imperador.png", "preco": None}
+    {"id": "icone-veigar", "nome": "Ícone Veigar Chefão Final", "tipo": "icone", "raridade": "ultimate", "img": W + "Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg", "preco": None},
+    {"id": "icone-urf", "nome": "Ícone Imperador Urf", "tipo": "icone", "raridade": "ultimate", "img": B + "Imperador.png", "preco": None},
+    # Emotes: aparecem ao lado do nome no perfil
+    {"id": "emote-flex", "nome": "Emote Pose de Força", "tipo": "emote", "raridade": "comum", "img": W + "Big_Flex_Emote.png", "preco": 150},
+    {"id": "emote-espiada", "nome": "Emote Só uma Espiada", "tipo": "emote", "raridade": "comum", "img": W + "Just_A_Peek_Emote.png", "preco": 150},
+    {"id": "emote-trabalho", "nome": "Emote De Volta ao Trabalho", "tipo": "emote", "raridade": "comum", "img": W + "Back_To_Business_Emote.png", "preco": 200},
+    {"id": "emote-brinde", "nome": "Emote Um Brinde", "tipo": "emote", "raridade": "comum", "img": W + "Cheers_Dears_Emote.png", "preco": 200},
+    {"id": "emote-petala", "nome": "Emote Leve como Pétala", "tipo": "emote", "raridade": "epica", "img": W + "Light_As_A_Petal_Emote.png", "preco": None},
+    {"id": "emote-comigo", "nome": "Emote Fica Comigo", "tipo": "emote", "raridade": "epica", "img": W + "Be_With_Me_Emote.png", "preco": None},
+    {"id": "emote-guma", "nome": "Emote Deusa Guma", "tipo": "emote", "raridade": "lendaria", "img": W + "Guma-Goddess_Emote.png", "preco": None}
 ]
 
 
@@ -137,16 +158,16 @@ poromaster = {
     "membros": [
         membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 7, 26, 9],
                [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
-               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1)),
-               equipado={"tema": "tema-sentina", "icone": "icone-urf"}),
+               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-riven", 2), ("emote-flex", 3), ("emote-guma", 1)),
+               equipado={"tema": "tema-sentina", "icone": "icone-urf", "emote": "emote-guma"}),
         membro("m2", "Bruch", "Admin", "Dev", None, 55, 2, [610, 3, 12, 2],
                [10, 8, 12, 14, 11, 15, 13, 12], "2022-01-20", tags=["Qualificador"],
                inventario=inv(("tema-oficial", 1), ("icone-poro", 1)),
                equipado={"tema": "tema-oficial", "icone": "icone-poro"}),
         membro("m3", "Jake", "Admin", "Mod", 84, 41, 3, [480, 2, 9, 3],
                [6, 9, 7, 11, 8, 6, 10, 12], "2022-02-03", foto="image/Profile/04.png", tags=["Corretor"], conta="u2",
-               inventario=inv(("tema-oficial", 1), ("tema-ionia", 2)),
-               equipado={"tema": "tema-ionia"}),
+               inventario=inv(("tema-oficial", 1), ("tema-ionia", 2), ("icone-rosa", 2), ("emote-trabalho", 1)),
+               equipado={"tema": "tema-ionia", "icone": "icone-rosa", "emote": "emote-trabalho"}),
         membro("m4", "Finger", "Membro", "Suporte", 67, 23, 1, [320, 1, 6, 0],
                [4, 6, 5, 7, 8, 6, 7, 9], "2022-02-11"),
         membro("m5", "Kawai Foxxy", "Membro", "Suporte", 58, 30, 1, [290, 2, 4, 1],
@@ -154,8 +175,8 @@ poromaster = {
                inventario=inv(("tema-oficial", 1)), equipado={"tema": "tema-oficial"}),
         membro("m6", "Khyago", "Membro", "Tester", 100, 64, 3, [410, 4, 11, 3],
                [9, 7, 11, 8, 12, 10, 13, 14], "2022-02-24", foto="image/Profile/03.png", conta="u3",
-               inventario=inv(("tema-oficial", 1), ("icone-maestria", 1)),
-               equipado={"tema": "tema-oficial", "icone": "icone-maestria"}),
+               inventario=inv(("tema-oficial", 1), ("icone-maestria", 1), ("emote-espiada", 1)),
+               equipado={"tema": "tema-oficial", "icone": "icone-maestria", "emote": "emote-espiada"}),
         membro("m7", "TaikunX3", "Membro", "Tester", 27, 12, 0, [90, 0, 2, 0],
                [3, 4, 2, 5, 1, 2, 0, 3], "2022-05-09", foto="image/Profile/02.png", penalidade=True),
         membro("m8", "imnotChinna", "Membro", "Tester", 76, 90, 2, [880, 5, 8, 4],

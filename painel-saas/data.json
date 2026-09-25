@@ -301,6 +301,8 @@
     },
     "lootbox": {
       "custo_essencia": 3,
+      "img": "painel-saas/img/wiki/Hextech_Crafting_Chest.png",
+      "img_aberta": "painel-saas/img/wiki/Hextech_Crafting_Masterwork_Chest.png",
       "nota": "Roleta aleatória. Cosmético repetido vira fragmentos."
     },
     "promocao": {
@@ -336,7 +338,7 @@
       "nome": "Tema Ionia",
       "tipo": "tema",
       "raridade": "epica",
-      "img": "image/back2.jpg",
+      "img": "painel-saas/img/ionia.jpg",
       "preco": 600
     },
     {
@@ -356,6 +358,70 @@
       "preco": 250
     },
     {
+      "id": "icone-rosa",
+      "nome": "Ícone Brasão da Rosa",
+      "tipo": "icone",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Crest_Of_The_Rose_profileicon.jpg",
+      "preco": 300
+    },
+    {
+      "id": "icone-academia",
+      "nome": "Ícone Academia de Batalha",
+      "tipo": "icone",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Battle_Academia_profileicon.png",
+      "preco": 300
+    },
+    {
+      "id": "icone-aspectos",
+      "nome": "Ícone Convergência dos Aspectos",
+      "tipo": "icone",
+      "raridade": "epica",
+      "img": "painel-saas/img/wiki/Aspects_Converge_profileicon.jpg",
+      "preco": null
+    },
+    {
+      "id": "icone-heartsteel",
+      "nome": "Ícone HEARTSTEEL",
+      "tipo": "icone",
+      "raridade": "epica",
+      "img": "painel-saas/img/wiki/HEARTSTEEL_Brand_profileicon.jpg",
+      "preco": null
+    },
+    {
+      "id": "icone-lucian",
+      "nome": "Ícone Lucian Velho Oeste",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "img": "painel-saas/img/wiki/High_Noon_Lucian_Mythic_Chroma_profileicon.jpg",
+      "preco": null
+    },
+    {
+      "id": "icone-mf",
+      "nome": "Ícone Miss Fortune MVP",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "img": "painel-saas/img/wiki/MVP_T1_Miss_Fortune_Signature_profileicon.jpg",
+      "preco": null
+    },
+    {
+      "id": "icone-riven",
+      "nome": "Ícone Riven Alvorecer",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "img": "painel-saas/img/wiki/Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg",
+      "preco": null
+    },
+    {
+      "id": "icone-zed",
+      "nome": "Ícone Zed Matador de Galáxias",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "img": "painel-saas/img/wiki/Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg",
+      "preco": null
+    },
+    {
       "id": "icone-maestria",
       "nome": "Ícone Maestria 7",
       "tipo": "icone",
@@ -364,11 +430,75 @@
       "preco": null
     },
     {
+      "id": "icone-veigar",
+      "nome": "Ícone Veigar Chefão Final",
+      "tipo": "icone",
+      "raridade": "ultimate",
+      "img": "painel-saas/img/wiki/Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg",
+      "preco": null
+    },
+    {
       "id": "icone-urf",
       "nome": "Ícone Imperador Urf",
       "tipo": "icone",
       "raridade": "ultimate",
       "img": "image/banco_de_dados/Imperador.png",
+      "preco": null
+    },
+    {
+      "id": "emote-flex",
+      "nome": "Emote Pose de Força",
+      "tipo": "emote",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Big_Flex_Emote.png",
+      "preco": 150
+    },
+    {
+      "id": "emote-espiada",
+      "nome": "Emote Só uma Espiada",
+      "tipo": "emote",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Just_A_Peek_Emote.png",
+      "preco": 150
+    },
+    {
+      "id": "emote-trabalho",
+      "nome": "Emote De Volta ao Trabalho",
+      "tipo": "emote",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Back_To_Business_Emote.png",
+      "preco": 200
+    },
+    {
+      "id": "emote-brinde",
+      "nome": "Emote Um Brinde",
+      "tipo": "emote",
+      "raridade": "comum",
+      "img": "painel-saas/img/wiki/Cheers_Dears_Emote.png",
+      "preco": 200
+    },
+    {
+      "id": "emote-petala",
+      "nome": "Emote Leve como Pétala",
+      "tipo": "emote",
+      "raridade": "epica",
+      "img": "painel-saas/img/wiki/Light_As_A_Petal_Emote.png",
+      "preco": null
+    },
+    {
+      "id": "emote-comigo",
+      "nome": "Emote Fica Comigo",
+      "tipo": "emote",
+      "raridade": "epica",
+      "img": "painel-saas/img/wiki/Be_With_Me_Emote.png",
+      "preco": null
+    },
+    {
+      "id": "emote-guma",
+      "nome": "Emote Deusa Guma",
+      "tipo": "emote",
+      "raridade": "lendaria",
+      "img": "painel-saas/img/wiki/Guma-Goddess_Emote.png",
       "preco": null
     }
   ],
@@ -494,11 +624,24 @@
             {
               "item": "icone-urf",
               "nivel": 1
+            },
+            {
+              "item": "icone-riven",
+              "nivel": 2
+            },
+            {
+              "item": "emote-flex",
+              "nivel": 3
+            },
+            {
+              "item": "emote-guma",
+              "nivel": 1
             }
           ],
           "equipado": {
             "tema": "tema-sentina",
-            "icone": "icone-urf"
+            "icone": "icone-urf",
+            "emote": "emote-guma"
           },
           "contrib": [
             14,
@@ -584,10 +727,20 @@
             {
               "item": "tema-ionia",
               "nivel": 2
+            },
+            {
+              "item": "icone-rosa",
+              "nivel": 2
+            },
+            {
+              "item": "emote-trabalho",
+              "nivel": 1
             }
           ],
           "equipado": {
-            "tema": "tema-ionia"
+            "tema": "tema-ionia",
+            "icone": "icone-rosa",
+            "emote": "emote-trabalho"
           },
           "contrib": [
             6,
@@ -703,11 +856,16 @@
             {
               "item": "icone-maestria",
               "nivel": 1
+            },
+            {
+              "item": "emote-espiada",
+              "nivel": 1
             }
           ],
           "equipado": {
             "tema": "tema-oficial",
-            "icone": "icone-maestria"
+            "icone": "icone-maestria",
+            "emote": "emote-espiada"
           },
           "contrib": [
             9,

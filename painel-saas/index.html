@@ -182,7 +182,9 @@ td.r,th.r{text-align:right}
 .item{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;display:grid;text-align:left;padding:0;border-top:3px solid var(--rc)}
 .item .pic{aspect-ratio:16/9;background:#0b1220 center/cover no-repeat;max-width:100%}
 .item .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:10px}
-.item .body{padding:10px 12px;display:grid;gap:6px}
+.item{grid-template-rows:auto 1fr}
+.item .body{padding:10px 12px;display:grid;gap:6px;grid-template-rows:auto auto 1fr}
+.item .body > .btn{align-self:end}
 .item b{font-weight:600;line-height:1.3}
 .item.sel{outline:2px solid var(--gold);outline-offset:1px}
 .rar{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--rc)}
@@ -225,6 +227,9 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 .prof .ava .avatar{width:84px;height:84px;font-size:26px;border:4px solid var(--panel)}
 .prof .ava .medal{position:absolute;right:-6px;bottom:-4px;width:36px;height:36px;border-radius:50%;background:#0a1a1d;border:2px solid var(--panel);object-fit:contain;padding:2px}
 .prof .idrow h2{font-size:21px;margin:0}
+.prof .emote{width:64px;height:64px;object-fit:contain;flex:none;align-self:flex-end}
+.loot-head{display:flex;align-items:center;gap:14px}
+.loot-head img{width:64px;height:64px;object-fit:contain}
 .prof .inner{padding-inline:18px;padding-bottom:18px;display:grid;gap:16px}
 .stats3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
 .stat{background:var(--panel-2);border-radius:10px;padding:12px;display:grid;gap:6px;justify-items:start;min-width:0}
@@ -303,7 +308,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v4";
+const STORE = "lsp-painel-v5";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -367,7 +372,9 @@ function rew(r){
 }
 function rarTag(id){ const r=rar(id); return `<span class="rar" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
 function lvl(n, id){ return `<span class="lvl" style="${rc(id)}" aria-label="Nível ${n} de ${S.forja.nivel_max}">${Array.from({length:S.forja.nivel_max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
-function pic(it, extra=""){ return `<div class="pic${it.tipo==="icone"?" icon":""} ${extra}" style="${bg(it.img)}"></div>`; }
+const TIPO = {tema:"tema", icone:"ícone", emote:"emote"};
+const contain = it => it.tipo!=="tema";
+function pic(it, extra=""){ return `<div class="pic${contain(it)?" icon":""} ${extra}" style="${bg(it.img)}"></div>`; }
 
 function log(c, texto){ c.atividade.unshift({quando:NOW_ISO, texto}); }
 /* aplica recompensas e cuida de maestria, alerta e elo */
@@ -568,6 +575,7 @@ function vVerif(c, me, adm){
 function profile(c, m, opts={}){
   const ban = m.equipado && m.equipado.tema && item(m.equipado.tema);
   const ic = m.equipado && m.equipado.icone && item(m.equipado.icone);
+  const em = m.equipado && m.equipado.emote && item(m.equipado.emote);
   const pos = [...c.membros].filter(x=>x.pp!=null).sort((a,b)=>b.pp-a.pp).findIndex(x=>x.id===m.id)+1;
   const hist = c.envios.filter(e=>e.membro===m.id);
   const spark = (()=>{ const v=m.contrib, mx=Math.max(...v)||1, W=300,H=46; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`); const [lx,ly]=pts.at(-1).split(",");
@@ -581,13 +589,13 @@ function profile(c, m, opts={}){
   return `<div class="prof">
     <div class="banner" style="${ban?bg(ban.img):""}"></div>
     <div class="idrow"><div class="ava">${avatar(m,84)}${ic?`<img class="medal" src="${src(ic.img)}" alt="${esc(ic.nome)}" title="${esc(ic.nome)}">`:""}</div>
-      <div style="padding-bottom:4px;min-width:0"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div></div>
+      <div style="padding-bottom:4px;min-width:0;flex:1"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div>${em?`<img class="emote" src="${src(em.img)}" alt="${esc(em.nome)}" title="${esc(em.nome)}">`:""}</div>
     <div class="inner">
       <div class="stats3">${statRep(m)}${statElo(m)}${statDest(m)}</div>
       ${flags.length?`<div class="flags">${flags.join("")}</div>`:""}
       <div class="wallet">${coins}</div>
       <div><span class="label">Contribuições nas últimas 8 semanas</span>${spark}</div>
-      <div><span class="label">Cosméticos (${m.inventario.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div class="${it.tipo==="icone"?"icon":""}" style="${bg(it.img)};${rc(it.raridade)}" title="${esc(it.nome)} · Nv. ${x.nivel}"></div>`; }).join("")}</div></div>
+      <div><span class="label">Cosméticos (${m.inventario.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div class="${contain(it)?"icon":""}" style="${bg(it.img)};${rc(it.raridade)}" title="${esc(it.nome)} · Nv. ${x.nivel}"></div>`; }).join("")}</div></div>
       <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
       <p class="note">Na staff desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
       ${opts.admin ? adminBox(c,m) : ""}
@@ -616,12 +624,12 @@ function vMercado(c, me){
   const pool = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
   const custo = S.lootbox.custo_essencia;
   return head("Mercado", "Moedas compram temas e cosméticos comuns. Essência Mítica abre LootBoxes, que podem dar os raros.") + walletBar(me) +
-  `<div class="card" style="margin-bottom:16px"><h2><span class="row"><img class="ico" src="${src(S.moedas.essencia.img)}" alt="">LootBox</span><span class="note">Chances: ${S.raridades.map(r=>`${r.nome} ${r.peso}%`).join(" · ")}</span></h2>
-    <div class="roleta" id="roleta"><div class="marker"></div><div class="strip" id="strip"></div><div class="idle" id="roleta-idle">Gire a roleta para ganhar um cosmético aleatório.<br>Se vier um repetido, ele vira fragmentos.</div></div>
-    <div class="row" style="margin-top:12px;justify-content:space-between"><span class="note" id="loot-result">Custa ${custo} Essência Mítica. Você tem ${me.carteira.essencia}.</span><button class="btn btn-gold" id="open-loot" ${me.carteira.essencia<custo?"disabled":""}>Abrir LootBox (${custo} <img class="ico" style="width:18px;height:18px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica">)</button></div>
+  `<div class="card" style="margin-bottom:16px"><h2><span class="loot-head"><img src="${src(S.lootbox.img)}" alt=""><span>Baú Hextech<br><span class="note">Abre com Essência Mítica</span></span></span><span class="note">Chances: ${S.raridades.map(r=>`${r.nome} ${r.peso}%`).join(" · ")}</span></h2>
+    <div class="roleta" id="roleta"><div class="marker"></div><div class="strip" id="strip"></div><div class="idle" id="roleta-idle">Abra o baú e gire a roleta para ganhar um cosmético aleatório.<br>Se vier um repetido, ele vira fragmentos.</div></div>
+    <div class="row" style="margin-top:12px;justify-content:space-between"><span class="note" id="loot-result">Custa ${custo} Essência Mítica. Você tem ${me.carteira.essencia}.</span><button class="btn btn-gold" id="open-loot" ${me.carteira.essencia<custo?"disabled":""}>Abrir baú (${custo} <img class="ico" style="width:18px;height:18px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica">)</button></div>
   </div>
   <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span></h2>
-    <div class="items">${loja.map(it=>`<div class="item" style="${rc(it.raridade)}">${pic(it)}<div class="body"><b>${esc(it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${esc(it.tipo==="icone"?"ícone":it.tipo)}</span></div>
+    <div class="items">${loja.map(it=>`<div class="item" style="${rc(it.raridade)}">${pic(it)}<div class="body"><b>${esc(it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
       ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")}</div>
     <p class="note" style="margin-top:12px">Cosméticos Épicos ou mais raros só saem na LootBox: ${pool.filter(it=>!it.preco).map(it=>esc(it.nome)).join(", ")}.</p>
   </div>`;
@@ -635,13 +643,13 @@ function vForja(c, me){
   return head("Forja", "Suba o nível dos seus cosméticos. Comuns e Épicos usam Fragmentos; Lendários ou acima só sobem com Fragmentos Estelares.") + walletBar(me) +
   `<div class="grid two">
     <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens</span></h2>
-      <div class="items">${inv.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t)}<div class="body"><b>${esc(t.nome)}</b><div class="row" style="justify-content:space-between">${lvl(x.nivel,t.raridade)}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${esc(t.tipo==="icone"?"ícone":t.tipo)}</span>`}</div></div></button>`; }).join("")}</div></div>
+      <div class="items">${inv.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t)}<div class="body"><b>${esc(t.nome)}</b><div class="row" style="justify-content:space-between">${lvl(x.nivel,t.raridade)}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
     <div class="card forge" style="${rc(it.raridade)}">
       ${pic(it)}
-      <div><h2 style="margin-bottom:4px">${esc(it.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${esc(it.tipo==="icone"?"ícone":it.tipo)}</span></div></div>
+      <div><h2 style="margin-bottom:4px">${esc(it.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
       <div class="row" style="justify-content:space-between"><span class="label">Nível</span><span class="row">${lvl(sel.nivel,it.raridade)}<span class="num">${sel.nivel}/${max}</span></span></div>
       ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Próximo nível custa</span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar para o nível ${sel.nivel+1}</button></div>` : `<p class="note">Nível máximo alcançado.</p>`}
-      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":"como ícone"}`}</button>
+      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":it.tipo==="emote"?"como emote do perfil":"como ícone"}`}</button>
     </div>
   </div>`;
 }
