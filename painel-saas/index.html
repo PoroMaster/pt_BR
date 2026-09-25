@@ -741,7 +741,10 @@ function bioHtml(m){
 
 /* ---------- sons do cliente (CommunityDragon) ---------- */
 const SFX = {purchase:"button-purchase-chest-click", chest:"tray-receive-chest_generic", key:"tray-receive-material_key", intro:"open_cm-intro", idle:"open_cm-idle", outro:"open_cm-outro", keyIn:"reveal-material_key", ack:"reveal-acknowledge", upIntro:"upgrade-intro", upOutro:"upgrade-outro", upMax:"upgrade-bar-max", click:"grid-click", hover:"grid-hover", coins:"blue-essence-fill", dup:"disenchant-outro",
-  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate"};
+  r_comum:"reveal-permanent-rarity_none", r_epica:"reveal-permanent-rarity_epic", r_lendaria:"reveal-permanent-rarity_legendary", r_mitica:"reveal-permanent-rarity_mythic", r_ultimate:"reveal-permanent-rarity_ultimate", ovo:"hextech_egg_open_mythic", portal:"portal_open_masterwork-outro"};
+/* o cliente usa o mesmo som para Lendária, Mítica e Ultimate; aqui cada uma ganha camadas próprias */
+const SOM_RAR = {mitica:[["r_mitica",0,.7],["ovo",120,.75]], ultimate:[["portal",0,.8],["r_ultimate",180,.75],["ovo",420,.6],["upMax",900,.7]]};
+function somRar(r){ const l = SOM_RAR[r]; if (!l) return som("r_"+r); l.forEach(([k,ms,vol])=>setTimeout(()=>som(k,{vol}), ms)); }
 const VID = {comum:"none", epica:"epic", lendaria:"legendary", mitica:"mythic", ultimate:"ultimate"};
 let mudo = false; try{ mudo = localStorage.getItem("lsp-mudo")==="1"; }catch(e){}
 const somUrl = k => BASE + "painel-saas/midia/som/sfx-loot-" + SFX[k] + ".ogg";
@@ -1467,16 +1470,16 @@ function revelar(c, me, premios, ov){
     ov.querySelectorAll("[data-bonus-c]").forEach((cb,i)=>setTimeout(()=>{ if(!ov.isConnected) return; cb.classList.remove("espera"); cb.classList.add("entra"); som(cb.classList.contains("kit")?"chest":"purchase",{vol:.8}); }, 350 + i*650)); };
   const raros = premios.map((p,i)=>({p,i})).filter(x=>raro(x.p.it));
   const comuns = premios.filter(p=>!raro(p.it));
-  if (!raros.length || reduz()){ ov.querySelectorAll("[data-verso]").forEach(v=>v.remove()); som("r_"+topo.raridade); final(); }
+  if (!raros.length || reduz()){ ov.querySelectorAll("[data-verso]").forEach(v=>v.remove()); somRar(topo.raridade); final(); }
   else {
-    if (comuns.length) som("r_"+comuns.at(-1).it.raridade); else som("hover",{vol:.5});
+    if (comuns.length) somRar(comuns.at(-1).it.raridade); else som("hover",{vol:.5});
     let t = premios.length>1 ? comuns.length*90 + 500 : 0;
     raros.forEach(({p,i})=>{ t += ESPERA[p.it.raridade];
-      depois(t, ()=>{ virar(premios.length>1 ? ov.querySelector(`[data-mc="${i}"]`) : ov.querySelector(".card-r")); som("r_"+p.it.raridade); }); });
+      depois(t, ()=>{ virar(premios.length>1 ? ov.querySelector(`[data-mc="${i}"]`) : ov.querySelector(".card-r")); somRar(p.it.raridade); }); });
     depois(t + 700, final);
     const top = ov.querySelector(".hx .top") || ov.querySelector(".top");
     if (top){ const b = document.createElement("button"); b.textContent = "Revelar tudo"; b.setAttribute("data-hx-revtudo",""); top.prepend(b);
-      b.onclick = () => { timers.forEach(clearTimeout); ov.querySelectorAll(".mc.raro,.card-r").forEach(virar); som("r_"+topo.raridade); final(); b.remove(); }; }
+      b.onclick = () => { timers.forEach(clearTimeout); ov.querySelectorAll(".mc.raro,.card-r").forEach(virar); somRar(topo.raridade); final(); b.remove(); }; }
   }
   const fechar = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; render(); };
   ov.querySelector("[data-hx-close]").onclick = fechar;
