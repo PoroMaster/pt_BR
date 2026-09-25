@@ -379,6 +379,8 @@ td.r,th.r{text-align:right}
 @keyframes virou{0%{transform:scale(.85);filter:brightness(2.2)}60%{transform:scale(1.06)}100%{transform:none;filter:none}}
 .reveal .badge.bonus{display:inline-flex;align-items:center;gap:6px;background:rgba(240,213,140,.16);color:#f0d58c;border:1px solid rgba(240,213,140,.45);font-weight:600;animation:rise .5s .9s ease-out both}
 .reveal .badge.bonus img{width:20px;height:20px;object-fit:contain}
+.reveal .badge.pack-b{background:rgba(120,170,255,.14);color:#b9d3ff;border:1px solid rgba(120,170,255,.4)}
+.multi-grid .mc small.pack-s{color:#b9d3ff;font-size:10.5px}
 .reveal .restam{color:#9fb0c6;font-size:12px}
 .reveal .resumo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
 .reveal.multi{width:min(920px,calc(100vw - 32px));max-height:calc(100dvh - 90px);overflow:auto;padding:4px}
@@ -518,7 +520,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v13";
+const STORE = "lsp-painel-v14";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -600,6 +602,7 @@ const evolui = it => !!(it.evolucoes && it.evolucoes.length);
 const dePack = it => !!it.pack;
 const ranq = it => !!it.ranqueada;
 const especial = it => dePack(it) || ranq(it);
+const packDe = it => it.pack ? db.packs.find(pk=>pk.id===it.pack) : null;
 const ult = it => it.raridade === "ultimate";
 /* recompensas de ranqueada: cada estágio exige um elo mítico (Esmeralda fica junto de Diamante) */
 const ELO_REQ = {Ferro:1, Bronze:2, Prata:3, Ouro:4, Platina:5, Esmeralda:6, Diamante:6, Mestre:7, "Grão-Mestre":8, Desafiante:9};
@@ -1106,7 +1109,9 @@ function vDados(){
 }
 
 /* ---------- Hextech: kit, baú e revelação ---------- */
-function sortear(pool){ const tot=pool.reduce((s,it)=>s+rar(it.raridade).peso,0); let r=Math.random()*tot; for(const it of pool){ r-=rar(it.raridade).peso; if(r<=0) return it; } return pool.at(-1); }
+/* itens de pack também saem do baú, com peso menor (sistema.hextech.peso_pack) */
+const pesoBau = it => rar(it.raridade).peso * (dePack(it) ? (S.hextech.peso_pack ?? .25) : 1);
+function sortear(pool){ const tot=pool.reduce((s,it)=>s+pesoBau(it),0); let r=Math.random()*tot; for(const it of pool){ r-=pesoBau(it); if(r<=0) return it; } return pool.at(-1); }
 function voarPara(img, origem, contador, video, somK, atraso, pousou){
   const tile = contador && contador.closest(".mat");
   if (!origem || !tile) { pousou(); return; }
@@ -1153,7 +1158,7 @@ async function abrirBau(c, me, qtd=1){
   if (session.abrindo || qtd<1) return;
   session.abrindo = true; const token = ++session.hx;
   me.materiais.baus -= qtd; me.materiais.chaves -= qtd;
-  const pool = db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !especial(x));
+  const pool = db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !ranq(x));
   const it = Array.from({length:qtd}, ()=>({it: sortear(pool), bonus: sortearBonus()}));
   save();
   const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
@@ -1219,7 +1224,7 @@ function revelar(c, me, premios, ov){
     const susp = raro(it) ? " espera" : "";
     html = `<div class="reveal" style="${rc(it.raridade)}">
       <div class="card-r"><div class="art ${ult(it)?"ult":""}">${pic(it,1,"",120)}</div>${susp?`<div class="verso" data-verso>?</div>`:""}<video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
-      <div class="info${susp}" data-info><h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>${bonusHtml(p.bonus)}</div>
+      <div class="info${susp}" data-info><h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>${packDe(it)?`<span class="badge pack-b">Do ${esc(packDe(it).nome)}</span>`:""}${bonusHtml(p.bonus)}</div>
       <div class="acts${susp}" data-fim>${!p.ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${botoesMais}${sair}</div>${n?restam:""}
     </div>`;
   } else {
@@ -1227,7 +1232,7 @@ function revelar(c, me, premios, ov){
     html = `<div class="reveal multi" style="${rc(topo.raridade)}">
       <h2>${premios.length} baús abertos</h2>
       <div class="multi-grid">${premios.map((p,i)=>`<div class="mc ${ult(p.it)?"ult":""} ${raro(p.it)?"raro":""}" style="${rc(p.it.raridade)};animation-delay:${i*90}ms" data-mc="${i}">
-        ${raro(p.it)?`<div class="verso" data-verso>?</div>`:""}<div class="art">${pic(p.it,1,"",64)}</div><b>${esc(p.it.nome)}</b>${rarTag(p.it.raridade)}<small>${p.ja?"Repetido":"Novo!"}</small>${p.bonus.length?`<span class="mb" title="${p.bonus.map(b=>`+${b.qtd} ${b.id==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}">+ bônus</span>`:""}</div>`).join("")}</div>
+        ${raro(p.it)?`<div class="verso" data-verso>?</div>`:""}<div class="art">${pic(p.it,1,"",64)}</div><b>${esc(p.it.nome)}</b>${rarTag(p.it.raridade)}<small>${p.ja?"Repetido":"Novo!"}</small>${packDe(p.it)?`<small class="pack-s">${esc(packDe(p.it).nome)}</small>`:""}${p.bonus.length?`<span class="mb" title="${p.bonus.map(b=>`+${b.qtd} ${b.id==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}">+ bônus</span>`:""}</div>`).join("")}</div>
       <div class="resumo espera" data-fim><span class="badge">${novos.length} ${novos.length===1?"novo":"novos"}${fr?` · repetidos viraram ${esc(fr)}`:""}</span>${bonusHtml(Object.entries(resumo.bonus).map(([id,qtd])=>({id,qtd})))}</div>
       <div class="acts espera" data-fim>${botoesMais}${sair}</div>${n?restam:""}
     </div>`;

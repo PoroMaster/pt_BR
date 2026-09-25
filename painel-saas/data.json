@@ -313,6 +313,7 @@
         5,
         10
       ],
+      "peso_pack": 0.25,
       "bonus": [
         {
           "id": "essencia",
@@ -329,7 +330,7 @@
           "max": 1
         }
       ],
-      "nota": "O Kit Hextech (1 baú + 1 chave) custa Essência Mítica. Use a chave para abrir o baú, um por vez ou vários de uma vez. Cosmético repetido vira fragmentos. Cada baú ainda pode dar um bônus: Essência Mítica (10%) ou outro Baú com Chave (8%)."
+      "nota": "O Kit Hextech (1 baú + 1 chave) custa Essência Mítica. Use a chave para abrir o baú, um por vez ou vários de uma vez. Cosmético repetido vira fragmentos. Itens dos packs temáticos também podem sair, com um quarto da chance normal da raridade. Cada baú ainda pode dar um bônus: Essência Mítica (10%) ou outro Baú com Chave (8%)."
     },
     "promocao": {
       "fragmentos": 13,
