@@ -406,6 +406,72 @@ td.r,th.r{text-align:right}
 .picker button{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:3px;width:40px;height:40px;display:grid;place-items:center}
 .picker button img{width:30px;height:30px;object-fit:contain}
 .slots{display:grid;gap:8px}
+.edit h2{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.eq-slots{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.eq-slot{display:flex;align-items:center;gap:10px;padding:8px;border-radius:10px;border:1px solid var(--line);border-left:4px solid var(--rc,var(--line));background:var(--panel-2);text-align:left;cursor:pointer;min-width:0;color:var(--ink)}
+.eq-slot:hover{border-color:var(--gold)}
+.eq-slot .pic{width:48px;height:48px;aspect-ratio:auto;border-radius:8px;flex:none}
+.eq-slot span{display:grid;min-width:0}.eq-slot small{color:var(--ink-3);font-size:11.5px}
+.eq-slot b{font-size:13px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.bio-slot b{white-space:normal;font-weight:500;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical}
+.pic.vazio{display:grid;place-items:center;color:var(--ink-3);font-size:20px;background:var(--panel)}
+/* editor de perfil */
+.scrim.ed-scrim{justify-content:center;align-items:center;z-index:30}
+.editor{width:min(1260px,calc(100vw - 32px));height:min(860px,calc(100dvh - 32px));background:var(--panel);border:1px solid var(--line);border-radius:14px;display:grid;grid-template-columns:190px minmax(0,1fr) 390px;grid-template-rows:auto minmax(0,1fr) auto;grid-template-areas:"top top top" "tabs main prev" "bar bar bar";overflow:hidden;box-shadow:0 24px 60px rgba(0,0,0,.45)}
+.ed-top{grid-area:top;display:flex;justify-content:space-between;align-items:center;padding:12px 18px;border-bottom:1px solid var(--line)}
+.ed-top h2{margin:0;font:700 19px var(--display);letter-spacing:.03em}
+.ed-tabs{grid-area:tabs;display:flex;flex-direction:column;gap:4px;padding:12px;border-right:1px solid var(--line);overflow:auto}
+.ed-tabs button{display:flex;align-items:center;gap:10px;padding:8px 10px;border-radius:8px;text-align:left;background:none;border:0;color:var(--ink-2);cursor:pointer;flex:none}
+.ed-tabs button:hover{background:var(--panel-2)}
+.ed-tabs button[aria-pressed="true"]{background:var(--gold-soft);color:var(--ink);font-weight:600}
+.ed-tabs button > span:last-child{display:grid}.ed-tabs small{font-size:11px;color:var(--ink-3);font-weight:400}
+.ed-tabs .ed-mini{width:32px;height:32px;border-radius:8px;overflow:hidden;display:grid;place-items:center;flex:none;background:var(--panel-2)}
+.ed-tabs .ed-mini .pic{width:100%;height:100%;aspect-ratio:auto}
+.ed-tabs .ed-mini.vazio{color:var(--ink-3)}
+.so-mobile{display:none!important}
+.ed-main{grid-area:main;overflow:auto;padding:0 16px 16px;display:grid;align-content:start;gap:10px}
+.ed-main .field{display:grid;gap:6px;padding-top:14px}
+.ed-main textarea{width:100%;min-height:120px;border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:10px;resize:vertical;font:inherit;color:var(--ink)}
+.ed-tools{position:sticky;top:0;z-index:3;background:var(--panel);padding:14px 0 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center;border-bottom:1px solid var(--line)}
+.ed-tools input[type=search]{flex:1 1 100%;min-width:0}
+.ed-tools select.sel{width:auto;flex:0 1 auto}
+.ed-tools .chk{display:flex;align-items:center;gap:6px;font-size:13px;color:var(--ink-2)}
+#ed-grid-wrap{display:grid;gap:10px}
+.ed-count{margin:0}
+.ed-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px}
+.ed-grid.tema{grid-template-columns:repeat(auto-fill,minmax(180px,1fr))}
+.ed-grp{grid-column:1/-1;display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:8px;font-size:13.5px;padding-bottom:4px;border-bottom:1px dashed var(--line)}
+.ed-grp:first-child{margin-top:0}
+.tile{position:relative;display:grid;gap:4px;justify-items:center;align-content:start;padding:6px 6px 8px;border-radius:10px;border:2px solid var(--line);border-bottom:3px solid var(--rc,var(--line));background:var(--panel-2);cursor:pointer;text-align:center;color:var(--ink);min-width:0}
+.tile:hover{border-color:var(--gold);transform:translateY(-1px)}
+.tile .pic{width:100%;border-radius:6px;background-color:#0a1a1d}
+.ed-grid:not(.tema) .tile .pic{aspect-ratio:1}
+.tile .nm{font-size:11px;line-height:1.25;color:var(--ink-2);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;word-break:break-word}
+.tile[aria-pressed="true"]{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold),0 0 18px color-mix(in srgb,var(--gold) 40%,transparent)}
+.tile[aria-pressed="true"]::after{content:"✓";position:absolute;top:4px;right:4px;width:20px;height:20px;border-radius:50%;background:var(--gold);color:#1a1204;font-size:12px;font-weight:800;display:grid;place-items:center}
+.tile.lock{opacity:.45;filter:grayscale(.85);cursor:not-allowed}
+.tile .cad{position:absolute;top:4px;left:4px;font-size:12px}
+.tile.nenhum .pic{font-size:26px}
+.ed-prev{grid-area:prev;overflow:auto;border-left:1px solid var(--line);background:var(--panel-2);padding:12px;display:grid;align-content:start;gap:8px}
+.ed-prev .prof{background:var(--panel);border-radius:12px;overflow:hidden;border:1px solid var(--line)}
+.ed-bar{grid-area:bar;display:flex;align-items:center;gap:10px;padding:10px 16px;border-top:1px solid var(--line);min-height:54px}
+.ed-bar > span{flex:1}
+.ed-bar.sujo{background:#111820;color:#f1f4f8}
+.ed-bar.sujo .ed-link{background:none;border-color:transparent;color:#f1f4f8;text-decoration:underline}
+.ed-bar .btn-ok{background:#2f9e5b;border-color:#2f9e5b;color:#fff}
+.ed-bar.shake{animation:shake .45s ease-in-out 2;background:#b3372f}
+@media (max-width:900px){
+  .editor{width:100vw;height:100dvh;border-radius:0;border:0;grid-template-columns:minmax(0,1fr);grid-template-rows:auto auto minmax(0,1fr) auto;grid-template-areas:"top" "tabs" "main" "bar"}
+  .ed-tabs{flex-direction:row;overflow-x:auto;border-right:0;border-bottom:1px solid var(--line);padding:8px}
+  .ed-tabs button{padding:6px 8px}
+  .so-mobile{display:flex!important}
+  .ed-prev{display:none;border-left:0}
+  .editor.vendo-prev .ed-prev{display:grid;grid-area:main}
+  .editor.vendo-prev .ed-main{display:none}
+  .ed-grid{grid-template-columns:repeat(auto-fill,minmax(86px,1fr))}
+  .ed-grid.tema{grid-template-columns:repeat(auto-fill,minmax(140px,1fr))}
+  .ed-bar{padding-bottom:calc(10px + env(safe-area-inset-bottom,0px))}
+}
 .slot-row{display:grid;grid-template-columns:90px 1fr;align-items:center;gap:8px}
 
 .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
@@ -770,12 +836,13 @@ document.addEventListener("click", e=>{
   const w = e.target.closest("[data-ws]");
   if(w){ if(w.dataset.ws==="__new") toast("Numa versão real, aqui você criaria uma nova comunidade."); else { session.ws=w.dataset.ws; session.view="inicio"; session.forjaSel=null; render(); } $("#ws-menu").hidden=true; return; }
   if(e.target.closest("#mute")){ mudo=!mudo; try{ localStorage.setItem("lsp-mudo", mudo?"1":"0"); }catch(err){} render(); if(!mudo) som("click",{vol:.5}); return; }
-  if(e.target.closest("#logout")){ session.conta=null; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
+  if(e.target.closest("#logout")){ session.ed=null; session.conta=null; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
   if(e.target.closest("#menu-btn")){ $("#side").classList.add("open"); return; }
   const mb = e.target.closest("[data-member]"); if(mb){ openMember(mb.dataset.member); return; }
-  if(e.target.classList.contains("scrim") || e.target.closest("[data-close]")) $("#layer").innerHTML="";
+  const ea = e.target.closest("[data-ed-abrir]"); if(ea){ abrirEditor(ea.dataset.edAbrir); return; }
+  if(e.target.classList.contains("scrim") || e.target.closest("[data-close]")){ if (session.ed) edFechar(); else $("#layer").innerHTML=""; }
 });
-document.addEventListener("keydown", e=>{ if(e.key==="Escape") $("#layer").innerHTML=""; });
+document.addEventListener("keydown", e=>{ if(e.key==="Escape"){ if (session.ed) edFechar(); else $("#layer").innerHTML=""; } });
 
 /* ---------- telas ---------- */
 const head = (t, sub, extra="") => `<div class="head"><div><h1>${t}</h1>${sub?`<p>${sub}</p>`:""}</div>${extra}</div>`;
@@ -894,14 +961,14 @@ function profile(c, m, opts={}){
     <div class="inner">
       ${m.bio||opts.editavel?`<div class="bio" id="bio-view">${bioHtml(m)||`<span class="note">Escreva algo sobre você ao lado.</span>`}</div>`:""}
       <div><span class="label">Vitrine</span><div class="vitrine" style="margin-top:6px">${vit(em,"Emote")}${vit(sent,"Sentinela")}${vit(ic,"Ícone")}</div></div>
-      <div class="stats3">${statRep(m)}${statElo(m)}${statDest(m)}</div>
+      ${opts.preview ? "" : `<div class="stats3">${statRep(m)}${statElo(m)}${statDest(m)}</div>
       ${flags.length?`<div class="flags">${flags.join("")}</div>`:""}
       <div class="wallet">${coins}</div>
       <div><span class="label">Contribuições nas últimas 8 semanas</span>${spark}</div>
       <div><span class="label">Coleção (${m.inventario.length} de ${db.cosmeticos.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div title="${esc(vis(it,x.nivel).nome)}" style="${rc(it.raridade)};width:64px;border-radius:6px;overflow:hidden;border-bottom:3px solid var(--rc)">${pic(it,x.nivel)}</div>`; }).join("")}</div></div>
       <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
       <p class="note">Na staff desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
-      ${opts.admin ? adminBox(c,m) : ""}
+      ${opts.admin ? adminBox(c,m) : ""}`}
     </div></div>`;
 }
 function adminBox(c,m){
@@ -918,18 +985,148 @@ function openMember(id){
   $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}"><div style="position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px;z-index:2"><button class="btn btn-sm" data-close>Fechar</button></div><div style="margin-top:-52px">${profile(c,m,{admin:isAdmin(c) && m.conta!==session.conta})}</div></div></div>`;
   bindAdmin(c, ()=>{ openMember(id); render(); });
 }
+const ED_TABS = [["icone","Ícone"],["borda","Borda"],["emote","Emote"],["sentinela","Sentinela"],["tema","Tema"],["bio","Biografia"]];
 function vPerfil(c, me){
-  const own = t => me.inventario.map(x=>item(x.item)).filter(it=>it.tipo===t);
-  const slot = (t, rot, opcional) => `<div class="slot-row"><label class="label" for="eq-${t}">${rot}</label><select class="sel" id="eq-${t}" data-eqsel="${t}">${opcional?`<option value="">Nenhum</option>`:""}${own(t).map(it=>`<option value="${it.id}" ${me.equipado&&me.equipado[t]===it.id?"selected":""}>${esc(vis(it,nivelDe(me,it.id)).nome)}</option>`).join("")}</select></div>`;
-  const emotes = own("emote");
-  return head("Meu perfil", "Personalize como a staff vê você: biografia com emotes, borda animada, ícone, sentinela e tema.", `<button class="btn" data-view="forja">Aprimorar na Forja</button>`) +
-  `<div class="grid two"><div class="card" style="padding:0;overflow:hidden">${profile(c,me,{editavel:true})}</div>
-   <div class="card edit"><h2>Editar perfil</h2>
-     <div class="field"><label class="label" for="bio-edit">Biografia</label><textarea id="bio-edit" maxlength="190" placeholder="Conte algo sobre você. Use :codigo: para emotes.">${esc(me.bio||"")}</textarea><span class="note" id="bio-count">${(me.bio||"").length}/190</span></div>
-     <div><span class="label">Seus emotes (clique para inserir)</span><div class="picker" style="margin-top:6px">${emotes.map(it=>`<button type="button" data-emo="${esc(it.codigo)}" title=":${esc(it.codigo)}:">${emo(it,nivelDe(me,it.id),30)}</button>`).join("")||`<span class="note">Você ainda não tem emotes. Compre no Mercado.</span>`}</div></div>
-     <button class="btn btn-primary" id="bio-save">Salvar biografia</button>
-     <div class="slots"><span class="label">Equipados</span>${slot("tema","Tema")}${slot("borda","Borda",1)}${slot("icone","Ícone",1)}${slot("emote","Emote",1)}${slot("sentinela","Sentinela",1)}</div>
+  const slot = ([t, rot]) => { if (t==="bio") return "";
+    const it = equip(me,t), n = it && nivelDe(me,it.id);
+    return `<button class="eq-slot" data-ed-abrir="${t}" style="${it?rc(it.raridade):""}">${it?pic(it,n,"",40):`<div class="pic vazio">+</div>`}<span><small>${rot}</small><b>${it?esc(vis(it,n).nome):"Nenhum"}</b></span></button>`; };
+  return head("Meu perfil", "Personalize como a staff vê você: biografia com emotes, borda animada, ícone, sentinela e tema.", `<button class="btn" data-view="forja">Aprimorar na Forja</button><button class="btn btn-primary" data-ed-abrir="icone">Editar perfil</button>`) +
+  `<div class="grid two"><div class="card" style="padding:0;overflow:hidden">${profile(c,me,{})}</div>
+   <div class="card edit"><h2>Equipados <button class="btn btn-sm btn-primary" data-ed-abrir="icone">Editar perfil</button></h2>
+     <div class="eq-slots">${ED_TABS.map(slot).join("")}</div>
+     <button class="eq-slot bio-slot" data-ed-abrir="bio"><span><small>Biografia</small><b>${me.bio?esc(me.bio):"Escreva algo sobre você"}</b></span></button>
+     <p class="note">Clique num item para abrir o editor: busca, filtros por raridade, todos os estágios liberados das linhas de evolução e prévia ao vivo antes de salvar.</p>
    </div></div>`;
+}
+
+/* ---------- editor de perfil (modal) ---------- */
+const semAcento = t => (t||"").normalize("NFD").replace(/[̀-ͯ]/g,"").toLowerCase();
+function edOriginal(me){ return {equipado:{...(me.equipado||{})}, ativo:Object.fromEntries(me.inventario.map(x=>[x.item, nivelDe(me,x.item)])), bio:me.bio||""}; }
+function abrirEditor(tab){
+  const c = ws(), me = meIn(c);
+  const orig = edOriginal(me);
+  session.ed = {tab: tab||"icone", busca:"", rar:"todas", ordem:"raridade", bloq:false, agrupar:true, lim:120, orig, d:structuredClone(orig)};
+  $("#layer").innerHTML = `<div class="scrim ed-scrim"><div class="editor" role="dialog" aria-modal="true" aria-label="Editar perfil">
+    <header class="ed-top"><h2>Editar perfil</h2><button class="btn btn-sm" data-ed-fechar>Fechar</button></header>
+    <div class="ed-tabs" id="ed-tabs" role="toolbar" aria-label="Partes do perfil"></div>
+    <section class="ed-main" id="ed-main"></section>
+    <div class="ed-prev" id="ed-prev" aria-label="Prévia do perfil"></div>
+    <footer class="ed-bar" id="ed-bar"></footer></div></div>`;
+  const ed = $(".editor");
+  ed.addEventListener("click", edClique);
+  ed.addEventListener("input", edInput);
+  ed.addEventListener("change", edInput);
+  edTudo();
+}
+const edSujo = () => session.ed && JSON.stringify(session.ed.d) !== JSON.stringify(session.ed.orig);
+function edRascunho(me){ const d = session.ed.d; return {...me, equipado:d.equipado, bio:d.bio, inventario: me.inventario.map(x=>({...x, ativo:d.ativo[x.item] ?? x.ativo}))}; }
+function edTudo(){ edAbas(); edMain(); edPrev(); edBarra(); }
+function edAbas(){
+  const c = ws(), me = meIn(c), e = session.ed, rm = edRascunho(me);
+  $("#ed-tabs").innerHTML = ED_TABS.map(([t,rot])=>{
+    const it = t!=="bio" && equip(rm,t), n = it && nivelDe(rm,it.id);
+    const qtd = t==="bio" ? "" : edOpcoes(me,t,true).length;
+    return `<button type="button" data-ed-tab="${t}" aria-pressed="${e.tab===t}">${it?`<span class="ed-mini">${pic(it,n,"",22)}</span>`:`<span class="ed-mini vazio">${t==="bio"?"✎":"+"}</span>`}<span>${rot}${qtd!==""?`<small>${qtd}</small>`:""}</span></button>`; }).join("")
+    + `<button type="button" class="so-mobile" data-ed-tab="prev" aria-pressed="${e.tab==="prev"}"><span class="ed-mini vazio">👁</span><span>Prévia</span></button>`;
+  $(".editor").classList.toggle("vendo-prev", e.tab==="prev");
+}
+/* todas as escolhas de um tipo: cada estágio liberado de cada linha vira uma opção */
+function edOpcoes(me, t, soLiberados){
+  const e = session.ed, own = new Map(me.inventario.map(x=>[x.item,x])), out = [];
+  const bloq = !soLiberados && e.bloq;
+  db.cosmeticos.forEach(it=>{
+    if (it.tipo!==t) return; const x = own.get(it.id); if (!x && !bloq) return;
+    const n = evolui(it) ? it.evolucoes.length : 1;
+    for (let k=1; k<=n; k++){ const lib = !!x && k<=x.nivel; if (!lib && !bloq) continue; out.push({it, k, nome: vis(it,k).nome, lib, ord: x ? me.inventario.indexOf(x) : -1}); }
+  });
+  return out;
+}
+function edFiltradas(me){
+  const e = session.ed, q = semAcento(e.busca.trim());
+  let l = edOpcoes(me, e.tab).filter(o => (e.rar==="todas" || o.it.raridade===e.rar) && (!q || semAcento(o.nome).includes(q) || semAcento(o.it.nome).includes(q)));
+  const porNome = (a,b) => a.nome.localeCompare(b.nome,"pt-BR");
+  if (e.ordem==="nome") l.sort(porNome);
+  else if (e.ordem==="recentes") l.sort((a,b)=> b.ord-a.ord || a.k-b.k);
+  else l.sort((a,b)=> ordemRar(b.it.raridade)-ordemRar(a.it.raridade) || a.it.nome.localeCompare(b.it.nome,"pt-BR") || a.k-b.k);
+  return l;
+}
+function edMain(){
+  const c = ws(), me = meIn(c), e = session.ed, el = $("#ed-main");
+  if (e.tab==="prev"){ el.innerHTML = ""; return; }
+  if (e.tab==="bio"){
+    const emotes = me.inventario.map(x=>item(x.item)).filter(it=>it.tipo==="emote");
+    el.innerHTML = `<div class="field"><label class="label" for="ed-bio">Biografia</label><textarea id="ed-bio" maxlength="190" placeholder="Conte algo sobre você. Use :codigo: para emotes.">${esc(e.d.bio)}</textarea><span class="note" id="ed-bio-n">${e.d.bio.length}/190</span></div>
+      <div><span class="label">Seus emotes (clique para inserir)</span><div class="picker" style="margin-top:6px">${emotes.map(it=>`<button type="button" data-ed-emo="${esc(it.codigo)}" title=":${esc(it.codigo)}:">${emo(it,e.d.ativo[it.id]||1,30)}</button>`).join("")||`<span class="note">Você ainda não tem emotes. Compre no Mercado.</span>`}</div></div>`;
+    return;
+  }
+  const opc = t => `<option value="${t[0]}" ${e.rar===t[0]||e.ordem===t[0]?"selected":""}>${t[1]}</option>`;
+  el.innerHTML = `<div class="ed-tools">
+      <input type="search" id="ed-busca" class="sel" placeholder="Buscar ${esc(TIPO[e.tab]||"").toLowerCase()} pelo nome…" value="${esc(e.busca)}" aria-label="Buscar">
+      <select class="sel" id="ed-rar" aria-label="Raridade">${[["todas","Todas as raridades"],...S.raridades.map(r=>[r.id,r.nome])].map(opc).join("")}</select>
+      <select class="sel" id="ed-ordem" aria-label="Ordenar">${[["raridade","Mais raros primeiro"],["nome","Nome (A-Z)"],["recentes","Mais recentes"]].map(opc).join("")}</select>
+      <label class="chk"><input type="checkbox" id="ed-agrupar" ${e.agrupar?"checked":""}> Agrupar por linha</label>
+      <label class="chk"><input type="checkbox" id="ed-bloq" ${e.bloq?"checked":""}> Mostrar bloqueados</label>
+    </div><div id="ed-grid-wrap"></div>`;
+  edGrade();
+}
+function edGrade(){
+  const c = ws(), me = meIn(c), e = session.ed, t = e.tab, l = edFiltradas(me);
+  const sel = e.d.equipado[t], lista = l.slice(0, e.lim);
+  const tile = o => { const on = sel===o.it.id && (e.d.ativo[o.it.id]||1)===o.k;
+    return `<button type="button" class="tile ${o.lib?"":"lock"}" style="${rc(o.it.raridade)}" data-ed-pick="${o.it.id}:${o.k}" aria-pressed="${on}" title="${esc(o.nome)}${o.lib?"":" (bloqueado)"}">${pic(o.it,o.k,"",44)}<span class="nm">${esc(o.nome)}</span>${o.lib?"":`<span class="cad">🔒</span>`}</button>`; };
+  let corpo = "";
+  if (e.agrupar && e.ordem!=="nome"){
+    const grupos = new Map(); lista.forEach(o=>{ if(!grupos.has(o.it.id)) grupos.set(o.it.id, []); grupos.get(o.it.id).push(o); });
+    corpo = [...grupos.values()].map(g=>{ const it = g[0].it, x = me.inventario.find(y=>y.item===it.id);
+      return `<div class="ed-grp"><b>${esc(it.nome)}</b>${rarTag(it.raridade)}${evolui(it)?`<span class="note">${x?x.nivel:0}/${it.evolucoes.length} liberados</span>`:""}</div>${g.map(tile).join("")}`; }).join("");
+  } else corpo = lista.map(tile).join("");
+  const nenhum = t!=="tema" ? `<button type="button" class="tile nenhum" data-ed-pick="" aria-pressed="${!sel}"><div class="pic vazio">∅</div><span class="nm">Nenhum</span></button>` : "";
+  $("#ed-grid-wrap").innerHTML = `<p class="note ed-count">${l.length} ${l.length===1?"opção":"opções"}${e.busca?` para “${esc(e.busca)}”`:""}${l.length>lista.length?` · mostrando ${lista.length}`:""}</p>
+    <div class="ed-grid ${t==="tema"?"tema":""}">${nenhum}${corpo||`<p class="note" style="grid-column:1/-1">Nada encontrado. Tente outra busca ou marque “Mostrar bloqueados”.</p>`}</div>
+    ${l.length>lista.length?`<button type="button" class="btn" data-ed-mais style="justify-self:center">Mostrar mais (${l.length-lista.length})</button>`:""}`;
+}
+function edPrev(){ const c = ws(), me = meIn(c); $("#ed-prev").innerHTML = `<span class="label">Prévia ao vivo</span>${profile(c, edRascunho(me), {preview:true})}`; }
+function edBarra(){
+  const sujo = edSujo(), b = $("#ed-bar");
+  b.classList.toggle("sujo", sujo);
+  b.innerHTML = sujo ? `<span>Cuidado, você tem alterações não salvas!</span><button type="button" class="btn btn-sm ed-link" data-ed-reset>Redefinir</button><button type="button" class="btn btn-sm btn-ok" data-ed-salvar>Salvar alterações</button>`
+    : `<span class="note">Tudo salvo. Escolha um item para ver a prévia ao lado.</span>`;
+}
+function edTremer(){ const b = $("#ed-bar"); if (!b) return; b.classList.remove("shake"); void b.offsetWidth; b.classList.add("shake"); setTimeout(()=>b.classList.remove("shake"), 1400); som("hover",{vol:.5}); }
+function edFechar(forcar){ if (!forcar && edSujo()){ edTremer(); return; } session.ed = null; $("#layer").innerHTML = ""; }
+function edClique(ev){
+  const e = session.ed, c = ws(), me = meIn(c), g = sel => ev.target.closest(sel);
+  let b;
+  if (g("[data-ed-fechar]")) return edFechar();
+  if ((b = g("[data-ed-tab]"))){ e.tab = b.dataset.edTab; e.busca = ""; e.lim = 120; som("click",{vol:.4}); edAbas(); edMain(); $("#ed-main").scrollTop = 0; return; }
+  if ((b = g("[data-ed-pick]"))){
+    if (b.classList.contains("lock")){ toast("Esse estágio ainda está bloqueado. Libere na Forja ou compre no Mercado.", {tipo:"erro"}); return; }
+    const [id, k] = b.dataset.edPick.split(":");
+    if (!id) delete e.d.equipado[e.tab]; else { e.d.equipado[e.tab] = id; e.d.ativo[id] = +k; }
+    som("click",{vol:.5});
+    $$("#ed-main [data-ed-pick][aria-pressed=true]").forEach(x=>x.setAttribute("aria-pressed","false")); b.setAttribute("aria-pressed","true");
+    edAbas(); edPrev(); edBarra(); return;
+  }
+  if (g("[data-ed-mais]")){ e.lim += 120; edGrade(); return; }
+  if ((b = g("[data-ed-emo]"))){ const ta = $("#ed-bio"), code = `:${b.dataset.edEmo}:`, i = ta.selectionStart ?? ta.value.length;
+    if (ta.value.length + code.length > 190) return; ta.value = ta.value.slice(0,i) + code + ta.value.slice(ta.selectionEnd ?? i); ta.focus(); ta.selectionStart = ta.selectionEnd = i + code.length; edInput({target:ta}); return; }
+  if (g("[data-ed-reset]")){ e.d = structuredClone(e.orig); edTudo(); return; }
+  if (g("[data-ed-salvar]")){
+    const d = e.d; me.equipado = {...d.equipado}; me.bio = d.bio.trim();
+    me.inventario.forEach(x=>{ const n = d.ativo[x.item]; if (n && n<=x.nivel) x.ativo = n; });
+    log(c, `${me.nome} atualizou o perfil`); save(); som("ack",{vol:.6});
+    e.orig = edOriginal(me); e.d = structuredClone(e.orig); render(); edTudo();
+    toast("Perfil salvo. É assim que a staff vê você agora.", {titulo:"Perfil atualizado!"}); return;
+  }
+}
+function edInput(ev){
+  const e = session.ed, t = ev.target;
+  if (t.id==="ed-busca"){ if (e.busca===t.value) return; e.busca = t.value; e.lim = 120; edGrade(); return; }
+  if (t.id==="ed-rar"){ e.rar = t.value; e.lim = 120; edGrade(); return; }
+  if (t.id==="ed-ordem"){ e.ordem = t.value; edGrade(); return; }
+  if (t.id==="ed-agrupar"){ e.agrupar = t.checked; edGrade(); return; }
+  if (t.id==="ed-bloq"){ e.bloq = t.checked; e.lim = 120; edGrade(); return; }
+  if (t.id==="ed-bio"){ if (ev.type==="change") return; e.d.bio = t.value; $("#ed-bio-n").textContent = `${t.value.length}/190`; edPrev(); edBarra(); edAbas(); }
 }
 
 function walletBar(m){ return `<div class="wallet" style="margin-bottom:16px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("")}</div>`; }
