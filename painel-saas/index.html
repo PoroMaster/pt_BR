@@ -380,6 +380,23 @@ td.r,th.r{text-align:right}
 .reveal .badge.bonus{display:inline-flex;align-items:center;gap:6px;background:rgba(240,213,140,.16);color:#f0d58c;border:1px solid rgba(240,213,140,.45);font-weight:600;animation:rise .5s .9s ease-out both}
 .reveal .badge.bonus img{width:20px;height:20px;object-fit:contain}
 .reveal .badge.pack-b{background:rgba(120,170,255,.14);color:#b9d3ff;border:1px solid rgba(120,170,255,.4)}
+.bonus-row{display:flex;flex-wrap:wrap;gap:10px;justify-content:center}
+.bonus-row .mc{width:140px}
+.mc.bonus-c{--rc:#e8c35e;background:radial-gradient(circle at 50% 35%,rgba(240,213,140,.28),rgba(10,26,29,.92) 70%);border:1.5px solid #e8c35e;box-shadow:0 0 22px rgba(232,195,94,.45);position:relative;display:grid;justify-items:center;gap:4px;padding:10px 8px;border-radius:12px}
+.mc.bonus-c.ess{--rc:#b77cff;border-color:#b77cff;box-shadow:0 0 22px rgba(183,124,255,.5);background:radial-gradient(circle at 50% 35%,rgba(183,124,255,.32),rgba(10,26,29,.92) 70%)}
+.mc.bonus-c .art{width:84px;height:84px;position:relative;display:grid;place-items:center;overflow:visible!important}
+.mc.bonus-c .art img{width:76px;height:76px;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.mc.bonus-c.kit .art img{width:76px;height:76px;transform:translateX(-10px)}
+.mc.bonus-c.kit .art img.k{position:absolute;right:-8px;bottom:-2px;width:54px;height:54px;transform:rotate(-20deg)}
+.mc.bonus-c b{font-size:12.5px;color:#fff}
+.mc.bonus-c small{font-size:11px;color:#f0d58c}
+.mc.bonus-c.ess small{color:#d9b8ff}
+.mc.bonus-c .qtd{position:absolute;top:6px;left:8px;font:800 18px var(--display);color:#fff;text-shadow:0 0 10px var(--rc),0 2px 4px #000}
+.mc.bonus-c.espera{visibility:hidden;opacity:0}
+.mc.bonus-c.entra{animation:bonus-entra .7s cubic-bezier(.2,1.5,.4,1) both}
+.mc.bonus-c.entra .art img{animation:bonus-brilho 1.6s ease-in-out .5s infinite alternate}
+@keyframes bonus-entra{0%{opacity:0;transform:translateY(24px) scale(.6) rotate(-6deg);filter:brightness(2.5)}60%{opacity:1;transform:translateY(-6px) scale(1.08) rotate(2deg)}100%{transform:none;filter:none}}
+@keyframes bonus-brilho{from{filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}to{filter:drop-shadow(0 0 16px var(--rc)) brightness(1.15)}}
 .multi-grid .mc small.pack-s{color:#b9d3ff;font-size:10.5px}
 .reveal .restam{color:#9fb0c6;font-size:12px}
 .reveal .resumo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
@@ -1391,9 +1408,11 @@ async function abrirBau(c, me, qtd=1){
 const ordemRar = id => S.raridades.findIndex(r=>r.id===id);
 const raro = it => ordemRar(it.raridade) >= ordemRar("lendaria");
 const ESPERA = {lendaria:1300, mitica:1900, ultimate:2700};   /* ms de suspense antes de revelar cada raridade */
-function bonusHtml(lista){
-  const img = {essencia: S.moedas.essencia.img, kit: S.hextech.bau.img};
-  return lista.map(b=>`<span class="badge bonus"><img src="${src(img[b.id])}" alt="">Bônus: +${b.qtd} ${b.id==="kit"?(b.qtd>1?"Baús com Chave":"Baú com Chave"):"Essência Mítica"}</span>`).join("");
+/* carta de bônus: aparece depois dos itens, como uma recompensa de verdade */
+function cartaBonus(b, i){
+  const kit = b.id==="kit", nome = kit ? (b.qtd>1?`${b.qtd} Baús com Chave`:"Baú com Chave") : "Essência Mítica";
+  const art = kit ? `<img src="${src(S.hextech.bau.img)}" alt=""><img class="k" src="${src(S.hextech.chave.img)}" alt="">` : `<img src="${src(S.moedas.essencia.img)}" alt="">`;
+  return `<div class="mc bonus-c ${kit?"kit":"ess"} espera" data-bonus-c style="--i:${i}"><span class="qtd">+${b.qtd}</span><div class="art">${art}</div><b>${nome}</b><small>Bônus do baú</small></div>`;
 }
 function revelar(c, me, premios, ov){
   /* entrega tudo: item novo vai para a coleção, repetido vira fragmentos, bônus vai para a carteira */
@@ -1421,7 +1440,8 @@ function revelar(c, me, premios, ov){
     const susp = raro(it) ? " espera" : "";
     html = `<div class="reveal" style="${rc(it.raridade)}">
       <div class="card-r"><div class="art ${ult(it)?"ult":""}">${pic(it,1,"",120)}</div>${susp?`<div class="verso" data-verso>?</div>`:""}<video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
-      <div class="info${susp}" data-info><h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>${packDe(it)?`<span class="badge pack-b">Do ${esc(packDe(it).nome)}</span>`:""}${bonusHtml(p.bonus)}</div>
+      <div class="info${susp}" data-info><h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>${packDe(it)?`<span class="badge pack-b">Do ${esc(packDe(it).nome)}</span>`:""}</div>
+      ${p.bonus.length?`<div class="bonus-row">${p.bonus.map(cartaBonus).join("")}</div>`:""}
       <div class="acts${susp}" data-fim>${!p.ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${botoesMais}${sair}</div>${n?restam:""}
     </div>`;
   } else {
@@ -1429,8 +1449,8 @@ function revelar(c, me, premios, ov){
     html = `<div class="reveal multi" style="${rc(topo.raridade)}">
       <h2>${premios.length} baús abertos</h2>
       <div class="multi-grid">${premios.map((p,i)=>`<div class="mc ${ult(p.it)?"ult":""} ${raro(p.it)?"raro":""}" style="${rc(p.it.raridade)};animation-delay:${i*90}ms" data-mc="${i}">
-        ${raro(p.it)?`<div class="verso" data-verso>?</div>`:""}<div class="art">${pic(p.it,1,"",64)}</div><b>${esc(p.it.nome)}</b>${rarTag(p.it.raridade)}<small>${p.ja?"Repetido":"Novo!"}</small>${packDe(p.it)?`<small class="pack-s">${esc(packDe(p.it).nome)}</small>`:""}${p.bonus.length?`<span class="mb" title="${p.bonus.map(b=>`+${b.qtd} ${b.id==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}">+ bônus</span>`:""}</div>`).join("")}</div>
-      <div class="resumo espera" data-fim><span class="badge">${novos.length} ${novos.length===1?"novo":"novos"}${fr?` · repetidos viraram ${esc(fr)}`:""}</span>${bonusHtml(Object.entries(resumo.bonus).map(([id,qtd])=>({id,qtd})))}</div>
+        ${raro(p.it)?`<div class="verso" data-verso>?</div>`:""}<div class="art">${pic(p.it,1,"",64)}</div><b>${esc(p.it.nome)}</b>${rarTag(p.it.raridade)}<small>${p.ja?"Repetido":"Novo!"}</small>${packDe(p.it)?`<small class="pack-s">${esc(packDe(p.it).nome)}</small>`:""}${p.bonus.length?`<span class="mb" title="${p.bonus.map(b=>`+${b.qtd} ${b.id==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}">+ bônus</span>`:""}</div>`).join("")}${Object.entries(resumo.bonus).map(([id,qtd],i)=>cartaBonus({id,qtd},i)).join("")}</div>
+      <div class="resumo espera" data-fim><span class="badge">${novos.length} ${novos.length===1?"novo":"novos"}${fr?` · repetidos viraram ${esc(fr)}`:""}</span></div>
       <div class="acts espera" data-fim>${botoesMais}${sair}</div>${n?restam:""}
     </div>`;
   }
@@ -1444,7 +1464,7 @@ function revelar(c, me, premios, ov){
   const virar = el => { const v = el && el.querySelector("[data-verso]"); if (v){ v.classList.add("sai"); setTimeout(()=>v.remove(), 600); } if (el) el.classList.add("virou"); };
   const final = () => { ov.querySelectorAll("[data-fim],[data-info]").forEach(e=>e.classList.remove("espera")); const rb = ov.querySelector("[data-hx-revtudo]"); if (rb) rb.remove();
     if (premios.some(p=>p.ja)) setTimeout(()=>som("dup",{vol:.6}), 300);
-    if (Object.keys(resumo.bonus).length) setTimeout(()=>som(resumo.bonus.kit?"chest":"purchase",{vol:.8}), 700); };
+    ov.querySelectorAll("[data-bonus-c]").forEach((cb,i)=>setTimeout(()=>{ if(!ov.isConnected) return; cb.classList.remove("espera"); cb.classList.add("entra"); som(cb.classList.contains("kit")?"chest":"purchase",{vol:.8}); }, 350 + i*650)); };
   const raros = premios.map((p,i)=>({p,i})).filter(x=>raro(x.p.it));
   const comuns = premios.filter(p=>!raro(p.it));
   if (!raros.length || reduz()){ ov.querySelectorAll("[data-verso]").forEach(v=>v.remove()); som("r_"+topo.raridade); final(); }
