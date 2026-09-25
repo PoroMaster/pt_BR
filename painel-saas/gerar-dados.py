@@ -88,7 +88,12 @@ sistema = {
         "kit_custo_essencia": 3,
         "bau": {"nome": "Baú Hextech", "img": "painel-saas/img/wiki/Hextech_Crafting_Chest.png"},
         "chave": {"nome": "Chave Hextech", "img": "painel-saas/img/wiki/Hextech_Crafting_Key.png"},
-        "nota": "O Kit Hextech (1 baú + 1 chave) custa Essência Mítica. Use a chave para abrir o baú. Cosmético repetido vira fragmentos."
+        "abrir_varios": [5, 10],
+        "bonus": [
+            {"id": "essencia", "nome": "Essência Mítica", "chance": 10, "min": 1, "max": 3},
+            {"id": "kit", "nome": "Baú + Chave", "chance": 8, "min": 1, "max": 1}
+        ],
+        "nota": "O Kit Hextech (1 baú + 1 chave) custa Essência Mítica. Use a chave para abrir o baú, um por vez ou vários de uma vez. Cosmético repetido vira fragmentos. Cada baú ainda pode dar um bônus: Essência Mítica (10%) ou outro Baú com Chave (8%)."
     },
     "promocao": {"fragmentos": 13, "nota": "Ao subir de cargo, P.P., Pontos Míticos e destaque voltam ao início e o membro recebe 13 Fragmentos."},
     "subir_maestria": {"moedas": 50, "essencia": 1},

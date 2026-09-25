@@ -365,6 +365,19 @@ td.r,th.r{text-align:right}
 .reveal .rar img{width:22px;height:22px}
 .reveal .badge{font-size:12.5px;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.08)}
 .reveal .acts{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:6px}
+.reveal .badge.bonus{display:inline-flex;align-items:center;gap:6px;background:rgba(240,213,140,.16);color:#f0d58c;border:1px solid rgba(240,213,140,.45);font-weight:600;animation:rise .5s .9s ease-out both}
+.reveal .badge.bonus img{width:20px;height:20px;object-fit:contain}
+.reveal .restam{color:#9fb0c6;font-size:12px}
+.reveal .resumo{display:flex;flex-wrap:wrap;gap:6px;justify-content:center}
+.reveal.multi{width:min(920px,calc(100vw - 32px));max-height:calc(100dvh - 90px);overflow:auto;padding:4px}
+.multi-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px;width:100%}
+.multi-grid .mc{position:relative;display:grid;justify-items:center;gap:4px;padding:10px 8px;border-radius:12px;background:rgba(10,26,29,.85);border:1.5px solid var(--rc);box-shadow:0 0 18px color-mix(in srgb,var(--rc) 45%,transparent);animation:rise .45s ease-out both}
+.multi-grid .mc .art{width:84px;height:84px;border-radius:10px;overflow:hidden}
+.multi-grid .mc .art .pic{width:100%;height:100%;aspect-ratio:auto}
+.multi-grid .mc b{font-size:12px;line-height:1.25;color:#eef2f7}
+.multi-grid .mc small{font-size:11px;color:#9fb0c6}
+.multi-grid .mc .rar{font-size:11.5px}
+.multi-grid .mc .mb{position:absolute;top:6px;right:6px;font-size:10px;font-weight:700;color:#1a1204;background:#f0d58c;border-radius:999px;padding:1px 6px}
 
 /* Perfil estilo Discord */
 .bio{white-space:pre-wrap;word-break:break-word;background:var(--panel-2);border-radius:10px;padding:12px 14px;line-height:1.6}
@@ -493,7 +506,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v11";
+const STORE = "lsp-painel-v12";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -931,6 +944,7 @@ function vMercado(c, me){
       <div class="hex-actions">
         <button class="btn btn-blue" id="buy-kit" ${me.carteira.essencia<H.kit_custo_essencia?"disabled":""}>Comprar Kit Hextech · ${H.kit_custo_essencia} <img class="ico" style="width:20px;height:20px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica"></button>
         <button class="btn btn-hex" id="open-chest" ${podeAbrir?"":"disabled"}>Abrir baú com a chave</button>
+        ${(()=>{ const n = Math.min(me.materiais.baus, me.materiais.chaves), vs = (H.abrir_varios||[]).filter(v=>n>=v); return vs.map(v=>`<button class="btn btn-hex" data-abrir-n="${v}">Abrir ${v}</button>`).join("") + (n>1 && !vs.includes(n) ? `<button class="btn btn-hex" data-abrir-n="${n}">Abrir todos (${n})</button>` : ""); })()}
       </div>
     </div>
     <p class="note" style="margin-top:10px">${esc(H.nota)} Você tem ${me.carteira.essencia} Essência Mítica.</p>
@@ -1117,11 +1131,18 @@ function comprarKit(c, me){
   voarPara(S.hextech.bau.img, botao, nb, "resource_add_chest_generic", "chest", 120, () => { if (nb) nb.textContent = me.materiais.baus; });
   voarPara(S.hextech.chave.img, botao, nc, "resource_add_material_key", "key", 620, () => { if (nc) nc.textContent = me.materiais.chaves; });
 }
-async function abrirBau(c, me){
-  if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
+/* sorteia o bônus de um baú (Essência Mítica ou outro Baú + Chave), conforme as chances do sistema */
+function sortearBonus(){
+  return (S.hextech.bonus||[]).filter(b=>Math.random()*100 < b.chance).map(b=>({id:b.id, qtd: b.min + Math.floor(Math.random()*(b.max-b.min+1))}));
+}
+const podeAbrirN = me => Math.min(me.materiais.baus, me.materiais.chaves);
+async function abrirBau(c, me, qtd=1){
+  qtd = Math.min(qtd, podeAbrirN(me));
+  if (session.abrindo || qtd<1) return;
   session.abrindo = true; const token = ++session.hx;
-  me.materiais.baus--; me.materiais.chaves--;
-  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !especial(x)));
+  me.materiais.baus -= qtd; me.materiais.chaves -= qtd;
+  const pool = db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !especial(x));
+  const it = Array.from({length:qtd}, ()=>({it: sortear(pool), bonus: sortearBonus()}));
   save();
   const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
   ov.innerHTML = `<div class="top"><button data-hx-mute>${mudo?"🔇":"🔊"}</button><button data-hx-skip>Pular</button></div>
@@ -1130,7 +1151,7 @@ async function abrirBau(c, me){
       <video id="v-loop" muted playsinline preload="auto" loop src="${vidUrl("open_cm_loop")}" style="opacity:0"></video>
       <video id="v-outro" class="wide" muted playsinline preload="auto" src="${vidUrl("open_cm_outro")}" style="opacity:0"></video>
       <img class="key" id="hx-key" src="${src(S.hextech.chave.img)}" alt="">
-    </div><div class="hint" id="hx-hint">Preparando o baú…</div>`;
+    </div><div class="hint" id="hx-hint">${qtd>1?`Preparando ${qtd} baús…`:"Preparando o baú…"}</div>`;
   document.body.appendChild(ov);
   let idle = null;
   const vivo = () => token===session.hx && document.body.contains(ov);
@@ -1143,7 +1164,7 @@ async function abrirBau(c, me){
   await Promise.all([pronto(vI), pronto(vL), pronto(vO)]); if(!vivo()) return;
   const fimIntro = tocar(vI, 2200); await comecou(vI); som("intro"); await fimIntro; if(!vivo()) return;
   vL.play().catch(()=>{}); await comecou(vL); vL.style.opacity = 1; vI.hidden = true; idle = som("idle",{vol:.45, loop:true});
-  hint.textContent = "Usando a Chave Hextech…";
+  hint.textContent = qtd>1 ? `Usando ${qtd} Chaves Hextech…` : "Usando a Chave Hextech…";
   await wait(250); if(!vivo()) return; key.classList.add("in");
   await wait(1000); if(!vivo()) return; som("keyIn"); key.classList.add("turn"); stage.classList.add("shake");
   await wait(750); if(!vivo()) return;
@@ -1153,28 +1174,60 @@ async function abrirBau(c, me){
   await fimOutro; if(!vivo()) return;
   revelar(c, me, it, ov);
 }
-function revelar(c, me, it, ov){
-  const r = rar(it.raridade), ja = me.inventario.find(x=>x.item===it.id);
-  let badge;
-  if (ja){ me.carteira[r.frag] += r.duplicata; badge = `Repetido: virou ${r.duplicata} ${S.moedas[r.frag].nome}`; }
-  else { me.inventario.push({item:it.id, nivel:1}); badge = evolui(it) ? `Novo! Evolui em ${it.evolucoes.length} estágios na Forja` : "Novo!"; log(c, `${me.nome} tirou ${it.nome} (${r.nome}) num Baú Hextech`); }
+const ordemRar = id => S.raridades.findIndex(r=>r.id===id);
+function bonusHtml(lista){
+  const img = {essencia: S.moedas.essencia.img, kit: S.hextech.bau.img};
+  return lista.map(b=>`<span class="badge bonus"><img src="${src(img[b.id])}" alt="">Bônus: +${b.qtd} ${b.id==="kit"?(b.qtd>1?"Baús com Chave":"Baú com Chave"):"Essência Mítica"}</span>`).join("");
+}
+function revelar(c, me, premios, ov){
+  /* entrega tudo: item novo vai para a coleção, repetido vira fragmentos, bônus vai para a carteira */
+  const resumo = {frag:{}, bonus:{}}, novos = [];
+  premios.forEach(p=>{
+    const r = rar(p.it.raridade), ja = me.inventario.some(x=>x.item===p.it.id) || novos.includes(p.it.id);
+    p.ja = ja;
+    if (ja){ me.carteira[r.frag] += r.duplicata; resumo.frag[r.frag] = (resumo.frag[r.frag]||0) + r.duplicata; }
+    else { me.inventario.push({item:p.it.id, nivel:1}); novos.push(p.it.id); log(c, `${me.nome} tirou ${p.it.nome} (${r.nome}) num Baú Hextech`); }
+    p.bonus.forEach(b=>{ resumo.bonus[b.id] = (resumo.bonus[b.id]||0) + b.qtd;
+      if (b.id==="essencia") me.carteira.essencia += b.qtd; else { me.materiais.baus += b.qtd; me.materiais.chaves += b.qtd; } });
+  });
+  if (Object.keys(resumo.bonus).length) log(c, `${me.nome} ganhou bônus no Baú Hextech: ${Object.entries(resumo.bonus).map(([k,q])=>`+${q} ${k==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}`);
   save();
-  const podeMais = me.materiais.baus>0 && me.materiais.chaves>0;
-  ov.querySelector("#hx-stage").outerHTML = `<div class="reveal" style="${rc(it.raridade)}">
+  const topo = premios.reduce((a,p)=>ordemRar(p.it.raridade)>ordemRar(a.it.raridade)?p:a, premios[0]).it;
+  const n = podeAbrirN(me), varios = S.hextech.abrir_varios||[];
+  const botoesMais = (n>0?`<button class="btn btn-blue" data-hx-again="1">Abrir outro</button>`:"") + varios.filter(v=>n>=v).map(v=>`<button class="btn btn-blue" data-hx-again="${v}">Abrir ${v}</button>`).join("") + (n>1 && !varios.includes(n)?`<button class="btn btn-blue" data-hx-again="${n}">Abrir todos (${n})</button>`:"");
+  const sair = `<button class="btn" data-hx-close style="background:rgba(255,255,255,.1);color:#e6ebf3;border-color:rgba(255,255,255,.25)">Continuar</button>`;
+  const restam = `<small class="restam">${me.materiais.baus} baús e ${me.materiais.chaves} chaves restantes</small>`;
+  let html;
+  if (premios.length===1){
+    const p = premios[0], it = p.it, r = rar(it.raridade);
+    const badge = p.ja ? `Repetido: virou ${r.duplicata} ${S.moedas[r.frag].nome}` : evolui(it) ? `Novo! Evolui em ${it.evolucoes.length} estágios na Forja` : "Novo!";
+    html = `<div class="reveal" style="${rc(it.raridade)}">
       <div class="card-r"><div class="art ${ult(it)?"ult":""}">${pic(it,1,"",120)}</div><video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
-      <h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>
-      <div class="acts">${!ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${podeMais?`<button class="btn btn-blue" data-hx-again>Abrir outro (${me.materiais.baus} baús, ${me.materiais.chaves} chaves)</button>`:""}<button class="btn" data-hx-close style="background:rgba(255,255,255,.1);color:#e6ebf3;border-color:rgba(255,255,255,.25)">Continuar</button></div>
+      <h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>${bonusHtml(p.bonus)}
+      <div class="acts">${!p.ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${botoesMais}${sair}</div>${n?restam:""}
     </div>`;
+  } else {
+    const fr = Object.entries(resumo.frag).map(([k,q])=>`+${q} ${S.moedas[k].nome}`).join(" · ");
+    html = `<div class="reveal multi" style="${rc(topo.raridade)}">
+      <h2>${premios.length} baús abertos</h2>
+      <div class="multi-grid">${premios.map((p,i)=>`<div class="mc ${ult(p.it)?"ult":""}" style="${rc(p.it.raridade)};animation-delay:${i*90}ms">
+        <div class="art">${pic(p.it,1,"",64)}</div><b>${esc(p.it.nome)}</b>${rarTag(p.it.raridade)}<small>${p.ja?"Repetido":"Novo!"}</small>${p.bonus.length?`<span class="mb" title="${p.bonus.map(b=>`+${b.qtd} ${b.id==="kit"?"Baú com Chave":"Essência Mítica"}`).join(", ")}">+ bônus</span>`:""}</div>`).join("")}</div>
+      <div class="resumo"><span class="badge">${novos.length} ${novos.length===1?"novo":"novos"}${fr?` · repetidos viraram ${esc(fr)}`:""}</span>${bonusHtml(Object.entries(resumo.bonus).map(([id,qtd])=>({id,qtd})))}</div>
+      <div class="acts">${botoesMais}${sair}</div>${n?restam:""}
+    </div>`;
+  }
+  ov.querySelector("#hx-stage").outerHTML = html;
   const hint = ov.querySelector("#hx-hint"); if (hint) hint.textContent = "";
   const sk = ov.querySelector("[data-hx-skip]"); if (sk) sk.remove();
   const vr = ov.querySelector("#v-rev");
-  vr.addEventListener("ended", ()=>{ vr.src = vidUrl("reveal_"+VID[it.raridade]+"_loop"); vr.loop = true; vr.play().catch(()=>{}); }, {once:true});
-  vr.play().catch(()=>{});
-  som("r_"+it.raridade); if (ja) setTimeout(()=>som("dup",{vol:.6}), 900);
+  if (vr){ vr.addEventListener("ended", ()=>{ vr.src = vidUrl("reveal_"+VID[topo.raridade]+"_loop"); vr.loop = true; vr.play().catch(()=>{}); }, {once:true}); vr.play().catch(()=>{}); }
+  som("r_"+topo.raridade);
+  if (premios.some(p=>p.ja)) setTimeout(()=>som("dup",{vol:.6}), 900);
+  if (Object.keys(resumo.bonus).length) setTimeout(()=>som(resumo.bonus.kit?"chest":"purchase",{vol:.8}), 1300);
   const fechar = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; render(); };
   ov.querySelector("[data-hx-close]").onclick = fechar;
-  const eq = ov.querySelector("[data-hx-equip]"); if (eq) eq.onclick = () => { me.equipado[it.tipo]=it.id; save(); toast(`${it.nome} equipado.`, imgsDe(it, nivelDe(me,it.id))); fechar(); };
-  const ag = ov.querySelector("[data-hx-again]"); if (ag) ag.onclick = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; abrirBau(c, me); };
+  const eq = ov.querySelector("[data-hx-equip]"); if (eq) eq.onclick = () => { const it = premios[0].it; me.equipado[it.tipo]=it.id; save(); toast(`${it.nome} equipado.`, imgsDe(it, nivelDe(me,it.id))); fechar(); };
+  ov.querySelectorAll("[data-hx-again]").forEach(ag => ag.onclick = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; abrirBau(c, me, +ag.dataset.hxAgain); });
 }
 
 /* ---------- eventos ---------- */
@@ -1215,6 +1268,7 @@ function bindView(c, me){
     const y=scrollY; render(); scrollTo(0,y); toast(`${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`, {titulo:`${pk.nome} liberado!`, imgs: novos.slice(0,3).map(id=>vis(item(id),1).img).filter(Boolean)}); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
+  $$("[data-abrir-n]").forEach(b=>b.addEventListener("click",()=>abrirBau(c, me, +b.dataset.abrirN)));
   $$("[data-ftipo]").forEach(b=>b.addEventListener("click",()=>{ session.forjaTipo=b.dataset.ftipo; som("click",{vol:.4}); render(); }));
   $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; session.novaLinha=true; som("click",{vol:.5}); render(); }));
   $$("[data-prev]").forEach(b=>b.addEventListener("click",()=>{ const n=+b.dataset.prev; session.forjaPrev = n||null; som("hover",{vol:.4}); render(); }));
