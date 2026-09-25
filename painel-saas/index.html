@@ -194,6 +194,12 @@ td.r,th.r{text-align:right}
 .lvl i{width:10px;height:10px;border-radius:2px;background:var(--panel-2);border:1px solid var(--line);transform:rotate(45deg)}
 .lvl i.on{background:var(--rc);border-color:var(--rc)}
 .evo-tag{font-size:11px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:3px}
+.mini-evo{display:flex;gap:3px;flex-wrap:wrap}
+.mini-evo button{width:26px;height:26px;padding:0;border-radius:6px;border:2px solid var(--line);background:#0a1a1d;overflow:hidden;display:grid;place-items:center}
+.mini-evo button[aria-pressed="true"]{border-color:var(--rc)}
+.mini-evo .pic{width:100%;height:100%;aspect-ratio:auto}
+.mini-evo .pic > img,.mini-evo .pic > .em{max-width:90%;max-height:90%;width:auto!important;height:auto!important}
+.mini-evo .ring{transform:scale(.42)}
 .forge{display:grid;gap:14px;align-content:start}
 .forge .pic{border-radius:8px;aspect-ratio:16/10}
 .forge .pic.flash{animation:forged .9s ease-out}
@@ -425,11 +431,11 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v8";
+const STORE = "lsp-painel-v9";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
-const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, lojaTipo:"todos", abrindo:false, hx:0, forjaPrev:null };
+const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, lojaTipo:"tema", abrindo:false, hx:0, forjaPrev:null, lojaPrev:{} };
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -793,7 +799,20 @@ function vPerfil(c, me){
 function walletBar(m){ return `<div class="wallet" style="margin-bottom:16px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("")}</div>`; }
 function vMercado(c, me){
   const H = S.hextech, t = session.lojaTipo;
-  const loja = db.cosmeticos.filter(it=>it.preco && (t==="todos"||it.tipo===t));
+  const ordemR = Object.fromEntries(S.raridades.map((r,i)=>[r.id,i])), ordemT = Object.keys(TIPO);
+  /* vitrine: 15 por categoria. Primeiro os vendidos por Moedas, depois raros de raridades variadas. */
+  const VITRINE = 15;
+  const vitrine = tipo => {
+    const todos = db.cosmeticos.filter(it=>it.tipo===tipo);
+    const venda = todos.filter(it=>it.preco!=null);
+    const raros = S.raridades.map(r=>todos.filter(it=>it.preco==null && it.raridade===r.id));
+    const esc = [...venda];
+    while (esc.length < VITRINE && raros.some(l=>l.length)) for (const l of raros) if (l.length && esc.length < VITRINE) esc.push(l.shift());
+    return esc.sort((a,b)=> (ordemR[a.raridade]-ordemR[b.raridade]) || ((a.preco??1e9)-(b.preco??1e9)));
+  };
+  const loja = (t==="todos" ? ordemT : [t]).flatMap(vitrine);
+  const fora = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n + db.cosmeticos.filter(it=>it.tipo===tp).length - vitrine(tp).length, 0);
+  const qtd = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n+vitrine(tp).length,0);
   const has = id => me.inventario.some(x=>x.item===id);
   const podeAbrir = me.materiais.baus>0 && me.materiais.chaves>0;
   return head("Mercado", "Moedas compram temas e cosméticos comuns. Essência Mítica compra o Kit Hextech: abra o baú com a chave para ganhar cosméticos de qualquer raridade.") + walletBar(me) +
@@ -808,11 +827,15 @@ function vMercado(c, me){
     </div>
     <p class="note" style="margin-top:10px">${esc(H.nota)} Você tem ${me.carteira.essencia} Essência Mítica.</p>
   </div>
-  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span><span class="note">${db.cosmeticos.filter(x=>has(x.id)).length} de ${db.cosmeticos.length} cosméticos na sua coleção</span></h2>
-    <div class="chips">${Object.entries(TIPOS_PL).map(([k,n])=>`<button data-loja="${k}" aria-pressed="${t===k}">${n}</button>`).join("")}</div>
-    <div class="items">${loja.map(it=>`<div class="item" style="${rc(it.raridade)}">${pic(it)}<div class="body"><b>${esc(it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
-      ${evolui(it)?`<span class="evo-tag">⬆ Evolui na Forja: ${it.evolucoes.length} estágios</span>`:""}
-      ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")||`<p class="note">Nada à venda nesta categoria. Procure nos baús Hextech.</p>`}</div>
+  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span><span class="note">${db.cosmeticos.filter(x=>has(x.id)).length} de ${db.cosmeticos.length} cosméticos na sua coleção · comuns e temas com Moedas, os raros só no Baú Hextech</span></h2>
+    <div class="chips">${Object.entries(TIPOS_PL).map(([k,n])=>`<button data-loja="${k}" aria-pressed="${t===k}">${n} (${qtd(k)})</button>`).join("")}</div>
+    ${fora(t)?`<p class="note" style="margin-bottom:10px">Mais ${fora(t)} ${t==="todos"?"cosméticos":TIPOS_PL[t].toLowerCase()} fora da vitrine: esses só saem no Baú Hextech.</p>`:""}
+    <div class="items">${loja.map(it=>{ const lp = session.lojaPrev[it.id] || 1; return `<div class="item" style="${rc(it.raridade)}">${pic(it, lp)}<div class="body"><b>${esc(evolui(it)?vis(it,lp).nome:it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
+      ${evolui(it)?`<span class="evo-tag">⬆ Evolui na Forja: ${it.evolucoes.length} estágios</span><div class="mini-evo">${it.evolucoes.map((e,i)=>`<button type="button" data-mprev="${it.id}:${i+1}" aria-pressed="${lp===i+1}" title="${esc(e.nome)}">${pic(it,i+1)}</button>`).join("")}</div>`:""}
+      ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`
+        : it.preco ? `<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`
+        : it.preco===0 ? `<button class="btn btn-sm" disabled>Padrão</button>`
+        : `<button class="btn btn-sm" disabled title="Chance de sair ${rar(it.raridade).nome}: ${rar(it.raridade).peso}%"><img class="ico" style="width:16px;height:16px" src="${src(S.hextech.bau.img)}" alt="">Só no Baú Hextech</button>`}</div></div>`; }).join("")}</div>
   </div>`;
 }
 /* prévia pequena do perfil com o cosmético num estágio */
@@ -1034,6 +1057,7 @@ function bindView(c, me){
   $$("[data-rrule]").forEach(i=>i.addEventListener("change",()=>{ const r=c.regras.find(x=>x.id===i.dataset.rrule); const v=parseInt(i.value,10)||0; if(v) r.recompensa[i.dataset.rkey]=v; else delete r.recompensa[i.dataset.rkey]; save(); toast(`"${r.acao}" atualizada.`); }));
   $$("[data-buy]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.buy); if(me.carteira.moedas<it.preco) return; me.carteira.moedas-=it.preco; me.inventario.push({item:it.id,nivel:1}); log(c, `${me.nome} comprou ${it.nome}`); save(); som("coins",{vol:.6}); render(); toast(`${it.nome} comprado. Equipe no seu perfil.`); }));
   $$("[data-loja]").forEach(b=>b.addEventListener("click",()=>{ session.lojaTipo=b.dataset.loja; som("click",{vol:.4}); render(); }));
+  $$("[data-mprev]").forEach(b=>b.addEventListener("click",()=>{ const [id,n]=b.dataset.mprev.split(":"); session.lojaPrev[id]=+n; som("hover",{vol:.4}); const y=scrollY; render(); scrollTo(0,y); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
   $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; som("click",{vol:.5}); render(); }));

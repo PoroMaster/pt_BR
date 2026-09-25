@@ -691,6 +691,14 @@
       "img": "painel-saas/img/wiki/Crest_Of_The_Rose_profileicon.jpg"
     },
     {
+      "id": "icone-academia",
+      "nome": "Ícone Academia de Batalha",
+      "tipo": "icone",
+      "raridade": "comum",
+      "preco": 300,
+      "img": "painel-saas/img/wiki/Battle_Academia_profileicon.png"
+    },
+    {
       "id": "icone-porofissional",
       "nome": "Ícone Porofissional",
       "tipo": "icone",
@@ -713,6 +721,22 @@
       "raridade": "epica",
       "preco": null,
       "img": "painel-saas/midia/cd/icon_1446.jpg"
+    },
+    {
+      "id": "icone-vazio",
+      "nome": "Ícone do Vazio",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_3369.jpg"
+    },
+    {
+      "id": "icone-aspectos",
+      "nome": "Ícone Convergência dos Aspectos",
+      "tipo": "icone",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/img/wiki/Aspects_Converge_profileicon.jpg"
     },
     {
       "id": "icone-heartsteel",
@@ -739,12 +763,68 @@
       "img": "painel-saas/midia/cd/icon_3872.jpg"
     },
     {
+      "id": "icone-lucian",
+      "nome": "Ícone Lucian Velho Oeste",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/img/wiki/High_Noon_Lucian_Mythic_Chroma_profileicon.jpg"
+    },
+    {
+      "id": "icone-mf",
+      "nome": "Ícone Miss Fortune MVP",
+      "tipo": "icone",
+      "raridade": "lendaria",
+      "preco": null,
+      "img": "painel-saas/img/wiki/MVP_T1_Miss_Fortune_Signature_profileicon.jpg"
+    },
+    {
+      "id": "icone-poro-negro",
+      "nome": "Ícone Poro Estrela Negra",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/icon_1447.jpg"
+    },
+    {
       "id": "icone-teclado",
       "nome": "Ícone Poro Rei do Teclado",
       "tipo": "icone",
       "raridade": "mitica",
       "preco": null,
       "img": "painel-saas/midia/cd/icon_5755.jpg"
+    },
+    {
+      "id": "icone-riven",
+      "nome": "Ícone Riven Alvorecer",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/img/wiki/Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg"
+    },
+    {
+      "id": "icone-zed",
+      "nome": "Ícone Zed Matador de Galáxias",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "painel-saas/img/wiki/Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg"
+    },
+    {
+      "id": "icone-maestria",
+      "nome": "Ícone Maestria 7",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "preco": null,
+      "img": "image/banco_de_dados/Rank_7.png"
+    },
+    {
+      "id": "icone-veigar",
+      "nome": "Ícone Veigar Chefão Final",
+      "tipo": "icone",
+      "raridade": "ultimate",
+      "preco": null,
+      "img": "painel-saas/img/wiki/Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg"
     },
     {
       "id": "icone-urf",
@@ -1027,6 +1107,25 @@
       "preco": 200,
       "img": "painel-saas/img/wiki/Cheers_Dears_Emote.png",
       "codigo": "brinde"
+    },
+    {
+      "id": "emote-carinho",
+      "nome": "Emote Carinho no Poro",
+      "tipo": "emote",
+      "raridade": "comum",
+      "preco": 150,
+      "img": "painel-saas/midia/cd/emote_5009.png",
+      "codigo": "carinho"
+    },
+    {
+      "id": "emote-infusao",
+      "nome": "Emote Infusão de Poro",
+      "tipo": "emote",
+      "raridade": "epica",
+      "preco": null,
+      "img": "painel-saas/midia/cd/emote_4551.png",
+      "codigo": "infusao",
+      "anim": "flutuar"
     },
     {
       "id": "emote-revigorado",
