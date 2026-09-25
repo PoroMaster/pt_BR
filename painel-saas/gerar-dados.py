@@ -262,7 +262,7 @@ def membro(id, nome, acesso, cargo, pp, pm, destaque, carteira, contrib, desde,
 
 poromaster = {
     "id": "poromaster", "nome": "PoroMaster", "descricao": "Staff do ModSkin brasileiro",
-    "plano": "pro", "cor": "#c8a24a", "logo": "assets/users/02.png",
+    "cor": "#c8a24a", "logo": "assets/users/02.png",
     "regras": [
         {"id": "r1", "acao": "Verificação de campeão aprovada", "setor": "Testadores", "recompensa": {"pp": 2, "moedas": 20}},
         {"id": "r2", "acao": "Bug reportado e confirmado", "setor": "Testadores", "recompensa": {"pp": 3, "estelares": 1}},

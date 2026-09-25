@@ -1334,7 +1334,6 @@ const VIEWS = [
   {id:"forja", nome:"Forja", ico:"image/banco_de_dados/Star_Shards.png"},
   {id:"membros", nome:"Membros", ico:"image/banco_de_dados/Mod.png", admin:true},
   {id:"sistema", nome:"Regras e sistema", ico:"image/banco_de_dados/Pontos_Prestigios.png", admin:true},
-  {id:"plano", nome:"Plano e uso", ico:"image/banco_de_dados/Parceiro.png", admin:true},
   {id:"dados", nome:"Dados (JSON)", ico:"image/banco_de_dados/Dev.png", admin:true}
 ];
 function wsDot(w, px){ const d=px?`width:${px}px;height:${px}px;font-size:11px;`:""; return w.logo ? `<img class="ws-dot" src="${src(w.logo)}" alt="" style="${d}">` : `<span class="ws-dot" style="background:${w.cor};${d}">${esc(w.nome[0])}</span>`; }
@@ -1343,7 +1342,7 @@ function render(){
   const c = ws(), me = meIn(c), adm = isAdmin(c);
   c.membros.forEach(syncRanq);
   if (VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
-  $("#ws-btn").innerHTML = `${wsDot(c)}<span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
+  $("#ws-btn").innerHTML = `${wsDot(c)}<span><b>${esc(c.nome)}</b><small>${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
   $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}">${wsDot(w,22)}${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:22px;text-align:center">+</span>Criar comunidade</button>`;
   const p = pending(c).length;
   /* barra de cima como a do cliente: logo + VERIFICAR (o JOGAR), status, abas em texto, ícones dourados, moedas */
@@ -1378,7 +1377,7 @@ function render(){
   $("#amigos").innerHTML = `<div class="social-h"><span>Social</span><small>${c.membros.filter(online).length}/${c.membros.length} online</small></div>` + grupos.map(g=>`<details open class="grupo"><summary>${esc(g.cg)} <small>(${g.ms.filter(online).length}/${g.ms.length})</small></summary>${g.ms.sort((a,b)=>online(b)-online(a)||a.nome.localeCompare(b.nome)).map(m=>`<button class="amigo ${online(m)?"":"off"}" data-member="${m.id}">${avatarR(m,32)}<span><b>${esc(m.nome)}</b><small>${online(m)?`<i class="on"></i>${m.pp!=null?`${m.pp} P.P.`:"Online"}`:"Offline"}</small></span></button>`).join("")}</details>`).join("");
   const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
   $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
-  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, membro:vMembro, betas:vBetas, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
+  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, membro:vMembro, betas:vBetas, forja:vForja, membros:vMembros, sistema:vSistema, dados:vDados};
   const rolagem = $$("#main .evo, #main .mini-evo").map(el=>el.scrollLeft);
   $("#main").innerHTML = `<div class="mobile-bar"><b>${esc(c.nome)}</b><button class="btn btn-sm" id="menu-btn" aria-label="Abrir social">Social ☰</button></div>` + V[session.view](c, me, adm);
   $("#side").classList.remove("open");
@@ -1960,18 +1959,6 @@ function vSistema(c){
   </div>`;
 }
 
-function vPlano(c){
-  const lim = c.plano==="pro" ? 50 : 10;
-  const plans=[
-    {id:"gratis",nome:"Grátis",preco:"R$ 0",itens:["Até 10 membros","1 comunidade","Reputação, ranking e verificações"]},
-    {id:"pro",nome:"Pro",preco:"R$ 29",itens:["Até 50 membros","Mercado, LootBox e Forja","Bot do Discord que posta novidades e dá recompensas","Regras personalizadas"]},
-    {id:"guilda",nome:"Guilda",preco:"R$ 89",itens:["Membros ilimitados","Várias comunidades","Cosméticos e temas com sua marca","Exportação e API"]}
-  ];
-  return head("Plano e uso", `A ${esc(c.nome)} está no plano ${c.plano==="pro"?"Pro":"Grátis"}.`) +
-  `<div class="card" style="margin-bottom:16px;max-width:520px;display:grid;gap:6px"><div class="row" style="justify-content:space-between"><span class="label">Membros usados</span><span class="num">${c.membros.length} / ${lim}</span></div><div class="bar teal"><i style="width:${Math.min(100,c.membros.length/lim*100)}%"></i></div></div>
-  <div class="grid plans">${plans.map(p=>`<div class="card plan ${p.id===c.plano?"current":""}"><div class="row" style="justify-content:space-between"><b style="font-size:16px">${p.nome}</b>${p.id===c.plano?`<span class="pill ok">Plano atual</span>`:""}</div><div><span class="price">${p.preco}</span><span class="note" style="display:inline"> /mês</span></div><ul>${p.itens.map(i=>`<li>${i}</li>`).join("")}</ul>${p.id===c.plano?"":`<button class="btn" data-plan="${p.id}">Mudar para ${p.nome}</button>`}</div>`).join("")}</div>
-  <p class="note" style="margin-top:14px">Preços fictícios, só para ilustrar o modelo.</p>`;
-}
 function vDados(){
   return head("Dados (JSON)", "Todo o painel roda em cima deste arquivo. As mudanças ficam salvas só neste navegador.", `<div class="row"><button class="btn" id="copy-json">Copiar JSON</button><button class="btn btn-bad" id="reset-json">Restaurar dados de exemplo</button></div>`) +
   `<div class="card"><textarea class="json" id="json-box" readonly aria-label="JSON do banco de dados">${esc(JSON.stringify(db,null,2))}</textarea></div>`;
@@ -2281,7 +2268,6 @@ function bindView(c, me){
     $$("[data-emo]").forEach(b=>b.addEventListener("click",()=>{ const code=`:${b.dataset.emo}:`, i=be.selectionStart??be.value.length; if(be.value.length+code.length>190) return; be.value=be.value.slice(0,i)+code+be.value.slice(be.selectionEnd??i); be.focus(); be.selectionStart=be.selectionEnd=i+code.length; som("click",{vol:.4}); upd(); }));
     $("#bio-save").addEventListener("click",()=>{ me.bio=be.value.trim(); save(); render(); toast("Biografia salva."); });
   }
-  $$("[data-plan]").forEach(b=>b.addEventListener("click",()=>{ c.plano=b.dataset.plan==="guilda"?"pro":b.dataset.plan; save(); render(); toast("Plano alterado (simulação, nada foi cobrado)."); }));
   const inv=$("#invite"); if(inv) inv.addEventListener("click",()=>toast("Numa versão real, isto gera um link de convite para o Discord."));
   const cp=$("#copy-json"); if(cp) cp.addEventListener("click",()=>{ const box=$("#json-box"); navigator.clipboard.writeText(box.value).then(()=>toast("JSON copiado."),()=>{ box.focus(); box.select(); toast("Selecionei o texto. Use Ctrl+C para copiar."); }); });
   const rs=$("#reset-json"); if(rs) rs.addEventListener("click",()=>{ if(rs.dataset.confirm){ db=structuredClone(seed); S=db.sistema; try{localStorage.removeItem(STORE);}catch(e){} render(); toast("Dados de exemplo restaurados."); } else { rs.dataset.confirm="1"; rs.textContent="Clique de novo para confirmar"; } });
