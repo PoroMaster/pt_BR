@@ -65,6 +65,15 @@ img{max-width:100%}
 .btn[data-recarga]{position:relative;overflow:hidden;cursor:wait}
 .btn[data-recarga]::after{content:"";position:absolute;left:0;bottom:0;height:3px;width:100%;background:currentColor;opacity:.7;transform-origin:left;animation:recarga var(--trava) linear forwards}
 @keyframes recarga{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+.kit-qtd{display:inline-flex;align-items:stretch;border:1px solid rgba(255,255,255,.22);border-radius:10px;overflow:hidden;background:rgba(255,255,255,.06)}
+.kit-qtd button{background:none;border:0;color:#e6ebf3;min-width:36px;font-size:18px;font-weight:700;cursor:pointer;padding:0 8px}
+.kit-qtd button:hover:not(:disabled){background:rgba(255,255,255,.1)}
+.kit-qtd button:disabled{opacity:.35;cursor:default}
+.kit-qtd button[data-kq="max"]{font-size:12.5px;letter-spacing:.04em;border-left:1px solid rgba(255,255,255,.18)}
+.kit-qtd input{width:56px;text-align:center;background:none;border:0;border-inline:1px solid rgba(255,255,255,.18);color:#fff;font:700 16px var(--mono);-moz-appearance:textfield}
+.kit-qtd input::-webkit-inner-spin-button,.kit-qtd input::-webkit-outer-spin-button{-webkit-appearance:none;margin:0}
+.sobe{position:fixed;z-index:42;pointer-events:none;transform:translate(-50%,0);font:800 22px var(--display);color:#f0d58c;text-shadow:0 0 10px rgba(240,213,140,.8),0 2px 4px #000;animation:sobe 1.3s ease-out forwards}
+@keyframes sobe{0%{opacity:0;transform:translate(-50%,6px) scale(.7)}20%{opacity:1;transform:translate(-50%,-8px) scale(1.15)}100%{opacity:0;transform:translate(-50%,-44px) scale(1)}}
 .btn-ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .btn-bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
 .btn-sm{padding:5px 10px;font-size:13px}
@@ -1200,7 +1209,9 @@ function vMercado(c, me){
       <div class="mat"><img src="${src(H.bau.img)}" alt=""><span><b id="n-baus">${me.materiais.baus}</b><small>${esc(H.bau.nome)}</small></span></div>
       <div class="mat"><img src="${src(H.chave.img)}" alt=""><span><b id="n-chaves">${me.materiais.chaves}</b><small>${esc(H.chave.nome)}</small></span></div>
       <div class="hex-actions">
-        <button class="btn btn-blue" id="buy-kit" ${me.carteira.essencia<H.kit_custo_essencia?"disabled":recarga("kit")}>Comprar Kit Hextech · ${H.kit_custo_essencia} <img class="ico" style="width:20px;height:20px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica"></button>
+        ${(()=>{ const mx = kitMax(me), n = kitQtd(me);
+          return `<div class="kit-qtd" role="group" aria-label="Quantidade de kits"><button type="button" data-kq="-1" aria-label="Menos um" ${n<=1?"disabled":""}>−</button><input id="kit-n" type="number" inputmode="numeric" min="1" max="${Math.max(1,mx)}" value="${n}" aria-label="Quantidade de kits" ${mx<1?"disabled":""}><button type="button" data-kq="1" aria-label="Mais um" ${n>=mx?"disabled":""}>+</button><button type="button" data-kq="max" ${mx<2?"disabled":""}>Máx</button></div>
+          <button class="btn btn-blue" id="buy-kit" ${mx<1?"disabled":recarga("kit")}>${kitRotulo(n)}</button>`; })()}
         <button class="btn btn-hex" id="open-chest" ${podeAbrir?"":"disabled"}>Abrir baú com a chave</button>
         ${(()=>{ const n = Math.min(me.materiais.baus, me.materiais.chaves), vs = (H.abrir_varios||[]).filter(v=>n>=v); return vs.map(v=>`<button class="btn btn-hex" data-abrir-n="${v}">Abrir ${v}</button>`).join("") + (n>1 && !vs.includes(n) ? `<button class="btn btn-hex" data-abrir-n="${n}">Abrir todos (${n})</button>` : ""); })()}
       </div>
@@ -1378,19 +1389,31 @@ function voarPara(img, origem, contador, video, somK, atraso, pousou){
     ], { duration:1300, easing:"cubic-bezier(.4,0,.3,1)" }).onfinish = chegar;
   }, atraso);
 }
+const kitMax = me => Math.floor(me.carteira.essencia / S.hextech.kit_custo_essencia);
+const kitQtd = me => Math.max(1, Math.min(session.kitN||1, kitMax(me)||1));
+const kitRotulo = n => `Comprar ${n>1?`${n} Kits`:"Kit"} Hextech · ${n*S.hextech.kit_custo_essencia} <img class="ico" style="width:20px;height:20px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica">`;
+/* atualiza o seletor sem redesenhar a tela (mantém o foco no campo) */
+function kitAjustar(me, n){
+  const mx = kitMax(me); n = Math.max(1, Math.min(isNaN(n)?1:n, Math.max(1,mx))); session.kitN = n;
+  const i = $("#kit-n"); if (i && +i.value!==n) i.value = n;
+  const menos = $('[data-kq="-1"]'), mais = $('[data-kq="1"]'), bk = $("#buy-kit");
+  if (menos) menos.disabled = n<=1; if (mais) mais.disabled = n>=mx; if (bk && !travado("kit")) bk.innerHTML = kitRotulo(n);
+}
+function subirTexto(el, txt){ const r = el.getBoundingClientRect(), t = document.createElement("div"); t.className = "sobe"; t.textContent = txt;
+  t.style.cssText = `left:${r.left + r.width/2}px;top:${r.top}px`; document.body.appendChild(t); setTimeout(()=>t.remove(), 1300); }
 function comprarKit(c, me){
-  const custo = S.hextech.kit_custo_essencia; if (travado("kit") || me.carteira.essencia < custo) return;
+  const custo = S.hextech.kit_custo_essencia, n = kitQtd(me); if (travado("kit") || kitMax(me) < 1) return;
   travar("kit", 1900);
-  me.carteira.essencia -= custo; me.materiais.baus++; me.materiais.chaves++;
-  log(c, `${me.nome} comprou um Kit Hextech`); save();
+  me.carteira.essencia -= custo*n; me.materiais.baus += n; me.materiais.chaves += n;
+  log(c, `${me.nome} comprou ${n>1?`${n} Kits Hextech`:"um Kit Hextech"}`); save();
   som("purchase");
   render();
   /* o baú e a chave saem do botão, crescem e voam até os contadores do Hextech */
   const botao = $("#buy-kit"), nb = $("#n-baus"), nc = $("#n-chaves");
-  if (nb) nb.textContent = me.materiais.baus - 1;
-  if (nc) nc.textContent = me.materiais.chaves - 1;
-  voarPara(S.hextech.bau.img, botao, nb, "resource_add_chest_generic", "chest", 120, () => { if (nb) nb.textContent = me.materiais.baus; });
-  voarPara(S.hextech.chave.img, botao, nc, "resource_add_material_key", "key", 620, () => { if (nc) nc.textContent = me.materiais.chaves; });
+  if (nb) nb.textContent = me.materiais.baus - n;
+  if (nc) nc.textContent = me.materiais.chaves - n;
+  voarPara(S.hextech.bau.img, botao, nb, "resource_add_chest_generic", "chest", 120, () => { if (nb){ nb.textContent = me.materiais.baus; subirTexto(nb, `+${n}`); } });
+  voarPara(S.hextech.chave.img, botao, nc, "resource_add_material_key", "key", 620, () => { if (nc){ nc.textContent = me.materiais.chaves; subirTexto(nc, `+${n}`); } });
 }
 /* sorteia o bônus de um baú (Essência Mítica ou outro Baú + Chave), conforme as chances do sistema */
 function sortearBonus(){
@@ -1551,6 +1574,8 @@ function bindView(c, me){
     log(c, `${me.nome} comprou o ${pk.nome}`); save(); som("purchase"); setTimeout(()=>som("r_lendaria",{vol:.6}),350);
     const y=scrollY; render(); scrollTo(0,y); toast(`${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`, {titulo:`${pk.nome} liberado!`, imgs: novos.slice(0,3).map(id=>vis(item(id),1).img).filter(Boolean)}); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
+  $$("[data-kq]").forEach(b=>b.addEventListener("click",()=>{ const v=b.dataset.kq; kitAjustar(me, v==="max" ? kitMax(me) : kitQtd(me) + +v); som("hover",{vol:.35}); }));
+  const kn=$("#kit-n"); if(kn){ kn.addEventListener("input",()=>{ if (kn.value!=="") kitAjustar(me, parseInt(kn.value,10)); }); kn.addEventListener("change",()=>kitAjustar(me, parseInt(kn.value,10))); kn.addEventListener("keydown",e=>{ if(e.key==="Enter") comprarKit(c, me); }); }
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
   $$("[data-abrir-n]").forEach(b=>b.addEventListener("click",()=>abrirBau(c, me, +b.dataset.abrirN)));
   $$("[data-ftipo]").forEach(b=>b.addEventListener("click",()=>{ session.forjaTipo=b.dataset.ftipo; som("click",{vol:.4}); render(); }));
