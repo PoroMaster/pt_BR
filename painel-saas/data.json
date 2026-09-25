@@ -20,52 +20,16 @@
       "foto": "image/Profile/03.png"
     },
     {
-      "id": "u-m2",
-      "nome": "Bruch",
-      "email": "bruch@poromaster.dev",
-      "foto": null
-    },
-    {
-      "id": "u-m4",
-      "nome": "Finger",
-      "email": "finger@poromaster.dev",
-      "foto": null
-    },
-    {
-      "id": "u-m5",
-      "nome": "Kawai Foxxy",
-      "email": "kawaifoxxy@poromaster.dev",
-      "foto": null
-    },
-    {
-      "id": "u-m7",
-      "nome": "TaikunX3",
-      "email": "taikunx3@poromaster.dev",
-      "foto": "image/Profile/02.png"
-    },
-    {
-      "id": "u-m8",
+      "id": "u-m3",
       "nome": "imnotChinna",
       "email": "imnotchinna@poromaster.dev",
       "foto": "image/Profile/05.png"
     },
     {
-      "id": "u-m9",
-      "nome": "Hatcubinho",
-      "email": "hatcubinho@poromaster.dev",
-      "foto": "assets/users/08.png"
-    },
-    {
-      "id": "u-n2",
-      "nome": "Diogo Teixeira",
-      "email": "diogoteixeira@tradutores.dev",
-      "foto": "assets/users/03.png"
-    },
-    {
-      "id": "u-n3",
-      "nome": "Selin",
-      "email": "selin@tradutores.dev",
-      "foto": null
+      "id": "u-m5",
+      "nome": "TaikunX3",
+      "email": "taikunx3@poromaster.dev",
+      "foto": "image/Profile/02.png"
     }
   ],
   "sistema": {
@@ -4596,484 +4560,14 @@
           "nome": "Luckey",
           "acesso": "Dono",
           "cargo": "Dev",
-          "tags": [
-            "Booster"
-          ],
+          "tags": [],
           "pp": null,
-          "pm": 72,
-          "destaque": 4,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 1240,
-            "essencia": 10,
-            "fragmentos": 26,
-            "estelares": 9
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            },
-            {
-              "item": "tema-sentina",
-              "nivel": 3
-            },
-            {
-              "item": "tema-ionia",
-              "nivel": 1
-            },
-            {
-              "item": "icone-poro",
-              "nivel": 4
-            },
-            {
-              "item": "icone-urf",
-              "nivel": 1
-            },
-            {
-              "item": "icone-udyr",
-              "nivel": 4
-            },
-            {
-              "item": "emote-flex",
-              "nivel": 2
-            },
-            {
-              "item": "emote-guma",
-              "nivel": 4
-            },
-            {
-              "item": "emote-poro",
-              "nivel": 2
-            },
-            {
-              "item": "emote-gg",
-              "nivel": 1
-            },
-            {
-              "item": "borda-chama",
-              "nivel": 1
-            },
-            {
-              "item": "borda-arcana",
-              "nivel": 3
-            },
-            {
-              "item": "sent-elementalista",
-              "nivel": 1
-            },
-            {
-              "item": "sent-poro",
-              "nivel": 3
-            },
-            {
-              "item": "emote-salao-lendas",
-              "nivel": 4
-            }
-          ],
-          "equipado": {
-            "tema": "tema-sentina",
-            "icone": "icone-urf",
-            "emote": "emote-guma",
-            "borda": "borda-arcana",
-            "sentinela": "sent-poro"
-          },
-          "materiais": {
-            "baus": 25,
-            "chaves": 25
-          },
-          "bio": "Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:",
-          "contrib": [
-            14,
-            18,
-            12,
-            22,
-            19,
-            24,
-            21,
-            27
-          ],
-          "desde": "2022-01-15",
-          "foto": "image/Profile/01.png",
-          "conta": "u1"
-        },
-        {
-          "id": "m2",
-          "nome": "Bruch",
-          "acesso": "Admin",
-          "cargo": "Dev",
-          "tags": [
-            "Qualificador"
-          ],
-          "pp": null,
-          "pm": 55,
-          "destaque": 2,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 610,
-            "essencia": 3,
-            "fragmentos": 12,
-            "estelares": 2
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            },
-            {
-              "item": "icone-poro",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial",
-            "icone": "icone-poro"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            10,
-            8,
-            12,
-            14,
-            11,
-            15,
-            13,
-            12
-          ],
-          "desde": "2022-01-20",
-          "conta": "u-m2"
-        },
-        {
-          "id": "m3",
-          "nome": "Jake",
-          "acesso": "Admin",
-          "cargo": "Mod",
-          "tags": [
-            "Corretor"
-          ],
-          "pp": 84,
-          "pm": 41,
-          "destaque": 3,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 480,
-            "essencia": 2,
-            "fragmentos": 9,
-            "estelares": 3
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            },
-            {
-              "item": "tema-ionia",
-              "nivel": 2
-            },
-            {
-              "item": "icone-rosa",
-              "nivel": 2
-            },
-            {
-              "item": "emote-trabalho",
-              "nivel": 1
-            },
-            {
-              "item": "borda-hextech",
-              "nivel": 1
-            },
-            {
-              "item": "sent-poro",
-              "nivel": 2
-            }
-          ],
-          "equipado": {
-            "tema": "tema-ionia",
-            "icone": "icone-rosa",
-            "emote": "emote-trabalho",
-            "borda": "borda-hextech",
-            "sentinela": "sent-poro"
-          },
-          "materiais": {
-            "baus": 6,
-            "chaves": 5
-          },
-          "bio": "Moderador. Corrijo texto torto :trabalho:",
-          "contrib": [
-            6,
-            9,
-            7,
-            11,
-            8,
-            6,
-            10,
-            12
-          ],
-          "desde": "2022-02-03",
-          "foto": "image/Profile/04.png",
-          "conta": "u2"
-        },
-        {
-          "id": "m4",
-          "nome": "Finger",
-          "acesso": "Membro",
-          "cargo": "Suporte",
-          "tags": [],
-          "pp": 67,
-          "pm": 23,
-          "destaque": 1,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 320,
-            "essencia": 1,
-            "fragmentos": 6,
-            "estelares": 0
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            4,
-            6,
-            5,
-            7,
-            8,
-            6,
-            7,
-            9
-          ],
-          "desde": "2022-02-11",
-          "conta": "u-m4"
-        },
-        {
-          "id": "m5",
-          "nome": "Kawai Foxxy",
-          "acesso": "Membro",
-          "cargo": "Suporte",
-          "tags": [
-            "Designer"
-          ],
-          "pp": 58,
-          "pm": 30,
-          "destaque": 1,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 290,
-            "essencia": 2,
-            "fragmentos": 4,
-            "estelares": 1
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            3,
-            5,
-            5,
-            6,
-            4,
-            7,
-            6,
-            7
-          ],
-          "desde": "2022-03-01",
-          "conta": "u-m5"
-        },
-        {
-          "id": "m6",
-          "nome": "Khyago",
-          "acesso": "Membro",
-          "cargo": "Tester",
-          "tags": [],
-          "pp": 100,
-          "pm": 64,
-          "destaque": 3,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 410,
-            "essencia": 4,
-            "fragmentos": 11,
-            "estelares": 3
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            },
-            {
-              "item": "icone-regioes",
-              "nivel": 3
-            },
-            {
-              "item": "emote-espiada",
-              "nivel": 1
-            },
-            {
-              "item": "borda-pulso",
-              "nivel": 1
-            },
-            {
-              "item": "sent-poro",
-              "nivel": 4
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial",
-            "icone": "icone-regioes",
-            "emote": "emote-espiada",
-            "borda": "borda-pulso",
-            "sentinela": "sent-poro"
-          },
-          "materiais": {
-            "baus": 10,
-            "chaves": 10
-          },
-          "bio": "Tester caçador de bugs :espiada: 100 P.P. e contando.",
-          "contrib": [
-            9,
-            7,
-            11,
-            8,
-            12,
-            10,
-            13,
-            14
-          ],
-          "desde": "2022-02-24",
-          "foto": "image/Profile/03.png",
-          "conta": "u3"
-        },
-        {
-          "id": "m7",
-          "nome": "TaikunX3",
-          "acesso": "Membro",
-          "cargo": "Tester",
-          "tags": [],
-          "pp": 27,
-          "pm": 12,
+          "pm": 0,
           "destaque": 0,
-          "penalidade": true,
+          "penalidade": false,
           "carteira": {
-            "moedas": 90,
+            "moedas": 0,
             "essencia": 0,
-            "fragmentos": 2,
-            "estelares": 0
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            3,
-            4,
-            2,
-            5,
-            1,
-            2,
-            0,
-            3
-          ],
-          "desde": "2022-05-09",
-          "foto": "image/Profile/02.png",
-          "conta": "u-m7"
-        },
-        {
-          "id": "m8",
-          "nome": "imnotChinna",
-          "acesso": "Membro",
-          "cargo": "Tester",
-          "tags": [
-            "Parceiro"
-          ],
-          "pp": 76,
-          "pm": 90,
-          "destaque": 2,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 880,
-            "essencia": 5,
-            "fragmentos": 8,
-            "estelares": 4
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            2,
-            12,
-            3,
-            4,
-            15,
-            3,
-            5,
-            13
-          ],
-          "desde": "2022-04-18",
-          "foto": "image/Profile/05.png",
-          "conta": "u-m8"
-        },
-        {
-          "id": "m9",
-          "nome": "Hatcubinho",
-          "acesso": "Membro",
-          "cargo": "Comunidade",
-          "tags": [
-            "Doador"
-          ],
-          "pp": null,
-          "pm": 15,
-          "destaque": 0,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 150,
-            "essencia": 1,
             "fragmentos": 0,
             "estelares": 0
           },
@@ -5093,87 +4587,260 @@
           "bio": "",
           "contrib": [
             0,
-            1,
-            2,
-            1,
-            2,
-            1,
-            2,
-            2
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
           ],
-          "desde": "2022-08-02",
-          "foto": "assets/users/08.png",
-          "conta": "u-m9"
+          "desde": "2023-01-09",
+          "foto": "image/Profile/01.png",
+          "conta": "u1"
+        },
+        {
+          "id": "m2",
+          "nome": "Jake",
+          "acesso": "Admin",
+          "cargo": "Mod",
+          "tags": [],
+          "pp": 30,
+          "pm": 0,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 0,
+            "essencia": 0,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
+          "contrib": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "desde": "2023-01-09",
+          "foto": "image/Profile/04.png",
+          "conta": "u2"
+        },
+        {
+          "id": "m3",
+          "nome": "imnotChinna",
+          "acesso": "Membro",
+          "cargo": "Mod",
+          "tags": [],
+          "pp": 30,
+          "pm": 0,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 0,
+            "essencia": 0,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
+          "contrib": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "desde": "2023-01-09",
+          "foto": "image/Profile/05.png",
+          "conta": "u-m3"
+        },
+        {
+          "id": "m4",
+          "nome": "Khyago",
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [],
+          "pp": 30,
+          "pm": 0,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 0,
+            "essencia": 0,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "",
+          "contrib": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "desde": "2023-01-09",
+          "foto": "image/Profile/03.png",
+          "conta": "u3"
+        },
+        {
+          "id": "m5",
+          "nome": "TaikunX3",
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [
+            "Parceiro"
+          ],
+          "pp": 30,
+          "pm": 0,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 0,
+            "essencia": 0,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "materiais": {
+            "baus": 0,
+            "chaves": 0
+          },
+          "bio": "Parceria: TAIKUNDROME",
+          "contrib": [
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0,
+            0
+          ],
+          "desde": "2023-01-09",
+          "foto": "image/Profile/02.png",
+          "conta": "u-m5"
         }
       ],
-      "envios": [
-        {
-          "id": "e1",
-          "membro": "m7",
-          "regra": "r1",
-          "detalhe": "Ahri, Espírito Florescente: cromas e VFX conferidos",
-          "quando": "2026-09-24T14:10:00",
-          "status": "pendente"
+      "envios": [],
+      "atividade": [],
+      "modskin": {
+        "estavel": {
+          "versao": "6.4.0",
+          "patch": "12.10",
+          "quando": "2022-05-25T20:00:00",
+          "links": [
+            {
+              "nome": "ModSkin PoroMaster",
+              "url": "https://github.com/PoroMaster/Latests/releases/download/pt_BR/PoroMaster.zip"
+            },
+            {
+              "nome": "ModSkin Lite",
+              "url": "https://github.com/poromaster/Latests/releases/download/pt_BR/PoroMaster_Lite.zip",
+              "indisponivel": true
+            }
+          ]
         },
-        {
-          "id": "e2",
-          "membro": "m6",
-          "regra": "r2",
-          "detalhe": "Skin de Aphelios some ao trocar de croma no lobby",
-          "quando": "2026-09-24T11:42:00",
-          "status": "pendente"
-        },
-        {
-          "id": "e3",
-          "membro": "m8",
-          "regra": "r5",
-          "detalhe": "Vídeo \"Top 10 skins do patch\" com link para download",
-          "quando": "2026-09-23T21:05:00",
-          "status": "pendente"
-        },
-        {
-          "id": "e4",
-          "membro": "m5",
-          "regra": "r6",
-          "detalhe": "Resolveu erro de instalação de 3 usuários no Discord",
-          "quando": "2026-09-23T18:30:00",
-          "status": "pendente"
-        },
-        {
-          "id": "e6",
-          "membro": "m3",
-          "regra": "r7",
-          "detalhe": "Organizou a Semana de caça aos bugs",
-          "quando": "2026-09-23T12:00:00",
-          "status": "pendente"
-        },
-        {
-          "id": "e5",
-          "membro": "m4",
-          "regra": "r4",
-          "detalhe": "Post no grupo de LoL do Facebook",
-          "quando": "2026-09-22T16:00:00",
-          "status": "aprovado"
-        }
-      ],
-      "atividade": [
-        {
-          "quando": "2026-09-24T09:15:00",
-          "texto": "Khyago chegou a 100 P.P. e pode subir para Suporte"
-        },
-        {
-          "quando": "2026-09-23T22:40:00",
-          "texto": "TaikunX3 recebeu uma penalidade (-10 P.P.)"
-        },
-        {
-          "quando": "2026-09-23T20:10:00",
-          "texto": "Luckey aprimorou Tema Águas de Sentina para o nível 3"
-        },
-        {
-          "quando": "2026-09-22T16:05:00",
-          "texto": "Finger ganhou 2 Pontos Míticos por divulgação"
-        }
-      ],
+        "beta_url": "https://github.com/modskinbr/Testers/releases/download/Betas/BETA.zip",
+        "betas": [
+          {
+            "id": "#0103",
+            "status": "teste"
+          },
+          {
+            "id": "#0102",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0101",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0100",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0099",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0098",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0097",
+            "status": "reprovada"
+          },
+          {
+            "id": "#0096",
+            "status": "aprovada"
+          },
+          {
+            "id": "#0095",
+            "status": "reprovada"
+          },
+          {
+            "id": "#0094",
+            "status": "aprovada"
+          }
+        ]
+      },
       "novidades": [
         {
           "quando": "2026-09-24T12:00:00",
@@ -5189,191 +4856,6 @@
           "quando": "2026-09-19T18:00:00",
           "titulo": "Novo tema na loja: Águas de Sentina",
           "texto": "Personalize o fundo do painel. Custa 900 Moedas."
-        }
-      ]
-    },
-    {
-      "id": "tradutores",
-      "nome": "Tradutores ModSkin",
-      "descricao": "Equipe que traduz o site e o cliente",
-      "plano": "gratis",
-      "cor": "#2bb5a6",
-      "regras": [
-        {
-          "id": "t1",
-          "acao": "Página traduzida",
-          "setor": "Tradução",
-          "recompensa": {
-            "pp": 3,
-            "moedas": 30
-          }
-        },
-        {
-          "id": "t2",
-          "acao": "Revisão de tradução",
-          "setor": "Revisão",
-          "recompensa": {
-            "pp": 1,
-            "moedas": 15
-          }
-        }
-      ],
-      "membros": [
-        {
-          "id": "n1",
-          "nome": "Luckey",
-          "acesso": "Dono",
-          "cargo": "Dev",
-          "tags": [],
-          "pp": null,
-          "pm": 20,
-          "destaque": 1,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 300,
-            "essencia": 1,
-            "fragmentos": 3,
-            "estelares": 0
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            2,
-            3,
-            1,
-            4,
-            2,
-            5,
-            3,
-            4
-          ],
-          "desde": "2022-11-15",
-          "foto": "image/Profile/01.png",
-          "conta": "u1"
-        },
-        {
-          "id": "n2",
-          "nome": "Diogo Teixeira",
-          "acesso": "Membro",
-          "cargo": "Tester",
-          "tags": [
-            "Corretor"
-          ],
-          "pp": 62,
-          "pm": 18,
-          "destaque": 1,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 240,
-            "essencia": 1,
-            "fragmentos": 2,
-            "estelares": 0
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            2,
-            2,
-            3,
-            2,
-            4,
-            3,
-            3,
-            4
-          ],
-          "desde": "2022-11-15",
-          "foto": "assets/users/03.png",
-          "conta": "u-n2"
-        },
-        {
-          "id": "n3",
-          "nome": "Selin",
-          "acesso": "Membro",
-          "cargo": "Tester",
-          "tags": [],
-          "pp": 35,
-          "pm": 5,
-          "destaque": 0,
-          "penalidade": false,
-          "carteira": {
-            "moedas": 60,
-            "essencia": 0,
-            "fragmentos": 0,
-            "estelares": 0
-          },
-          "inventario": [
-            {
-              "item": "tema-oficial",
-              "nivel": 1
-            }
-          ],
-          "equipado": {
-            "tema": "tema-oficial"
-          },
-          "materiais": {
-            "baus": 0,
-            "chaves": 0
-          },
-          "bio": "",
-          "contrib": [
-            0,
-            1,
-            1,
-            2,
-            1,
-            2,
-            2,
-            3
-          ],
-          "desde": "2022-12-01",
-          "conta": "u-n3"
-        }
-      ],
-      "envios": [
-        {
-          "id": "f1",
-          "membro": "n2",
-          "regra": "t1",
-          "detalhe": "FAQ traduzido para es_AR",
-          "quando": "2026-09-24T10:00:00",
-          "status": "pendente"
-        }
-      ],
-      "atividade": [
-        {
-          "quando": "2026-09-24T10:00:00",
-          "texto": "Diogo Teixeira enviou o FAQ em espanhol"
-        }
-      ],
-      "novidades": [
-        {
-          "quando": "2026-09-20T12:00:00",
-          "titulo": "Faltam 4 páginas em turco",
-          "texto": "Quem puder ajudar, pegue uma página no canal de tradução."
         }
       ]
     }

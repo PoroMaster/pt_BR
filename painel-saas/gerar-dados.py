@@ -273,81 +273,36 @@ poromaster = {
         {"id": "r7", "acao": "Participação em evento", "setor": "Federativa", "recompensa": {"pm": 3, "estelares": 1}},
         {"id": "r8", "acao": "Mérito dado pelo dono", "setor": "Dono", "recompensa": {"estelares": 2, "essencia": 1}, "so_admin": True}
     ],
+    # Reset: os cinco perfis originais do painel L.S.P. UT (fantome-fantom.js, jan/2023), como eram:
+    # 30 pontos (Rank 1), sem elo, sem destaque, carteira zerada. Devs são isentos de P.P.
     "membros": [
-        membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 10, 26, 9],
-               [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
-               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-udyr", 4), ("emote-flex", 2), ("emote-guma", 4),
-                               ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-elementalista", 1), ("sent-poro", 3), ("emote-salao-lendas", 4)),
-               equipado={"tema": "tema-sentina", "icone": "icone-urf", "emote": "emote-guma", "borda": "borda-arcana", "sentinela": "sent-poro"},
-               materiais=(25, 25), bio="Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:"),
-        membro("m2", "Bruch", "Admin", "Dev", None, 55, 2, [610, 3, 12, 2],
-               [10, 8, 12, 14, 11, 15, 13, 12], "2022-01-20", tags=["Qualificador"],
-               inventario=inv(("tema-oficial", 1), ("icone-poro", 1)),
-               equipado={"tema": "tema-oficial", "icone": "icone-poro"}),
-        membro("m3", "Jake", "Admin", "Mod", 84, 41, 3, [480, 2, 9, 3],
-               [6, 9, 7, 11, 8, 6, 10, 12], "2022-02-03", foto="image/Profile/04.png", tags=["Corretor"], conta="u2",
-               inventario=inv(("tema-oficial", 1), ("tema-ionia", 2), ("icone-rosa", 2), ("emote-trabalho", 1), ("borda-hextech", 1), ("sent-poro", 2)),
-               equipado={"tema": "tema-ionia", "icone": "icone-rosa", "emote": "emote-trabalho", "borda": "borda-hextech", "sentinela": "sent-poro"},
-               materiais=(6, 5), bio="Moderador. Corrijo texto torto :trabalho:"),
-        membro("m4", "Finger", "Membro", "Suporte", 67, 23, 1, [320, 1, 6, 0],
-               [4, 6, 5, 7, 8, 6, 7, 9], "2022-02-11"),
-        membro("m5", "Kawai Foxxy", "Membro", "Suporte", 58, 30, 1, [290, 2, 4, 1],
-               [3, 5, 5, 6, 4, 7, 6, 7], "2022-03-01", tags=["Designer"],
-               inventario=inv(("tema-oficial", 1)), equipado={"tema": "tema-oficial"}),
-        membro("m6", "Khyago", "Membro", "Tester", 100, 64, 3, [410, 4, 11, 3],
-               [9, 7, 11, 8, 12, 10, 13, 14], "2022-02-24", foto="image/Profile/03.png", conta="u3",
-               inventario=inv(("tema-oficial", 1), ("icone-regioes", 3), ("emote-espiada", 1), ("borda-pulso", 1), ("sent-poro", 4)),
-               equipado={"tema": "tema-oficial", "icone": "icone-regioes", "emote": "emote-espiada", "borda": "borda-pulso", "sentinela": "sent-poro"},
-               materiais=(10, 10), bio="Tester caçador de bugs :espiada: 100 P.P. e contando."),
-        membro("m7", "TaikunX3", "Membro", "Tester", 27, 12, 0, [90, 0, 2, 0],
-               [3, 4, 2, 5, 1, 2, 0, 3], "2022-05-09", foto="image/Profile/02.png", penalidade=True),
-        membro("m8", "imnotChinna", "Membro", "Tester", 76, 90, 2, [880, 5, 8, 4],
-               [2, 12, 3, 4, 15, 3, 5, 13], "2022-04-18", foto="image/Profile/05.png", tags=["Parceiro"],
-               inventario=inv(("tema-oficial", 1)), equipado={"tema": "tema-oficial"}),
-        membro("m9", "Hatcubinho", "Membro", "Comunidade", None, 15, 0, [150, 1, 0, 0],
-               [0, 1, 2, 1, 2, 1, 2, 2], "2022-08-02", foto="assets/users/08.png", tags=["Doador"])
+        membro("m1", "Luckey", "Dono", "Dev", None, 0, 0, [0, 0, 0, 0], [0] * 8, "2023-01-09",
+               foto="image/Profile/01.png", conta="u1"),
+        membro("m2", "Jake", "Admin", "Mod", 30, 0, 0, [0, 0, 0, 0], [0] * 8, "2023-01-09",
+               foto="image/Profile/04.png", conta="u2"),
+        membro("m3", "imnotChinna", "Membro", "Mod", 30, 0, 0, [0, 0, 0, 0], [0] * 8, "2023-01-09",
+               foto="image/Profile/05.png"),
+        membro("m4", "Khyago", "Membro", "Tester", 30, 0, 0, [0, 0, 0, 0], [0] * 8, "2023-01-09",
+               foto="image/Profile/03.png", conta="u3"),
+        membro("m5", "TaikunX3", "Membro", "Tester", 30, 0, 0, [0, 0, 0, 0], [0] * 8, "2023-01-09",
+               foto="image/Profile/02.png", tags=["Parceiro"], bio="Parceria: TAIKUNDROME")
     ],
-    "envios": [
-        {"id": "e1", "membro": "m7", "regra": "r1", "detalhe": "Ahri, Espírito Florescente: cromas e VFX conferidos", "quando": "2026-09-24T14:10:00", "status": "pendente"},
-        {"id": "e2", "membro": "m6", "regra": "r2", "detalhe": "Skin de Aphelios some ao trocar de croma no lobby", "quando": "2026-09-24T11:42:00", "status": "pendente"},
-        {"id": "e3", "membro": "m8", "regra": "r5", "detalhe": "Vídeo \"Top 10 skins do patch\" com link para download", "quando": "2026-09-23T21:05:00", "status": "pendente"},
-        {"id": "e4", "membro": "m5", "regra": "r6", "detalhe": "Resolveu erro de instalação de 3 usuários no Discord", "quando": "2026-09-23T18:30:00", "status": "pendente"},
-        {"id": "e6", "membro": "m3", "regra": "r7", "detalhe": "Organizou a Semana de caça aos bugs", "quando": "2026-09-23T12:00:00", "status": "pendente"},
-        {"id": "e5", "membro": "m4", "regra": "r4", "detalhe": "Post no grupo de LoL do Facebook", "quando": "2026-09-22T16:00:00", "status": "aprovado"}
-    ],
-    "atividade": [
-        {"quando": "2026-09-24T09:15:00", "texto": "Khyago chegou a 100 P.P. e pode subir para Suporte"},
-        {"quando": "2026-09-23T22:40:00", "texto": "TaikunX3 recebeu uma penalidade (-10 P.P.)"},
-        {"quando": "2026-09-23T20:10:00", "texto": "Luckey aprimorou Tema Águas de Sentina para o nível 3"},
-        {"quando": "2026-09-22T16:05:00", "texto": "Finger ganhou 2 Pontos Míticos por divulgação"}
-    ],
+    "envios": [],
+    "atividade": [],
+    # Downloads do ModSkin, como no painel original (painel.html): versão estável e as betas experimentais
+    # que os testers baixam antes de todo mundo. "status": teste (em teste agora), aprovada ou reprovada.
+    "modskin": {
+        "estavel": {"versao": "6.4.0", "patch": "12.10", "quando": "2022-05-25T20:00:00",
+                    "links": [{"nome": "ModSkin PoroMaster", "url": "https://github.com/PoroMaster/Latests/releases/download/pt_BR/PoroMaster.zip"},
+                              {"nome": "ModSkin Lite", "url": "https://github.com/poromaster/Latests/releases/download/pt_BR/PoroMaster_Lite.zip", "indisponivel": True}]},
+        "beta_url": "https://github.com/modskinbr/Testers/releases/download/Betas/BETA.zip",
+        "betas": [{"id": f"#{n:04d}", "status": "teste" if n == 103 else ("reprovada" if n in (95, 97) else "aprovada")} for n in range(103, 93, -1)]
+    },
     "novidades": [
         {"quando": "2026-09-24T12:00:00", "titulo": "ModSkin 13.6.1 liberado para testers", "texto": "Download antecipado disponível no painel. Confiram as skins novas do patch."},
         {"quando": "2026-09-22T09:00:00", "titulo": "Evento: Semana de caça aos bugs", "texto": "Todo bug confirmado nesta semana vale 1 Fragmento Estelar."},
         {"quando": "2026-09-19T18:00:00", "titulo": "Novo tema na loja: Águas de Sentina", "texto": "Personalize o fundo do painel. Custa 900 Moedas."}
     ]
-}
-
-tradutores = {
-    "id": "tradutores", "nome": "Tradutores ModSkin", "descricao": "Equipe que traduz o site e o cliente",
-    "plano": "gratis", "cor": "#2bb5a6",
-    "regras": [
-        {"id": "t1", "acao": "Página traduzida", "setor": "Tradução", "recompensa": {"pp": 3, "moedas": 30}},
-        {"id": "t2", "acao": "Revisão de tradução", "setor": "Revisão", "recompensa": {"pp": 1, "moedas": 15}}
-    ],
-    "membros": [
-        membro("n1", "Luckey", "Dono", "Dev", None, 20, 1, [300, 1, 3, 0],
-               [2, 3, 1, 4, 2, 5, 3, 4], "2022-11-15", foto="image/Profile/01.png", conta="u1"),
-        membro("n2", "Diogo Teixeira", "Membro", "Tester", 62, 18, 1, [240, 1, 2, 0],
-               [2, 2, 3, 2, 4, 3, 3, 4], "2022-11-15", foto="assets/users/03.png", tags=["Corretor"]),
-        membro("n3", "Selin", "Membro", "Tester", 35, 5, 0, [60, 0, 0, 0],
-               [0, 1, 1, 2, 1, 2, 2, 3], "2022-12-01")
-    ],
-    "envios": [
-        {"id": "f1", "membro": "n2", "regra": "t1", "detalhe": "FAQ traduzido para es_AR", "quando": "2026-09-24T10:00:00", "status": "pendente"}
-    ],
-    "atividade": [{"quando": "2026-09-24T10:00:00", "texto": "Diogo Teixeira enviou o FAQ em espanhol"}],
-    "novidades": [{"quando": "2026-09-20T12:00:00", "titulo": "Faltam 4 páginas em turco", "texto": "Quem puder ajudar, pegue uma página no canal de tradução."}]
 }
 
 # Toda pessoa da staff tem uma conta de login. As três primeiras são fixas (u1, u2, u3);
@@ -357,7 +312,7 @@ contas = [
     {"id": "u2", "nome": "Jake", "email": "jake@poromaster.dev", "foto": "image/Profile/04.png"},
     {"id": "u3", "nome": "Khyago", "email": "khyago@poromaster.dev", "foto": "image/Profile/03.png"},
 ]
-for com, dominio in ((poromaster, "poromaster.dev"), (tradutores, "tradutores.dev")):
+for com, dominio in ((poromaster, "poromaster.dev"),):
     for m in com["membros"]:
         if m.get("conta"):
             continue
@@ -372,7 +327,7 @@ dados = {
     "sistema": sistema,
     "cosmeticos": cosmeticos,
     "packs": packs,
-    "comunidades": [poromaster, tradutores]
+    "comunidades": [poromaster]
 }
 
 # coleções geradas por gerar-colecoes.py (Poro, regiões, CBLoL, Ultimates e ranqueada)

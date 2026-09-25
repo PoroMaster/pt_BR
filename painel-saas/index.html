@@ -657,7 +657,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 /* tela de carregamento */
 .ld{position:fixed;inset:0;z-index:80;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;padding:20px 16px 90px;background:#010a13;overflow:auto;transition:opacity .6s}
-.ld.sai{opacity:0;pointer-events:none}
+.ld.sai{opacity:0;pointer-events:none;transition-duration:.25s}
 .ld-fundo{position:fixed;inset:0;background:center/cover no-repeat;filter:blur(18px) brightness(.25) saturate(.8);transform:scale(1.1)}
 .ld > *:not(.ld-fundo){position:relative}
 .ld-topo{text-align:center;display:grid;gap:2px}
@@ -896,7 +896,14 @@ i.on{display:inline-block;width:8px;height:8px;border-radius:50%;background:var(
   .status-pop{position:fixed;top:64px;left:8px;right:8px;width:auto}
   #side.social{padding-top:0}
 }
-@media (max-width:560px){#topo #nav{display:none}.topo-icones{margin-left:auto}}
+@media (max-width:560px){
+  #app #topo{flex-wrap:wrap;height:auto;row-gap:0;padding-top:6px}
+  .topo-icones{margin-left:auto}
+  #app #topo #nav{order:9;flex:1 0 100%;height:42px;overflow-x:auto;border-top:1px solid var(--ouro-4);margin:0 -6px;padding:0 6px}
+  #app #topo .jogar-wrap{margin-bottom:6px}
+  #app #topo .topo-icones{height:52px}
+  #topo #nav .tab[aria-current="page"]::after{bottom:4px}
+}
 /* correções da auditoria */
 .forge .btn{white-space:normal;text-align:center;line-height:1.3;max-width:100%}
 td .rar{min-width:max-content}
@@ -932,6 +939,22 @@ td b,td small{overflow-wrap:anywhere}
 .gp-item img{width:22px;height:22px;object-fit:contain}
 .gp-item b{color:var(--ok);font-family:var(--mono)}
 .give-prev .label{margin-right:2px}
+/* betas */
+.betas{display:grid;gap:6px}
+.beta{display:flex;align-items:center;gap:12px;padding:10px 12px;background:#010a13;border:1px solid var(--line)}
+.beta.teste{border-color:var(--ouro-2);box-shadow:0 0 12px rgba(200,170,110,.2)}
+.beta-ic{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;font-weight:800;flex:none;border:1px solid currentColor}
+.beta-ic.ok{color:var(--ok)}.beta-ic.bad{color:var(--bad)}.beta-ic.warn{color:var(--warn)}
+.beta-nome{display:grid;min-width:0}.beta-nome b{font-family:var(--mono);color:var(--ouro-1)}
+.beta-nome small{font-size:12px}.beta-nome small.ok{color:var(--ok)}.beta-nome small.bad{color:var(--bad)}.beta-nome small.warn{color:var(--warn)}
+.beta-acoes{margin-left:auto;display:flex;flex-wrap:wrap;gap:6px;justify-content:flex-end}
+.card h2 #beta-nova{float:right}
+.estavel{display:grid;gap:2px}.estavel-v{font:800 22px var(--display);color:var(--ouro-1);letter-spacing:.04em}
+.passos{margin:0;padding-left:20px;display:grid;gap:6px;color:var(--ink-2)}
+#topo .count.novo{background:var(--azul-2);color:#010a13;text-transform:uppercase;font-size:9.5px;letter-spacing:.06em}
+@media (max-width:600px){.beta{flex-wrap:wrap}.beta-acoes{margin-left:0;width:100%;justify-content:flex-start}}
+a.btn{text-decoration:none}
+.card .grid > .btn{white-space:normal;min-width:0;text-align:center}
 </style>
 
 <section id="login">
@@ -984,7 +1007,7 @@ td b,td small{overflow-wrap:anywhere}
 
 <script>
 (function(){
-const STORE = "lsp-painel-v16";
+const STORE = "lsp-painel-v18";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -1290,9 +1313,9 @@ function carregamento(c, me){
   let fim = false;
   let di = Math.floor(Math.random()*DICAS.length);
   const trocaDica = setInterval(()=>{ di = (di+1) % DICAS.length; const d = ov.querySelector("#ld-dica"); if (d){ d.classList.remove("troca"); void d.offsetWidth; d.classList.add("troca"); d.innerHTML = `<b>Dica:</b> ${esc(DICAS[di])}`; } }, 3200);
-  const acabar = () => { if (fim) return; fim = true; clearInterval(t); clearInterval(trocaDica); cartas.forEach(cd=>{ cd.querySelector(".ld-barra i").style.width="100%"; cd.querySelector(".ld-pct").textContent="100%"; cd.classList.add("pronto"); });
-    setTimeout(()=>{ ov.classList.add("sai"); setTimeout(()=>ov.remove(), 600); }, reduz() ? 0 : 1100); };
-  ov.querySelector(".ld-pular").onclick = acabar;
+  const acabar = (pulou) => { if (fim) return; fim = true; clearInterval(t); clearInterval(trocaDica); cartas.forEach(cd=>{ cd.querySelector(".ld-barra i").style.width="100%"; cd.querySelector(".ld-pct").textContent="100%"; cd.classList.add("pronto"); });
+    setTimeout(()=>{ ov.classList.add("sai"); setTimeout(()=>ov.remove(), pulou ? 250 : 600); }, reduz() || pulou ? 0 : 1100); };
+  ov.querySelector(".ld-pular").onclick = () => acabar(true);
   const t = setInterval(()=>{
     cartas.forEach((cd,i)=>{ if (pct[i]>=100) return; pct[i] = Math.min(100, pct[i] + Math.random()*(i===0?3.6:4.8) * (pct[i] > 85 ? .6 : 1));
       cd.querySelector(".ld-barra i").style.width = pct[i]+"%"; cd.querySelector(".ld-pct").textContent = Math.floor(pct[i])+"%"; if (pct[i]>=100) cd.classList.add("pronto"); });
@@ -1326,7 +1349,7 @@ function render(){
   /* barra de cima como a do cliente: logo + VERIFICAR (o JOGAR), status, abas em texto, ícones dourados, moedas */
   const on = id => session.view===id ? 'aria-current="page"' : "";
   const adminIds = VIEWS.filter(v=>v.admin).map(v=>v.id);
-  $("#nav").innerHTML = `<button class="tab" data-view="inicio" ${on("inicio")}>Início</button><button class="tab" data-view="ranking" ${on("ranking")}>Ranking</button>`
+  $("#nav").innerHTML = `<button class="tab" data-view="inicio" ${on("inicio")}>Início</button><button class="tab" data-view="ranking" ${on("ranking")}>Ranking</button><button class="tab" data-view="betas" ${on("betas")}>Betas${(c.modskin?.betas||[]).some(b=>b.status==="teste")?`<span class="count novo">nova</span>`:""}</button>`
     + (adm ? `<div class="admin-wrap"><button class="tab" id="admin-btn" aria-expanded="false" ${adminIds.includes(session.view)?'aria-current="page"':""}>Staff ▾</button><div class="admin-menu" id="admin-menu" hidden>${VIEWS.filter(v=>v.admin).map(v=>`<button data-view="${v.id}" ${on(v.id)}>${esc(v.nome)}</button>`).join("")}</div></div>` : "");
   const ICO = {
     colecao:`<svg viewBox="0 0 24 24"><path d="M6 8h12l-1 12H7L6 8Z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/><path d="M9 12h6"/></svg>`,
@@ -1355,7 +1378,7 @@ function render(){
   $("#amigos").innerHTML = `<div class="social-h"><span>Social</span><small>${c.membros.filter(online).length}/${c.membros.length} online</small></div>` + grupos.map(g=>`<details open class="grupo"><summary>${esc(g.cg)} <small>(${g.ms.filter(online).length}/${g.ms.length})</small></summary>${g.ms.sort((a,b)=>online(b)-online(a)||a.nome.localeCompare(b.nome)).map(m=>`<button class="amigo ${online(m)?"":"off"}" data-member="${m.id}">${avatarR(m,32)}<span><b>${esc(m.nome)}</b><small>${online(m)?`<i class="on"></i>${m.pp!=null?`${m.pp} P.P.`:"Online"}`:"Offline"}</small></span></button>`).join("")}</details>`).join("");
   const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
   $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
-  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, membro:vMembro, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
+  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, membro:vMembro, betas:vBetas, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
   const rolagem = $$("#main .evo, #main .mini-evo").map(el=>el.scrollLeft);
   $("#main").innerHTML = `<div class="mobile-bar"><b>${esc(c.nome)}</b><button class="btn btn-sm" id="menu-btn" aria-label="Abrir social">Social ☰</button></div>` + V[session.view](c, me, adm);
   $("#side").classList.remove("open");
@@ -1413,7 +1436,7 @@ function statDest(m){
 }
 
 function vInicio(c, me, adm){
-  const tot=weekTotals(c), last=tot.at(-1), prev=tot.at(-2)||1, diff=Math.round((last-prev)/prev*100);
+  const tot=weekTotals(c), last=tot.at(-1), prev=tot.at(-2)||0, diff=prev ? Math.round((last-prev)/prev*100) : 0;
   const ativos=c.membros.filter(m=>m.contrib.at(-1)>0).length, pend=pending(c);
   const atencao = [
     ...c.membros.filter(podePromover).map(m=>({m, t:`Chegou a ${S.reputacao.max} P.P. e pode subir para ${S.cargos[cargoIdx(m)+1].nome}`, k:"gold", i:S.reputacao.icone})),
@@ -1423,7 +1446,7 @@ function vInicio(c, me, adm){
   const bot = S.bot;
   return head(`Olá, ${esc(me.nome)}`, `Resumo da ${esc(c.nome)} na semana de ${weekLabels(tot.length).at(-1)}.`) +
   `<div class="grid kpis">
-    <div class="card kpi"><div class="label">Contribuições na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
+    <div class="card kpi"><div class="label">Contribuições na semana</div><div class="v">${fmt(last)}</div>${last===prev ? `<div class="d">igual à semana anterior</div>` : prev===0 ? `<div class="d up">▲ primeira semana com contribuições</div>` : `<div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div>`}</div>
     <div class="card kpi"><div class="label">Membros ativos</div><div class="v">${ativos}<span style="font-size:16px;color:var(--ink-3)">/${c.membros.length}</span></div><div class="d">contribuíram nesta semana</div></div>
     <div class="card kpi"><img class="kpi-ico" src="${src(S.alerta.img)}" alt=""><div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
     <div class="card kpi"><img class="kpi-ico" src="${src(ma?ma.t.img:e.t.img)}" alt=""><div class="label">Sua reputação</div><div class="v disp" style="font-size:18px;margin-top:8px">${ma?esc(ma.t.nome):"Isento (Dev)"}</div><div class="d">${ma?`${me.pp} P.P. · `:""}elo ${esc(e.t.nome)}</div></div>
@@ -1435,7 +1458,7 @@ function vInicio(c, me, adm){
   </div>
   <div class="grid halves" style="margin-top:16px">
     <div class="card"><h2>Novidades</h2>${c.novidades.map(n=>`<div class="post"><img src="${src(bot.img)}" alt=""><div><div class="row" style="gap:6px"><b>${esc(n.titulo)}</b></div><small class="note">${esc(bot.nome)} · ${when(n.quando)}</small><p>${esc(n.texto)}</p></div></div>`).join("")}</div>
-    <div class="card"><h2>Atividade recente</h2><ul class="feed">${c.atividade.slice(0,7).map(a=>`<li><span class="dot"></span><span>${esc(a.texto)}<small>${when(a.quando)}</small></span></li>`).join("")}</ul></div>
+    <div class="card"><h2>Atividade recente</h2>${c.atividade.length ? `<ul class="feed">${c.atividade.slice(0,7).map(a=>`<li><span class="dot"></span><span>${esc(a.texto)}<small>${when(a.quando)}</small></span></li>`).join("")}</ul>` : `<p class="note">Nada por aqui ainda. Aprovações, compras e promoções vão aparecer aqui.</p>`}</div>
   </div>`;
 }
 
@@ -1473,9 +1496,9 @@ function vVerif(c, me, adm){
       <div>${list.length?list.map(e=>subRow(c,e,true)).join(""):`<p class="note">Nenhuma verificação pendente.</p>`}</div></div>
     <form class="card grid" id="send-form" style="gap:12px;align-content:start">
       <h2>Enviar verificação</h2>
-      <div class="field"><label class="label" for="send-rule">O que você fez</label><select id="send-rule">${regras.map(r=>`<option value="${r.id}">${esc(r.acao)}</option>`).join("")}</select></div>
-      <div id="send-rew">${rew(regras[0].recompensa)}</div>
-      <div class="field"><label class="label" for="send-detail">Detalhes</label><input id="send-detail" placeholder="Ex.: Jinx, Arcane: cromas conferidos" required></div>
+      <div class="field"><label class="label" for="send-rule">O que você fez</label><select id="send-rule">${regras.map(r=>`<option value="${r.id}" ${session.preencher && session.preencher.regra===r.id?"selected":""}>${esc(r.acao)}</option>`).join("")}</select></div>
+      <div id="send-rew">${rew((regras.find(r=>session.preencher && r.id===session.preencher.regra)||regras[0]).recompensa)}</div>
+      <div class="field"><label class="label" for="send-detail">Detalhes</label><input id="send-detail" placeholder="Ex.: Jinx, Arcane: cromas conferidos" required value="${esc(session.preencher ? session.preencher.detalhe : "")}"></div>
       <button class="btn btn-primary" type="submit">Enviar como ${esc(me.nome)}</button>
     </form>
   </div>`;
@@ -1820,6 +1843,37 @@ function vColecao(c, me){
      <div id="col-grade">${colGradeHtml(me)}</div></div>`;
 }
 
+/* ---------- ModSkin: versão estável e betas experimentais para os testers ---------- */
+function vBetas(c, me, adm){
+  const ms = c.modskin || {betas:[]}, est = ms.estavel, atual = ms.betas.find(b=>b.status==="teste");
+  const ST = {teste:["⏳","Em teste","warn"], aprovada:["✔","Aprovada","ok"], reprovada:["✖","Reprovada","bad"]};
+  const minhas = id => c.envios.filter(e=>e.membro===me.id && (e.detalhe||"").startsWith(`BETA ${id}`));
+  const linha = b => { const [ic,rot,cl] = ST[b.status], meu = minhas(b.id);
+    return `<div class="beta ${b.status}">
+      <span class="beta-ic ${cl}" aria-hidden="true">${ic}</span>
+      <span class="beta-nome"><b>BETA ${esc(b.id)}</b><small class="${cl}">${rot}${meu.length?` · você enviou ${meu.length} ${meu.length>1?"verificações":"verificação"}`:""}</small></span>
+      <span class="beta-acoes">
+        ${b.status==="teste" ? `<a class="btn btn-sm btn-primary" href="${esc(ms.beta_url)}" target="_blank" rel="noopener">⬇ Baixar</a>
+          <button class="btn btn-sm" data-beta-ok="${esc(b.id)}">Funcionou</button><button class="btn btn-sm btn-bad" data-beta-bug="${esc(b.id)}">Deu problema</button>` : ""}
+        ${adm && b.status==="teste" ? `<button class="btn btn-sm btn-gold" data-beta-st="${esc(b.id)}:aprovada">Aprovar</button><button class="btn btn-sm btn-bad" data-beta-st="${esc(b.id)}:reprovada">Reprovar</button>` : ""}
+      </span></div>`; };
+  return head("Betas do ModSkin", "Versões experimentais para a staff testar antes de todo mundo. Baixe a beta em teste, experimente no jogo e diga se funcionou: vira uma verificação para o admin aprovar.") +
+  `<div class="grid two">
+    <div class="card"><h2>Experimentais (Betas) ${adm?`<button class="btn btn-sm btn-primary" id="beta-nova">+ Publicar nova beta</button>`:""}</h2>
+      ${atual ? `<p class="note" style="margin-bottom:10px">A <b>BETA ${esc(atual.id)}</b> está em teste agora.</p>` : `<p class="note" style="margin-bottom:10px">Nenhuma beta em teste agora.</p>`}
+      <div class="betas">${ms.betas.map(linha).join("")}</div></div>
+    <div class="grid" style="gap:16px;align-content:start">
+      ${est ? `<div class="card"><h2>Última atualização do ModSkin</h2>
+        <div class="estavel"><span class="estavel-v">Versão ${esc(est.versao)}</span><span class="note">Patch ${esc(est.patch)} · ${when(est.quando)}</span></div>
+        <div class="grid" style="gap:8px;margin-top:12px">${est.links.map(l=>l.indisponivel ? `<span class="btn" aria-disabled="true" style="opacity:.55;cursor:default">${esc(l.nome)} · indisponível neste patch</span>` : `<a class="btn btn-gold" href="${esc(l.url)}" target="_blank" rel="noopener">⬇ Baixar ${esc(l.nome)}</a>`).join("")}</div></div>` : ""}
+      <div class="card"><h2>Como testar</h2><ol class="passos">
+        <li>Baixe a beta em teste e instale por cima do ModSkin.</li>
+        <li>Entre numa partida personalizada e confira skins, cromas e efeitos.</li>
+        <li>Clique em <b>Funcionou</b> ou <b>Deu problema</b> e descreva o que viu.</li>
+        <li>Um admin aprova a verificação e a recompensa entra na hora.</li></ol></div>
+    </div></div>`;
+}
+
 function vForja(c, me){
   const inv = me.inventario;
   if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
@@ -2145,6 +2199,18 @@ function bindAdmin(c, after, root){
   const pr=$r("[data-promo]"); if(pr) pr.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===pr.dataset.promo); promover(c,m); after(); toast(`${m.nome} agora é ${m.cargo} e ganhou ${S.promocao.fragmentos} Fragmentos.`); });
 }
 function bindView(c, me){
+  if (session.view==="verificacoes") session.preencher = null;
+  if (session.view==="betas"){
+    const ir = (regra, detalhe) => { session.preencher = {regra, detalhe}; session.view = "verificacoes"; render(); const d=$("#send-detail"); if(d){ d.focus(); d.setSelectionRange(d.value.length, d.value.length); } };
+    const achar = t => (c.regras.find(r=>new RegExp(t,"i").test(r.acao)) || c.regras[0]).id;
+    $$("[data-beta-ok]").forEach(b=>b.addEventListener("click",()=>ir(achar("verifica"), `BETA ${b.dataset.betaOk}: funcionou, `)));
+    $$("[data-beta-bug]").forEach(b=>b.addEventListener("click",()=>ir(achar("bug"), `BETA ${b.dataset.betaBug}: problema em `)));
+    $$("[data-beta-st]").forEach(b=>b.addEventListener("click",()=>{ const [id,st]=b.dataset.betaSt.split(":"), bt=c.modskin.betas.find(x=>x.id===id); bt.status=st;
+      log(c, `BETA ${id} foi ${st} por ${me.nome}`); save(); render(); toast(`BETA ${id} ${st}.`, {titulo:"Betas", tipo: st==="reprovada"?"erro":undefined}); }));
+    const nv=$("#beta-nova"); if(nv) nv.addEventListener("click",()=>{ const ult = c.modskin.betas[0], n = ult ? parseInt(ult.id.slice(1),10)+1 : 1, id = `#${String(n).padStart(4,"0")}`;
+      c.modskin.betas.forEach(b=>{ if(b.status==="teste") b.status="aprovada"; }); c.modskin.betas.unshift({id, status:"teste"});
+      log(c, `${me.nome} publicou a BETA ${id} para os testers`); save(); render(); toast(`Os testers já podem baixar e testar.`, {titulo:`BETA ${id} publicada`}); });
+  }
   if (session.view==="colecao"){
     const redesenha = () => { const g = $("#col-grade"); if (g) g.innerHTML = colGradeHtml(me); };
     const cb = $("#col-busca"); if (cb) cb.addEventListener("input", ()=>{ session.col.busca = cb.value; session.col.lim = 120; redesenha(); });
