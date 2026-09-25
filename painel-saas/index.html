@@ -193,9 +193,9 @@ td.r,th.r{text-align:right}
 .lvl{display:inline-flex;gap:3px}
 .lvl i{width:10px;height:10px;border-radius:2px;background:var(--panel-2);border:1px solid var(--line);transform:rotate(45deg)}
 .lvl i.on{background:var(--rc);border-color:var(--rc)}
-.pilha > .frente{position:relative;z-index:2;display:grid;place-items:center;max-width:100%;max-height:100%}
-.pilha > .frente > img{max-width:72%;max-height:78%;object-fit:contain}
-.pilha.icone > .frente > img{border-radius:50%;max-height:74%}
+.pilha > .frente{position:absolute;inset:0;z-index:2;display:grid;place-items:center}
+.pilha > .frente > img{height:78%;width:auto;max-width:72%;object-fit:contain;filter:drop-shadow(0 4px 10px rgba(0,0,0,.6))}
+.pilha.icone > .frente > img{border-radius:50%;height:74%;aspect-ratio:1;box-shadow:0 0 0 2px rgba(255,255,255,.18),0 6px 16px rgba(0,0,0,.6);filter:none}
 .pilha .sombra{position:absolute;top:50%;left:var(--l);height:var(--h,62%);transform:translate(-50%,-50%) scale(var(--s));opacity:var(--o);filter:brightness(.75) saturate(.7) blur(.3px);z-index:1;pointer-events:none;display:grid;place-items:center}
 .pilha .sombra{aspect-ratio:1;width:auto}
 .pilha .sombra:not(.b) img{height:100%!important;width:100%!important;max-width:none!important;object-fit:contain}
