@@ -15,11 +15,11 @@ sistema = {
         "nome": "Pontos de Prestígio",
         "sigla": "P.P.",
         "icone": B + "Pontos_Prestigios.png",
-        "min": 20, "max": 100, "inicial": 30, "alerta_abaixo_de": 30,
-        "nota": "Vale para todos, menos os Devs. Em 100 o membro pode subir de cargo; em 20 é removido da staff."
+        "min": 0, "max": 100, "inicial": 30, "alerta_abaixo_de": 30,
+        "nota": "Vale para todos, menos os Devs. Todo mundo entra com 30 P.P. Em 100 o membro pode subir de cargo; se cair para 0, é demitido da staff."
     },
     "maestrias": [
-        {"nome": "Sem Maestria", "min": 20, "img": B + "Rank_0.png"},
+        {"nome": "Sem Maestria", "min": 0, "img": B + "Rank_0.png"},
         {"nome": "Maestria 1", "min": 30, "img": B + "Rank_1.png"},
         {"nome": "Maestria 2", "min": 40, "img": B + "Rank_2.png"},
         {"nome": "Maestria 3", "min": 50, "img": B + "Rank_3.png"},

@@ -955,6 +955,10 @@ td b,td small{overflow-wrap:anywhere}
 @media (max-width:600px){.beta{flex-wrap:wrap}.beta-acoes{margin-left:0;width:100%;justify-content:flex-start}}
 a.btn{text-decoration:none}
 .card .grid > .btn{white-space:normal;min-width:0;text-align:center}
+.admin-box .btn.perigo,.btn.perigo{background:linear-gradient(180deg,#7a1e1a,#3a1414) padding-box,linear-gradient(180deg,#ff9d8f,#e2574f) border-box;color:#fff;white-space:normal}
+.ex-linha{display:flex;align-items:center;gap:10px;padding:8px 10px;background:#010a13;border:1px solid var(--line)}
+.ex-linha span{flex:1;display:grid;min-width:0}.ex-linha b{color:var(--ink-2)}.ex-linha small{color:var(--ink-3)}
+.acc-lista li.acc-off{opacity:.5;cursor:not-allowed}
 </style>
 
 <section id="login">
@@ -1007,7 +1011,7 @@ a.btn{text-decoration:none}
 
 <script>
 (function(){
-const STORE = "lsp-painel-v18";
+const STORE = "lsp-painel-v19";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -1213,13 +1217,23 @@ function aplicar(c, m, r, motivo){
   }
   if (depE.i > antesE.i) log(c, `${m.nome} alcançou o elo ${depE.t.nome}`);
   save();
+  checarDemissao(c, m);
 }
+/* chegou a 0 P.P.: sai da staff. Fica em ex-membros (pode ser readmitido) e as verificações pendentes são canceladas */
+function demitir(c, m, motivo){
+  c.membros = c.membros.filter(x=>x.id!==m.id);
+  c.envios.forEach(e=>{ if (e.membro===m.id && e.status==="pendente") e.status = "recusado"; });
+  (c.ex_membros = c.ex_membros || []).unshift({...m, saiu: NOW_ISO, motivo});
+  log(c, `${m.nome} foi demitido da staff: ${motivo}`);
+  save();
+}
+const vaiDemitir = (m, delta) => m.pp!=null && m.pp + delta <= S.reputacao.min;
+function checarDemissao(c, m){ if (m.pp!=null && m.pp <= S.reputacao.min && c.membros.includes(m)){ demitir(c, m, `chegou a ${S.reputacao.min} P.P.`); toast(`${m.nome} chegou a ${S.reputacao.min} P.P. e saiu da staff.`, {titulo:"Membro demitido", tipo:"erro"}); return true; } return false; }
 function penalizar(c, m){
   if (imune(m)) { toast(`${m.nome} tem destaque Laranja e está imune a penalidades.`); return false; }
   m.penalidade = true; m.pp = clamp(m.pp + S.penalidade.pp, S.reputacao.min, S.reputacao.max);
   log(c, `${m.nome} recebeu uma penalidade (${S.penalidade.pp} P.P.)`);
-  if (m.pp <= S.reputacao.min) log(c, `${m.nome} chegou a ${S.reputacao.min} P.P. e corre risco de sair da staff`);
-  save(); return true;
+  save(); if (checarDemissao(c, m)) return "demitido"; return true;
 }
 function promover(c, m){
   const de = m.cargo, para = S.cargos[cargoIdx(m)+1].nome;
@@ -1246,7 +1260,8 @@ function renderLogin(){
       .sort((a,b)=>ordemCargo(b.m?.cargo)-ordemCargo(a.m?.cargo) || a.a.nome.localeCompare(b.a.nome));
     if (!doGrupo.length) return "";
     return `<li role="presentation" class="acc-grupo">${esc(c.nome)} <small>${doGrupo.length}</small></li>` + doGrupo.map(x=>`<li role="option" id="acc-op-${k++}" data-acc="${x.a.id}" aria-selected="false">${foto(x,40)}<span><b>${esc(x.a.nome)}</b><small>${esc(x.roles)}</small></span></li>`).join("");
-  }).join("");
+  }).join("") + (()=>{ const ex = contas.filter(x=>!db.comunidades.some(c=>c.membros.some(m=>m.conta===x.a.id)));
+    return ex.length ? `<li role="presentation" class="acc-grupo">Ex-staff <small>${ex.length}</small></li>` + ex.map(x=>`<li role="option" id="acc-op-${k++}" data-acc="${x.a.id}" aria-selected="false" aria-disabled="true" class="acc-off">${avatar({id:x.a.id,nome:x.a.nome,foto:x.a.foto},40)}<span><b>${esc(x.a.nome)}</b><small>Desligado da staff</small></span></li>`).join("") : ""; })();
   session.contasLogin = contas;
 }
 /* lista suspensa de contas: abrir, navegar com as setas, escolher preenche e-mail e senha */
@@ -1254,6 +1269,7 @@ function accAbrir(abrir){ const l=$("#acc-lista"), b=$("#acc-sel"); l.hidden=!ab
   if (abrir){ const sel = l.querySelector('[aria-selected="true"]') || l.querySelector('[role="option"]'); accFoco(sel); l.focus(); } }
 function accFoco(li){ $$("#acc-lista [role=option]").forEach(x=>x.classList.toggle("foco", x===li)); if (li){ $("#acc-lista").setAttribute("aria-activedescendant", li.id); li.scrollIntoView({block:"nearest"}); } }
 function accEscolher(li){
+  if (li.getAttribute("aria-disabled")==="true"){ const err=$("#login-err"); err.hidden=false; err.textContent="Essa conta foi desligada da staff (chegou a 0 P.P.). Fale com um admin para ser readmitido."; accAbrir(false); return; }
   const x = session.contasLogin.find(c=>c.a.id===li.dataset.acc); if (!x) return;
   $$("#acc-lista [role=option]").forEach(o=>o.setAttribute("aria-selected", String(o===li)));
   $("#acc-sel").innerHTML = li.innerHTML + `<span class="acc-seta" aria-hidden="true">▾</span>`;
@@ -1280,7 +1296,10 @@ $("#login-form").addEventListener("submit", e=>{
   if(!acc){ err.hidden=false; err.textContent="Não encontramos esse e-mail. Escolha uma das contas de demonstração acima."; return; }
   login(acc.id);
 });
-function login(id){ session.conta=id; session.ws=myWorkspaces()[0].id; session.view="inicio"; $("#login").hidden=true; $("#app").hidden=false; render(); carregamento(ws(), meIn(ws())); }
+function login(id){
+  const tem = db.comunidades.some(c=>c.membros.some(m=>m.conta===id));
+  if (!tem){ const err=$("#login-err"); err.hidden=false; err.textContent="Essa conta foi desligada da staff (chegou a 0 P.P.). Fale com um admin para ser readmitido."; return; }
+  session.conta=id; session.ws=myWorkspaces()[0].id; session.view="inicio"; $("#login").hidden=true; $("#app").hidden=false; render(); carregamento(ws(), meIn(ws())); }
 /* tela de carregamento no estilo da partida do LoL: a staff em cartas verticais, cada uma carregando até 100% */
 const DICAS = [
   "Cosméticos repetidos do Baú Hextech viram fragmentos: guarde para a Forja.",
@@ -1393,7 +1412,7 @@ document.addEventListener("click", e=>{
   const w = e.target.closest("[data-ws]");
   if(w){ if(w.dataset.ws==="__new") toast("Numa versão real, aqui você criaria uma nova comunidade."); else { session.ws=w.dataset.ws; session.view="inicio"; session.forjaSel=null; render(); } $("#ws-menu").hidden=true; return; }
   if(e.target.closest("#mute")){ mudo=!mudo; try{ localStorage.setItem("lsp-mudo", mudo?"1":"0"); }catch(err){} render(); if(!mudo) som("click",{vol:.5}); return; }
-  if(e.target.closest("#logout")){ session.ed=null; session.conta=null; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
+  if(e.target.closest("#logout")){ session.ed=null; session.conta=null; renderLogin(); $("#login-err").hidden=true; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
   if(e.target.closest("#menu-btn")){ $("#side").classList.add("open"); return; }
   if(e.target.closest("#status-btn")){ const pp=$("#status-pop"); pp.hidden=!pp.hidden; $("#status-btn").setAttribute("aria-expanded", String(!pp.hidden)); som("click",{vol:.4}); return; }
   if(e.target.closest("#admin-btn")){ const am=$("#admin-menu"), r=$("#admin-btn").getBoundingClientRect(); am.style.left = Math.max(8, Math.min(r.left, innerWidth-220))+"px"; am.style.top = (r.bottom-6)+"px"; am.hidden=!am.hidden; $("#admin-btn").setAttribute("aria-expanded", String(!am.hidden)); return; }
@@ -1478,7 +1497,7 @@ function vRanking(c){
 }
 
 function subRow(c,e,actions){
-  const m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra), adm=isAdmin(c);
+  const m=c.membros.find(x=>x.id===e.membro) || (c.ex_membros||[]).find(x=>x.id===e.membro) || {id:e.membro, nome:"Ex-membro"}, rg=c.regras.find(x=>x.id===e.regra), adm=isAdmin(c);
   const st = e.status==="pendente"?"warn":e.status==="aprovado"?"ok":"bad";
   return `<div class="sub ${e.status!=="pendente"?"done":""}">
     <div style="min-width:0"><b>${esc(e.detalhe)}</b>
@@ -1539,7 +1558,7 @@ function adminBox(c,m){
     <div class="give-prev" id="give-prev">${givePrev(c, m, c.regras[0].id)}</div>
     <div class="row"><button class="btn btn-sm btn-primary" data-give="${m.id}">Dar recompensa</button></div>
     <div class="row">
-      ${m.pp!=null?`<button class="btn btn-sm btn-bad" data-penal="${m.id}">Aplicar penalidade (${S.penalidade.pp} P.P.)</button>`:""}
+      ${m.pp!=null?`<button class="btn btn-sm btn-bad" data-penal="${m.id}">Aplicar penalidade (${S.penalidade.pp} P.P.)${vaiDemitir(m, S.penalidade.pp) && !imune(m) ? " · demite" : ""}</button>`:""}
       ${m.destaque < S.destaques.length-1 ? `<button class="btn btn-sm" data-dest="${m.id}">Dar destaque (${esc(S.destaques[m.destaque+1].cor)})</button>` : ""}
       ${podePromover(m)?`<button class="btn btn-sm btn-gold" data-promo="${m.id}">Promover para ${esc(S.cargos[cargoIdx(m)+1].nome)}</button>`:""}
     </div></div>`;
@@ -1918,7 +1937,9 @@ function vMembros(c){
       <td class="r">${m.pp==null?`<span class="note">Isento</span>`:`<input class="inline-num" type="number" min="${S.reputacao.min}" max="${S.reputacao.max}" value="${m.pp}" data-pp="${m.id}" aria-label="P.P. de ${esc(m.nome)}">`}</td>
       <td class="r"><input class="inline-num" type="number" min="0" max="${S.miticos.max}" value="${m.pm}" data-pm="${m.id}" aria-label="Pontos Míticos de ${esc(m.nome)}"></td>
       <td><select class="sel" style="width:auto;padding:4px 6px" data-destaque="${m.id}" aria-label="Destaque de ${esc(m.nome)}">${S.destaques.map((d,i)=>`<option value="${i}" ${i===m.destaque?"selected":""}>${esc(d.cor)}</option>`).join("")}</select></td>
-    </tr>`).join("")}</tbody></table></div></div>`;
+    </tr>`).join("")}</tbody></table></div></div>
+  ${(c.ex_membros||[]).length ? `<div class="card" style="margin-top:16px"><h2>Ex-staff</h2><p class="note" style="margin-bottom:10px">Quem chegou a ${S.reputacao.min} P.P. foi demitido. Readmitir devolve o membro com ${S.reputacao.inicial} P.P.</p>
+    <div class="grid" style="gap:8px">${c.ex_membros.map(m=>`<div class="ex-linha">${avatar(m,34)}<span><b>${esc(m.nome)}</b><small>${esc(m.cargo)} · saiu ${when(m.saiu)} · ${esc(m.motivo)}</small></span><button class="btn btn-sm" data-readmitir="${m.id}">Readmitir</button></div>`).join("")}</div></div>` : ""}`;
 }
 
 function vSistema(c){
@@ -2181,11 +2202,18 @@ function bindAdmin(c, after, root){
   const $r = sel => root.querySelector(sel);
   const g=$r("[data-give]"); if(g) g.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===g.dataset.give), rg=c.regras.find(r=>r.id===$r("#give-rule").value); aplicar(c,m,rg.recompensa,`${meIn(c).nome} deu a ${m.nome}: ${rg.acao.toLowerCase()}`); m.contrib[m.contrib.length-1]++; save(); after(); toast(`${m.nome} ganhou ${rewTxt(rewDe(rg.recompensa, m))}.`, {titulo:`Recompensa: ${rg.acao}`}); });
   const gr=$r("#give-rule"), gp=$r("#give-prev"); if(gr && gp && g) gr.addEventListener("change",()=>{ gp.innerHTML = givePrev(c, c.membros.find(x=>x.id===g.dataset.give), gr.value); });
-  const p=$r("[data-penal]"); if(p) p.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===p.dataset.penal); if(penalizar(c,m)){ after(); toast(`Penalidade aplicada a ${m.nome}. O alerta fica até a reputação subir.`); } });
+  const p=$r("[data-penal]"); if(p) p.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===p.dataset.penal);
+    if (vaiDemitir(m, S.penalidade.pp) && !imune(m) && !p.dataset.confirma){ p.dataset.confirma="1"; p.textContent=`Confirmar: ${m.nome} vai a ${Math.max(S.reputacao.min, m.pp+S.penalidade.pp)} P.P. e será demitido`; p.classList.add("perigo"); return; }
+    const r = penalizar(c,m);
+    if (r==="demitido"){ if (session.view==="membro") session.view="membros"; render(); return; }
+    if (r){ after(); toast(`Penalidade aplicada a ${m.nome}. O alerta fica até a reputação subir.`); } });
   const d=$r("[data-dest]"); if(d) d.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===d.dataset.dest); m.destaque++; const t=S.destaques[m.destaque]; log(c, `${m.nome} recebeu ${t.nome}${imune(m)?" e ficou imune a rebaixamento":""}`); save(); after(); toast(`${m.nome} agora tem ${t.nome}.`); });
   const pr=$r("[data-promo]"); if(pr) pr.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===pr.dataset.promo); promover(c,m); after(); toast(`${m.nome} agora é ${m.cargo} e ganhou ${S.promocao.fragmentos} Fragmentos.`); });
 }
 function bindView(c, me){
+  $$("[data-readmitir]").forEach(b=>b.addEventListener("click",()=>{ const i=(c.ex_membros||[]).findIndex(x=>x.id===b.dataset.readmitir); if(i<0) return;
+    const m = {...c.ex_membros[i]}; delete m.saiu; delete m.motivo; m.pp = S.reputacao.inicial; m.penalidade = false;
+    c.ex_membros.splice(i,1); c.membros.push(m); log(c, `${m.nome} foi readmitido na staff com ${m.pp} P.P.`); save(); render(); toast(`${m.nome} voltou para a staff com ${m.pp} P.P.`, {titulo:"Readmitido"}); }));
   if (session.view==="verificacoes") session.preencher = null;
   if (session.view==="betas"){
     const ir = (regra, detalhe) => { session.preencher = {regra, detalhe}; session.view = "verificacoes"; render(); const d=$("#send-detail"); if(d){ d.focus(); d.setSelectionRange(d.value.length, d.value.length); } };
@@ -2228,7 +2256,7 @@ function bindView(c, me){
     c.envios.unshift({id:"e"+Date.now(), membro:me.id, regra:$("#send-rule").value, detalhe:d, quando:NOW_ISO, status:"pendente"});
     log(c, `${me.nome} enviou uma verificação`); save(); session.verifTab="pendente"; render(); toast("Verificação enviada para aprovação."); });
   bindAdmin(c, render, $("#main"));
-  $$("[data-pp]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pp); aplicar(c,m,{pp:clamp(parseInt(i.value,10)||S.reputacao.min,S.reputacao.min,S.reputacao.max)-m.pp}); render(); toast(`P.P. de ${m.nome}: ${m.pp}.`); }));
+  $$("[data-pp]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pp); const v = parseInt(i.value,10); aplicar(c,m,{pp:clamp(isNaN(v)?m.pp:v,S.reputacao.min,S.reputacao.max)-m.pp}); render(); if (c.membros.includes(m)) toast(`P.P. de ${m.nome}: ${m.pp}.`); }));
   $$("[data-pm]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pm); aplicar(c,m,{pm:clamp(parseInt(i.value,10)||0,0,S.miticos.max)-m.pm}); render(); toast(`Pontos Míticos de ${m.nome}: ${m.pm}.`); }));
   $$("[data-destaque]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.destaque); m.destaque=+s.value; save(); render(); toast(`${m.nome}: ${S.destaques[m.destaque].nome}.`); }));
   $$("[data-acesso]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.acesso); m.acesso=s.value; save(); render(); toast(`${m.nome} agora tem acesso ${s.value}.`); }));

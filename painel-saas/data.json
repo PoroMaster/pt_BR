@@ -37,16 +37,16 @@
       "nome": "Pontos de Prestígio",
       "sigla": "P.P.",
       "icone": "image/banco_de_dados/Pontos_Prestigios.png",
-      "min": 20,
+      "min": 0,
       "max": 100,
       "inicial": 30,
       "alerta_abaixo_de": 30,
-      "nota": "Vale para todos, menos os Devs. Em 100 o membro pode subir de cargo; em 20 é removido da staff."
+      "nota": "Vale para todos, menos os Devs. Todo mundo entra com 30 P.P. Em 100 o membro pode subir de cargo; se cair para 0, é demitido da staff."
     },
     "maestrias": [
       {
         "nome": "Sem Maestria",
-        "min": 20,
+        "min": 0,
         "img": "image/banco_de_dados/Rank_0.png"
       },
       {
