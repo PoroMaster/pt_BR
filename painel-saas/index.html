@@ -926,6 +926,12 @@ td b,td small{overflow-wrap:anywhere}
 .acc-lista li > span:last-child{min-width:0}
 .acc-foto{position:relative;flex:none}
 .acc-ic{position:absolute;right:-5px;bottom:-4px;width:20px;height:20px;border-radius:50%;border:2px solid var(--ouro-2);background:#010a13}
+.give-prev{display:flex;flex-wrap:wrap;align-items:center;gap:6px 12px;padding:10px 12px;background:#010a13;border:1px dashed var(--ouro-4)}
+.give-prev .label{flex-basis:100%}
+.gp-item{display:inline-flex;align-items:center;gap:6px;color:var(--ink);font-size:13.5px}
+.gp-item img{width:22px;height:22px;object-fit:contain}
+.gp-item b{color:var(--ok);font-family:var(--mono)}
+.give-prev .label{margin-right:2px}
 </style>
 
 <section id="login">
@@ -1052,6 +1058,14 @@ function rew(r){
   const keys = [["pp",S.reputacao.icone,"P.P."],["pm",S.miticos.icone,"Pontos Míticos"],["moedas",S.moedas.moedas.img,"Moedas"],["essencia",S.moedas.essencia.img,"Essência Mítica"],["fragmentos",S.moedas.fragmentos.img,"Fragmentos"],["estelares",S.moedas.estelares.img,"Fragmentos Estelares"]];
   return `<span class="rew">${keys.filter(([k])=>r[k]).map(([k,i,n])=>`<span title="${n}"><img src="${src(i)}" alt="">${r[k]>0?"+":""}${r[k]}</span>`).join("")}</span>`;
 }
+/* recompensa que o membro realmente recebe (Devs são isentos de P.P.) */
+const rewDe = (r, m) => { const x = {...r}; if (m && m.pp==null) delete x.pp; return x; };
+function rewTxt(r){ const n = {pp:"P.P.", pm:"Pontos Míticos", moedas:"Moedas", essencia:"Essência Mítica", fragmentos:"Fragmentos", estelares:"Fragmentos Estelares"};
+  return Object.keys(n).filter(k=>r[k]).map(k=>`${r[k]>0?"+":""}${r[k]} ${n[k]}`).join(", ") || "nada"; }
+const REW_NOMES = [["pp","P.P.",()=>S.reputacao.icone],["pm","Pontos Míticos",()=>S.miticos.icone],["moedas","Moedas",()=>S.moedas.moedas.img],["essencia","Essência Mítica",()=>S.moedas.essencia.img],["fragmentos","Fragmentos",()=>S.moedas.fragmentos.img],["estelares","Fragmentos Estelares",()=>S.moedas.estelares.img]];
+const givePrev = (c, m, id) => { const rg = c.regras.find(r=>r.id===id) || c.regras[0], r = rewDe(rg.recompensa, m);
+  const itens = REW_NOMES.filter(([k])=>r[k]).map(([k,n,img])=>`<span class="gp-item"><img src="${src(img())}" alt=""><b>${r[k]>0?"+":""}${r[k]}</b> ${n}</span>`).join("");
+  return `<span class="label">${esc(m.nome)} ganha</span>${itens || `<span class="note">nada</span>`}${m.pp==null && rg.recompensa.pp ? `<span class="note">Devs são isentos de P.P.</span>` : ""}`; };
 function rarTag(id){ const r=rar(id); return `<span class="rar ${id}" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
 function lvl(n, id, max=S.forja.nivel_max){ return `<span class="lvl" style="${rc(id)}" aria-label="Estágio ${n} de ${max}">${Array.from({length:max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
 const TIPO = {tema:"tema", borda:"borda", icone:"ícone", sentinela:"sentinela", emote:"emote"};
@@ -1499,7 +1513,9 @@ function profile(c, m, opts={}){
 }
 function adminBox(c,m){
   return `<div class="admin-box"><b>Ações de admin</b>
-    <div class="row"><select class="sel" id="give-rule" style="flex:1;min-width:180px" aria-label="Recompensa">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)}</option>`).join("")}</select><button class="btn btn-sm btn-primary" data-give="${m.id}">Dar recompensa</button></div>
+    <select class="sel" id="give-rule" aria-label="Recompensa">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)}</option>`).join("")}</select>
+    <div class="give-prev" id="give-prev">${givePrev(c, m, c.regras[0].id)}</div>
+    <div class="row"><button class="btn btn-sm btn-primary" data-give="${m.id}">Dar recompensa</button></div>
     <div class="row">
       ${m.pp!=null?`<button class="btn btn-sm btn-bad" data-penal="${m.id}">Aplicar penalidade (${S.penalidade.pp} P.P.)</button>`:""}
       ${m.destaque < S.destaques.length-1 ? `<button class="btn btn-sm" data-dest="${m.id}">Dar destaque (${esc(S.destaques[m.destaque+1].cor)})</button>` : ""}
@@ -2122,7 +2138,8 @@ function revelar(c, me, premios, ov){
 /* root: onde procurar os botões (a gaveta do membro ou a tela), para nunca ligar a mesma ação duas vezes */
 function bindAdmin(c, after, root){
   const $r = sel => root.querySelector(sel);
-  const g=$r("[data-give]"); if(g) g.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===g.dataset.give), rg=c.regras.find(r=>r.id===$r("#give-rule").value); aplicar(c,m,rg.recompensa,`${meIn(c).nome} deu a ${m.nome}: ${rg.acao.toLowerCase()}`); m.contrib[m.contrib.length-1]++; save(); after(); toast(`Recompensa entregue a ${m.nome}.`); });
+  const g=$r("[data-give]"); if(g) g.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===g.dataset.give), rg=c.regras.find(r=>r.id===$r("#give-rule").value); aplicar(c,m,rg.recompensa,`${meIn(c).nome} deu a ${m.nome}: ${rg.acao.toLowerCase()}`); m.contrib[m.contrib.length-1]++; save(); after(); toast(`${m.nome} ganhou ${rewTxt(rewDe(rg.recompensa, m))}.`, {titulo:`Recompensa: ${rg.acao}`}); });
+  const gr=$r("#give-rule"), gp=$r("#give-prev"); if(gr && gp && g) gr.addEventListener("change",()=>{ gp.innerHTML = givePrev(c, c.membros.find(x=>x.id===g.dataset.give), gr.value); });
   const p=$r("[data-penal]"); if(p) p.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===p.dataset.penal); if(penalizar(c,m)){ after(); toast(`Penalidade aplicada a ${m.nome}. O alerta fica até a reputação subir.`); } });
   const d=$r("[data-dest]"); if(d) d.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===d.dataset.dest); m.destaque++; const t=S.destaques[m.destaque]; log(c, `${m.nome} recebeu ${t.nome}${imune(m)?" e ficou imune a rebaixamento":""}`); save(); after(); toast(`${m.nome} agora tem ${t.nome}.`); });
   const pr=$r("[data-promo]"); if(pr) pr.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===pr.dataset.promo); promover(c,m); after(); toast(`${m.nome} agora é ${m.cargo} e ganhou ${S.promocao.fragmentos} Fragmentos.`); });
