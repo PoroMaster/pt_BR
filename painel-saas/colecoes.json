@@ -739,6 +739,238 @@
    ]
   },
   {
+   "id": "emote-salao-lendas",
+   "nome": "Emote Salão das Lendas",
+   "tipo": "emote",
+   "raridade": "ultimate",
+   "preco": null,
+   "custo_fixo": 3,
+   "codigo": "lendas",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote O QUE FOI ISSO?!",
+     "img": "painel-saas/midia/colecoes/emote_4536.png"
+    },
+    {
+     "nome": "Emote Joinha da farsante",
+     "img": "painel-saas/midia/colecoes/emote_4537.png"
+    },
+    {
+     "nome": "Emote SKT T1 Ryze",
+     "img": "painel-saas/midia/colecoes/emote_4538.png"
+    },
+    {
+     "nome": "Emote Cabeça de brócolis",
+     "img": "painel-saas/midia/colecoes/emote_4539.png"
+    },
+    {
+     "nome": "Emote Todos os caminhos levam a mim",
+     "img": "painel-saas/midia/colecoes/emote_4540.png"
+    },
+    {
+     "nome": "Emote Rei do boné indestrutível",
+     "img": "painel-saas/midia/colecoes/emote_4541.png"
+    },
+    {
+     "nome": "Emote Lenda tímida",
+     "img": "painel-saas/midia/colecoes/emote_4542.png"
+    },
+    {
+     "nome": "Emote Reticências",
+     "img": "painel-saas/midia/colecoes/emote_4543.png"
+    },
+    {
+     "nome": "Emote Vamos nessa!",
+     "img": "painel-saas/midia/colecoes/emote_4881.png"
+    },
+    {
+     "nome": "Emote Silêncio imortalizado",
+     "img": "painel-saas/midia/colecoes/emote_4544.png"
+    }
+   ]
+  },
+  {
+   "id": "emote-guerreiros-alma",
+   "nome": "Emote Guerreiros da Alma",
+   "tipo": "emote",
+   "raridade": "ultimate",
+   "preco": null,
+   "custo_fixo": 3,
+   "codigo": "alma",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote No estilo",
+     "img": "painel-saas/midia/colecoes/emote_4274.png"
+    },
+    {
+     "nome": "Emote Quem? Eu?",
+     "img": "painel-saas/midia/colecoes/emote_4275.png"
+    },
+    {
+     "nome": "Emote HIHIHIII",
+     "img": "painel-saas/midia/colecoes/emote_4276.png"
+    },
+    {
+     "nome": "Emote Hora da brincadeira",
+     "img": "painel-saas/midia/colecoes/emote_4277.png"
+    },
+    {
+     "nome": "Emote Degolando",
+     "img": "painel-saas/midia/colecoes/emote_4278.png"
+    },
+    {
+     "nome": "Emote Tudo vê",
+     "img": "painel-saas/midia/colecoes/emote_4279.png"
+    }
+   ]
+  },
+  {
+   "id": "emote-prestigio",
+   "nome": "Emote Prestígio",
+   "tipo": "emote",
+   "raridade": "mitica",
+   "preco": null,
+   "custo_fixo": 3,
+   "codigo": "prestigio",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Hihihi!",
+     "img": "painel-saas/midia/colecoes/emote_3490.png"
+    },
+    {
+     "nome": "Emote Prestígio suculento",
+     "img": "painel-saas/midia/colecoes/emote_3813.png"
+    },
+    {
+     "nome": "Emote Você quer?!",
+     "img": "painel-saas/midia/colecoes/emote_3426.png"
+    },
+    {
+     "nome": "Emote É isso que as patroas fazem",
+     "img": "painel-saas/midia/colecoes/emote_3568.png"
+    },
+    {
+     "nome": "Emote Emote Senna Cavaleira do Eclipse de Prestígio",
+     "img": "painel-saas/midia/colecoes/emote_3842.png"
+    },
+    {
+     "nome": "Emote Emote Seraphine Canção do Oceano de Prestígio",
+     "img": "painel-saas/midia/colecoes/emote_3920.png"
+    },
+    {
+     "nome": "Emote Simplesmente Superior",
+     "img": "painel-saas/midia/colecoes/emote_4711.png"
+    },
+    {
+     "nome": "Emote Ezreal de Porcelana Chibi de Prestígio",
+     "img": "painel-saas/midia/colecoes/emote_10001.png"
+    },
+    {
+     "nome": "Emote Espírito tentador",
+     "img": "painel-saas/midia/colecoes/emote_10025.png"
+    },
+    {
+     "nome": "Emote Florescer da fortuna",
+     "img": "painel-saas/midia/colecoes/emote_10049.png"
+    }
+   ]
+  },
+  {
+   "id": "emote-lenda",
+   "nome": "Emote Lenda",
+   "tipo": "emote",
+   "raridade": "mitica",
+   "preco": null,
+   "custo_fixo": 2,
+   "codigo": "lenda",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Lenda 1",
+     "img": "painel-saas/midia/colecoes/emote_3000.png"
+    },
+    {
+     "nome": "Emote Lenda 2",
+     "img": "painel-saas/midia/colecoes/emote_3001.png"
+    },
+    {
+     "nome": "Emote Lenda 3",
+     "img": "painel-saas/midia/colecoes/emote_3002.png"
+    },
+    {
+     "nome": "Emote Lenda 4",
+     "img": "painel-saas/midia/colecoes/emote_3003.png"
+    },
+    {
+     "nome": "Emote Lenda 5",
+     "img": "painel-saas/midia/colecoes/emote_3004.png"
+    },
+    {
+     "nome": "Emote Lenda 6",
+     "img": "painel-saas/midia/colecoes/emote_3005.png"
+    },
+    {
+     "nome": "Emote Lenda 7",
+     "img": "painel-saas/midia/colecoes/emote_3006.png"
+    },
+    {
+     "nome": "Emote Lenda 8",
+     "img": "painel-saas/midia/colecoes/emote_3007.png"
+    },
+    {
+     "nome": "Emote Lenda 9",
+     "img": "painel-saas/midia/colecoes/emote_3008.png"
+    },
+    {
+     "nome": "Emote Lenda 10",
+     "img": "painel-saas/midia/colecoes/emote_3009.png"
+    },
+    {
+     "nome": "Emote Lenda 11",
+     "img": "painel-saas/midia/colecoes/emote_3010.png"
+    },
+    {
+     "nome": "Emote Lenda 12",
+     "img": "painel-saas/midia/colecoes/emote_3011.png"
+    },
+    {
+     "nome": "Emote Lenda 13",
+     "img": "painel-saas/midia/colecoes/emote_3012.png"
+    },
+    {
+     "nome": "Emote Lenda 14",
+     "img": "painel-saas/midia/colecoes/emote_3013.png"
+    },
+    {
+     "nome": "Emote Lenda 15",
+     "img": "painel-saas/midia/colecoes/emote_3014.png"
+    },
+    {
+     "nome": "Emote Lenda 16",
+     "img": "painel-saas/midia/colecoes/emote_3015.png"
+    },
+    {
+     "nome": "Emote Lenda 17",
+     "img": "painel-saas/midia/colecoes/emote_3016.png"
+    },
+    {
+     "nome": "Emote Lenda 18",
+     "img": "painel-saas/midia/colecoes/emote_3017.png"
+    },
+    {
+     "nome": "Emote Lenda 19",
+     "img": "painel-saas/midia/colecoes/emote_3018.png"
+    },
+    {
+     "nome": "Emote Lenda 20",
+     "img": "painel-saas/midia/colecoes/emote_3019.png"
+    }
+   ]
+  },
+  {
    "id": "sent-elementalista",
    "nome": "Sentinela Elementalista",
    "tipo": "sentinela",

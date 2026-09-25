@@ -109,6 +109,16 @@ def main():
                            ("icone-samira", "Ícone Samira Soul Fighter", [5905, 5914, 5929])]:
         cos.append({"id": cid, "nome": nome, "tipo": "icone", "raridade": "ultimate", "preco": None, "custo_fixo": 3,
                     "evolucoes": [{"nome": icones[i]["title"], "img": img_icone(i)} for i in ids]})
+    # Emotes Ultimate e Míticos: Salão das Lendas (termina no Silêncio Imortalizado do Faker), Guerreiros da Alma,
+    # Prestígio (emotes de skins de Prestígio) e Lenda (os 20 níveis de maestria de conta).
+    for cid, nome, rar, codigo, ids in [
+            ("emote-salao-lendas", "Emote Salão das Lendas", "ultimate", "lendas", [4536, 4537, 4538, 4539, 4540, 4541, 4542, 4543, 4881, 4544]),
+            ("emote-guerreiros-alma", "Emote Guerreiros da Alma", "ultimate", "alma", [4274, 4275, 4276, 4277, 4278, 4279]),
+            ("emote-prestigio", "Emote Prestígio", "mitica", "prestigio", [3490, 3813, 3426, 3568, 3842, 3920, 4711, 10001, 10025, 10049]),
+            ("emote-lenda", "Emote Lenda", "mitica", "lenda", list(range(3000, 3020)))]:
+        cos.append({"id": cid, "nome": nome, "tipo": "emote", "raridade": rar, "preco": None, "custo_fixo": 2 if len(ids) > 12 else 3,
+                    "codigo": codigo, "anim": "flutuar",
+                    "evolucoes": [{"nome": "Emote " + emotes[i]["name"].strip(), "img": img_emote(i)} for i in ids]})
     cos.append({"id": "sent-elementalista", "nome": "Sentinela Elementalista", "tipo": "sentinela", "raridade": "ultimate", "preco": None, "img": img_sent(69)})
 
     # --- Recompensas de ranqueada ---

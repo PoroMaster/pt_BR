@@ -277,7 +277,7 @@ poromaster = {
         membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 10, 26, 9],
                [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
                inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-udyr", 4), ("emote-flex", 2), ("emote-guma", 4),
-                               ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-elementalista", 1), ("sent-poro", 3)),
+                               ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-elementalista", 1), ("sent-poro", 3), ("emote-salao-lendas", 4)),
                equipado={"tema": "tema-sentina", "icone": "icone-urf", "emote": "emote-guma", "borda": "borda-arcana", "sentinela": "sent-poro"},
                materiais=(25, 25), bio="Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:"),
         membro("m2", "Bruch", "Admin", "Dev", None, 55, 2, [610, 3, 12, 2],
