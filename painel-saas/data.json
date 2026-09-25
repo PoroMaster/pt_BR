@@ -1,258 +1,839 @@
 {
-  "_nota": "Banco de dados de exemplo do protótipo. Pontos e atividades são fictícios; nomes, fotos e emblemas vêm do painel L.S.P. UT e do site original. Caminhos de imagem são relativos à raiz do repositório.",
+  "_nota": "Banco de dados de exemplo. As regras seguem o painel L.S.P. UT original; pontos, carteiras e atividades são fictícios. Caminhos de imagem são relativos à raiz do repositório. Gerado por gerar-dados.py.",
   "contas": [
     {
       "id": "u1",
       "nome": "Luckey",
-      "email": "luckey@poromaster.dev"
+      "email": "luckey@poromaster.dev",
+      "foto": "image/Profile/01.png"
     },
     {
       "id": "u2",
       "nome": "Jake",
-      "email": "jake@poromaster.dev"
+      "email": "jake@poromaster.dev",
+      "foto": "image/Profile/04.png"
     },
     {
       "id": "u3",
       "nome": "Khyago",
-      "email": "khyago@poromaster.dev"
+      "email": "khyago@poromaster.dev",
+      "foto": "image/Profile/03.png"
+    }
+  ],
+  "sistema": {
+    "reputacao": {
+      "nome": "Pontos de Prestígio",
+      "sigla": "P.P.",
+      "icone": "image/banco_de_dados/Pontos_Prestigios.png",
+      "min": 20,
+      "max": 100,
+      "inicial": 30,
+      "alerta_abaixo_de": 30,
+      "nota": "Vale para todos, menos os Devs. Em 100 o membro pode subir de cargo; em 20 é removido da staff."
+    },
+    "maestrias": [
+      {
+        "nome": "Sem Maestria",
+        "min": 20,
+        "img": "image/banco_de_dados/Rank_0.png"
+      },
+      {
+        "nome": "Maestria 1",
+        "min": 30,
+        "img": "image/banco_de_dados/Rank_1.png"
+      },
+      {
+        "nome": "Maestria 2",
+        "min": 40,
+        "img": "image/banco_de_dados/Rank_2.png"
+      },
+      {
+        "nome": "Maestria 3",
+        "min": 50,
+        "img": "image/banco_de_dados/Rank_3.png"
+      },
+      {
+        "nome": "Maestria 4",
+        "min": 60,
+        "img": "image/banco_de_dados/Rank_4.png"
+      },
+      {
+        "nome": "Maestria 5",
+        "min": 70,
+        "img": "image/banco_de_dados/Rank_5.png"
+      },
+      {
+        "nome": "Maestria 6",
+        "min": 80,
+        "img": "image/banco_de_dados/Rank_6.png"
+      },
+      {
+        "nome": "Maestria 7",
+        "min": 90,
+        "img": "image/banco_de_dados/Rank_7.png"
+      }
+    ],
+    "miticos": {
+      "nome": "Pontos Míticos",
+      "icone": "image/banco_de_dados/Pontos_Miticos.png",
+      "max": 100,
+      "nota": "Ganhos por ajuda voluntária ou grandiosa: divulgação, vídeos, eventos."
+    },
+    "elos": [
+      {
+        "nome": "Sem Elo",
+        "min": 0,
+        "img": "image/banco_de_dados/Rank_0.png"
+      },
+      {
+        "nome": "Ferro",
+        "min": 10,
+        "img": "image/banco_de_dados/Ferro.png"
+      },
+      {
+        "nome": "Bronze",
+        "min": 20,
+        "img": "image/banco_de_dados/Bronze.png"
+      },
+      {
+        "nome": "Prata",
+        "min": 30,
+        "img": "image/banco_de_dados/Prata.png"
+      },
+      {
+        "nome": "Ouro",
+        "min": 40,
+        "img": "image/banco_de_dados/Ouro.png"
+      },
+      {
+        "nome": "Platina",
+        "min": 50,
+        "img": "image/banco_de_dados/Platina.png"
+      },
+      {
+        "nome": "Diamante",
+        "min": 60,
+        "img": "image/banco_de_dados/Diamante.png"
+      },
+      {
+        "nome": "Mestre",
+        "min": 70,
+        "img": "assets/logos/mestre.png"
+      },
+      {
+        "nome": "Grão-Mestre",
+        "min": 80,
+        "img": "image/banco_de_dados/Grao_Mestre.png"
+      },
+      {
+        "nome": "Desafiante",
+        "min": 90,
+        "img": "image/banco_de_dados/Desafiante.png"
+      },
+      {
+        "nome": "Imperador Urf",
+        "min": 100,
+        "img": "image/banco_de_dados/Imperador.png"
+      }
+    ],
+    "destaques": [
+      {
+        "nome": "Sem destaque",
+        "cor": "Cinza",
+        "img": "image/banco_de_dados/Destaque_0.png"
+      },
+      {
+        "nome": "Destaque Azul",
+        "cor": "Azul",
+        "img": "image/banco_de_dados/Destaque_1.png"
+      },
+      {
+        "nome": "Destaque Vermelho",
+        "cor": "Vermelho",
+        "img": "image/banco_de_dados/Destaque_2.png"
+      },
+      {
+        "nome": "Destaque Roxo",
+        "cor": "Roxo",
+        "img": "image/banco_de_dados/Destaque_3.png"
+      },
+      {
+        "nome": "Destaque Laranja",
+        "cor": "Laranja",
+        "img": "image/banco_de_dados/Destaque_4.png"
+      }
+    ],
+    "imunidade": {
+      "img": "image/banco_de_dados/Imunidade.png",
+      "nota": "Quem tem destaque acima do Roxo fica imune a rebaixamento e perda de P.P."
+    },
+    "alerta": {
+      "img": "image/banco_de_dados/Alerta.png",
+      "nota": "Aparece com uma penalidade ou P.P. abaixo de 30, até a reputação subir de novo."
+    },
+    "cargos": [
+      {
+        "nome": "Tester",
+        "img": "image/banco_de_dados/Tester.png"
+      },
+      {
+        "nome": "Suporte",
+        "img": "image/banco_de_dados/Supp.png"
+      },
+      {
+        "nome": "Mod",
+        "img": "image/banco_de_dados/Mod.png"
+      },
+      {
+        "nome": "Dev",
+        "img": "image/banco_de_dados/Dev.png"
+      }
+    ],
+    "tags": [
+      {
+        "nome": "Designer",
+        "img": "image/banco_de_dados/Designer.png",
+        "nota": "Cria artes e ícones"
+      },
+      {
+        "nome": "Parceiro",
+        "img": "image/banco_de_dados/Parceiro.png",
+        "nota": "Parceiro do projeto"
+      },
+      {
+        "nome": "Booster",
+        "img": "image/Booster.png",
+        "nota": "Impulsiona o servidor"
+      },
+      {
+        "nome": "Doador",
+        "img": "image/Doador.png",
+        "nota": "Apoia com doações"
+      },
+      {
+        "nome": "Corretor",
+        "img": "image/Corretor.png",
+        "nota": "Corrige a ortografia"
+      },
+      {
+        "nome": "Qualificador",
+        "img": "image/Qualificador.png",
+        "nota": "Avalia o desempenho de cada membro"
+      }
+    ],
+    "moedas": {
+      "moedas": {
+        "nome": "Moedas",
+        "img": "image/banco_de_dados/Moedas.png",
+        "nota": "Compram cosméticos comuns e temas na loja."
+      },
+      "essencia": {
+        "nome": "Essência Mítica",
+        "img": "image/banco_de_dados/Essencia_Mitica.png",
+        "nota": "Abre LootBoxes, que podem dar cosméticos raros."
+      },
+      "fragmentos": {
+        "nome": "Fragmentos",
+        "img": "image/banco_de_dados/Shards.png",
+        "nota": "Sobem o nível de cosméticos Comuns e Épicos na Forja."
+      },
+      "estelares": {
+        "nome": "Fragmentos Estelares",
+        "img": "image/banco_de_dados/Star_Shards.png",
+        "nota": "Sobem o nível de cosméticos Lendários ou acima. Vêm de eventos, bugs reportados e mérito dado pelo dono."
+      }
+    },
+    "raridades": [
+      {
+        "id": "comum",
+        "nome": "Comum",
+        "cor": "Cinza",
+        "img": "image/banco_de_dados/Destaque_0.png",
+        "peso": 45,
+        "frag": "fragmentos",
+        "custo": 3,
+        "duplicata": 5
+      },
+      {
+        "id": "epica",
+        "nome": "Épica",
+        "cor": "Azul",
+        "img": "image/banco_de_dados/Destaque_1.png",
+        "peso": 30,
+        "frag": "fragmentos",
+        "custo": 5,
+        "duplicata": 10
+      },
+      {
+        "id": "lendaria",
+        "nome": "Lendária",
+        "cor": "Vermelha",
+        "img": "image/banco_de_dados/Destaque_2.png",
+        "peso": 15,
+        "frag": "estelares",
+        "custo": 2,
+        "duplicata": 2
+      },
+      {
+        "id": "mitica",
+        "nome": "Mítica",
+        "cor": "Roxa",
+        "img": "image/banco_de_dados/Destaque_3.png",
+        "peso": 8,
+        "frag": "estelares",
+        "custo": 3,
+        "duplicata": 4
+      },
+      {
+        "id": "ultimate",
+        "nome": "Ultimate",
+        "cor": "Laranja",
+        "img": "image/banco_de_dados/Destaque_4.png",
+        "peso": 2,
+        "frag": "estelares",
+        "custo": 5,
+        "duplicata": 8
+      }
+    ],
+    "forja": {
+      "nivel_max": 5,
+      "nota": "Custo para subir de nível = custo da raridade x nível atual."
+    },
+    "lootbox": {
+      "custo_essencia": 3,
+      "nota": "Roleta aleatória. Cosmético repetido vira fragmentos."
+    },
+    "promocao": {
+      "fragmentos": 13,
+      "nota": "Ao subir de cargo, P.P., Pontos Míticos e destaque voltam ao início e o membro recebe 13 Fragmentos."
+    },
+    "subir_maestria": {
+      "moedas": 50,
+      "essencia": 1
+    },
+    "penalidade": {
+      "pp": -10
+    },
+    "bot": {
+      "nome": "Bot L.S.P. UT",
+      "img": "image/server_br.gif"
+    },
+    "erro": {
+      "img": "image/notConnected.png"
+    }
+  },
+  "cosmeticos": [
+    {
+      "id": "tema-oficial",
+      "nome": "Tema Oficial",
+      "tipo": "tema",
+      "raridade": "comum",
+      "img": "image/background.png",
+      "preco": 0
+    },
+    {
+      "id": "tema-ionia",
+      "nome": "Tema Ionia",
+      "tipo": "tema",
+      "raridade": "epica",
+      "img": "image/back2.jpg",
+      "preco": 600
+    },
+    {
+      "id": "tema-sentina",
+      "nome": "Tema Águas de Sentina",
+      "tipo": "tema",
+      "raridade": "lendaria",
+      "img": "image/back.png",
+      "preco": 900
+    },
+    {
+      "id": "banner-classico",
+      "nome": "Banner Cliente Clássico",
+      "tipo": "banner",
+      "raridade": "comum",
+      "img": "assets/banner.png",
+      "preco": 200
+    },
+    {
+      "id": "banner-instalador",
+      "nome": "Banner Instalador",
+      "tipo": "banner",
+      "raridade": "comum",
+      "img": "assets/download_03.png",
+      "preco": 150
+    },
+    {
+      "id": "banner-colecao",
+      "nome": "Banner Coleção",
+      "tipo": "banner",
+      "raridade": "comum",
+      "img": "assets/sobre02.png",
+      "preco": 150
+    },
+    {
+      "id": "banner-feerica",
+      "nome": "Banner Feérica",
+      "tipo": "banner",
+      "raridade": "epica",
+      "img": "assets/download_01.png",
+      "preco": null
+    },
+    {
+      "id": "banner-fliperama",
+      "nome": "Banner Fliperama",
+      "tipo": "banner",
+      "raridade": "epica",
+      "img": "assets/download_02.png",
+      "preco": null
+    },
+    {
+      "id": "banner-guardia",
+      "nome": "Banner Guardiã Estelar",
+      "tipo": "banner",
+      "raridade": "lendaria",
+      "img": "assets/sobre01.png",
+      "preco": null
+    },
+    {
+      "id": "icone-poro",
+      "nome": "Ícone Poro",
+      "tipo": "icone",
+      "raridade": "epica",
+      "img": "assets/users/02.png",
+      "preco": null
+    },
+    {
+      "id": "icone-maestria",
+      "nome": "Ícone Maestria 7",
+      "tipo": "icone",
+      "raridade": "mitica",
+      "img": "image/banco_de_dados/Rank_7.png",
+      "preco": null
+    },
+    {
+      "id": "icone-urf",
+      "nome": "Ícone Imperador Urf",
+      "tipo": "icone",
+      "raridade": "ultimate",
+      "img": "image/banco_de_dados/Imperador.png",
+      "preco": null
     }
   ],
   "comunidades": [
     {
       "id": "poromaster",
       "nome": "PoroMaster",
-      "descricao": "Equipe do ModSkin brasileiro",
+      "descricao": "Staff do ModSkin brasileiro",
       "plano": "pro",
       "cor": "#c8a24a",
-      "moeda": "Moedas",
-      "ranks": [
-        {
-          "nome": "Ferro",
-          "min": 0,
-          "img": "assets/logos/ferro.png"
-        },
-        {
-          "nome": "Bronze",
-          "min": 100,
-          "img": "assets/logos/bronze.png"
-        },
-        {
-          "nome": "Prata",
-          "min": 250,
-          "img": "assets/logos/prata.png"
-        },
-        {
-          "nome": "Ouro",
-          "min": 500,
-          "img": "assets/logos/ouro.png"
-        },
-        {
-          "nome": "Platina",
-          "min": 900,
-          "img": "assets/logos/platina.png"
-        },
-        {
-          "nome": "Diamante",
-          "min": 1400,
-          "img": "assets/logos/diamante.png"
-        },
-        {
-          "nome": "Mestre",
-          "min": 2000,
-          "img": "assets/logos/mestre.png"
-        },
-        {
-          "nome": "Grão-Mestre",
-          "min": 2800,
-          "img": "assets/logos/grao_mestre.png"
-        },
-        {
-          "nome": "Desafiante",
-          "min": 3800,
-          "img": "assets/logos/desafiante.png"
-        }
-      ],
+      "logo": "assets/users/02.png",
       "regras": [
         {
           "id": "r1",
           "acao": "Verificação de campeão aprovada",
-          "pontos": 40,
-          "setor": "Testadores"
+          "setor": "Testadores",
+          "recompensa": {
+            "pp": 2,
+            "moedas": 20
+          }
         },
         {
           "id": "r2",
           "acao": "Bug reportado e confirmado",
-          "pontos": 25,
-          "setor": "Testadores"
+          "setor": "Testadores",
+          "recompensa": {
+            "pp": 3,
+            "estelares": 1
+          }
         },
         {
           "id": "r3",
           "acao": "Tarefa do dia concluída",
-          "pontos": 10,
-          "setor": "Testadores"
+          "setor": "Testadores",
+          "recompensa": {
+            "pp": 1,
+            "moedas": 10
+          }
         },
         {
           "id": "r4",
           "acao": "Divulgação em rede social",
-          "pontos": 15,
-          "setor": "Academia"
+          "setor": "Academia",
+          "recompensa": {
+            "pm": 2,
+            "moedas": 15
+          }
         },
         {
           "id": "r5",
           "acao": "Vídeo mostrando o ModSkin",
-          "pontos": 80,
-          "setor": "Academia"
+          "setor": "Academia",
+          "recompensa": {
+            "pm": 5,
+            "essencia": 1
+          }
         },
         {
           "id": "r6",
           "acao": "Ajuda a usuário no suporte",
-          "pontos": 8,
-          "setor": "Federativa"
+          "setor": "Federativa",
+          "recompensa": {
+            "pp": 1,
+            "moedas": 10
+          }
         },
         {
           "id": "r7",
           "acao": "Participação em evento",
-          "pontos": 20,
-          "setor": "Federativa"
+          "setor": "Federativa",
+          "recompensa": {
+            "pm": 3,
+            "estelares": 1
+          }
+        },
+        {
+          "id": "r8",
+          "acao": "Mérito dado pelo dono",
+          "setor": "Dono",
+          "recompensa": {
+            "estelares": 2,
+            "essencia": 1
+          },
+          "so_admin": true
         }
       ],
       "membros": [
         {
           "id": "m1",
-          "conta": "u1",
           "nome": "Luckey",
-          "cargo": "Dono",
-          "setor": "Dev",
-          "pontos": 4120,
-          "moedas": 860,
-          "semanas": [
-            210,
-            260,
-            190,
-            320,
-            280,
-            350,
-            300,
-            410
+          "acesso": "Dono",
+          "cargo": "Dev",
+          "tags": [
+            "Booster"
+          ],
+          "pp": null,
+          "pm": 72,
+          "destaque": 4,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 1240,
+            "essencia": 7,
+            "fragmentos": 26,
+            "estelares": 9
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "tema-sentina",
+              "nivel": 3
+            },
+            {
+              "item": "tema-ionia",
+              "nivel": 1
+            },
+            {
+              "item": "banner-guardia",
+              "nivel": 2
+            },
+            {
+              "item": "banner-classico",
+              "nivel": 4
+            },
+            {
+              "item": "icone-poro",
+              "nivel": 4
+            },
+            {
+              "item": "icone-urf",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-sentina",
+            "banner": "banner-guardia",
+            "icone": "icone-urf"
+          },
+          "contrib": [
+            14,
+            18,
+            12,
+            22,
+            19,
+            24,
+            21,
+            27
           ],
           "desde": "2022-01-15",
-          "foto": "image/Profile/01.png"
+          "foto": "image/Profile/01.png",
+          "conta": "u1"
         },
         {
           "id": "m2",
           "nome": "Bruch",
-          "cargo": "Admin",
-          "setor": "Dev",
-          "pontos": 2950,
-          "moedas": 540,
-          "semanas": [
-            150,
-            120,
-            180,
-            200,
-            160,
-            230,
-            210,
-            190
+          "acesso": "Admin",
+          "cargo": "Dev",
+          "tags": [
+            "Qualificador"
+          ],
+          "pp": null,
+          "pm": 55,
+          "destaque": 2,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 610,
+            "essencia": 3,
+            "fragmentos": 12,
+            "estelares": 2
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "banner-instalador",
+              "nivel": 2
+            },
+            {
+              "item": "icone-poro",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial",
+            "banner": "banner-instalador",
+            "icone": "icone-poro"
+          },
+          "contrib": [
+            10,
+            8,
+            12,
+            14,
+            11,
+            15,
+            13,
+            12
           ],
           "desde": "2022-01-20"
         },
         {
           "id": "m3",
-          "conta": "u2",
           "nome": "Jake",
-          "cargo": "Admin",
-          "setor": "Moderação",
-          "pontos": 1780,
-          "moedas": 310,
-          "semanas": [
-            90,
-            110,
-            100,
-            140,
-            120,
-            95,
-            130,
-            150
+          "acesso": "Admin",
+          "cargo": "Mod",
+          "tags": [
+            "Corretor"
+          ],
+          "pp": 84,
+          "pm": 41,
+          "destaque": 3,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 480,
+            "essencia": 2,
+            "fragmentos": 9,
+            "estelares": 3
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "tema-ionia",
+              "nivel": 2
+            },
+            {
+              "item": "banner-fliperama",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-ionia",
+            "banner": "banner-fliperama"
+          },
+          "contrib": [
+            6,
+            9,
+            7,
+            11,
+            8,
+            6,
+            10,
+            12
           ],
           "desde": "2022-02-03",
-          "foto": "image/Profile/04.png"
+          "foto": "image/Profile/04.png",
+          "conta": "u2"
         },
         {
           "id": "m4",
           "nome": "Finger",
-          "cargo": "Membro",
-          "setor": "Suporte",
-          "pontos": 1210,
-          "moedas": 220,
-          "semanas": [
-            60,
-            80,
-            70,
-            95,
-            110,
-            85,
-            90,
-            120
+          "acesso": "Membro",
+          "cargo": "Suporte",
+          "tags": [],
+          "pp": 67,
+          "pm": 23,
+          "destaque": 1,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 320,
+            "essencia": 1,
+            "fragmentos": 6,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
+            4,
+            6,
+            5,
+            7,
+            8,
+            6,
+            7,
+            9
           ],
           "desde": "2022-02-11"
         },
         {
           "id": "m5",
           "nome": "Kawai Foxxy",
-          "cargo": "Membro",
-          "setor": "Suporte",
-          "pontos": 980,
-          "moedas": 190,
-          "semanas": [
-            40,
-            70,
-            65,
-            80,
-            60,
-            90,
-            75,
-            88
+          "acesso": "Membro",
+          "cargo": "Suporte",
+          "tags": [
+            "Designer"
+          ],
+          "pp": 58,
+          "pm": 30,
+          "destaque": 1,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 290,
+            "essencia": 2,
+            "fragmentos": 4,
+            "estelares": 1
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "banner-colecao",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial",
+            "banner": "banner-colecao"
+          },
+          "contrib": [
+            3,
+            5,
+            5,
+            6,
+            4,
+            7,
+            6,
+            7
           ],
           "desde": "2022-03-01"
         },
         {
           "id": "m6",
-          "conta": "u3",
           "nome": "Khyago",
-          "cargo": "Membro",
-          "setor": "Testadores",
-          "pontos": 1540,
-          "moedas": 280,
-          "semanas": [
-            120,
-            90,
-            140,
-            100,
-            150,
-            130,
-            160,
-            170
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [],
+          "pp": 100,
+          "pm": 64,
+          "destaque": 3,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 410,
+            "essencia": 4,
+            "fragmentos": 11,
+            "estelares": 3
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "banner-feerica",
+              "nivel": 2
+            },
+            {
+              "item": "icone-maestria",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial",
+            "banner": "banner-feerica",
+            "icone": "icone-maestria"
+          },
+          "contrib": [
+            9,
+            7,
+            11,
+            8,
+            12,
+            10,
+            13,
+            14
           ],
           "desde": "2022-02-24",
-          "foto": "image/Profile/03.png"
+          "foto": "image/Profile/03.png",
+          "conta": "u3"
         },
         {
           "id": "m7",
           "nome": "TaikunX3",
-          "cargo": "Membro",
-          "setor": "Testadores",
-          "pontos": 640,
-          "moedas": 110,
-          "semanas": [
-            30,
-            55,
-            40,
-            60,
-            45,
-            70,
-            50,
-            65
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [],
+          "pp": 27,
+          "pm": 12,
+          "destaque": 0,
+          "penalidade": true,
+          "carteira": {
+            "moedas": 90,
+            "essencia": 0,
+            "fragmentos": 2,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
+            3,
+            4,
+            2,
+            5,
+            1,
+            2,
+            0,
+            3
           ],
           "desde": "2022-05-09",
           "foto": "image/Profile/02.png"
@@ -260,19 +841,44 @@
         {
           "id": "m8",
           "nome": "imnotChinna",
-          "cargo": "Membro",
-          "setor": "Criadores",
-          "pontos": 2230,
-          "moedas": 400,
-          "semanas": [
-            80,
-            240,
-            60,
-            90,
-            320,
-            70,
-            110,
-            260
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [
+            "Parceiro"
+          ],
+          "pp": 76,
+          "pm": 90,
+          "destaque": 2,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 880,
+            "essencia": 5,
+            "fragmentos": 8,
+            "estelares": 4
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            },
+            {
+              "item": "banner-classico",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial",
+            "banner": "banner-classico"
+          },
+          "contrib": [
+            2,
+            12,
+            3,
+            4,
+            15,
+            3,
+            5,
+            13
           ],
           "desde": "2022-04-18",
           "foto": "image/Profile/05.png"
@@ -280,19 +886,39 @@
         {
           "id": "m9",
           "nome": "Hatcubinho",
-          "cargo": "Membro",
-          "setor": "Apoiadores",
-          "pontos": 310,
-          "moedas": 60,
-          "semanas": [
+          "acesso": "Membro",
+          "cargo": "Comunidade",
+          "tags": [
+            "Doador"
+          ],
+          "pp": null,
+          "pm": 15,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 150,
+            "essencia": 1,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
             0,
-            20,
-            30,
-            10,
-            40,
-            25,
-            35,
-            30
+            1,
+            2,
+            1,
+            2,
+            1,
+            2,
+            2
           ],
           "desde": "2022-08-02",
           "foto": "assets/users/08.png"
@@ -303,7 +929,7 @@
           "id": "e1",
           "membro": "m7",
           "regra": "r1",
-          "detalhe": "Ahri — Espírito Florescente: cromas e VFX conferidos",
+          "detalhe": "Ahri, Espírito Florescente: cromas e VFX conferidos",
           "quando": "2026-09-24T14:10:00",
           "status": "pendente"
         },
@@ -332,6 +958,14 @@
           "status": "pendente"
         },
         {
+          "id": "e6",
+          "membro": "m3",
+          "regra": "r7",
+          "detalhe": "Organizou a Semana de caça aos bugs",
+          "quando": "2026-09-23T12:00:00",
+          "status": "pendente"
+        },
+        {
           "id": "e5",
           "membro": "m4",
           "regra": "r4",
@@ -343,35 +977,38 @@
       "atividade": [
         {
           "quando": "2026-09-24T09:15:00",
-          "texto": "Khyago subiu para Diamante"
+          "texto": "Khyago chegou a 100 P.P. e pode subir para Suporte"
         },
         {
           "quando": "2026-09-23T22:40:00",
-          "texto": "Jake aprovou 4 verificações de Finger"
+          "texto": "TaikunX3 recebeu uma penalidade (-10 P.P.)"
         },
         {
-          "quando": "2026-09-23T20:00:00",
-          "texto": "Versão 13.6.1 publicada por Luckey"
+          "quando": "2026-09-23T20:10:00",
+          "texto": "Luckey aprimorou Tema Águas de Sentina para o nível 3"
         },
         {
           "quando": "2026-09-22T16:05:00",
-          "texto": "Finger ganhou 15 pontos por divulgação"
+          "texto": "Finger ganhou 2 Pontos Míticos por divulgação"
         }
       ],
-      "logo": "assets/users/02.png",
-      "icones": {
-        "pontos": "assets/logos/pp.png",
-        "moeda": "image/banco_de_dados/Moedas.png",
-        "pendente": "assets/logos/alerta.png"
-      },
-      "setores": {
-        "Apoiadores": "image/banco_de_dados/Imunidade.png",
-        "Criadores": "image/banco_de_dados/Parceiro.png",
-        "Dev": "assets/logos/dev.png",
-        "Moderação": "assets/logos/mod.png",
-        "Suporte": "assets/logos/sup.png",
-        "Testadores": "assets/logos/tester.png"
-      }
+      "novidades": [
+        {
+          "quando": "2026-09-24T12:00:00",
+          "titulo": "ModSkin 13.6.1 liberado para testers",
+          "texto": "Download antecipado disponível no painel. Confiram as skins novas do patch."
+        },
+        {
+          "quando": "2026-09-22T09:00:00",
+          "titulo": "Evento: Semana de caça aos bugs",
+          "texto": "Todo bug confirmado nesta semana vale 1 Fragmento Estelar."
+        },
+        {
+          "quando": "2026-09-19T18:00:00",
+          "titulo": "Novo tema na loja: Águas de Sentina",
+          "texto": "Personalize o fundo do painel. Custa 900 Moedas."
+        }
+      ]
     },
     {
       "id": "tradutores",
@@ -379,81 +1016,102 @@
       "descricao": "Equipe que traduz o site e o cliente",
       "plano": "gratis",
       "cor": "#2bb5a6",
-      "moeda": "Créditos",
-      "ranks": [
-        {
-          "nome": "Aprendiz",
-          "min": 0,
-          "img": "assets/logos/m_1.png"
-        },
-        {
-          "nome": "Tradutor",
-          "min": 150,
-          "img": "assets/logos/m_3.png"
-        },
-        {
-          "nome": "Revisor",
-          "min": 400,
-          "img": "assets/logos/m_5.png"
-        },
-        {
-          "nome": "Coordenador",
-          "min": 900,
-          "img": "assets/logos/m_7.png"
-        }
-      ],
       "regras": [
         {
           "id": "t1",
           "acao": "Página traduzida",
-          "pontos": 30,
-          "setor": "Tradução"
+          "setor": "Tradução",
+          "recompensa": {
+            "pp": 3,
+            "moedas": 30
+          }
         },
         {
           "id": "t2",
           "acao": "Revisão de tradução",
-          "pontos": 15,
-          "setor": "Revisão"
+          "setor": "Revisão",
+          "recompensa": {
+            "pp": 1,
+            "moedas": 15
+          }
         }
       ],
       "membros": [
         {
           "id": "n1",
-          "conta": "u1",
           "nome": "Luckey",
-          "cargo": "Dono",
-          "setor": "Coordenação",
-          "pontos": 520,
-          "moedas": 90,
-          "semanas": [
-            40,
-            60,
-            30,
-            70,
-            50,
-            80,
-            60,
-            90
+          "acesso": "Dono",
+          "cargo": "Dev",
+          "tags": [],
+          "pp": null,
+          "pm": 20,
+          "destaque": 1,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 300,
+            "essencia": 1,
+            "fragmentos": 3,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
+            2,
+            3,
+            1,
+            4,
+            2,
+            5,
+            3,
+            4
           ],
           "desde": "2022-11-15",
-          "foto": "image/Profile/01.png"
+          "foto": "image/Profile/01.png",
+          "conta": "u1"
         },
         {
           "id": "n2",
           "nome": "Diogo Teixeira",
-          "cargo": "Membro",
-          "setor": "Espanhol",
-          "pontos": 460,
-          "moedas": 70,
-          "semanas": [
-            30,
-            50,
-            60,
-            40,
-            70,
-            55,
-            65,
-            80
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [
+            "Corretor"
+          ],
+          "pp": 62,
+          "pm": 18,
+          "destaque": 1,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 240,
+            "essencia": 1,
+            "fragmentos": 2,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
+            2,
+            2,
+            3,
+            2,
+            4,
+            3,
+            3,
+            4
           ],
           "desde": "2022-11-15",
           "foto": "assets/users/03.png"
@@ -461,19 +1119,37 @@
         {
           "id": "n3",
           "nome": "Selin",
-          "cargo": "Membro",
-          "setor": "Turco",
-          "pontos": 180,
-          "moedas": 25,
-          "semanas": [
+          "acesso": "Membro",
+          "cargo": "Tester",
+          "tags": [],
+          "pp": 35,
+          "pm": 5,
+          "destaque": 0,
+          "penalidade": false,
+          "carteira": {
+            "moedas": 60,
+            "essencia": 0,
+            "fragmentos": 0,
+            "estelares": 0
+          },
+          "inventario": [
+            {
+              "item": "tema-oficial",
+              "nivel": 1
+            }
+          ],
+          "equipado": {
+            "tema": "tema-oficial"
+          },
+          "contrib": [
             0,
-            10,
-            20,
-            30,
-            15,
-            35,
-            30,
-            40
+            1,
+            1,
+            2,
+            1,
+            2,
+            2,
+            3
           ],
           "desde": "2022-12-01"
         }
@@ -494,16 +1170,13 @@
           "texto": "Diogo Teixeira enviou o FAQ em espanhol"
         }
       ],
-      "icones": {
-        "pontos": "assets/logos/pm.png",
-        "moeda": "assets/logos/shards.png",
-        "pendente": "assets/logos/alerta.png"
-      },
-      "setores": {
-        "Coordenação": "assets/logos/dev.png",
-        "Espanhol": "image/banco_de_dados/Designer.png",
-        "Turco": "image/banco_de_dados/Designer.png"
-      }
+      "novidades": [
+        {
+          "quando": "2026-09-20T12:00:00",
+          "titulo": "Faltam 4 páginas em turco",
+          "texto": "Quem puder ajudar, pegue uma página no canal de tradução."
+        }
+      ]
     }
   ]
 }

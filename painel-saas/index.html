@@ -1,59 +1,67 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Painel Forja</title>
+<title>Painel L.S.P.</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
 <style>
 :root{
-  --bg:#f3f5f8; --panel:#ffffff; --panel-2:#eef1f5; --line:#d9dee6;
-  --ink:#152033; --ink-2:#4a5870; --ink-3:#7a869a;
+  --bg:#f3f5f8; --veil:rgba(243,245,248,.92); --panel:#ffffff; --panel-2:#eef1f5; --line:#d9dee6;
+  --ink:#152033; --ink-2:#4a5870; --ink-3:#6f7c91;
   --gold:#9a7422; --gold-soft:#f3ead3; --teal:#147e73; --teal-soft:#dcf1ee;
   --ok:#1f8a4c; --ok-soft:#e1f3e8; --warn:#a86a00; --warn-soft:#fbefd6; --bad:#b53b3b; --bad-soft:#f8e2e2;
+  --r-comum:#7d8796; --r-epica:#1f8fb8; --r-lendaria:#c23b3b; --r-mitica:#8a45c4; --r-ultimate:#d9731a;
   --side:#0f1a2b; --side-ink:#c9d2e0; --side-ink-2:#8593a8; --side-active:#1b2a42;
   --display:"Cinzel",Georgia,serif; --body:"IBM Plex Sans",system-ui,-apple-system,"Segoe UI",sans-serif; --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
   --r:10px;
 }
 @media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
   color-scheme:dark;
-  --bg:#0b1220; --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
-  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#7c89a0;
+  --bg:#0b1220; --veil:rgba(11,18,32,.88); --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
+  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#8491a7;
   --gold:#d6b25c; --gold-soft:#2c2616; --teal:#3cc4b4; --teal-soft:#10302d;
   --ok:#4cc17e; --ok-soft:#12301f; --warn:#e0a53a; --warn-soft:#33260c; --bad:#e2716f; --bad-soft:#3a1818;
+  --r-comum:#a3acba; --r-epica:#4cc0e8; --r-lendaria:#ec6a6a; --r-mitica:#b67ef0; --r-ultimate:#f39a4a;
   --side:#070c16; --side-ink:#c9d2e0; --side-ink-2:#7f8ca3; --side-active:#16223a;
 }}
 :root[data-theme="dark"]{
   color-scheme:dark;
-  --bg:#0b1220; --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
-  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#7c89a0;
+  --bg:#0b1220; --veil:rgba(11,18,32,.88); --panel:#121b2c; --panel-2:#18233a; --line:#26334d;
+  --ink:#e6ebf3; --ink-2:#aab6c9; --ink-3:#8491a7;
   --gold:#d6b25c; --gold-soft:#2c2616; --teal:#3cc4b4; --teal-soft:#10302d;
   --ok:#4cc17e; --ok-soft:#12301f; --warn:#e0a53a; --warn-soft:#33260c; --bad:#e2716f; --bad-soft:#3a1818;
+  --r-comum:#a3acba; --r-epica:#4cc0e8; --r-lendaria:#ec6a6a; --r-mitica:#b67ef0; --r-ultimate:#f39a4a;
   --side:#070c16; --side-ink:#c9d2e0; --side-ink-2:#7f8ca3; --side-active:#16223a;
 }
 *{box-sizing:border-box}
 [hidden]{display:none!important}
-body{margin:0}
 html,body{height:100%}
-body{background:var(--bg);color:var(--ink);font:14px/1.5 var(--body)}
+body{margin:0;background:var(--bg);color:var(--ink);font:14px/1.5 var(--body)}
 h1,h2,h3{margin:0;text-wrap:balance}
 button,input,select,textarea{font:inherit;color:inherit}
 button{cursor:pointer}
+button:disabled{cursor:not-allowed;opacity:.5}
 :focus-visible{outline:2px solid var(--teal);outline-offset:2px}
+img{max-width:100%}
 .num{font-family:var(--mono);font-variant-numeric:tabular-nums}
 .label{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600}
+.note{font-size:12.5px;color:var(--ink-3);margin:0}
+.row{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
 
 /* Login */
-#login{min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:32px;background:var(--side)}
+#login{min-height:100%;display:grid;place-items:center;padding-inline:16px;padding-block:32px;background:var(--side) center/cover}
 .login-card{width:100%;max-width:420px;background:var(--panel);border-radius:14px;padding:32px;display:grid;gap:20px;border:1px solid var(--line)}
-.brand{font-family:var(--display);font-weight:700;letter-spacing:.06em;font-size:22px;display:flex;align-items:center;gap:10px}
-.brand-mark{width:30px;height:30px;border-radius:8px;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),#7a5a14);color:#fff;font-size:15px}
+.brand{font-family:var(--display);font-weight:700;letter-spacing:.06em;font-size:20px;display:flex;align-items:center;gap:10px}
+.brand img{width:32px;height:32px}
 .login-card p{margin:0;color:var(--ink-2)}
 .field{display:grid;gap:6px}
-.field input,.field select{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:10px 12px;width:100%}
-.btn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;justify-content:center}
-.btn:hover{background:var(--panel-2)}
+.field input,.field select,.sel{border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:9px 12px;width:100%}
+.btn{border:1px solid var(--line);background:var(--panel);border-radius:8px;padding:8px 14px;font-weight:500;display:inline-flex;align-items:center;gap:6px;justify-content:center;white-space:nowrap}
+.btn:hover:not(:disabled){background:var(--panel-2)}
 .btn-primary{background:var(--ink);color:var(--panel);border-color:var(--ink)}
-.btn-primary:hover{background:var(--ink-2)}
+.btn-primary:hover:not(:disabled){background:var(--ink-2)}
+.btn-gold{background:var(--gold);color:#fff;border-color:var(--gold)}
+.btn-gold:hover:not(:disabled){filter:brightness(1.08);background:var(--gold)}
 .btn-ok{background:var(--ok-soft);color:var(--ok);border-color:transparent}
 .btn-bad{background:var(--bad-soft);color:var(--bad);border-color:transparent}
 .btn-sm{padding:5px 10px;font-size:13px}
@@ -63,21 +71,21 @@ button{cursor:pointer}
 .demo-acc small{display:block;color:var(--ink-3)}
 .divider{display:flex;align-items:center;gap:10px;color:var(--ink-3);font-size:12px}
 .divider::before,.divider::after{content:"";flex:1;height:1px;background:var(--line)}
-.note{font-size:12px;color:var(--ink-3)}
 
 /* Shell */
-#app{display:grid;grid-template-columns:240px 1fr;min-height:100%}
-aside{background:var(--side);color:var(--side-ink);padding-block:20px;padding-inline:14px;display:flex;flex-direction:column;gap:18px;position:sticky;top:0;height:100vh;overflow:auto}
-aside .brand{color:#fff;font-size:18px;padding-inline:6px}
+#app{display:grid;grid-template-columns:244px 1fr;min-height:100%}
+aside{background:var(--side);color:var(--side-ink);padding-block:20px;padding-inline:14px;display:flex;flex-direction:column;gap:16px;position:sticky;top:0;height:100vh;overflow:auto}
+aside .brand{color:#fff;font-size:17px;padding-inline:6px}
 .ws-switch{width:100%;display:flex;align-items:center;gap:10px;background:var(--side-active);border:1px solid #243452;border-radius:10px;padding:8px 10px;color:#fff;text-align:left}
-.ws-dot{width:26px;height:26px;border-radius:7px;object-fit:cover;display:grid;place-items:center;font-weight:600;color:#0b1220;flex:none}
+.ws-dot{width:28px;height:28px;border-radius:7px;display:grid;place-items:center;font-weight:600;color:#0b1220;flex:none;object-fit:cover}
 .ws-switch small{display:block;color:var(--side-ink-2);font-size:11px}
-.ws-menu{display:grid;gap:4px;background:var(--side-active);border-radius:10px;padding:6px}
+.ws-menu{display:grid;gap:4px;background:var(--side-active);border-radius:10px;padding:6px;margin-top:6px}
 .ws-menu button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:6px 8px;border-radius:6px;text-align:left}
 .ws-menu button:hover{background:#22324f}
 nav{display:grid;gap:2px}
 nav .label{color:var(--side-ink-2);padding:10px 8px 4px}
-nav button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:8px 10px;border-radius:8px;text-align:left;width:100%}
+nav button{display:flex;align-items:center;gap:10px;background:none;border:0;color:var(--side-ink);padding:7px 10px;border-radius:8px;text-align:left;width:100%}
+nav button img{width:18px;height:18px;object-fit:contain;flex:none}
 nav button:hover{background:var(--side-active)}
 nav button[aria-current="page"]{background:var(--side-active);color:#fff;box-shadow:inset 2px 0 0 var(--gold)}
 nav .count{margin-left:auto;background:var(--gold);color:#0b1220;border-radius:999px;font-size:11px;padding:0 7px;font-weight:600}
@@ -85,87 +93,158 @@ nav .count{margin-left:auto;background:var(--gold);color:#0b1220;border-radius:9
 .me small{display:block;color:var(--side-ink-2)}
 .me button{margin-left:auto;background:none;border:1px solid #2a3a58;color:var(--side-ink);border-radius:6px;padding:3px 8px;font-size:12px}
 
-main{padding-block:28px 48px;padding-inline:clamp(16px,3vw,40px);min-width:0}
+main{padding-block:28px 48px;padding-inline:clamp(16px,3vw,40px);min-width:0;background-color:var(--bg);background-size:cover;background-position:center;background-attachment:fixed}
 .head{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:12px;margin-bottom:22px}
 .head h1{font-size:26px;font-weight:600;letter-spacing:-.01em}
-.head p{margin:4px 0 0;color:var(--ink-2)}
+.head p{margin:4px 0 0;color:var(--ink-2);max-width:70ch}
 .mobile-bar{display:none}
 
 .grid{display:grid;gap:16px}
 .kpis{grid-template-columns:repeat(4,minmax(0,1fr))}
 .two{grid-template-columns:minmax(0,1.6fr) minmax(0,1fr)}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px}
-.card h2{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px}
+.halves{grid-template-columns:repeat(2,minmax(0,1fr))}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:var(--r);padding:18px;min-width:0}
+.card h2{font-size:15px;font-weight:600;margin-bottom:12px;display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap}
+.kpi{position:relative}
 .kpi .v{font-size:28px;font-weight:500;margin-top:4px;font-family:var(--mono);font-variant-numeric:tabular-nums}
 .kpi .d{font-size:12px;color:var(--ink-3)}
+.kpi-ico{position:absolute;top:14px;right:14px;width:36px;height:36px;object-fit:contain}
 .up{color:var(--ok)} .down{color:var(--bad)}
 
 .avatar{width:32px;height:32px;border-radius:50%;display:grid;place-items:center;font-weight:600;font-size:12px;flex:none;color:#fff;object-fit:cover;background:var(--panel-2)}
-img.avatar.icon{background:#0a1a1d;object-fit:contain}
-.emb{width:22px;height:22px;object-fit:contain;flex:none}
-.kpi-ico{width:34px;height:34px;object-fit:contain;float:right}
-.big-emb{width:76px;height:76px;object-fit:contain;margin-left:auto}
 .who{display:flex;align-items:center;gap:10px;min-width:0}
-.who b{font-weight:600;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.who .nm{min-width:0}
+.who b{font-weight:600}
 .who small{color:var(--ink-3);display:block}
+.tags{display:inline-flex;gap:3px;vertical-align:-3px;margin-left:4px}
+.tags img{width:17px;height:17px;object-fit:contain}
+.ico{width:22px;height:22px;object-fit:contain;flex:none;vertical-align:middle}
+.ico-lg{width:40px;height:40px;object-fit:contain;flex:none}
+.plain{background:none;border:0;padding:0;text-align:left;color:inherit}
 
 .table-wrap{overflow-x:auto}
 table{width:100%;border-collapse:collapse}
 th{text-align:left;font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-3);font-weight:600;padding:8px 10px;border-bottom:1px solid var(--line);white-space:nowrap}
-td{padding:10px;border-bottom:1px solid var(--line);vertical-align:middle}
+td{padding:9px 10px;border-bottom:1px solid var(--line);vertical-align:middle}
 tr:last-child td{border-bottom:0}
 tbody tr.click{cursor:pointer}
 tbody tr.click:hover{background:var(--panel-2)}
 td.r,th.r{text-align:right}
+.cell{display:flex;align-items:center;gap:6px;white-space:nowrap}
 
-.rank{display:inline-flex;align-items:center;gap:5px;font-family:var(--display);font-weight:600;font-size:12.5px;letter-spacing:.04em;padding:1px 10px 1px 3px;border-radius:999px;background:var(--gold-soft);color:var(--gold);white-space:nowrap}
-.pill{display:inline-block;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--panel-2);color:var(--ink-2);white-space:nowrap}
-.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.teal{background:var(--teal-soft);color:var(--teal)}
+.pill{display:inline-flex;align-items:center;gap:4px;font-size:12px;padding:1px 8px;border-radius:999px;background:var(--panel-2);color:var(--ink-2);white-space:nowrap}
+.pill.ok{background:var(--ok-soft);color:var(--ok)} .pill.warn{background:var(--warn-soft);color:var(--warn)} .pill.bad{background:var(--bad-soft);color:var(--bad)} .pill.teal{background:var(--teal-soft);color:var(--teal)} .pill.gold{background:var(--gold-soft);color:var(--gold)}
 .pos{font-family:var(--mono);color:var(--ink-3);width:28px}
 .pos.top{color:var(--gold);font-weight:600}
-.bar{height:6px;background:var(--panel-2);border-radius:99px;overflow:hidden;min-width:80px}
+.bar{height:6px;background:var(--panel-2);border-radius:99px;overflow:hidden;min-width:60px}
 .bar i{display:block;height:100%;background:var(--gold);border-radius:99px}
+.bar.teal i{background:var(--teal)}
+.bar.bad i{background:var(--bad)}
+.disp{font-family:var(--display);font-weight:600;letter-spacing:.03em}
 
 .feed{display:grid;gap:12px;margin:0;padding:0;list-style:none}
 .feed li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:start}
 .feed .dot{width:8px;height:8px;border-radius:50%;background:var(--teal);margin-top:7px}
 .feed small{color:var(--ink-3);display:block}
+.post{display:grid;grid-template-columns:36px 1fr;gap:10px;padding-block:10px;border-bottom:1px solid var(--line)}
+.post:last-child{border-bottom:0}
+.post img{width:36px;height:36px;border-radius:50%}
+.post p{margin:2px 0 0;color:var(--ink-2)}
 
-.queue{display:grid;gap:10px}
-.sub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel)}
-.sub .meta{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:12.5px;color:var(--ink-3);margin-top:4px}
+.sub{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:12px;align-items:center;border:1px solid var(--line);border-radius:10px;padding:12px 14px;background:var(--panel);margin-bottom:8px}
+.sub .meta{display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:12.5px;color:var(--ink-3);margin-top:4px}
 .sub .acts{display:flex;gap:6px}
 .sub.done{opacity:.65}
+.rew{display:inline-flex;flex-wrap:wrap;gap:4px}
+.rew span{display:inline-flex;align-items:center;gap:3px;font-family:var(--mono);font-size:12px;background:var(--panel-2);border-radius:999px;padding:1px 7px 1px 3px;color:var(--ink-2)}
+.rew img{width:16px;height:16px;object-fit:contain}
 
 .tabs{display:flex;gap:4px;border-bottom:1px solid var(--line);margin-bottom:14px;overflow-x:auto}
 .tabs button{background:none;border:0;padding:8px 12px;color:var(--ink-2);border-bottom:2px solid transparent;white-space:nowrap}
 .tabs button[aria-selected="true"]{color:var(--ink);border-color:var(--gold);font-weight:600}
 
-.inline-num{width:90px;border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:5px 8px;text-align:right;font-family:var(--mono)}
+.inline-num{width:74px;border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:4px 7px;text-align:right;font-family:var(--mono)}
 .ladder{display:flex;flex-wrap:wrap;gap:8px}
-.ladder div{border:1px solid var(--line);border-radius:8px;padding:10px 12px;min-width:120px;display:grid;justify-items:center;text-align:center;gap:2px}
-.ladder img{width:56px;height:56px;object-fit:contain}
-.ladder b{font-family:var(--display);font-size:13px;letter-spacing:.04em;color:var(--gold);display:block}
+.ladder > div{border:1px solid var(--line);border-radius:8px;padding:10px;min-width:104px;flex:1 1 104px;display:grid;justify-items:center;text-align:center;gap:2px}
+.ladder img{width:48px;height:48px;object-fit:contain}
+.ladder b{font-family:var(--display);font-size:12.5px;letter-spacing:.03em}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+.steps .arrow{color:var(--ink-3)}
+
+.wallet{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.coin{display:flex;align-items:center;gap:10px;background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:10px 12px;min-width:0}
+.coin img{width:32px;height:32px;object-fit:contain;flex:none}
+.coin b{display:block;font-family:var(--mono);font-size:18px;font-weight:500}
+.coin small{color:var(--ink-3);font-size:11.5px;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+
+/* Cosmetics */
+.items{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:12px}
+.item{border:1px solid var(--line);border-radius:10px;background:var(--panel);overflow:hidden;display:grid;text-align:left;padding:0;border-top:3px solid var(--rc)}
+.item .pic{aspect-ratio:16/9;background:#0b1220 center/cover no-repeat;max-width:100%}
+.item .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:10px}
+.item .body{padding:10px 12px;display:grid;gap:6px}
+.item b{font-weight:600;line-height:1.3}
+.item.sel{outline:2px solid var(--gold);outline-offset:1px}
+.rar{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:600;color:var(--rc)}
+.rar img{width:16px;height:16px}
+.lvl{display:inline-flex;gap:3px}
+.lvl i{width:10px;height:10px;border-radius:2px;background:var(--panel-2);border:1px solid var(--line);transform:rotate(45deg)}
+.lvl i.on{background:var(--rc);border-color:var(--rc)}
+.forge{display:grid;gap:14px;align-content:start}
+.forge .pic{aspect-ratio:16/9;border-radius:8px;background:#0b1220 center/cover no-repeat}
+.forge .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:16px}
+
+/* LootBox roulette */
+.roleta{position:relative;overflow:hidden;border-radius:10px;background:#0a111d;border:1px solid var(--line);height:170px}
+.roleta .strip{display:flex;gap:10px;padding:14px 0;position:absolute;left:0;top:0;will-change:transform}
+.roleta .slot{width:130px;height:140px;flex:none;border-radius:8px;background:#121b2c;border-bottom:4px solid var(--rc);display:grid;grid-template-rows:1fr auto;overflow:hidden;color:#e6ebf3}
+.roleta .slot .pic{background:#0b1220 center/cover no-repeat}
+.roleta .slot .pic.icon{background-size:contain;background-color:#0a1a1d;background-origin:content-box;padding:8px}
+.roleta .slot span{font-size:11.5px;padding:5px 7px;line-height:1.25;height:38px;overflow:hidden}
+.roleta .marker{position:absolute;left:50%;top:0;bottom:0;width:3px;background:var(--gold);transform:translateX(-50%);box-shadow:0 0 12px var(--gold);z-index:2}
+.roleta .marker::before,.roleta .marker::after{content:"";position:absolute;left:50%;transform:translateX(-50%);border:8px solid transparent}
+.roleta .marker::before{top:0;border-top-color:var(--gold)}
+.roleta .marker::after{bottom:0;border-bottom-color:var(--gold)}
+.roleta .idle{position:absolute;inset:0;display:grid;place-items:center;color:#aab6c9;z-index:1;text-align:center;padding:16px}
 
 .plans{grid-template-columns:repeat(3,minmax(0,1fr))}
 .plan{display:grid;gap:10px;align-content:start}
 .plan.current{border-color:var(--gold);box-shadow:0 0 0 1px var(--gold)}
 .plan .price{font-size:30px;font-family:var(--mono)}
 .plan ul{margin:0;padding-left:18px;color:var(--ink-2);display:grid;gap:4px}
-.usage{display:grid;gap:6px}
-
 textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background:var(--panel-2);border:1px solid var(--line);border-radius:8px;padding:12px;resize:vertical}
 
-/* Drawer */
-.scrim{position:fixed;inset:0;background:rgba(5,10,20,.5);display:flex;justify-content:flex-end;z-index:10}
-.drawer{width:min(440px,100%);height:100%;background:var(--panel);padding:24px;overflow:auto;display:grid;gap:18px;align-content:start;border-left:1px solid var(--line)}
-.drawer .top{display:flex;align-items:center;gap:14px}
-.drawer .top .avatar{width:56px;height:56px;font-size:18px}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.stats div{background:var(--panel-2);border-radius:8px;padding:10px}
-.stats b{display:block;font-family:var(--mono);font-size:18px;font-weight:500}
-.give{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
-.give select{flex:1;min-width:180px;border:1px solid var(--line);background:var(--panel-2);border-radius:8px;padding:8px}
+/* Profile / drawer */
+.scrim{position:fixed;inset:0;background:rgba(5,10,20,.55);display:flex;justify-content:flex-end;z-index:10}
+.drawer{width:min(480px,100%);height:100%;background:var(--panel);overflow:auto;border-left:1px solid var(--line)}
+.prof{display:grid;gap:16px}
+.prof .banner{height:120px;background:linear-gradient(135deg,#1b2a42,#0b1220) center/cover no-repeat;border-radius:10px 10px 0 0;position:relative}
+.drawer .prof .banner{border-radius:0}
+.prof .idrow{display:flex;align-items:flex-end;gap:14px;margin-top:-46px;padding-inline:18px;position:relative}
+.prof .ava{position:relative;flex:none}
+.prof .ava .avatar{width:84px;height:84px;font-size:26px;border:4px solid var(--panel)}
+.prof .ava .medal{position:absolute;right:-6px;bottom:-4px;width:36px;height:36px;border-radius:50%;background:#0a1a1d;border:2px solid var(--panel);object-fit:contain;padding:2px}
+.prof .idrow h2{font-size:21px;margin:0}
+.prof .inner{padding-inline:18px;padding-bottom:18px;display:grid;gap:16px}
+.stats3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.stat{background:var(--panel-2);border-radius:10px;padding:12px;display:grid;gap:6px;justify-items:start;min-width:0}
+.stat .top{display:flex;align-items:center;gap:8px;width:100%}
+.stat .top img{width:40px;height:40px;object-fit:contain;flex:none}
+.stat b{display:block;font-size:13px}
+.stat .num{font-size:12px;color:var(--ink-3)}
+.stat .bar{width:100%}
+.flags{display:flex;gap:8px;flex-wrap:wrap}
+.flag{display:inline-flex;align-items:center;gap:6px;font-size:12.5px;border-radius:8px;padding:4px 10px 4px 4px}
+.flag img{width:24px;height:24px}
+.flag.bad{background:var(--bad-soft);color:var(--bad)}
+.flag.ok{background:var(--ok-soft);color:var(--ok)}
+.flag.gold{background:var(--gold-soft);color:var(--gold)}
+.thumbs{display:flex;gap:6px;flex-wrap:wrap}
+.thumbs div{width:64px;aspect-ratio:16/10;border-radius:6px;background:#0b1220 center/cover;border-bottom:3px solid var(--rc)}
+.thumbs div.icon{background-size:contain;background-repeat:no-repeat;background-color:#0a1a1d}
+.admin-box{background:var(--panel-2);border-radius:10px;padding:14px;display:grid;gap:10px}
+.drawer .stats3{grid-template-columns:1fr}
+.drawer .wallet{grid-template-columns:repeat(2,minmax(0,1fr))}
 
 .toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;z-index:20;font-weight:500;max-width:calc(100% - 32px)}
 .chart text{fill:var(--ink-3);font:11px var(--mono)}
@@ -173,25 +252,28 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 .chart .b{fill:var(--gold);opacity:.35}
 .chart .b.last{opacity:1}
 .chart .v{fill:var(--ink);font-weight:500}
+.error-box{display:grid;justify-items:center;gap:10px;text-align:center}
 
-@media (max-width:1000px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.two{grid-template-columns:1fr}.plans{grid-template-columns:1fr}}
+@media (max-width:1100px){.kpis{grid-template-columns:repeat(2,minmax(0,1fr))}.two,.halves{grid-template-columns:1fr}.plans{grid-template-columns:1fr}.wallet{grid-template-columns:repeat(2,minmax(0,1fr))}}
 @media (max-width:760px){
   #app{grid-template-columns:1fr}
-  aside{position:fixed;inset:0 auto 0 0;width:260px;z-index:15;transform:translateX(-100%);transition:transform .2s;height:100%;padding-top:calc(20px + env(safe-area-inset-top,0px))}
+  aside{position:fixed;inset:0 auto 0 0;width:264px;z-index:15;transform:translateX(-100%);transition:transform .2s;height:100%;padding-top:calc(20px + env(safe-area-inset-top,0px))}
   aside.open{transform:none}
   .mobile-bar{display:flex;align-items:center;gap:10px;margin-bottom:16px}
   .hide-sm{display:none}
   .sub{grid-template-columns:1fr}
+  .stats3{grid-template-columns:1fr}
+  main{background-attachment:scroll}
 }
 @media (prefers-reduced-motion:reduce){aside{transition:none}}
 </style>
 
 <section id="login">
   <div class="login-card">
-    <div class="brand"><span class="brand-mark">F</span>Forja</div>
+    <div class="brand"><img src="" alt="" id="brand-login">L.S.P. Painel</div>
     <div>
-      <h1 style="font-size:20px;font-weight:600">Entre no painel da sua equipe</h1>
-      <p>Pontos, ranks e verificações para comunidades que trabalham juntas.</p>
+      <h1 style="font-size:20px;font-weight:600">Entre no painel da sua staff</h1>
+      <p>Reputação, maestrias, verificações e cosméticos para equipes de comunidade.</p>
     </div>
     <form id="login-form" class="grid" style="gap:12px">
       <div class="field"><label class="label" for="login-email">E-mail</label><input id="login-email" type="email" placeholder="voce@equipe.com" autocomplete="username"></div>
@@ -200,14 +282,14 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
       <p id="login-err" class="note" hidden style="color:var(--bad)"></p>
     </form>
     <div class="divider">ou entre com uma conta de demonstração</div>
-    <div class="demo-accounts" id="demo-accounts"></div>
+    <div class="demo-accounts" id="demo-accounts"><p class="note">Carregando…</p></div>
     <p class="note">Protótipo: não existe senha de verdade. Numa versão real, o login seria feito no servidor, com senha criptografada ou "Entrar com Discord".</p>
   </div>
 </section>
 
 <div id="app" hidden>
   <aside id="side">
-    <div class="brand"><span class="brand-mark">F</span>Forja</div>
+    <div class="brand"><img src="" alt="" id="brand-side">L.S.P. Painel</div>
     <div>
       <button class="ws-switch" id="ws-btn" aria-expanded="false"></button>
       <div class="ws-menu" id="ws-menu" hidden></div>
@@ -221,287 +303,499 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "forja-dados-v2";
-let db = null, seed = null, session = { conta: null, ws: null, view: "inicio" };
+const STORE = "lsp-painel-v3";
+const NOW = new Date("2026-09-25T09:00:00");
+const NOW_ISO = "2026-09-25T09:00:00";
+let db = null, seed = null, S = null;
+const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, spinning:false };
 const $ = s => document.querySelector(s);
-const esc = s => String(s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
-const fmt = n => n.toLocaleString("pt-BR");
+const $$ = s => [...document.querySelectorAll(s)];
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt = n => Number(n).toLocaleString("pt-BR");
+const BASE = /\/painel-saas\//.test(location.pathname) ? "../" : "";
+const src = p => esc(BASE + p);
+const bg = p => `background-image:url('${src(p)}')`;
+const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 const PALETTE = ["#b8862b","#2f8f84","#6a5acd","#c0504d","#3f7cc0","#8a6d3b","#4c9a5a","#a35d9a","#5d6f8a"];
 function color(id){ let h=0; for(const c of id) h=(h*31+c.charCodeAt(0))>>>0; return PALETTE[h%PALETTE.length]; }
 function initials(n){ return n.split(/\s+/).map(p=>p[0]).join("").slice(0,2).toUpperCase(); }
-const BASE = /\/painel-saas\//.test(location.pathname) ? "../" : "";
-const src = p => esc(BASE + p);
-function avatar(m, size){
-  const dim = size ? `width:${size}px;height:${size}px;` : "";
-  if (m.foto) return `<img class="avatar" src="${src(m.foto)}" alt="" style="${dim}" loading="lazy">`;
-  const ico = m.setor && ws() && ws().setores && ws().setores[m.setor];
-  if (ico) return `<img class="avatar icon" src="${src(ico)}" alt="" style="${dim}" loading="lazy">`;
-  return `<span class="avatar" style="background:${color(m.id||m.nome)};${dim}">${esc(initials(m.nome))}</span>`;
-}
-function rankChip(r){ return `<span class="rank">${r.img?`<img class="emb" src="${src(r.img)}" alt="">`:""}${esc(r.nome)}</span>`; }
-function wsDot(w, px){ const d=px?`width:${px}px;height:${px}px;font-size:11px;`:""; return w.logo ? `<img class="ws-dot" src="${src(w.logo)}" alt="" style="${d}">` : `<span class="ws-dot" style="background:${w.cor};${d}">${esc(w.nome[0])}</span>`; }
-function ico(c,k){ return c.icones && c.icones[k] ? `<img class="kpi-ico" src="${src(c.icones[k])}" alt="">` : ""; }
 function when(iso){
-  const d = new Date(iso), now = new Date("2026-09-24T18:00:00");
-  const h = Math.round((now - d) / 36e5);
+  const h = Math.round((NOW - new Date(iso)) / 36e5);
   if (h < 1) return "agora"; if (h < 24) return `há ${h} h`;
-  const days = Math.round(h/24); return days === 1 ? "ontem" : `há ${days} dias`;
+  const d = Math.round(h/24); return d === 1 ? "ontem" : `há ${d} dias`;
 }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(db)); }catch(e){} }
-function toast(msg){ const t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),2600); }
+function toast(msg){ $$(".toast").forEach(t=>t.remove()); const t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),3200); }
 
-function ws(){ return db.comunidades.find(c=>c.id===session.ws); }
-function rankOf(c, pts){ let r=c.ranks[0], next=null; for(const k of c.ranks){ if(pts>=k.min) r=k; else { next=k; break; } } return {r,next}; }
-function meIn(c){ return c.membros.find(m=>m.conta===session.conta); }
-function isAdmin(c){ const m=meIn(c); return m && (m.cargo==="Dono"||m.cargo==="Admin"); }
-function myWorkspaces(){ return db.comunidades.filter(c=>c.membros.some(m=>m.conta===session.conta)); }
-function pending(c){ return c.envios.filter(e=>e.status==="pendente"); }
+/* ---------- regras do sistema ---------- */
+const ws = () => db.comunidades.find(c=>c.id===session.ws);
+const meIn = c => c.membros.find(m=>m.conta===session.conta);
+const isAdmin = c => { const m=meIn(c); return !!m && (m.acesso==="Dono"||m.acesso==="Admin"); };
+const myWorkspaces = () => db.comunidades.filter(c=>c.membros.some(m=>m.conta===session.conta));
+const pending = c => c.envios.filter(e=>e.status==="pendente");
+const item = id => db.cosmeticos.find(x=>x.id===id);
+const rar = id => S.raridades.find(r=>r.id===id);
+const rc = id => `--rc:var(--r-${id})`;
+function tier(list, v){ let i=0; list.forEach((t,k)=>{ if(v>=t.min) i=k; }); return i; }
+function maestria(m){ if(m.pp==null) return null; const i=tier(S.maestrias,m.pp); return {i, t:S.maestrias[i], next:S.maestrias[i+1]||null}; }
+function elo(m){ const i=tier(S.elos,m.pm); return {i, t:S.elos[i], next:S.elos[i+1]||null}; }
+const alerta = m => m.pp!=null && (m.penalidade || m.pp < S.reputacao.alerta_abaixo_de);
+const imune = m => m.destaque >= S.destaques.length-1;
+const cargoIdx = m => S.cargos.findIndex(k=>k.nome===m.cargo);
+const podePromover = m => m.pp!=null && m.pp>=S.reputacao.max && cargoIdx(m)>-1 && cargoIdx(m)<S.cargos.length-1;
+const isentoPP = m => m.pp==null;
+const tagImg = n => (S.tags.find(t=>t.nome===n)||{}).img;
+const cargoImg = n => (S.cargos.find(t=>t.nome===n)||{}).img;
+
+function avatar(m, size){
+  const dim = size ? `width:${size}px;height:${size}px;font-size:${Math.round(size/3)}px;` : "";
+  if (m.foto) return `<img class="avatar" src="${src(m.foto)}" alt="" style="${dim}" loading="lazy">`;
+  return `<span class="avatar" style="background:${color(m.id||m.nome)};${dim}">${esc(initials(m.nome))}</span>`;
+}
+function tags(m){
+  const list = [];
+  const ci = cargoImg(m.cargo); if (ci) list.push([m.cargo, ci]);
+  (m.tags||[]).forEach(t=>{ const ti=tagImg(t); if(ti) list.push([t, ti]); });
+  if (alerta(m)) list.push(["Alerta de rebaixamento", S.alerta.img]);
+  if (imune(m)) list.push(["Imune a rebaixamento", S.imunidade.img]);
+  return list.length ? `<span class="tags">${list.map(([n,i])=>`<img src="${src(i)}" alt="${esc(n)}" title="${esc(n)}">`).join("")}</span>` : "";
+}
+function who(m, sub){ return `<span class="who">${avatar(m)}<span class="nm"><b>${esc(m.nome)}</b>${tags(m)}${sub!==undefined?`<small>${sub}</small>`:""}</span></span>`; }
+function rew(r){
+  const keys = [["pp",S.reputacao.icone,"P.P."],["pm",S.miticos.icone,"Pontos Míticos"],["moedas",S.moedas.moedas.img,"Moedas"],["essencia",S.moedas.essencia.img,"Essência Mítica"],["fragmentos",S.moedas.fragmentos.img,"Fragmentos"],["estelares",S.moedas.estelares.img,"Fragmentos Estelares"]];
+  return `<span class="rew">${keys.filter(([k])=>r[k]).map(([k,i,n])=>`<span title="${n}"><img src="${src(i)}" alt="">${r[k]>0?"+":""}${r[k]}</span>`).join("")}</span>`;
+}
+function rarTag(id){ const r=rar(id); return `<span class="rar" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
+function lvl(n, id){ return `<span class="lvl" style="${rc(id)}" aria-label="Nível ${n} de ${S.forja.nivel_max}">${Array.from({length:S.forja.nivel_max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
+function pic(it, extra=""){ return `<div class="pic${it.tipo==="icone"?" icon":""} ${extra}" style="${bg(it.img)}"></div>`; }
+
+function log(c, texto){ c.atividade.unshift({quando:NOW_ISO, texto}); }
+/* aplica recompensas e cuida de maestria, alerta e elo */
+function aplicar(c, m, r, motivo){
+  const antesM = maestria(m), antesE = elo(m);
+  if (r.pp && m.pp!=null){
+    if (r.pp<0 && imune(m)) { toast(`${m.nome} está imune e não perde P.P.`); }
+    else m.pp = clamp(m.pp + r.pp, S.reputacao.min, S.reputacao.max);
+  }
+  if (r.pm) m.pm = clamp(m.pm + r.pm, 0, S.miticos.max);
+  for (const k of ["moedas","essencia","fragmentos","estelares"]) if (r[k]) m.carteira[k] = Math.max(0, m.carteira[k] + r[k]);
+  if (m.penalidade && r.pp>0 && m.pp >= S.reputacao.alerta_abaixo_de){ m.penalidade=false; log(c, `${m.nome} recuperou a reputação e saiu do alerta`); }
+  if (motivo) log(c, motivo);
+  const depM = maestria(m), depE = elo(m);
+  if (antesM && depM && depM.i > antesM.i){
+    const b = S.subir_maestria; m.carteira.moedas += b.moedas; m.carteira.essencia += b.essencia;
+    log(c, `${m.nome} subiu para ${depM.t.nome} e ganhou ${b.moedas} Moedas e ${b.essencia} Essência Mítica`);
+  }
+  if (depE.i > antesE.i) log(c, `${m.nome} alcançou o elo ${depE.t.nome}`);
+  save();
+}
+function penalizar(c, m){
+  if (imune(m)) { toast(`${m.nome} tem destaque Laranja e está imune a penalidades.`); return false; }
+  m.penalidade = true; m.pp = clamp(m.pp + S.penalidade.pp, S.reputacao.min, S.reputacao.max);
+  log(c, `${m.nome} recebeu uma penalidade (${S.penalidade.pp} P.P.)`);
+  if (m.pp <= S.reputacao.min) log(c, `${m.nome} chegou a ${S.reputacao.min} P.P. e corre risco de sair da staff`);
+  save(); return true;
+}
+function promover(c, m){
+  const de = m.cargo, para = S.cargos[cargoIdx(m)+1].nome;
+  m.cargo = para; m.pp = S.reputacao.inicial; m.pm = 0; m.destaque = 0; m.penalidade = false;
+  m.carteira.fragmentos += S.promocao.fragmentos;
+  log(c, `${m.nome} subiu de ${de} para ${para} e ganhou ${S.promocao.fragmentos} Fragmentos`);
+  save();
+}
 
 /* ---------- login ---------- */
 function renderLogin(){
+  $("#brand-login").src = BASE + "image/tester.ico"; $("#brand-side").src = BASE + "image/tester.ico";
   $("#demo-accounts").innerHTML = db.contas.map(a=>{
     const roles = db.comunidades.map(c=>{ const m=c.membros.find(x=>x.conta===a.id); return m ? `${m.cargo} em ${c.nome}` : null; }).filter(Boolean).join(" · ");
-    return `<button class="demo-acc" data-acc="${a.id}">${avatar({id:a.id,nome:a.nome})}<span><b>${esc(a.nome)}</b><small>${esc(roles)}</small></span></button>`;
+    return `<button class="demo-acc" data-acc="${a.id}">${avatar({id:a.id,nome:a.nome,foto:a.foto},40)}<span><b>${esc(a.nome)}</b><small>${esc(roles)}</small></span></button>`;
   }).join("");
 }
 $("#demo-accounts").addEventListener("click", e=>{ const b=e.target.closest("[data-acc]"); if(b) login(b.dataset.acc); });
 $("#login-form").addEventListener("submit", e=>{
   e.preventDefault();
-  const email = $("#login-email").value.trim().toLowerCase();
-  const acc = db.contas.find(a=>a.email===email);
+  if(!db) return;
+  const acc = db.contas.find(a=>a.email===$("#login-email").value.trim().toLowerCase());
   const err = $("#login-err");
   if(!acc){ err.hidden=false; err.textContent="Não encontramos esse e-mail. Use uma das contas de demonstração abaixo."; return; }
   login(acc.id);
 });
-function login(id){
-  session.conta=id; session.ws=myWorkspaces()[0].id; session.view="inicio";
-  $("#login").hidden=true; $("#app").hidden=false; render();
-}
+function login(id){ session.conta=id; session.ws=myWorkspaces()[0].id; session.view="inicio"; $("#login").hidden=true; $("#app").hidden=false; render(); }
 
 /* ---------- shell ---------- */
 const VIEWS = [
-  {id:"inicio", nome:"Visão geral", ico:"◆"},
-  {id:"ranking", nome:"Ranking", ico:"▲"},
-  {id:"verificacoes", nome:"Verificações", ico:"✓"},
-  {id:"perfil", nome:"Meu perfil", ico:"●"},
-  {id:"membros", nome:"Membros", ico:"☰", admin:true},
-  {id:"regras", nome:"Regras e ranks", ico:"⚙", admin:true},
-  {id:"plano", nome:"Plano e uso", ico:"$", admin:true},
-  {id:"dados", nome:"Dados (JSON)", ico:"{ }", admin:true}
+  {id:"inicio", nome:"Visão geral", ico:"image/tester.ico"},
+  {id:"ranking", nome:"Ranking", ico:"image/banco_de_dados/Rank_7.png"},
+  {id:"verificacoes", nome:"Verificações", ico:"image/banco_de_dados/Tester.png"},
+  {id:"perfil", nome:"Meu perfil", ico:"image/banco_de_dados/Destaque_4.png"},
+  {id:"mercado", nome:"Mercado", ico:"image/banco_de_dados/Moedas.png"},
+  {id:"forja", nome:"Forja", ico:"image/banco_de_dados/Star_Shards.png"},
+  {id:"membros", nome:"Membros", ico:"image/banco_de_dados/Mod.png", admin:true},
+  {id:"sistema", nome:"Regras e sistema", ico:"image/banco_de_dados/Pontos_Prestigios.png", admin:true},
+  {id:"plano", nome:"Plano e uso", ico:"image/banco_de_dados/Parceiro.png", admin:true},
+  {id:"dados", nome:"Dados (JSON)", ico:"image/banco_de_dados/Dev.png", admin:true}
 ];
+function wsDot(w, px){ const d=px?`width:${px}px;height:${px}px;font-size:11px;`:""; return w.logo ? `<img class="ws-dot" src="${src(w.logo)}" alt="" style="${d}">` : `<span class="ws-dot" style="background:${w.cor};${d}">${esc(w.nome[0])}</span>`; }
+function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><img src="${src(v.ico)}" alt="">${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
 function render(){
   const c = ws(), me = meIn(c), adm = isAdmin(c);
-  if(VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
+  if (VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
   $("#ws-btn").innerHTML = `${wsDot(c)}<span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
-  $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}">${wsDot(w,20)}${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:20px;text-align:center">+</span>Criar comunidade</button>`;
+  $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}">${wsDot(w,22)}${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:22px;text-align:center">+</span>Criar comunidade</button>`;
   const p = pending(c).length;
-  let navHtml = `<div class="label">Comunidade</div>`;
-  for(const v of VIEWS.filter(v=>!v.admin)) navHtml += navBtn(v, v.id==="verificacoes"&&p?p:0);
-  if(adm){ navHtml += `<div class="label">Administração</div>`; for(const v of VIEWS.filter(v=>v.admin)) navHtml += navBtn(v,0); }
-  $("#nav").innerHTML = navHtml;
-  $("#me").innerHTML = `${avatar(me)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)}</small></span><button id="logout">Sair</button>`;
-  const views = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:()=>vPerfil(me), membros:vMembros, regras:vRegras, plano:vPlano, dados:vDados};
-  $("#main").innerHTML = `<div class="mobile-bar"><button class="btn btn-sm" id="menu-btn" aria-label="Abrir menu">☰ Menu</button><b>${esc(c.nome)}</b></div>` + views[session.view](c);
+  let nav = `<div class="label">Comunidade</div>` + VIEWS.filter(v=>!v.admin).map(v=>navBtn(v, v.id==="verificacoes"&&adm?p:0)).join("");
+  if (adm) nav += `<div class="label">Administração</div>` + VIEWS.filter(v=>v.admin).map(v=>navBtn(v,0)).join("");
+  $("#nav").innerHTML = nav;
+  $("#me").innerHTML = `${avatar(me)}<span><b>${esc(me.nome)}</b><small>${esc(me.cargo)} · ${esc(me.acesso)}</small></span><button id="logout">Sair</button>`;
+  const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
+  $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
+  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
+  $("#main").innerHTML = `<div class="mobile-bar"><button class="btn btn-sm" id="menu-btn" aria-label="Abrir menu">☰ Menu</button><b>${esc(c.nome)}</b></div>` + V[session.view](c, me, adm);
   $("#side").classList.remove("open");
-  bindView(c);
+  bindView(c, me);
 }
-function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><span style="min-width:18px;text-align:center;opacity:.8;white-space:nowrap">${v.ico}</span>${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
 
 document.addEventListener("click", e=>{
   const v = e.target.closest("[data-view]"); if(v){ session.view=v.dataset.view; render(); window.scrollTo(0,0); return; }
   if(e.target.closest("#ws-btn")){ const m=$("#ws-menu"); m.hidden=!m.hidden; $("#ws-btn").setAttribute("aria-expanded", String(!m.hidden)); return; }
   const w = e.target.closest("[data-ws]");
-  if(w){ if(w.dataset.ws==="__new"){ toast("Numa versão real, aqui você criaria uma nova comunidade."); } else { session.ws=w.dataset.ws; session.view="inicio"; render(); } $("#ws-menu").hidden=true; return; }
-  if(e.target.closest("#logout")){ session.conta=null; $("#app").hidden=true; $("#login").hidden=false; return; }
+  if(w){ if(w.dataset.ws==="__new") toast("Numa versão real, aqui você criaria uma nova comunidade."); else { session.ws=w.dataset.ws; session.view="inicio"; session.forjaSel=null; render(); } $("#ws-menu").hidden=true; return; }
+  if(e.target.closest("#logout")){ session.conta=null; $("#app").hidden=true; $("#login").hidden=false; $("#layer").innerHTML=""; return; }
   if(e.target.closest("#menu-btn")){ $("#side").classList.add("open"); return; }
   const mb = e.target.closest("[data-member]"); if(mb){ openMember(mb.dataset.member); return; }
-  if(e.target.classList.contains("scrim") || e.target.closest("[data-close]")){ $("#layer").innerHTML=""; }
+  if(e.target.classList.contains("scrim") || e.target.closest("[data-close]")) $("#layer").innerHTML="";
 });
 document.addEventListener("keydown", e=>{ if(e.key==="Escape") $("#layer").innerHTML=""; });
 
-/* ---------- views ---------- */
-function head(t, sub, extra=""){ return `<div class="head"><div><h1>${t}</h1>${sub?`<p>${sub}</p>`:""}</div>${extra}</div>`; }
-
-function weekTotals(c){ const n=c.membros[0].semanas.length; return Array.from({length:n},(_,i)=>c.membros.reduce((s,m)=>s+m.semanas[i],0)); }
+/* ---------- telas ---------- */
+const head = (t, sub, extra="") => `<div class="head"><div><h1>${t}</h1>${sub?`<p>${sub}</p>`:""}</div>${extra}</div>`;
+function weekTotals(c){ const n=c.membros[0].contrib.length; return Array.from({length:n},(_,i)=>c.membros.reduce((s,m)=>s+m.contrib[i],0)); }
 function weekLabels(n){ const end=new Date("2026-09-21T12:00:00"); return Array.from({length:n},(_,i)=>{ const d=new Date(end); d.setDate(d.getDate()-7*(n-1-i)); return `${String(d.getDate()).padStart(2,"0")}/${String(d.getMonth()+1).padStart(2,"0")}`; }); }
 function chart(vals){
-  const W=560,H=190,pl=40,pr=8,pt=16,pb=24, max=Math.ceil(Math.max(...vals)/500)*500||100;
+  const W=560,H=190,pl=34,pr=8,pt=18,pb=24, max=Math.max(20, Math.ceil(Math.max(...vals)/20)*20);
   const iw=W-pl-pr, ih=H-pt-pb, bw=iw/vals.length, labels=weekLabels(vals.length);
   let g=""; for(let k=0;k<=4;k++){ const v=max*k/4, y=pt+ih-ih*k/4; g+=`<line class="grid-l" x1="${pl}" x2="${W-pr}" y1="${y}" y2="${y}"/><text x="${pl-6}" y="${y+4}" text-anchor="end">${fmt(v)}</text>`; }
   vals.forEach((v,i)=>{ const h=ih*v/max, x=pl+i*bw+bw*.18, y=pt+ih-h, last=i===vals.length-1;
-    g+=`<rect class="b${last?" last":""}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*.64).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/>`;
-    g+=`<text x="${(x+bw*.32).toFixed(1)}" y="${H-6}" text-anchor="middle">${labels[i]}</text>`;
+    g+=`<rect class="b${last?" last":""}" x="${x.toFixed(1)}" y="${y.toFixed(1)}" width="${(bw*.64).toFixed(1)}" height="${h.toFixed(1)}" rx="3"/><text x="${(x+bw*.32).toFixed(1)}" y="${H-6}" text-anchor="middle">${labels[i]}</text>`;
     if(last) g+=`<text class="v" x="${(x+bw*.32).toFixed(1)}" y="${(y-5).toFixed(1)}" text-anchor="middle">${fmt(v)}</text>`; });
-  return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Pontos da equipe por semana">${g}</svg>`;
+  return `<svg class="chart" viewBox="0 0 ${W} ${H}" width="100%" role="img" aria-label="Contribuições aprovadas por semana">${g}</svg>`;
+}
+function statRep(m){
+  const ma = maestria(m);
+  if (!ma) return `<div class="stat"><div class="top"><img src="${src(S.reputacao.icone)}" alt=""><span><span class="label">Reputação</span><b>Isento</b></span></div><span class="note">Devs não usam P.P.</span></div>`;
+  const pct = (m.pp - S.reputacao.min) / (S.reputacao.max - S.reputacao.min) * 100;
+  return `<div class="stat"><div class="top"><img src="${src(ma.t.img)}" alt=""><span><span class="label">Reputação</span><b>${esc(ma.t.nome)}</b></span></div><span class="num">${m.pp} / ${S.reputacao.max} P.P.</span><div class="bar ${alerta(m)?"bad":""}"><i style="width:${pct.toFixed(0)}%"></i></div></div>`;
+}
+function statElo(m){
+  const e = elo(m); const pct = e.next ? (m.pm - e.t.min) / (e.next.min - e.t.min) * 100 : 100;
+  return `<div class="stat"><div class="top"><img src="${src(e.t.img)}" alt=""><span><span class="label">Elo mítico</span><b>${esc(e.t.nome)}</b></span></div><span class="num">${m.pm} Pontos Míticos</span><div class="bar teal"><i style="width:${pct.toFixed(0)}%"></i></div><span class="note">${e.next?`${esc(e.t.nome)} → ${esc(e.next.nome)}: faltam ${e.next.min-m.pm}`:"Elo máximo"}</span></div>`;
+}
+function statDest(m){
+  const d = S.destaques[m.destaque];
+  return `<div class="stat"><div class="top"><img src="${src(d.img)}" alt=""><span><span class="label">Destaque</span><b>${esc(d.nome)}</b></span></div><span class="note">${imune(m)?"Imune a rebaixamento":`Sequência ${m.destaque} de ${S.destaques.length-1}`}</span></div>`;
 }
 
-function vInicio(c){
-  const tot=weekTotals(c), last=tot.at(-1), prev=tot.at(-2), diff=Math.round((last-prev)/prev*100);
-  const ativos=c.membros.filter(m=>m.semanas.at(-1)>0).length, pend=pending(c);
-  const top=[...c.membros].sort((a,b)=>b.semanas.at(-1)-a.semanas.at(-1)).slice(0,5);
-  const me=meIn(c), {r,next}=rankOf(c,me.pontos);
+function vInicio(c, me, adm){
+  const tot=weekTotals(c), last=tot.at(-1), prev=tot.at(-2)||1, diff=Math.round((last-prev)/prev*100);
+  const ativos=c.membros.filter(m=>m.contrib.at(-1)>0).length, pend=pending(c);
+  const atencao = [
+    ...c.membros.filter(podePromover).map(m=>({m, t:`Chegou a ${S.reputacao.max} P.P. e pode subir para ${S.cargos[cargoIdx(m)+1].nome}`, k:"gold", i:S.reputacao.icone})),
+    ...c.membros.filter(alerta).map(m=>({m, t:m.penalidade?`Penalidade ativa · ${m.pp} P.P.`:`Reputação baixa · ${m.pp} P.P.`, k:"bad", i:S.alerta.img}))
+  ];
+  const ma = maestria(me), e = elo(me);
+  const bot = S.bot;
   return head(`Olá, ${esc(me.nome)}`, `Resumo da ${esc(c.nome)} na semana de ${weekLabels(tot.length).at(-1)}.`) +
   `<div class="grid kpis">
-    <div class="card kpi">${ico(c,"pontos")}<div class="label">Pontos na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
-    <div class="card kpi"><div class="label">Membros ativos</div><div class="v">${ativos}<span style="font-size:16px;color:var(--ink-3)">/${c.membros.length}</span></div><div class="d">pontuaram nesta semana</div></div>
-    <div class="card kpi">${ico(c,"pendente")}<div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
-    <div class="card kpi"><div class="label">Seu rank</div><div class="v" style="font-size:20px;margin-top:10px">${rankChip(r)}</div><div class="d">${next?`faltam ${fmt(next.min-me.pontos)} pts para ${esc(next.nome)}`:"rank máximo"}</div></div>
+    <div class="card kpi"><div class="label">Contribuições na semana</div><div class="v">${fmt(last)}</div><div class="d ${diff>=0?"up":"down"}">${diff>=0?"▲":"▼"} ${Math.abs(diff)}% vs. semana anterior</div></div>
+    <div class="card kpi"><div class="label">Membros ativos</div><div class="v">${ativos}<span style="font-size:16px;color:var(--ink-3)">/${c.membros.length}</span></div><div class="d">contribuíram nesta semana</div></div>
+    <div class="card kpi"><img class="kpi-ico" src="${src(S.alerta.img)}" alt=""><div class="label">Aguardando aprovação</div><div class="v" style="color:${pend.length?"var(--warn)":"inherit"}">${pend.length}</div><div class="d">${pend.length?"verificações na fila":"fila vazia"}</div></div>
+    <div class="card kpi"><img class="kpi-ico" src="${src(ma?ma.t.img:e.t.img)}" alt=""><div class="label">Sua reputação</div><div class="v disp" style="font-size:18px;margin-top:8px">${ma?esc(ma.t.nome):"Isento (Dev)"}</div><div class="d">${ma?`${me.pp} P.P. · `:""}elo ${esc(e.t.nome)}</div></div>
   </div>
   <div class="grid two" style="margin-top:16px">
-    <div class="card"><h2>Pontos da equipe por semana <span class="label">últimas 8 semanas</span></h2>${chart(tot)}</div>
-    <div class="card"><h2>Destaques da semana</h2>
-      <div class="grid" style="gap:10px">${top.map((m,i)=>`<button class="who" data-member="${m.id}" style="background:none;border:0;padding:0;text-align:left;width:100%"><span class="pos ${i===0?"top":""}">${i+1}</span>${avatar(m)}<span style="flex:1;min-width:0"><b>${esc(m.nome)}</b><small>${esc(m.setor)}</small></span><span class="num">+${fmt(m.semanas.at(-1))}</span></button>`).join("")}</div>
-    </div>
+    <div class="card"><h2>Contribuições aprovadas por semana <span class="label">últimas 8 semanas</span></h2>${chart(tot)}</div>
+    ${adm ? `<div class="card"><h2>Precisa de atenção</h2>${atencao.length?`<div class="grid" style="gap:10px">${atencao.map(a=>`<button class="plain row" data-member="${a.m.id}" style="flex-wrap:nowrap;width:100%">${avatar(a.m)}<span style="flex:1;min-width:0"><b>${esc(a.m.nome)}</b><small class="note" style="display:block">${esc(a.t)}</small></span><img class="ico" src="${src(a.i)}" alt=""></button>`).join("")}</div>`:`<p class="note">Ninguém em alerta nem pronto para subir de cargo.</p>`}</div>`
+          : `<div class="card"><h2>Sua jornada</h2><div class="grid" style="gap:10px">${statRep(me)}${statElo(me)}</div></div>`}
   </div>
-  <div class="grid two" style="margin-top:16px">
-    <div class="card"><h2>Fila de verificações <button class="btn btn-sm" data-view="verificacoes">Ver todas</button></h2>${pend.length?pend.slice(0,3).map(e=>subRow(c,e,false)).join(""):`<p class="note">Nada pendente.</p>`}</div>
-    <div class="card"><h2>Atividade recente</h2><ul class="feed">${c.atividade.slice(0,6).map(a=>`<li><span class="dot"></span><span>${esc(a.texto)}<small>${when(a.quando)}</small></span></li>`).join("")}</ul></div>
+  <div class="grid halves" style="margin-top:16px">
+    <div class="card"><h2>Novidades</h2>${c.novidades.map(n=>`<div class="post"><img src="${src(bot.img)}" alt=""><div><div class="row" style="gap:6px"><b>${esc(n.titulo)}</b></div><small class="note">${esc(bot.nome)} · ${when(n.quando)}</small><p>${esc(n.texto)}</p></div></div>`).join("")}</div>
+    <div class="card"><h2>Atividade recente</h2><ul class="feed">${c.atividade.slice(0,7).map(a=>`<li><span class="dot"></span><span>${esc(a.texto)}<small>${when(a.quando)}</small></span></li>`).join("")}</ul></div>
   </div>`;
 }
 
 function vRanking(c){
-  const list=[...c.membros].sort((a,b)=>b.pontos-a.pontos), max=list[0].pontos;
-  return head("Ranking", `Todos os ${c.membros.length} membros, por pontos acumulados. Clique em alguém para ver o perfil.`) +
-  `<div class="card"><div class="table-wrap"><table>
-    <thead><tr><th>#</th><th>Membro</th><th>Rank</th><th class="hide-sm">Progresso</th><th class="r">Semana</th><th class="r">Pontos</th></tr></thead>
-    <tbody>${list.map((m,i)=>{ const {r}=rankOf(c,m.pontos); return `<tr class="click" data-member="${m.id}">
+  const by = session.rankBy;
+  const list = [...c.membros].sort((a,b)=> by==="pp" ? ((b.pp??-1)-(a.pp??-1) || b.pm-a.pm) : (b.pm-a.pm));
+  return head("Ranking", "Reputação (P.P.) define a maestria e o cargo. Pontos Míticos definem o elo. Clique em alguém para ver o perfil.") +
+  `<div class="card"><div class="tabs" role="tablist"><button role="tab" data-rank="pp" aria-selected="${by==="pp"}">Reputação (P.P.)</button><button role="tab" data-rank="pm" aria-selected="${by==="pm"}">Pontos Míticos</button></div>
+  <div class="table-wrap"><table>
+    <thead><tr><th>#</th><th>Membro</th><th>Maestria</th><th class="hide-sm">Elo</th><th class="hide-sm">Destaque</th><th class="r">${by==="pp"?"P.P.":"P.M."}</th></tr></thead>
+    <tbody>${list.map((m,i)=>{ const ma=maestria(m), e=elo(m), d=S.destaques[m.destaque]; return `<tr class="click" data-member="${m.id}">
       <td class="pos ${i<3?"top":""}">${i+1}</td>
-      <td><div class="who">${avatar(m)}<span><b>${esc(m.nome)}</b><small>${esc(m.setor)}</small></span></div></td>
-      <td>${rankChip(r)}</td>
-      <td class="hide-sm"><div class="bar"><i style="width:${(m.pontos/max*100).toFixed(1)}%"></i></div></td>
-      <td class="r num up">+${fmt(m.semanas.at(-1))}</td>
-      <td class="r num">${fmt(m.pontos)}</td></tr>`; }).join("")}</tbody></table></div></div>`;
+      <td>${who(m, esc(m.cargo))}</td>
+      <td><span class="cell">${ma?`<img class="ico" src="${src(ma.t.img)}" alt="">${esc(ma.t.nome)}`:`<span class="note">Isento</span>`}</span></td>
+      <td class="hide-sm"><span class="cell"><img class="ico" src="${src(e.t.img)}" alt="">${esc(e.t.nome)}</span></td>
+      <td class="hide-sm"><img class="ico" src="${src(d.img)}" alt="${esc(d.nome)}" title="${esc(d.nome)}"></td>
+      <td class="r num">${by==="pp" ? (m.pp??"–") : m.pm}</td></tr>`; }).join("")}</tbody></table></div></div>`;
 }
 
 function subRow(c,e,actions){
-  const m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra);
+  const m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra), adm=isAdmin(c);
   const st = e.status==="pendente"?"warn":e.status==="aprovado"?"ok":"bad";
-  const adm = isAdmin(c);
-  return `<div class="sub ${e.status!=="pendente"?"done":""}" style="margin-bottom:8px">
-    <div style="min-width:0"><div class="who">${avatar(m)}<span style="min-width:0"><b>${esc(e.detalhe)}</b></span></div>
-    <div class="meta"><span>${esc(m.nome)}</span>·<span>${esc(rg.acao)}</span>·<span class="num">+${rg.pontos} pts</span>·<span>${when(e.quando)}</span><span class="pill ${st}">${e.status}</span></div></div>
+  return `<div class="sub ${e.status!=="pendente"?"done":""}">
+    <div style="min-width:0"><b>${esc(e.detalhe)}</b>
+    <div class="meta"><button class="plain row" data-member="${m.id}" style="gap:6px">${avatar(m,20)}${esc(m.nome)}</button>·<span>${esc(rg.acao)}</span>${rew(rg.recompensa)}<span>${when(e.quando)}</span><span class="pill ${st}">${e.status}</span></div></div>
     ${actions && adm && e.status==="pendente" ? `<div class="acts"><button class="btn btn-sm btn-ok" data-approve="${e.id}">Aprovar</button><button class="btn btn-sm btn-bad" data-reject="${e.id}">Recusar</button></div>` : ""}
   </div>`;
 }
-let verifTab="pendente";
-function vVerif(c){
-  const me=meIn(c), adm=isAdmin(c);
-  const list=c.envios.filter(e=>verifTab==="todas"?true:e.status==="pendente");
-  return head("Verificações", adm?"Aprove o que a equipe enviou. Os pontos entram na hora.":"Envie o que você fez para um admin aprovar.") +
+function vVerif(c, me, adm){
+  const list=c.envios.filter(e=>session.verifTab==="todas"?true:e.status==="pendente");
+  const regras=c.regras.filter(r=>!r.so_admin);
+  return head("Verificações", adm?"Aprove o que a staff enviou. As recompensas entram na hora.":"Envie o que você fez para um admin aprovar.") +
   `<div class="grid two">
-    <div><div class="tabs" role="tablist"><button role="tab" data-tab="pendente" aria-selected="${verifTab==="pendente"}">Pendentes (${pending(c).length})</button><button role="tab" data-tab="todas" aria-selected="${verifTab==="todas"}">Histórico</button></div>
-      <div class="queue">${list.length?list.map(e=>subRow(c,e,true)).join(""):`<p class="note">Nenhuma verificação pendente.</p>`}</div></div>
+    <div><div class="tabs" role="tablist"><button role="tab" data-tab="pendente" aria-selected="${session.verifTab==="pendente"}">Pendentes (${pending(c).length})</button><button role="tab" data-tab="todas" aria-selected="${session.verifTab==="todas"}">Histórico</button></div>
+      <div>${list.length?list.map(e=>subRow(c,e,true)).join(""):`<p class="note">Nenhuma verificação pendente.</p>`}</div></div>
     <form class="card grid" id="send-form" style="gap:12px;align-content:start">
       <h2>Enviar verificação</h2>
-      <div class="field"><label class="label" for="send-rule">O que você fez</label><select id="send-rule">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)} (+${r.pontos})</option>`).join("")}</select></div>
-      <div class="field"><label class="label" for="send-detail">Detalhes</label><input id="send-detail" placeholder="Ex.: Jinx — Arcane, cromas conferidos" required></div>
+      <div class="field"><label class="label" for="send-rule">O que você fez</label><select id="send-rule">${regras.map(r=>`<option value="${r.id}">${esc(r.acao)}</option>`).join("")}</select></div>
+      <div id="send-rew">${rew(regras[0].recompensa)}</div>
+      <div class="field"><label class="label" for="send-detail">Detalhes</label><input id="send-detail" placeholder="Ex.: Jinx, Arcane: cromas conferidos" required></div>
       <button class="btn btn-primary" type="submit">Enviar como ${esc(me.nome)}</button>
     </form>
   </div>`;
 }
 
-function vPerfil(m){ return head("Meu perfil", "Como a equipe vê você.") + `<div class="card" style="max-width:640px">${memberDetail(ws(), m)}</div>`; }
-function memberDetail(c,m){
-  const {r,next}=rankOf(c,m.pontos), pos=[...c.membros].sort((a,b)=>b.pontos-a.pontos).findIndex(x=>x.id===m.id)+1;
-  const pct = next ? Math.round((m.pontos-r.min)/(next.min-r.min)*100) : 100;
+function profile(c, m, opts={}){
+  const ban = m.equipado && m.equipado.banner && item(m.equipado.banner);
+  const ic = m.equipado && m.equipado.icone && item(m.equipado.icone);
+  const pos = [...c.membros].filter(x=>x.pp!=null).sort((a,b)=>b.pp-a.pp).findIndex(x=>x.id===m.id)+1;
   const hist = c.envios.filter(e=>e.membro===m.id);
-  const spark = (()=>{ const v=m.semanas, mx=Math.max(...v)||1, W=300,H=48; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`).join(" ");
-    const [lx,ly]=pts.split(" ").at(-1).split(","); return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="48" aria-label="Pontos por semana"><polygon points="0,${H} ${pts} ${W},${H}" style="fill:var(--gold-soft)"/><polyline points="${pts}" style="fill:none;stroke:var(--gold);stroke-width:2"/><circle cx="${lx}" cy="${ly}" r="3.5" style="fill:var(--gold)"/></svg>`; })();
-  return `<div class="grid" style="gap:18px">
-    <div class="top" style="display:flex;align-items:center;gap:14px">${avatar(m,56)}<div><h2 style="font-size:20px;margin:0">${esc(m.nome)}</h2><div style="display:flex;gap:6px;flex-wrap:wrap;margin-top:4px">${rankChip(r)}<span class="pill teal">${esc(m.setor)}</span><span class="pill">${esc(m.cargo)}</span></div></div>${r.img?`<img class="big-emb" src="${src(r.img)}" alt="Emblema ${esc(r.nome)}">`:""}</div>
-    <div class="stats"><div><span class="label">Pontos</span><b>${fmt(m.pontos)}</b></div><div><span class="label">Posição</span><b>${pos}º</b></div><div><span class="label">${esc(c.moeda)}</span><b style="display:flex;align-items:center;gap:6px">${c.icones&&c.icones.moeda?`<img src="${src(c.icones.moeda)}" alt="" style="width:22px;height:22px">`:""}${fmt(m.moedas)}</b></div></div>
-    <div class="usage"><div style="display:flex;justify-content:space-between"><span class="label">Progresso para ${next?esc(next.nome):"o topo"}</span><span class="num">${pct}%</span></div><div class="bar"><i style="width:${pct}%"></i></div><span class="note">${next?`${fmt(next.min-m.pontos)} pontos restantes`:"Rank máximo alcançado"}</span></div>
-    <div><span class="label">Últimas 8 semanas</span>${spark}</div>
-    <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div style="display:flex;justify-content:space-between;gap:10px;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
-    <p class="note">Membro desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
-  </div>`;
+  const spark = (()=>{ const v=m.contrib, mx=Math.max(...v)||1, W=300,H=46; const pts=v.map((x,i)=>`${(i/(v.length-1)*W).toFixed(1)},${(H-4-x/mx*(H-8)).toFixed(1)}`); const [lx,ly]=pts.at(-1).split(",");
+    return `<svg viewBox="0 0 ${W} ${H}" width="100%" height="46" aria-label="Contribuições por semana"><polygon points="0,${H} ${pts.join(" ")} ${W},${H}" style="fill:var(--gold-soft)"/><polyline points="${pts.join(" ")}" style="fill:none;stroke:var(--gold);stroke-width:2"/><circle cx="${lx}" cy="${ly}" r="3.5" style="fill:var(--gold)"/></svg>`; })();
+  const flags = [];
+  if (alerta(m)) flags.push(`<span class="flag bad"><img src="${src(S.alerta.img)}" alt="">${m.penalidade?"Penalidade ativa":"Reputação baixa"}: pode ser rebaixado</span>`);
+  if (imune(m)) flags.push(`<span class="flag ok"><img src="${src(S.imunidade.img)}" alt="">Imune a rebaixamento</span>`);
+  if (podePromover(m)) flags.push(`<span class="flag gold"><img src="${src(S.reputacao.icone)}" alt="">Pode subir para ${esc(S.cargos[cargoIdx(m)+1].nome)}</span>`);
+  (m.tags||[]).forEach(t=>{ const tg=S.tags.find(x=>x.nome===t); if(tg) flags.push(`<span class="flag" style="background:var(--panel-2)"><img src="${src(tg.img)}" alt="">${esc(t)}: ${esc(tg.nota)}</span>`); });
+  const coins = ["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("");
+  return `<div class="prof">
+    <div class="banner" style="${ban?bg(ban.img):""}"></div>
+    <div class="idrow"><div class="ava">${avatar(m,84)}${ic?`<img class="medal" src="${src(ic.img)}" alt="${esc(ic.nome)}" title="${esc(ic.nome)}">`:""}</div>
+      <div style="padding-bottom:4px;min-width:0"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div></div>
+    <div class="inner">
+      <div class="stats3">${statRep(m)}${statElo(m)}${statDest(m)}</div>
+      ${flags.length?`<div class="flags">${flags.join("")}</div>`:""}
+      <div class="wallet">${coins}</div>
+      <div><span class="label">Contribuições nas últimas 8 semanas</span>${spark}</div>
+      <div><span class="label">Cosméticos (${m.inventario.length})</span><div class="thumbs" style="margin-top:6px">${m.inventario.map(x=>{ const it=item(x.item); return `<div class="${it.tipo==="icone"?"icon":""}" style="${bg(it.img)};${rc(it.raridade)}" title="${esc(it.nome)} · Nv. ${x.nivel}"></div>`; }).join("")}</div></div>
+      <div><span class="label">Verificações</span>${hist.length?hist.map(e=>{ const rg=c.regras.find(x=>x.id===e.regra); return `<div class="row" style="justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--line)"><span>${esc(rg.acao)}</span><span class="pill ${e.status==="aprovado"?"ok":e.status==="pendente"?"warn":"bad"}">${e.status}</span></div>`; }).join(""):`<p class="note">Nenhuma ainda.</p>`}</div>
+      <p class="note">Na staff desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}</p>
+      ${opts.admin ? adminBox(c,m) : ""}
+    </div></div>`;
+}
+function adminBox(c,m){
+  return `<div class="admin-box"><b>Ações de admin</b>
+    <div class="row"><select class="sel" id="give-rule" style="flex:1;min-width:180px" aria-label="Recompensa">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)}</option>`).join("")}</select><button class="btn btn-sm btn-primary" data-give="${m.id}">Dar recompensa</button></div>
+    <div class="row">
+      ${m.pp!=null?`<button class="btn btn-sm btn-bad" data-penal="${m.id}">Aplicar penalidade (${S.penalidade.pp} P.P.)</button>`:""}
+      ${m.destaque < S.destaques.length-1 ? `<button class="btn btn-sm" data-dest="${m.id}">Dar destaque (${esc(S.destaques[m.destaque+1].cor)})</button>` : ""}
+      ${podePromover(m)?`<button class="btn btn-sm btn-gold" data-promo="${m.id}">Promover para ${esc(S.cargos[cargoIdx(m)+1].nome)}</button>`:""}
+    </div></div>`;
 }
 function openMember(id){
-  const c=ws(), m=c.membros.find(x=>x.id===id), adm=isAdmin(c);
-  $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}">
-    <div style="display:flex;justify-content:flex-end"><button class="btn btn-sm" data-close>Fechar</button></div>
-    ${memberDetail(c,m)}
-    ${adm?`<div class="card" style="background:var(--panel-2)"><h2>Dar pontos manualmente</h2><div class="give"><select id="give-rule">${c.regras.map(r=>`<option value="${r.id}">${esc(r.acao)} (+${r.pontos})</option>`).join("")}</select><button class="btn btn-primary btn-sm" data-give="${m.id}">Dar pontos</button></div></div>`:""}
-  </div></div>`;
-  const g=$("[data-give]"); if(g) g.addEventListener("click",()=>{ const rg=c.regras.find(r=>r.id===$("#give-rule").value); addPoints(c,m,rg.pontos,`${m.nome} ganhou ${rg.pontos} pontos: ${rg.acao.toLowerCase()}`); openMember(id); render(); toast(`+${rg.pontos} pontos para ${m.nome}`); });
+  const c=ws(), m=c.membros.find(x=>x.id===id);
+  $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}"><div style="position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px;z-index:2"><button class="btn btn-sm" data-close>Fechar</button></div><div style="margin-top:-52px">${profile(c,m,{admin:isAdmin(c) && m.conta!==session.conta})}</div></div></div>`;
+  bindAdmin(c, ()=>{ openMember(id); render(); });
 }
-function addPoints(c,m,pts,texto){
-  const before=rankOf(c,m.pontos).r.nome;
-  m.pontos+=pts; m.semanas[m.semanas.length-1]+=pts; m.moedas+=Math.round(pts/5);
-  c.atividade.unshift({quando:"2026-09-24T18:00:00",texto});
-  const after=rankOf(c,m.pontos).r.nome; if(after!==before) c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${m.nome} subiu para ${after}`});
-  save();
+function vPerfil(c, me){ return head("Meu perfil", "Como a staff vê você. Troque banner, ícone e tema na Forja.", `<button class="btn" data-view="forja">Personalizar na Forja</button>`) + `<div class="card" style="max-width:720px;padding:0;overflow:hidden">${profile(c,me)}</div>`; }
+
+function walletBar(m){ return `<div class="wallet" style="margin-bottom:16px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="coin"><img src="${src(S.moedas[k].img)}" alt=""><span style="min-width:0"><b>${fmt(m.carteira[k])}</b><small>${esc(S.moedas[k].nome)}</small></span></div>`).join("")}</div>`; }
+function vMercado(c, me){
+  const loja = db.cosmeticos.filter(it=>it.preco);
+  const has = id => me.inventario.some(x=>x.item===id);
+  const pool = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
+  const custo = S.lootbox.custo_essencia;
+  return head("Mercado", "Moedas compram temas e cosméticos comuns. Essência Mítica abre LootBoxes, que podem dar os raros.") + walletBar(me) +
+  `<div class="card" style="margin-bottom:16px"><h2><span class="row"><img class="ico" src="${src(S.moedas.essencia.img)}" alt="">LootBox</span><span class="note">Chances: ${S.raridades.map(r=>`${r.nome} ${r.peso}%`).join(" · ")}</span></h2>
+    <div class="roleta" id="roleta"><div class="marker"></div><div class="strip" id="strip"></div><div class="idle" id="roleta-idle">Gire a roleta para ganhar um cosmético aleatório.<br>Se vier um repetido, ele vira fragmentos.</div></div>
+    <div class="row" style="margin-top:12px;justify-content:space-between"><span class="note" id="loot-result">Custa ${custo} Essência Mítica. Você tem ${me.carteira.essencia}.</span><button class="btn btn-gold" id="open-loot" ${me.carteira.essencia<custo?"disabled":""}>Abrir LootBox (${custo} <img class="ico" style="width:18px;height:18px" src="${src(S.moedas.essencia.img)}" alt="Essência Mítica">)</button></div>
+  </div>
+  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span></h2>
+    <div class="items">${loja.map(it=>`<div class="item" style="${rc(it.raridade)}">${pic(it)}<div class="body"><b>${esc(it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${esc(it.tipo==="icone"?"ícone":it.tipo)}</span></div>
+      ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")}</div>
+    <p class="note" style="margin-top:12px">Cosméticos Épicos ou mais raros só saem na LootBox: ${pool.filter(it=>!it.preco).map(it=>esc(it.nome)).join(", ")}.</p>
+  </div>`;
+}
+function vForja(c, me){
+  const inv = me.inventario;
+  if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = inv[0] && inv[0].item;
+  const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = S.forja.nivel_max;
+  const custo = r.custo * sel.nivel, moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
+  const eq = me.equipado && me.equipado[it.tipo] === it.id;
+  return head("Forja", "Suba o nível dos seus cosméticos. Comuns e Épicos usam Fragmentos; Lendários ou acima só sobem com Fragmentos Estelares.") + walletBar(me) +
+  `<div class="grid two">
+    <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens</span></h2>
+      <div class="items">${inv.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t)}<div class="body"><b>${esc(t.nome)}</b><div class="row" style="justify-content:space-between">${lvl(x.nivel,t.raridade)}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${esc(t.tipo==="icone"?"ícone":t.tipo)}</span>`}</div></div></button>`; }).join("")}</div></div>
+    <div class="card forge" style="${rc(it.raridade)}">
+      ${pic(it)}
+      <div><h2 style="margin-bottom:4px">${esc(it.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${esc(it.tipo==="icone"?"ícone":it.tipo)}</span></div></div>
+      <div class="row" style="justify-content:space-between"><span class="label">Nível</span><span class="row">${lvl(sel.nivel,it.raridade)}<span class="num">${sel.nivel}/${max}</span></span></div>
+      ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Próximo nível custa</span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar para o nível ${sel.nivel+1}</button></div>` : `<p class="note">Nível máximo alcançado.</p>`}
+      <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${it.tipo==="tema"?"como tema do painel":it.tipo==="banner"?"no perfil":"como ícone"}`}</button>
+    </div>
+  </div>`;
 }
 
 function vMembros(c){
-  return head("Membros", "Cargos, setores e pontos. Edite os pontos direto na tabela.", `<button class="btn" id="invite">+ Convidar membro</button>`) +
+  return head("Membros", "Acesso, cargo, reputação, pontos míticos e destaque. Clique no nome para dar recompensas, penalidades ou promover.", `<button class="btn" id="invite">+ Convidar membro</button>`) +
   `<div class="card"><div class="table-wrap"><table>
-    <thead><tr><th>Membro</th><th>Cargo</th><th>Setor</th><th>Rank</th><th class="r">Pontos</th></tr></thead>
+    <thead><tr><th>Membro</th><th>Acesso</th><th>Cargo</th><th class="r">P.P.</th><th class="r">P.M.</th><th>Destaque</th></tr></thead>
     <tbody>${c.membros.map(m=>`<tr>
-      <td><button class="who" data-member="${m.id}" style="background:none;border:0;padding:0;text-align:left">${avatar(m)}<span><b>${esc(m.nome)}</b><small>desde ${m.desde.slice(0,4)}</small></span></button></td>
-      <td><select data-role="${m.id}" aria-label="Cargo de ${esc(m.nome)}" style="border:1px solid var(--line);background:var(--panel-2);border-radius:6px;padding:4px" ${m.cargo==="Dono"?"disabled":""}>${["Dono","Admin","Membro"].map(r=>`<option ${r===m.cargo?"selected":""} ${r==="Dono"&&m.cargo!=="Dono"?"disabled":""}>${r}</option>`).join("")}</select></td>
-      <td><span class="pill teal">${esc(m.setor)}</span></td>
-      <td>${rankChip(rankOf(c,m.pontos).r)}</td>
-      <td class="r"><input class="inline-num" type="number" min="0" step="10" value="${m.pontos}" data-pts="${m.id}" aria-label="Pontos de ${esc(m.nome)}"></td></tr>`).join("")}</tbody>
-  </table></div></div>`;
+      <td><button class="plain" data-member="${m.id}">${who(m, `desde ${m.desde.slice(0,4)}`)}</button></td>
+      <td><select class="sel" style="width:auto;padding:4px 6px" data-acesso="${m.id}" aria-label="Acesso de ${esc(m.nome)}" ${m.acesso==="Dono"?"disabled":""}>${["Dono","Admin","Membro"].map(r=>`<option ${r===m.acesso?"selected":""} ${r==="Dono"&&m.acesso!=="Dono"?"disabled":""}>${r}</option>`).join("")}</select></td>
+      <td><select class="sel" style="width:auto;padding:4px 6px" data-cargo="${m.id}" aria-label="Cargo de ${esc(m.nome)}">${[...S.cargos.map(k=>k.nome),"Comunidade"].map(k=>`<option ${k===m.cargo?"selected":""}>${k}</option>`).join("")}</select></td>
+      <td class="r">${m.pp==null?`<span class="note">Isento</span>`:`<input class="inline-num" type="number" min="${S.reputacao.min}" max="${S.reputacao.max}" value="${m.pp}" data-pp="${m.id}" aria-label="P.P. de ${esc(m.nome)}">`}</td>
+      <td class="r"><input class="inline-num" type="number" min="0" max="${S.miticos.max}" value="${m.pm}" data-pm="${m.id}" aria-label="Pontos Míticos de ${esc(m.nome)}"></td>
+      <td><select class="sel" style="width:auto;padding:4px 6px" data-destaque="${m.id}" aria-label="Destaque de ${esc(m.nome)}">${S.destaques.map((d,i)=>`<option value="${i}" ${i===m.destaque?"selected":""}>${esc(d.cor)}</option>`).join("")}</select></td>
+    </tr>`).join("")}</tbody></table></div></div>`;
 }
 
-function vRegras(c){
-  return head("Regras e ranks", "O que vale ponto e em que ponto cada rank começa. Cada comunidade define as suas.") +
+function vSistema(c){
+  const K = [["pp","P.P."],["pm","P.M."],["moedas","Moedas"],["essencia","Essência"],["fragmentos","Frag."],["estelares","Estelar"]];
+  const ic = {pp:S.reputacao.icone, pm:S.miticos.icone, moedas:S.moedas.moedas.img, essencia:S.moedas.essencia.img, fragmentos:S.moedas.fragmentos.img, estelares:S.moedas.estelares.img};
+  return head("Regras e sistema", "O que cada ação vale e como funcionam reputação, maestrias, elos, destaques, cargos e a economia de cosméticos. As recompensas são editáveis por comunidade.") +
   `<div class="grid" style="gap:16px">
-  <div class="card"><h2>Ações que dão pontos</h2><div class="table-wrap"><table>
-    <thead><tr><th>Ação</th><th>Setor</th><th class="r">Pontos</th></tr></thead>
-    <tbody>${c.regras.map(r=>`<tr><td>${esc(r.acao)}</td><td><span class="pill teal">${esc(r.setor)}</span></td><td class="r"><input class="inline-num" type="number" min="0" value="${r.pontos}" data-rule="${r.id}" aria-label="Pontos para ${esc(r.acao)}"></td></tr>`).join("")}</tbody>
+  <div class="card"><h2>Ações que dão recompensa</h2><div class="table-wrap"><table>
+    <thead><tr><th>Ação</th><th>Setor</th>${K.map(([k,n])=>`<th class="r"><span class="cell" style="justify-content:flex-end"><img class="ico" style="width:18px;height:18px" src="${src(ic[k])}" alt="">${n}</span></th>`).join("")}</tr></thead>
+    <tbody>${c.regras.map(r=>`<tr><td>${esc(r.acao)}${r.so_admin?` <span class="pill gold">só admin</span>`:""}</td><td><span class="pill teal">${esc(r.setor)}</span></td>${K.map(([k,n])=>`<td class="r"><input class="inline-num" style="width:60px" type="number" value="${r.recompensa[k]||0}" data-rrule="${r.id}" data-rkey="${k}" aria-label="${n} para ${esc(r.acao)}"></td>`).join("")}</tr>`).join("")}</tbody>
   </table></div></div>
-  <div class="card"><h2>Escada de ranks</h2><div class="ladder">${c.ranks.map(k=>`<div>${k.img?`<img src="${src(k.img)}" alt="">`:""}<b>${esc(k.nome)}</b><span class="num note">${fmt(k.min)}+ pts</span><span class="note">${c.membros.filter(m=>rankOf(c,m.pontos).r===k).length} membros</span></div>`).join("")}</div></div>
+
+  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.reputacao.icone)}" alt="">Reputação (P.P.) e Maestrias</span></h2>
+    <p class="note" style="margin-bottom:12px">${esc(S.reputacao.nota)} Começa em ${S.reputacao.inicial}. Uma penalidade tira ${-S.penalidade.pp} P.P. Subir de maestria dá ${S.subir_maestria.moedas} Moedas e ${S.subir_maestria.essencia} Essência Mítica.</p>
+    <div class="ladder">${S.maestrias.map((t,i)=>`<div><img src="${src(t.img)}" alt=""><b>${esc(t.nome)}</b><span class="note num">${t.min}–${(S.maestrias[i+1]?S.maestrias[i+1].min-1:S.reputacao.max)} P.P.</span></div>`).join("")}</div></div>
+
+  <div class="card"><h2><span class="row"><img class="ico" src="${src(S.miticos.icone)}" alt="">Pontos Míticos e Elos</span></h2>
+    <p class="note" style="margin-bottom:12px">${esc(S.miticos.nota)} Um elo novo a cada 10 pontos.</p>
+    <div class="ladder">${S.elos.map(t=>`<div><img src="${src(t.img)}" alt=""><b>${esc(t.nome)}</b><span class="note num">${t.min}+</span></div>`).join("")}</div></div>
+
+  <div class="grid halves">
+    <div class="card"><h2>Destaques e Imunidade</h2>
+      <div class="ladder">${S.destaques.map((d,i)=>`<div><img src="${src(d.img)}" alt=""><b>${esc(d.cor)}</b><span class="note">${i===0?"Padrão":`Sequência ${i}`}</span></div>`).join("")}</div>
+      <div class="flags" style="margin-top:12px"><span class="flag ok"><img src="${src(S.imunidade.img)}" alt="">${esc(S.imunidade.nota)}</span><span class="flag bad"><img src="${src(S.alerta.img)}" alt="">${esc(S.alerta.nota)}</span></div></div>
+    <div class="card"><h2>Cargos e tags</h2>
+      <div class="steps">${S.cargos.map((k,i)=>`${i?`<span class="arrow">→</span>`:""}<span class="pill teal"><img class="ico" style="width:18px;height:18px" src="${src(k.img)}" alt="">${esc(k.nome)}</span>`).join("")}</div>
+      <p class="note" style="margin-block:10px">${esc(S.promocao.nota)}</p>
+      <div class="grid" style="gap:6px">${S.tags.map(t=>`<div class="row"><img class="ico" src="${src(t.img)}" alt=""><b>${esc(t.nome)}</b><span class="note">${esc(t.nota)}</span></div>`).join("")}</div></div>
+  </div>
+
+  <div class="card"><h2>Economia de cosméticos</h2>
+    <div class="grid halves" style="gap:16px">
+      <div class="grid" style="gap:8px">${["moedas","essencia","fragmentos","estelares"].map(k=>`<div class="row" style="flex-wrap:nowrap;align-items:flex-start"><img class="ico-lg" src="${src(S.moedas[k].img)}" alt=""><span><b>${esc(S.moedas[k].nome)}</b><br><span class="note">${esc(S.moedas[k].nota)}</span></span></div>`).join("")}</div>
+      <div class="table-wrap"><table><thead><tr><th>Raridade</th><th class="r">Chance</th><th>Sobe com</th><th class="r">Custo/nível</th><th class="r">Repetido vira</th></tr></thead>
+        <tbody>${S.raridades.map(r=>`<tr><td>${rarTag(r.id)}</td><td class="r num">${r.peso}%</td><td><span class="cell"><img class="ico" style="width:18px;height:18px" src="${src(S.moedas[r.frag].img)}" alt="">${esc(S.moedas[r.frag].nome)}</span></td><td class="r num">${r.custo} × nível</td><td class="r num">${r.duplicata}</td></tr>`).join("")}</tbody></table>
+        <p class="note" style="margin-top:8px">LootBox custa ${S.lootbox.custo_essencia} Essência Mítica. Nível máximo: ${S.forja.nivel_max}.</p></div>
+    </div></div>
   </div>`;
 }
 
 function vPlano(c){
   const lim = c.plano==="pro" ? 50 : 10;
   const plans=[
-    {id:"gratis",nome:"Grátis",preco:"R$ 0",itens:["Até 10 membros","1 comunidade","Ranking e verificações"]},
-    {id:"pro",nome:"Pro",preco:"R$ 29",itens:["Até 50 membros","Bot do Discord que dá pontos sozinho","Regras e ranks personalizados","Histórico completo"]},
-    {id:"guilda",nome:"Guilda",preco:"R$ 89",itens:["Membros ilimitados","Várias comunidades","Domínio próprio e sua marca","Exportação e API"]}
+    {id:"gratis",nome:"Grátis",preco:"R$ 0",itens:["Até 10 membros","1 comunidade","Reputação, ranking e verificações"]},
+    {id:"pro",nome:"Pro",preco:"R$ 29",itens:["Até 50 membros","Mercado, LootBox e Forja","Bot do Discord que posta novidades e dá recompensas","Regras personalizadas"]},
+    {id:"guilda",nome:"Guilda",preco:"R$ 89",itens:["Membros ilimitados","Várias comunidades","Cosméticos e temas com sua marca","Exportação e API"]}
   ];
   return head("Plano e uso", `A ${esc(c.nome)} está no plano ${c.plano==="pro"?"Pro":"Grátis"}.`) +
-  `<div class="card usage" style="margin-bottom:16px;max-width:520px"><div style="display:flex;justify-content:space-between"><span class="label">Membros usados</span><span class="num">${c.membros.length} / ${lim}</span></div><div class="bar"><i style="width:${Math.min(100,c.membros.length/lim*100)}%;background:${c.membros.length/lim>.8?"var(--warn)":"var(--teal)"}"></i></div></div>
-  <div class="grid plans">${plans.map(p=>`<div class="card plan ${p.id===c.plano?"current":""}"><div style="display:flex;justify-content:space-between;align-items:center"><b style="font-size:16px">${p.nome}</b>${p.id===c.plano?`<span class="pill ok">Plano atual</span>`:""}</div><div><span class="price">${p.preco}</span><span class="note"> /mês</span></div><ul>${p.itens.map(i=>`<li>${i}</li>`).join("")}</ul>${p.id===c.plano?"":`<button class="btn" data-plan="${p.id}">Mudar para ${p.nome}</button>`}</div>`).join("")}</div>
+  `<div class="card" style="margin-bottom:16px;max-width:520px;display:grid;gap:6px"><div class="row" style="justify-content:space-between"><span class="label">Membros usados</span><span class="num">${c.membros.length} / ${lim}</span></div><div class="bar teal"><i style="width:${Math.min(100,c.membros.length/lim*100)}%"></i></div></div>
+  <div class="grid plans">${plans.map(p=>`<div class="card plan ${p.id===c.plano?"current":""}"><div class="row" style="justify-content:space-between"><b style="font-size:16px">${p.nome}</b>${p.id===c.plano?`<span class="pill ok">Plano atual</span>`:""}</div><div><span class="price">${p.preco}</span><span class="note" style="display:inline"> /mês</span></div><ul>${p.itens.map(i=>`<li>${i}</li>`).join("")}</ul>${p.id===c.plano?"":`<button class="btn" data-plan="${p.id}">Mudar para ${p.nome}</button>`}</div>`).join("")}</div>
   <p class="note" style="margin-top:14px">Preços fictícios, só para ilustrar o modelo.</p>`;
 }
-
-function vDados(c){
-  return head("Dados (JSON)", "Todo o painel roda em cima deste arquivo. As mudanças ficam salvas só neste navegador.", `<div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" id="copy-json">Copiar JSON</button><button class="btn btn-bad" id="reset-json">Restaurar dados de exemplo</button></div>`) +
+function vDados(){
+  return head("Dados (JSON)", "Todo o painel roda em cima deste arquivo. As mudanças ficam salvas só neste navegador.", `<div class="row"><button class="btn" id="copy-json">Copiar JSON</button><button class="btn btn-bad" id="reset-json">Restaurar dados de exemplo</button></div>`) +
   `<div class="card"><textarea class="json" id="json-box" readonly aria-label="JSON do banco de dados">${esc(JSON.stringify(db,null,2))}</textarea></div>`;
 }
 
-/* ---------- bindings ---------- */
-function bindView(c){
-  document.querySelectorAll("[data-tab]").forEach(b=>b.addEventListener("click",()=>{ verifTab=b.dataset.tab; render(); }));
-  document.querySelectorAll("[data-approve],[data-reject]").forEach(b=>b.addEventListener("click",()=>{
-    const ok=!!b.dataset.approve, e=c.envios.find(x=>x.id===(b.dataset.approve||b.dataset.reject)), m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra), me=meIn(c);
-    e.status= ok?"aprovado":"recusado";
-    if(ok) addPoints(c,m,rg.pontos,`${me.nome} aprovou: ${m.nome} +${rg.pontos} pts (${rg.acao.toLowerCase()})`);
-    else { c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${me.nome} recusou uma verificação de ${m.nome}`}); save(); }
-    render(); toast(ok?`Aprovado. ${m.nome} ganhou ${rg.pontos} pontos.`:`Verificação de ${m.nome} recusada.`);
+/* ---------- LootBox ---------- */
+function sortear(pool){ const tot=pool.reduce((s,it)=>s+rar(it.raridade).peso,0); let r=Math.random()*tot; for(const it of pool){ r-=rar(it.raridade).peso; if(r<=0) return it; } return pool.at(-1); }
+function abrirLoot(c, me){
+  if (session.spinning) return;
+  const custo = S.lootbox.custo_essencia; if (me.carteira.essencia < custo) return;
+  session.spinning = true; me.carteira.essencia -= custo; save();
+  const pool = db.cosmeticos.filter(it=>it.id!=="tema-oficial");
+  const win = sortear(pool), N = 46, W = 40;
+  const cells = Array.from({length:N}, (_,i)=> i===W ? win : sortear(pool));
+  const strip = $("#strip"); $("#roleta-idle").hidden = true; $("#open-loot").disabled = true;
+  strip.style.transition = "none"; strip.style.transform = "translateX(0)";
+  strip.innerHTML = cells.map(it=>`<div class="slot" style="${rc(it.raridade)}">${pic(it)}<span>${esc(it.nome)}</span></div>`).join("");
+  const box = $("#roleta").clientWidth, cw = 140, jitter = (Math.random()-.5)*90;
+  const x = -(W*cw + 65 - box/2 + jitter);
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  requestAnimationFrame(()=>requestAnimationFrame(()=>{
+    strip.style.transition = reduce ? "none" : "transform 5.2s cubic-bezier(.08,.72,.16,1)";
+    strip.style.transform = `translateX(${x}px)`;
+    const done = ()=>{ session.spinning=false; ganhar(c, me, win); };
+    if (reduce) done(); else strip.addEventListener("transitionend", done, {once:true});
   }));
-  const f=$("#send-form"); if(f) f.addEventListener("submit",e=>{ e.preventDefault(); const me=meIn(c), d=$("#send-detail").value.trim(); if(!d) return;
-    c.envios.unshift({id:"e"+Date.now(),membro:me.id,regra:$("#send-rule").value,detalhe:d,quando:"2026-09-24T18:00:00",status:"pendente"});
-    c.atividade.unshift({quando:"2026-09-24T18:00:00",texto:`${me.nome} enviou uma verificação`}); save(); verifTab="pendente"; render(); toast("Verificação enviada para aprovação."); });
-  document.querySelectorAll("[data-pts]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pts), v=Math.max(0,parseInt(i.value,10)||0); m.pontos=v; save(); render(); toast(`Pontos de ${m.nome} atualizados para ${fmt(v)}.`); }));
-  document.querySelectorAll("[data-role]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.role); m.cargo=s.value; save(); render(); toast(`${m.nome} agora é ${s.value}.`); }));
-  document.querySelectorAll("[data-rule]").forEach(i=>i.addEventListener("change",()=>{ const r=c.regras.find(x=>x.id===i.dataset.rule); r.pontos=Math.max(0,parseInt(i.value,10)||0); save(); toast(`"${r.acao}" agora vale ${r.pontos} pontos.`); }));
-  document.querySelectorAll("[data-plan]").forEach(b=>b.addEventListener("click",()=>{ c.plano=b.dataset.plan==="guilda"?"pro":b.dataset.plan; save(); render(); toast("Plano alterado (simulação, nada foi cobrado)."); }));
-  const inv=$("#invite"); if(inv) inv.addEventListener("click",()=>toast("Numa versão real, isto gera um link de convite para o Discord."));
-  const cp=$("#copy-json"); if(cp) cp.addEventListener("click",()=>{ const box=$("#json-box"); navigator.clipboard.writeText(box.value).then(()=>toast("JSON copiado."),()=>{ box.focus(); box.select(); toast("Selecionei o texto. Use Ctrl+C para copiar."); }); });
-  const rs=$("#reset-json"); if(rs) rs.addEventListener("click",()=>{ if(rs.dataset.confirm){ db=structuredClone(seed); try{localStorage.removeItem(STORE);}catch(e){} render(); toast("Dados de exemplo restaurados."); } else { rs.dataset.confirm="1"; rs.textContent="Clique de novo para confirmar"; } });
+}
+function ganhar(c, me, it){
+  const r = rar(it.raridade), ja = me.inventario.find(x=>x.item===it.id);
+  let msg;
+  if (ja){ me.carteira[r.frag] += r.duplicata; msg = `${it.nome} (${r.nome}) repetido: virou ${r.duplicata} ${S.moedas[r.frag].nome}.`; }
+  else { me.inventario.push({item:it.id, nivel:1}); msg = `Você ganhou ${it.nome} (${r.nome})!`; log(c, `${me.nome} tirou ${it.nome} (${r.nome}) na LootBox`); }
+  save();
+  const res = $("#loot-result"); if (res) res.innerHTML = `<b>${esc(msg)}</b> Restam ${me.carteira.essencia} Essência Mítica.`;
+  $$(".wallet").forEach(w=>w.outerHTML = walletBar(me));
+  const btn = $("#open-loot"); if (btn) btn.disabled = me.carteira.essencia < S.lootbox.custo_essencia;
+  toast(msg);
 }
 
-/* ---------- boot ---------- */
-fetch("data.json").then(r=>r.json()).then(j=>{
+/* ---------- eventos ---------- */
+function bindAdmin(c, after){
+  const g=$("[data-give]"); if(g) g.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===g.dataset.give), rg=c.regras.find(r=>r.id===$("#give-rule").value); aplicar(c,m,rg.recompensa,`${meIn(c).nome} deu a ${m.nome}: ${rg.acao.toLowerCase()}`); m.contrib[m.contrib.length-1]++; save(); after(); toast(`Recompensa entregue a ${m.nome}.`); });
+  const p=$("[data-penal]"); if(p) p.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===p.dataset.penal); if(penalizar(c,m)){ after(); toast(`Penalidade aplicada a ${m.nome}. O alerta fica até a reputação subir.`); } });
+  const d=$("[data-dest]"); if(d) d.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===d.dataset.dest); m.destaque++; const t=S.destaques[m.destaque]; log(c, `${m.nome} recebeu ${t.nome}${imune(m)?" e ficou imune a rebaixamento":""}`); save(); after(); toast(`${m.nome} agora tem ${t.nome}.`); });
+  const pr=$("[data-promo]"); if(pr) pr.addEventListener("click",()=>{ const m=c.membros.find(x=>x.id===pr.dataset.promo); promover(c,m); after(); toast(`${m.nome} agora é ${m.cargo} e ganhou ${S.promocao.fragmentos} Fragmentos.`); });
+}
+function bindView(c, me){
+  $$("[data-tab]").forEach(b=>b.addEventListener("click",()=>{ session.verifTab=b.dataset.tab; render(); }));
+  $$("[data-rank]").forEach(b=>b.addEventListener("click",()=>{ session.rankBy=b.dataset.rank; render(); }));
+  $$("[data-approve],[data-reject]").forEach(b=>b.addEventListener("click",()=>{
+    const ok=!!b.dataset.approve, e=c.envios.find(x=>x.id===(b.dataset.approve||b.dataset.reject)), m=c.membros.find(x=>x.id===e.membro), rg=c.regras.find(x=>x.id===e.regra);
+    e.status = ok?"aprovado":"recusado";
+    if (ok){ m.contrib[m.contrib.length-1]++; aplicar(c,m,rg.recompensa,`${me.nome} aprovou: ${m.nome}, ${rg.acao.toLowerCase()}`); }
+    else { log(c, `${me.nome} recusou uma verificação de ${m.nome}`); save(); }
+    render(); toast(ok?`Aprovado. Recompensas entregues a ${m.nome}.`:`Verificação de ${m.nome} recusada.`);
+  }));
+  const sr=$("#send-rule"); if(sr) sr.addEventListener("change",()=>{ $("#send-rew").innerHTML = rew(c.regras.find(r=>r.id===sr.value).recompensa); });
+  const f=$("#send-form"); if(f) f.addEventListener("submit",e=>{ e.preventDefault(); const d=$("#send-detail").value.trim(); if(!d) return;
+    c.envios.unshift({id:"e"+Date.now(), membro:me.id, regra:$("#send-rule").value, detalhe:d, quando:NOW_ISO, status:"pendente"});
+    log(c, `${me.nome} enviou uma verificação`); save(); session.verifTab="pendente"; render(); toast("Verificação enviada para aprovação."); });
+  bindAdmin(c, render);
+  $$("[data-pp]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pp); aplicar(c,m,{pp:clamp(parseInt(i.value,10)||S.reputacao.min,S.reputacao.min,S.reputacao.max)-m.pp}); render(); toast(`P.P. de ${m.nome}: ${m.pp}.`); }));
+  $$("[data-pm]").forEach(i=>i.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===i.dataset.pm); aplicar(c,m,{pm:clamp(parseInt(i.value,10)||0,0,S.miticos.max)-m.pm}); render(); toast(`Pontos Míticos de ${m.nome}: ${m.pm}.`); }));
+  $$("[data-destaque]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.destaque); m.destaque=+s.value; save(); render(); toast(`${m.nome}: ${S.destaques[m.destaque].nome}.`); }));
+  $$("[data-acesso]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.acesso); m.acesso=s.value; save(); render(); toast(`${m.nome} agora tem acesso ${s.value}.`); }));
+  $$("[data-cargo]").forEach(s=>s.addEventListener("change",()=>{ const m=c.membros.find(x=>x.id===s.dataset.cargo); m.cargo=s.value; if(s.value==="Dev") m.pp=null; else if(m.pp==null) m.pp=S.reputacao.inicial; save(); render(); toast(`${m.nome} agora é ${s.value}.`); }));
+  $$("[data-rrule]").forEach(i=>i.addEventListener("change",()=>{ const r=c.regras.find(x=>x.id===i.dataset.rrule); const v=parseInt(i.value,10)||0; if(v) r.recompensa[i.dataset.rkey]=v; else delete r.recompensa[i.dataset.rkey]; save(); toast(`"${r.acao}" atualizada.`); }));
+  $$("[data-buy]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.buy); if(me.carteira.moedas<it.preco) return; me.carteira.moedas-=it.preco; me.inventario.push({item:it.id,nivel:1}); log(c, `${me.nome} comprou ${it.nome}`); save(); render(); toast(`${it.nome} comprado. Equipe na Forja.`); }));
+  const ol=$("#open-loot"); if(ol) ol.addEventListener("click",()=>abrirLoot(c, me));
+  $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; render(); }));
+  $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=r.custo*x.nivel;
+    if(me.carteira[r.frag]<custo || x.nivel>=S.forja.nivel_max) return; me.carteira[r.frag]-=custo; x.nivel++; log(c, `${me.nome} aprimorou ${it.nome} para o nível ${x.nivel}`); save(); render(); toast(`${it.nome} agora está no nível ${x.nivel}.`); }));
+  $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); render(); toast(`${it.nome} equipado.`); }));
+  $$("[data-plan]").forEach(b=>b.addEventListener("click",()=>{ c.plano=b.dataset.plan==="guilda"?"pro":b.dataset.plan; save(); render(); toast("Plano alterado (simulação, nada foi cobrado)."); }));
+  const inv=$("#invite"); if(inv) inv.addEventListener("click",()=>toast("Numa versão real, isto gera um link de convite para o Discord."));
+  const cp=$("#copy-json"); if(cp) cp.addEventListener("click",()=>{ const box=$("#json-box"); navigator.clipboard.writeText(box.value).then(()=>toast("JSON copiado."),()=>{ box.focus(); box.select(); toast("Selecionei o texto. Use Ctrl+C para copiar."); }); });
+  const rs=$("#reset-json"); if(rs) rs.addEventListener("click",()=>{ if(rs.dataset.confirm){ db=structuredClone(seed); S=db.sistema; try{localStorage.removeItem(STORE);}catch(e){} render(); toast("Dados de exemplo restaurados."); } else { rs.dataset.confirm="1"; rs.textContent="Clique de novo para confirmar"; } });
+}
+
+/* ---------- início ---------- */
+fetch(BASE + "painel-saas/data.json").then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(j=>{
   seed=j; db=structuredClone(j);
   try{ const s=localStorage.getItem(STORE); if(s) db=JSON.parse(s); }catch(e){}
-  renderLogin();
-}).catch(()=>{ $(".login-card").insertAdjacentHTML("beforeend",`<p class="note" style="color:var(--bad)">Não consegui carregar o data.json. Abra o painel por um servidor (ex.: python3 -m http.server) em vez de abrir o arquivo direto.</p>`); });
+  S=db.sistema; renderLogin();
+}).catch(()=>{
+  $("#demo-accounts").innerHTML = `<div class="error-box"><img src="${src("image/notConnected.png")}" alt="" width="72"><b>Sem conexão com os dados</b><p class="note">Não consegui carregar o data.json. Abra o painel por um servidor (ex.: python3 -m http.server na raiz do repositório) em vez de abrir o arquivo direto.</p></div>`;
+});
 })();
 </script>
