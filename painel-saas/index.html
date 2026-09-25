@@ -203,6 +203,17 @@ td.r,th.r{text-align:right}
 .evo .st.on .pic{border-color:var(--rc)}
 .evo .st.lock{opacity:.45;filter:grayscale(.6)}
 .evo .arrow{color:var(--ink-3);flex:none}
+.evo .st{background:none;border:0;padding:0;color:inherit;font:inherit;cursor:pointer}
+.evo .st:hover .pic{border-color:var(--gold)}
+.evo .st.prev .pic{border-color:var(--gold);box-shadow:0 0 0 2px var(--gold-soft)}
+.evo .st.prev{opacity:1;filter:none}
+.prev-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;flex-wrap:wrap;background:var(--gold-soft);color:var(--gold);border-radius:8px;padding:6px 10px;font-size:13px;font-weight:500}
+.mini{display:flex;align-items:center;gap:12px;border-radius:10px;padding:12px;background:var(--panel-2) center/cover;min-height:84px;position:relative}
+.mini.tema{color:#fff;text-shadow:0 1px 3px #000}
+.mini.tema::before{content:"";position:absolute;inset:0;border-radius:10px;background:linear-gradient(90deg,rgba(0,0,0,.55),rgba(0,0,0,.1))}
+.mini > *{position:relative}
+.mini .ava{position:relative}
+.mini .medal{position:absolute;right:-6px;bottom:-4px;width:28px;height:28px;border-radius:50%;border:2px solid var(--panel);background:#0a1a1d;object-fit:contain}
 @keyframes forged{0%{filter:brightness(2.2) saturate(1.6);transform:scale(1.04)}100%{filter:none;transform:none}}
 
 /* Bordas animadas */
@@ -410,7 +421,7 @@ const STORE = "lsp-painel-v7";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
-const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, lojaTipo:"todos", abrindo:false, hx:0 };
+const session = { conta:null, ws:null, view:"inicio", rankBy:"pp", verifTab:"pendente", forjaSel:null, lojaTipo:"todos", abrindo:false, hx:0, forjaPrev:null };
 const $ = s => document.querySelector(s);
 const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -793,12 +804,24 @@ function vMercado(c, me){
       ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`:`<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`}</div></div>`).join("")||`<p class="note">Nada à venda nesta categoria. Procure nos baús Hextech.</p>`}</div>
   </div>`;
 }
+/* prévia pequena do perfil com o cosmético num estágio */
+function miniPerfil(m, it, nivel){
+  const v = vis(it, nivel);
+  const bordaAtual = equip(m,"borda"), estilo = it.tipo==="borda" ? v.estilo : bordaAtual && vis(bordaAtual, nivelDe(m,bordaAtual.id)).estilo;
+  const icAtual = equip(m,"icone"), icImg = it.tipo==="icone" ? v.img : icAtual && vis(icAtual, nivelDe(m,icAtual.id)).img;
+  const emAtual = equip(m,"emote"), emHtml = it.tipo==="emote" ? emo(it, nivel, 48) : emAtual ? emo(emAtual, nivelDe(m,emAtual.id), 48) : "";
+  const temaImg = it.tipo==="tema" ? v.img : (equip(m,"tema")||{}).img;
+  const sentHtml = it.tipo==="sentinela" ? `<img src="${src(v.img)}" alt="" style="height:64px;margin-left:auto">` : "";
+  return `<div class="mini ${temaImg?"tema":""}" style="${temaImg?bg(temaImg):""}"><span class="ava">${ring(avatar(m,52), estilo)}${icImg?`<img class="medal" src="${src(icImg)}" alt="">`:""}</span><span><b>${esc(m.nome)}</b><br><small>${esc(m.cargo)}</small></span>${emHtml?`<span style="margin-left:${sentHtml?"8px":"auto"}">${emHtml}</span>`:""}${sentHtml}</div>`;
+}
 function vForja(c, me){
   const inv = me.inventario;
   if (!session.forjaSel || !inv.some(x=>x.item===session.forjaSel)) session.forjaSel = (inv.find(x=>evolui(item(x.item)))||inv[0]).item;
   const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = it.evolucoes ? it.evolucoes.length : 1;
   const custo = r.custo * sel.nivel, moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
-  const eq = me.equipado && me.equipado[it.tipo] === it.id, v = vis(it, sel.nivel);
+  const eq = me.equipado && me.equipado[it.tipo] === it.id;
+  const prev = evolui(it) && session.forjaPrev && session.forjaPrev!==sel.nivel ? session.forjaPrev : null;
+  const nv = prev || sel.nivel, v = vis(it, nv);
   const ordem = [...inv].sort((a,b)=> (evolui(item(b.item))-evolui(item(a.item))));
   const onde = {tema:"como tema do painel", borda:"como borda da foto", icone:"como ícone", emote:"como emote do perfil", sentinela:"na vitrine do perfil"};
   return head("Forja", "Aprimorar muda o visual do cosmético para o próximo estágio da linha dele. Só cosméticos com linha de evolução podem ser aprimorados.") + walletBar(me) +
@@ -806,9 +829,11 @@ function vForja(c, me){
     <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens · ${inv.filter(x=>evolui(item(x.item))).length} evoluem</span></h2>
       <div class="items">${ordem.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.nivel)}<div class="body"><b>${esc(vis(t,x.nivel).nome)}</b><div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
     <div class="card forge" style="${rc(it.raridade)}">
-      ${pic(it, sel.nivel, "forge-pic")}
+      ${prev?`<div class="prev-bar"><span>👁 Pré-visualização: estágio ${prev} de ${max}${prev>sel.nivel?" (ainda bloqueado)":""}</span><button class="btn btn-sm" data-prev="0">Voltar ao atual</button></div>`:""}
+      ${pic(it, nv, "forge-pic")}
       <div><h2 style="margin-bottom:4px">${esc(v.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
-      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<div class="st ${i+1===sel.nivel?"on":""} ${i+1>sel.nivel?"lock":""}" style="${rc(it.raridade)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}</span></div>`).join("")}</div></div>
+      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===sel.nivel?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}${i+1===sel.nivel?"<br><b>atual</b>":""}</span></button>`).join("")}</div><p class="note" style="margin-top:4px">Clique num estágio para ver como fica.</p></div>
+        <div><span class="label">Como fica no seu perfil</span><div style="margin-top:6px">${miniPerfil(me, it, nv)}</div></div>
         ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Evoluir para <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar</button></div>` : `<p class="note">Estágio final alcançado.</p>`}`
       : `<p class="note">Este cosmético não tem linha de evolução, então não pode ser aprimorado. Procure os que têm o selo ⬆ na loja.</p>`}
       <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${onde[it.tipo]}`}</button>
@@ -991,9 +1016,10 @@ function bindView(c, me){
   $$("[data-loja]").forEach(b=>b.addEventListener("click",()=>{ session.lojaTipo=b.dataset.loja; som("click",{vol:.4}); render(); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
-  $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; som("click",{vol:.5}); render(); }));
+  $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; som("click",{vol:.5}); render(); }));
+  $$("[data-prev]").forEach(b=>b.addEventListener("click",()=>{ const n=+b.dataset.prev; session.forjaPrev = n||null; som("hover",{vol:.4}); render(); }));
   $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=r.custo*x.nivel;
-    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++;
+    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; session.forjaPrev=null;
     const nome = vis(it,x.nivel).nome; log(c, `${me.nome} evoluiu ${it.nome} para ${nome}`); save();
     som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
     render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Evoluiu para ${nome}!`); }));
