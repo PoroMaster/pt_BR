@@ -281,9 +281,6 @@ td.r,th.r{text-align:right}
 .hx .key{position:absolute;width:26%;left:50%;top:50%;opacity:0;transform:translate(160%,130%) rotate(-35deg) scale(.8);transition:transform .95s cubic-bezier(.25,.8,.25,1),opacity .35s;filter:drop-shadow(0 0 14px #7ff) drop-shadow(0 0 30px #3fb5e8);z-index:3}
 .hx .key.in{opacity:1;transform:translate(-50%,-38%) rotate(0) scale(1)}
 .hx .key.turn{transition:transform .35s ease-in,opacity .35s;transform:translate(-50%,-30%) rotate(90deg) scale(.7);opacity:0}
-.hx .flash{position:absolute;inset:-50vmax;background:radial-gradient(circle,#fff 0%,#bdf 30%,transparent 60%);opacity:0;pointer-events:none;z-index:4}
-.hx .flash.on{animation:boom .8s ease-out}
-@keyframes boom{0%{opacity:0;transform:scale(.3)}15%{opacity:1}100%{opacity:0;transform:scale(1.4)}}
 .hx .shake{animation:shake .45s ease-in-out 2}
 @keyframes shake{0%,100%{transform:translate(0,0)}20%{transform:translate(-4px,2px)}40%{transform:translate(4px,-2px)}60%{transform:translate(-3px,-2px)}80%{transform:translate(3px,2px)}}
 .hx .top{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;display:flex;gap:8px;z-index:6}
@@ -524,6 +521,8 @@ let ultimoHover = 0;
 document.addEventListener("mouseover", e=>{ const t=e.target.closest(".item,.btn-hex,.btn-blue"); if(!t || t.contains(e.relatedTarget)) return; const n=Date.now(); if(n-ultimoHover>90){ ultimoHover=n; som("hover",{vol:.18}); } });
 const wait = ms => new Promise(r=>setTimeout(r,ms));
 const reduz = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+function pronto(v, maxMs=4000){ return new Promise(res=>{ if (v.readyState >= 3) return res(); const ok=()=>res(); v.addEventListener("canplaythrough",ok,{once:true}); v.addEventListener("error",ok,{once:true}); setTimeout(ok,maxMs); v.load(); }); }
+function comecou(v, maxMs=1500){ return new Promise(res=>{ if (!v.paused && v.currentTime>0) return res(); const ok=()=>res(); v.addEventListener("playing",ok,{once:true}); setTimeout(ok,maxMs); }); }
 function tocar(v, maxMs){ return new Promise(res=>{ let ok=false; const fim=()=>{ if(!ok){ ok=true; res(); } }; v.addEventListener("ended",fim,{once:true}); v.addEventListener("error",fim,{once:true}); setTimeout(fim,maxMs); v.play().catch(fim); }); }
 
 function log(c, texto){ c.atividade.unshift({quando:NOW_ISO, texto}); }
@@ -944,11 +943,10 @@ async function abrirBau(c, me){
   const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
   ov.innerHTML = `<div class="top"><button data-hx-mute>${mudo?"🔇":"🔊"}</button><button data-hx-skip>Pular</button></div>
     <div class="stage" id="hx-stage">
-      <video id="v-intro" muted playsinline src="${vidUrl("open_cm_intro")}"></video>
-      <video id="v-loop" muted playsinline loop src="${vidUrl("open_cm_loop")}" hidden></video>
-      <video id="v-outro" class="wide" muted playsinline src="${vidUrl("open_cm_outro")}" hidden></video>
+      <video id="v-intro" muted playsinline preload="auto" src="${vidUrl("open_cm_intro")}"></video>
+      <video id="v-loop" muted playsinline preload="auto" loop src="${vidUrl("open_cm_loop")}" style="opacity:0"></video>
+      <video id="v-outro" class="wide" muted playsinline preload="auto" src="${vidUrl("open_cm_outro")}" style="opacity:0"></video>
       <img class="key" id="hx-key" src="${src(S.hextech.chave.img)}" alt="">
-      <div class="flash" id="hx-flash"></div>
     </div><div class="hint" id="hx-hint">Preparando o baú…</div>`;
   document.body.appendChild(ov);
   let idle = null;
@@ -958,15 +956,18 @@ async function abrirBau(c, me){
   ov.querySelector("[data-hx-mute]").onclick = e => { mudo=!mudo; try{ localStorage.setItem("lsp-mudo", mudo?"1":"0"); }catch(err){} e.target.textContent = mudo?"🔇":"🔊"; if(mudo) fimCena(); };
   if (reduz()) { revelar(c, me, it, ov); return; }
   const vI=ov.querySelector("#v-intro"), vL=ov.querySelector("#v-loop"), vO=ov.querySelector("#v-outro"), key=ov.querySelector("#hx-key"), hint=ov.querySelector("#hx-hint"), stage=ov.querySelector("#hx-stage");
-  som("intro"); await tocar(vI, 2200); if(!vivo()) return;
-  vI.hidden = true; vL.hidden = false; vL.play().catch(()=>{}); idle = som("idle",{vol:.45, loop:true});
+  /* cada troca de vídeo só acontece quando o próximo já está tocando, e o som sai junto */
+  await Promise.all([pronto(vI), pronto(vL), pronto(vO)]); if(!vivo()) return;
+  const fimIntro = tocar(vI, 2200); await comecou(vI); som("intro"); await fimIntro; if(!vivo()) return;
+  vL.play().catch(()=>{}); await comecou(vL); vL.style.opacity = 1; vI.hidden = true; idle = som("idle",{vol:.45, loop:true});
   hint.textContent = "Usando a Chave Hextech…";
   await wait(250); if(!vivo()) return; key.classList.add("in");
   await wait(1000); if(!vivo()) return; som("keyIn"); key.classList.add("turn"); stage.classList.add("shake");
   await wait(750); if(!vivo()) return;
-  fimCena(); vL.hidden = true; vO.hidden = false; hint.textContent = "";
-  ov.querySelector("#hx-flash").classList.add("on"); som("outro");
-  await tocar(vO, 2400); if(!vivo()) return;
+  stage.classList.remove("shake");
+  const fimOutro = tocar(vO, 2600); await comecou(vO); if(!vivo()) return;
+  fimCena(); vO.style.opacity = 1; vL.pause(); vL.hidden = true; key.hidden = true; hint.textContent = ""; som("outro");
+  await fimOutro; if(!vivo()) return;
   revelar(c, me, it, ov);
 }
 function revelar(c, me, it, ov){
