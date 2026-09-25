@@ -1281,7 +1281,7 @@ function render(){
   $("#amigos").innerHTML = `<div class="social-h"><span>Social</span><small>${c.membros.filter(online).length}/${c.membros.length} online</small></div>` + grupos.map(g=>`<details open class="grupo"><summary>${esc(g.cg)} <small>(${g.ms.filter(online).length}/${g.ms.length})</small></summary>${g.ms.sort((a,b)=>online(b)-online(a)||a.nome.localeCompare(b.nome)).map(m=>`<button class="amigo ${online(m)?"":"off"}" data-member="${m.id}">${avatarR(m,32)}<span><b>${esc(m.nome)}</b><small>${online(m)?`<i class="on"></i>${m.pp!=null?`${m.pp} P.P.`:"Online"}`:"Offline"}</small></span></button>`).join("")}</details>`).join("");
   const tema = me.equipado && me.equipado.tema && item(me.equipado.tema);
   $("#main").style.backgroundImage = tema ? `linear-gradient(var(--veil),var(--veil)),url('${BASE+tema.img}')` : "";
-  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
+  const V = {inicio:vInicio, ranking:vRanking, verificacoes:vVerif, perfil:vPerfil, mercado:vMercado, colecao:vColecao, membro:vMembro, forja:vForja, membros:vMembros, sistema:vSistema, plano:vPlano, dados:vDados};
   const rolagem = $$("#main .evo, #main .mini-evo").map(el=>el.scrollLeft);
   $("#main").innerHTML = `<div class="mobile-bar"><b>${esc(c.nome)}</b><button class="btn btn-sm" id="menu-btn" aria-label="Abrir social">Social ☰</button></div>` + V[session.view](c, me, adm);
   $("#side").classList.remove("open");
@@ -1446,10 +1446,28 @@ function adminBox(c,m){
       ${podePromover(m)?`<button class="btn btn-sm btn-gold" data-promo="${m.id}">Promover para ${esc(S.cargos[cargoIdx(m)+1].nome)}</button>`:""}
     </div></div>`;
 }
+/* perfil de outro membro: abre em tela cheia, igual ao "Meu perfil" (como o perfil de um amigo no cliente) */
 function openMember(id){
-  const c=ws(), m=c.membros.find(x=>x.id===id);
-  $("#layer").innerHTML = `<div class="scrim"><div class="drawer" role="dialog" aria-label="Perfil de ${esc(m.nome)}"><div style="position:sticky;top:0;display:flex;justify-content:flex-end;padding:10px;z-index:2"><button class="btn btn-sm" data-close>Fechar</button></div><div style="margin-top:-52px">${profile(c,m,{admin:isAdmin(c) && m.conta!==session.conta})}</div></div></div>`;
-  bindAdmin(c, ()=>{ openMember(id); render(); }, $("#layer"));
+  const c = ws(), me = meIn(c);
+  $("#layer").innerHTML = ""; $("#side").classList.remove("open");
+  if (me && me.id===id){ session.view = "perfil"; }
+  else { session.membroSel = id; session.voltar = session.view!=="membro" ? session.view : (session.voltar||"inicio"); session.view = "membro"; }
+  render(); scrollTo(0,0);
+}
+function vMembro(c, me, adm){
+  const m = c.membros.find(x=>x.id===session.membroSel);
+  if (!m) { session.view = "inicio"; return vInicio(c, me, adm); }
+  const volta = VIEWS.find(v=>v.id===session.voltar);
+  const hist = c.envios.filter(e=>e.membro===m.id);
+  const slot = ([t, rot]) => { if (t==="bio") return ""; const it = equip(m,t), n = it && nivelDe(m,it.id);
+    return `<div class="eq-slot" style="${it?rc(it.raridade):""}">${it?pic(it,n,"",40):`<div class="pic vazio">–</div>`}<span><small>${rot}</small><b>${it?esc(vis(it,n).nome):"Nenhum"}</b></span></div>`; };
+  return head(`Perfil de ${esc(m.nome)}`, `${esc(m.cargo)} · ${esc(m.acesso)} · na staff desde ${new Date(m.desde+"T12:00:00").toLocaleDateString("pt-BR",{month:"long",year:"numeric"})}.`,
+      `<button class="btn" data-view="${volta?volta.id:"inicio"}">← Voltar${volta?` para ${esc(volta.nome)}`:""}</button>`) +
+    `<div class="grid two"><div class="card" style="padding:0;overflow:hidden">${profile(c,m,{})}</div>
+     <div class="grid" style="gap:16px;align-content:start">
+       ${adm && m.conta!==session.conta ? `<div class="card">${adminBox(c,m)}</div>` : ""}
+       <div class="card edit"><h2>Equipados</h2><div class="eq-slots">${ED_TABS.map(slot).join("")}</div></div>
+     </div></div>`;
 }
 const ED_TABS = [["icone","Ícone"],["borda","Borda"],["emote","Emote"],["sentinela","Sentinela"],["tema","Tema"],["bio","Biografia"]];
 function vPerfil(c, me){
