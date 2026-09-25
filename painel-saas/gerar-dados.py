@@ -350,13 +350,25 @@ tradutores = {
     "novidades": [{"quando": "2026-09-20T12:00:00", "titulo": "Faltam 4 páginas em turco", "texto": "Quem puder ajudar, pegue uma página no canal de tradução."}]
 }
 
+# Toda pessoa da staff tem uma conta de login. As três primeiras são fixas (u1, u2, u3);
+# os demais membros ganham uma conta própria com e-mail no domínio da comunidade.
+contas = [
+    {"id": "u1", "nome": "Luckey", "email": "luckey@poromaster.dev", "foto": "image/Profile/01.png"},
+    {"id": "u2", "nome": "Jake", "email": "jake@poromaster.dev", "foto": "image/Profile/04.png"},
+    {"id": "u3", "nome": "Khyago", "email": "khyago@poromaster.dev", "foto": "image/Profile/03.png"},
+]
+for com, dominio in ((poromaster, "poromaster.dev"), (tradutores, "tradutores.dev")):
+    for m in com["membros"]:
+        if m.get("conta"):
+            continue
+        cid = "u-" + m["id"]
+        slug = "".join(ch for ch in m["nome"].lower() if ch.isalnum())
+        contas.append({"id": cid, "nome": m["nome"], "email": f"{slug}@{dominio}", "foto": m.get("foto")})
+        m["conta"] = cid
+
 dados = {
     "_nota": "Banco de dados de exemplo. As regras seguem o painel L.S.P. UT original; pontos, carteiras e atividades são fictícios. Caminhos de imagem são relativos à raiz do repositório. Gerado por gerar-dados.py.",
-    "contas": [
-        {"id": "u1", "nome": "Luckey", "email": "luckey@poromaster.dev", "foto": "image/Profile/01.png"},
-        {"id": "u2", "nome": "Jake", "email": "jake@poromaster.dev", "foto": "image/Profile/04.png"},
-        {"id": "u3", "nome": "Khyago", "email": "khyago@poromaster.dev", "foto": "image/Profile/03.png"}
-    ],
+    "contas": contas,
     "sistema": sistema,
     "cosmeticos": cosmeticos,
     "packs": packs,
