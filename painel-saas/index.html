@@ -419,7 +419,20 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 .drawer .stats3{grid-template-columns:1fr}
 .drawer .wallet{grid-template-columns:repeat(2,minmax(0,1fr))}
 
-.toast{position:fixed;bottom:calc(20px + env(safe-area-inset-bottom,0px));left:50%;transform:translateX(-50%);background:var(--ink);color:var(--panel);padding:10px 16px;border-radius:8px;z-index:20;font-weight:500;max-width:calc(100% - 32px)}
+.toast{position:fixed;top:calc(18px + env(safe-area-inset-top,0px));left:50%;transform:translateX(-50%);z-index:60;display:flex;align-items:center;gap:14px;min-width:min(340px,calc(100% - 32px));max-width:min(520px,calc(100% - 32px));padding:14px 18px 16px;border-radius:12px;background:linear-gradient(135deg,#0f2530,#0a161d);color:#f3ecd9;border:1.5px solid #c8a24e;box-shadow:0 0 0 1px rgba(0,0,0,.4),0 12px 36px rgba(0,0,0,.45),0 0 28px rgba(200,162,78,.35);font-size:15px;line-height:1.35;cursor:pointer;overflow:hidden;animation:toast-in .45s cubic-bezier(.2,1.4,.4,1)}
+.toast.sai{animation:toast-out .3s ease-in forwards}
+.toast .t-ico{display:flex;flex:none}
+.toast .t-ico img{width:52px;height:52px;object-fit:contain;filter:drop-shadow(0 2px 6px rgba(0,0,0,.6))}
+.toast .t-ico img + img{margin-left:-14px}
+.toast .t-ico img.redondo{border-radius:50%;border:2px solid #c8a24e}
+.toast b{display:block;font-size:16px;color:#f0d58c;letter-spacing:.2px}
+.toast .t-barra{position:absolute;left:0;bottom:0;height:3px;width:100%;background:linear-gradient(90deg,#c8a24e,#f0d58c);transform-origin:left;animation:toast-barra var(--dur,4.5s) linear forwards}
+.toast.erro{border-color:#d0564b;box-shadow:0 12px 36px rgba(0,0,0,.45),0 0 28px rgba(208,86,75,.35)}
+.toast.erro b{color:#ff9d8f}.toast.erro .t-barra{background:#d0564b}
+@keyframes toast-in{from{opacity:0;transform:translate(-50%,-30px) scale(.9)}to{opacity:1;transform:translate(-50%,0) scale(1)}}
+@keyframes toast-out{to{opacity:0;transform:translate(-50%,-20px) scale(.95)}}
+@keyframes toast-barra{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+@media (prefers-reduced-motion:reduce){.toast,.toast.sai,.toast .t-barra{animation:none}}
 .chart text{fill:var(--ink-3);font:11px var(--mono)}
 .chart .grid-l{stroke:var(--line)}
 .chart .b{fill:var(--gold);opacity:.35}
@@ -500,7 +513,17 @@ function when(iso){
   const d = Math.round(h/24); return d === 1 ? "ontem" : `há ${d} dias`;
 }
 function save(){ try{ localStorage.setItem(STORE, JSON.stringify(db)); }catch(e){} }
-function toast(msg){ $$(".toast").forEach(t=>t.remove()); const t=document.createElement("div"); t.className="toast"; t.setAttribute("role","status"); t.textContent=msg; document.body.appendChild(t); setTimeout(()=>t.remove(),3200); }
+/* aviso no topo da tela: toast(texto, {titulo, imgs:[caminhos], redondo, tipo:"erro"}) */
+function imgsDe(it, nivel){ const v = it && vis(it, nivel||1); return v && v.img ? {imgs:[v.img], redondo: it.tipo==="icone"} : {}; }
+function toast(msg, o={}){
+  $$(".toast").forEach(t=>t.remove());
+  const dur = Math.max(3500, 2000 + msg.length*45), t = document.createElement("div");
+  t.className = "toast" + (o.tipo==="erro" ? " erro" : ""); t.setAttribute("role","status"); t.style.setProperty("--dur", dur+"ms");
+  const imgs = o.imgs || ["image/tester.ico"];
+  t.innerHTML = `${imgs.length?`<span class="t-ico">${imgs.map(p=>`<img class="${o.redondo?"redondo":""}" src="${src(p)}" alt="">`).join("")}</span>`:""}<span>${o.titulo?`<b>${esc(o.titulo)}</b>`:""}${esc(msg)}</span><span class="t-barra"></span>`;
+  const sair = () => { if (!t.isConnected) return; t.classList.add("sai"); setTimeout(()=>t.remove(), 300); };
+  t.onclick = sair; document.body.appendChild(t); setTimeout(sair, dur);
+}
 
 /* ---------- regras do sistema ---------- */
 const ws = () => db.comunidades.find(c=>c.id===session.ws);
@@ -1066,7 +1089,7 @@ function comprarKit(c, me){
   setTimeout(()=>{ v1.play().catch(()=>{}); som("chest"); }, 150);
   setTimeout(()=>{ v2.play().catch(()=>{}); som("key"); }, 650);
   setTimeout(()=>fx.remove(), 2700);
-  render(); toast("Kit Hextech comprado: 1 baú e 1 chave.");
+  render(); toast("1 baú e 1 chave foram para o seu inventário.", {titulo:"Kit Hextech comprado!", imgs:[S.hextech.bau.img, S.hextech.chave.img]});
 }
 async function abrirBau(c, me){
   if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
@@ -1124,7 +1147,7 @@ function revelar(c, me, it, ov){
   som("r_"+it.raridade); if (ja) setTimeout(()=>som("dup",{vol:.6}), 900);
   const fechar = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; render(); };
   ov.querySelector("[data-hx-close]").onclick = fechar;
-  const eq = ov.querySelector("[data-hx-equip]"); if (eq) eq.onclick = () => { me.equipado[it.tipo]=it.id; save(); toast(`${it.nome} equipado.`); fechar(); };
+  const eq = ov.querySelector("[data-hx-equip]"); if (eq) eq.onclick = () => { me.equipado[it.tipo]=it.id; save(); toast(`${it.nome} equipado.`, imgsDe(it, nivelDe(me,it.id))); fechar(); };
   const ag = ov.querySelector("[data-hx-again]"); if (ag) ag.onclick = () => { som("ack",{vol:.6}); ov.remove(); session.abrindo=false; abrirBau(c, me); };
 }
 
@@ -1163,7 +1186,7 @@ function bindView(c, me){
     const novos = pk.itens.filter(id=>!me.inventario.some(x=>x.item===id)); if(!novos.length) return;
     me.carteira[pk.moeda]-=pk.preco; novos.forEach(id=>me.inventario.push({item:id, nivel:1}));
     log(c, `${me.nome} comprou o ${pk.nome}`); save(); som("purchase"); setTimeout(()=>som("r_lendaria",{vol:.6}),350);
-    const y=scrollY; render(); scrollTo(0,y); toast(`${pk.nome}: ${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`); }));
+    const y=scrollY; render(); scrollTo(0,y); toast(`${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`, {titulo:`${pk.nome} liberado!`, imgs: novos.slice(0,3).map(id=>vis(item(id),1).img).filter(Boolean)}); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
   $$("[data-ftipo]").forEach(b=>b.addEventListener("click",()=>{ session.forjaTipo=b.dataset.ftipo; som("click",{vol:.4}); render(); }));
@@ -1173,9 +1196,9 @@ function bindView(c, me){
     if(!evolui(it) || ranq(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
     const nome = vis(it,x.nivel).nome; log(c, `${me.nome} desbloqueou ${nome}`); save();
     som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
-    render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Desbloqueado: ${nome}!`); }));
+    render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`${nome} já pode ser usado no seu perfil.`, {titulo:"Estágio desbloqueado!", ...imgsDe(it, x.nivel)}); }));
   $$("[data-usar]").forEach(b=>b.addEventListener("click",()=>{ const it=item(session.forjaSel), x=me.inventario.find(y=>y.item===it.id), n=+b.dataset.usar; if(!x || n>x.nivel) return; x.ativo=n; session.forjaPrev=null; save(); som("upOutro",{vol:.5}); render(); toast(`Agora usando: ${vis(it,n).nome}.`); }));
-  $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); som("click",{vol:.5}); render(); toast(`${it.nome} equipado.`); }));
+  $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); som("click",{vol:.5}); render(); toast(`${it.nome} equipado.`, imgsDe(it, nivelDe(me,it.id))); }));
   $$("[data-eqsel]").forEach(s=>s.addEventListener("change",()=>{ const t=s.dataset.eqsel; if(s.value) me.equipado[t]=s.value; else delete me.equipado[t]; save(); som("click",{vol:.5}); render(); toast("Perfil atualizado."); }));
   const be=$("#bio-edit");
   if(be){
