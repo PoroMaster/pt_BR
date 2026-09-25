@@ -1,0 +1,2176 @@
+{
+ "cosmeticos": [
+  {
+   "id": "icone-poro",
+   "nome": "Ícone Poro",
+   "tipo": "icone",
+   "raridade": "comum",
+   "preco": 250,
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "Ícone Poro Iniciante",
+     "img": "painel-saas/midia/colecoes/icon_3521.jpg"
+    },
+    {
+     "nome": "Friaca 2013 - Poro Embrulhado",
+     "img": "painel-saas/midia/colecoes/icon_588.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Máquina de Combate",
+     "img": "painel-saas/midia/colecoes/icon_743.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Cavalheiro",
+     "img": "painel-saas/midia/colecoes/icon_744.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Ilhas das Sombras",
+     "img": "painel-saas/midia/colecoes/icon_745.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Astronauta",
+     "img": "painel-saas/midia/colecoes/icon_746.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Matador de Dragões",
+     "img": "painel-saas/midia/colecoes/icon_747.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Rei Poro",
+     "img": "painel-saas/midia/colecoes/icon_748.jpg"
+    },
+    {
+     "nome": "Friaca 2014 - Poro Chegando!",
+     "img": "painel-saas/midia/colecoes/icon_749.jpg"
+    },
+    {
+     "nome": "Ícone Poro Artista",
+     "img": "painel-saas/midia/colecoes/icon_871.jpg"
+    },
+    {
+     "nome": "Ícone Poro Webcartum",
+     "img": "painel-saas/midia/colecoes/icon_904.jpg"
+    },
+    {
+     "nome": "Ícone Poro de Cosplay",
+     "img": "painel-saas/midia/colecoes/icon_905.jpg"
+    },
+    {
+     "nome": "Ícone Poro é Amor",
+     "img": "painel-saas/midia/colecoes/icon_907.jpg"
+    },
+    {
+     "nome": "Ícone Poro Profeta Faminto",
+     "img": "painel-saas/midia/colecoes/icon_936.jpg"
+    },
+    {
+     "nome": "Ícone Poro Profeta Vidente",
+     "img": "painel-saas/midia/colecoes/icon_937.jpg"
+    },
+    {
+     "nome": "Ícone PROJETO: Poro",
+     "img": "painel-saas/midia/colecoes/icon_985.jpg"
+    },
+    {
+     "nome": "Ícone Poro do Nariz Vermelho",
+     "img": "painel-saas/midia/colecoes/icon_1437.jpg"
+    },
+    {
+     "nome": "Ícone Rei Poro",
+     "img": "painel-saas/midia/colecoes/icon_1441.jpg"
+    },
+    {
+     "nome": "Ícone Poro Guardião Estelar",
+     "img": "painel-saas/midia/colecoes/icon_1446.jpg"
+    },
+    {
+     "nome": "Ícone Poro Estrela Negra",
+     "img": "painel-saas/midia/colecoes/icon_1447.jpg"
+    },
+    {
+     "nome": "Ícone Poro Sakura",
+     "img": "painel-saas/midia/colecoes/icon_1626.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama",
+     "img": "painel-saas/midia/colecoes/icon_2094.jpg"
+    },
+    {
+     "nome": "Ícone Poro 5º Aniversário - Turquia",
+     "img": "painel-saas/midia/colecoes/icon_3218.jpg"
+    },
+    {
+     "nome": "Ícone Poro Rena",
+     "img": "painel-saas/midia/colecoes/icon_3232.jpg"
+    },
+    {
+     "nome": "Ícone Poro Barão",
+     "img": "painel-saas/midia/colecoes/icon_3233.jpg"
+    },
+    {
+     "nome": "Ícone Poro de Gema + Gema",
+     "img": "painel-saas/midia/colecoes/icon_3237.jpg"
+    },
+    {
+     "nome": "Ícone Poro Pirata",
+     "img": "painel-saas/midia/colecoes/icon_3493.jpg"
+    },
+    {
+     "nome": "Ícone Poro Cidade do Crime",
+     "img": "painel-saas/midia/colecoes/icon_3592.jpg"
+    },
+    {
+     "nome": "Ícone Poro Chapéu de Barão",
+     "img": "painel-saas/midia/colecoes/icon_3804.jpg"
+    },
+    {
+     "nome": "Ícone Poro Em Chamas",
+     "img": "painel-saas/midia/colecoes/icon_3872.jpg"
+    },
+    {
+     "nome": "Ícone Poro Torcedor",
+     "img": "painel-saas/midia/colecoes/icon_3895.jpg"
+    },
+    {
+     "nome": "Ícone Rainha Poro",
+     "img": "painel-saas/midia/colecoes/icon_3901.jpg"
+    },
+    {
+     "nome": "Ícone Poronauta",
+     "img": "painel-saas/midia/colecoes/icon_4081.jpg"
+    },
+    {
+     "nome": "Ícone Porofissional",
+     "img": "painel-saas/midia/colecoes/icon_4149.jpg"
+    },
+    {
+     "nome": "Ícone Poro Barca do Dragão",
+     "img": "painel-saas/midia/colecoes/icon_4155.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama Pixelado",
+     "img": "painel-saas/midia/colecoes/icon_4200.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fliperama Corrompido",
+     "img": "painel-saas/midia/colecoes/icon_4201.jpg"
+    },
+    {
+     "nome": "Ícone Poro Songpyeon",
+     "img": "painel-saas/midia/colecoes/icon_4285.jpg"
+    },
+    {
+     "nome": "Poro Acolhedor - Meio",
+     "img": "painel-saas/midia/colecoes/icon_4303.jpg"
+    },
+    {
+     "nome": "Ícone Poro Lua Cheia",
+     "img": "painel-saas/midia/colecoes/icon_4690.jpg"
+    },
+    {
+     "nome": "Ícone Poro Tomo Banho de Lua",
+     "img": "painel-saas/midia/colecoes/icon_4691.jpg"
+    },
+    {
+     "nome": "Poro de 10 Anos do Mundial",
+     "img": "painel-saas/midia/colecoes/icon_4787.jpg"
+    },
+    {
+     "nome": "Poro Ostentação",
+     "img": "painel-saas/midia/colecoes/icon_5255.jpg"
+    },
+    {
+     "nome": "Poro Genial",
+     "img": "painel-saas/midia/colecoes/icon_5256.jpg"
+    },
+    {
+     "nome": "Poro Quê?!",
+     "img": "painel-saas/midia/colecoes/icon_5257.jpg"
+    },
+    {
+     "nome": "Poro Preparado",
+     "img": "painel-saas/midia/colecoes/icon_5258.jpg"
+    },
+    {
+     "nome": "Poro Caos!",
+     "img": "painel-saas/midia/colecoes/icon_5259.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fogos de Artifício",
+     "img": "painel-saas/midia/colecoes/icon_5260.jpg"
+    },
+    {
+     "nome": "Ícone Poro Barca do Dragão 2022",
+     "img": "painel-saas/midia/colecoes/icon_5388.jpg"
+    },
+    {
+     "nome": "Ícone Poro e a Lua Cheia",
+     "img": "painel-saas/midia/colecoes/icon_5487.jpg"
+    },
+    {
+     "nome": "Ícone Poro Chá com Leite",
+     "img": "painel-saas/midia/colecoes/icon_5490.jpg"
+    },
+    {
+     "nome": "GG! Ícone Poro",
+     "img": "painel-saas/midia/colecoes/icon_5707.jpg"
+    },
+    {
+     "nome": "Hora da festinha! Ícone Poro",
+     "img": "painel-saas/midia/colecoes/icon_5708.jpg"
+    },
+    {
+     "nome": "Cai dentro! Ícone Poro",
+     "img": "painel-saas/midia/colecoes/icon_5709.jpg"
+    },
+    {
+     "nome": "Ícone DJ Poro",
+     "img": "painel-saas/midia/colecoes/icon_5710.jpg"
+    },
+    {
+     "nome": "Número 1! Ícone Poro",
+     "img": "painel-saas/midia/colecoes/icon_5711.jpg"
+    },
+    {
+     "nome": "Tudo pronto?! Ícone Poro",
+     "img": "painel-saas/midia/colecoes/icon_5712.jpg"
+    },
+    {
+     "nome": "Ícone Poro Ano-Novo Lunar",
+     "img": "painel-saas/midia/colecoes/icon_5714.jpg"
+    },
+    {
+     "nome": "Ícone Poro Rei do Teclado!",
+     "img": "painel-saas/midia/colecoes/icon_5755.jpg"
+    },
+    {
+     "nome": "Ícone Poro Repouso",
+     "img": "painel-saas/midia/colecoes/icon_5756.jpg"
+    },
+    {
+     "nome": "Ícone Poro Salto de Fé",
+     "img": "painel-saas/midia/colecoes/icon_5757.jpg"
+    },
+    {
+     "nome": "Ícone Poro CONHECIMENTO",
+     "img": "painel-saas/midia/colecoes/icon_5758.jpg"
+    },
+    {
+     "nome": "Ícone Poro Pulinhos de Alegria!",
+     "img": "painel-saas/midia/colecoes/icon_5759.jpg"
+    },
+    {
+     "nome": "Ícone Poro Hora do Lanche",
+     "img": "painel-saas/midia/colecoes/icon_5760.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fã Número Um",
+     "img": "painel-saas/midia/colecoes/icon_5761.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fãs de Carteirinha",
+     "img": "painel-saas/midia/colecoes/icon_5762.jpg"
+    },
+    {
+     "nome": "Ícone Poro do Verão CBLoL 2023",
+     "img": "painel-saas/midia/colecoes/icon_5825.jpg"
+    },
+    {
+     "nome": "Ícone Poro Barca do Dragão 2023",
+     "img": "painel-saas/midia/colecoes/icon_5858.jpg"
+    },
+    {
+     "nome": "Ícone Poro Fãzaço",
+     "img": "painel-saas/midia/colecoes/icon_6260.jpg"
+    },
+    {
+     "nome": "Ícone Poro Sonequinha",
+     "img": "painel-saas/midia/colecoes/icon_6261.jpg"
+    },
+    {
+     "nome": "Ícone Poro Atrasado",
+     "img": "painel-saas/midia/colecoes/icon_6262.jpg"
+    },
+    {
+     "nome": "Ícone Poro Dançante",
+     "img": "painel-saas/midia/colecoes/icon_6263.jpg"
+    },
+    {
+     "nome": "Ícone Poro Cochilinho",
+     "img": "painel-saas/midia/colecoes/icon_6264.jpg"
+    },
+    {
+     "nome": "Ícone Poro Refrescante",
+     "img": "painel-saas/midia/colecoes/icon_6265.jpg"
+    },
+    {
+     "nome": "Ícone Poro Curtindo Muito!",
+     "img": "painel-saas/midia/colecoes/icon_6266.jpg"
+    },
+    {
+     "nome": "Ícone Cavaleiro Poro de Espátula",
+     "img": "painel-saas/midia/colecoes/icon_6303.jpg"
+    },
+    {
+     "nome": "Ícone Poro Espátula Dourada 2023",
+     "img": "painel-saas/midia/colecoes/icon_6305.jpg"
+    },
+    {
+     "nome": "Ícone Poro da Sorte 2024",
+     "img": "painel-saas/midia/colecoes/icon_6542.jpg"
+    },
+    {
+     "nome": "Ícone Poro Barca do Dragão 2024",
+     "img": "painel-saas/midia/colecoes/icon_6624.jpg"
+    },
+    {
+     "nome": "Ícone Poro da Sorte 2025",
+     "img": "painel-saas/midia/colecoes/icon_6830.jpg"
+    },
+    {
+     "nome": "Ícone Poro Espectador do Mundial",
+     "img": "painel-saas/midia/colecoes/icon_7015.jpg"
+    },
+    {
+     "nome": "Ícone Poro Destemido",
+     "img": "painel-saas/midia/colecoes/icon_7067.jpg"
+    },
+    {
+     "nome": "Ícone Poros Presenteadores",
+     "img": "painel-saas/midia/colecoes/icon_7088.jpg"
+    },
+    {
+     "nome": "Ícone Detonação Poro!",
+     "img": "painel-saas/midia/colecoes/icon_7091.jpg"
+    },
+    {
+     "nome": "Ícone Detonação Poro",
+     "img": "painel-saas/midia/colecoes/icon_7142.jpg"
+    },
+    {
+     "nome": "Ícone Poro Gamer",
+     "img": "painel-saas/midia/colecoes/icon_4226.jpg"
+    }
+   ]
+  },
+  {
+   "id": "sent-poro",
+   "nome": "Sentinela Poro",
+   "tipo": "sentinela",
+   "raridade": "comum",
+   "preco": 300,
+   "custo_fixo": 3,
+   "evolucoes": [
+    {
+     "nome": "Sentinela Poro",
+     "img": "painel-saas/midia/colecoes/ward_33.png"
+    },
+    {
+     "nome": "Sentinela Poro Astronauta",
+     "img": "painel-saas/midia/colecoes/ward_34.png"
+    },
+    {
+     "nome": "Sentinela Poro Cavalheiro",
+     "img": "painel-saas/midia/colecoes/ward_35.png"
+    },
+    {
+     "nome": "Sentinela Poro Máquina de Combate",
+     "img": "painel-saas/midia/colecoes/ward_36.png"
+    },
+    {
+     "nome": "Sentinela Poro Matador de Dragões",
+     "img": "painel-saas/midia/colecoes/ward_37.png"
+    },
+    {
+     "nome": "Sentinela Poro do Submundo",
+     "img": "painel-saas/midia/colecoes/ward_38.png"
+    },
+    {
+     "nome": "Sentinela El Poro",
+     "img": "painel-saas/midia/colecoes/ward_58.png"
+    },
+    {
+     "nome": "Sentinela Vamporo",
+     "img": "painel-saas/midia/colecoes/ward_70.png"
+    },
+    {
+     "nome": "Sentinela Poro Fliperama",
+     "img": "painel-saas/midia/colecoes/ward_85.png"
+    },
+    {
+     "nome": "Sentinela Rainha Poro",
+     "img": "painel-saas/midia/colecoes/ward_123.png"
+    },
+    {
+     "nome": "Sentinela Poro Fã de Games",
+     "img": "painel-saas/midia/colecoes/ward_252.png"
+    }
+   ]
+  },
+  {
+   "id": "emote-poro",
+   "nome": "Emote Poro",
+   "tipo": "emote",
+   "raridade": "comum",
+   "preco": 100,
+   "custo_fixo": 3,
+   "codigo": "poro",
+   "anim": "flutuar",
+   "evolucoes": [
+    {
+     "nome": "Emote Poro da paz",
+     "img": "painel-saas/midia/colecoes/emote_1498.png"
+    },
+    {
+     "nome": "Emote Poro bochechudo",
+     "img": "painel-saas/midia/colecoes/emote_1499.png"
+    },
+    {
+     "nome": "Emote Vamporo",
+     "img": "painel-saas/midia/colecoes/emote_3106.png"
+    },
+    {
+     "nome": "Emote Poropido",
+     "img": "painel-saas/midia/colecoes/emote_3126.png"
+    },
+    {
+     "nome": "Emote Poro Dorminhoco",
+     "img": "painel-saas/midia/colecoes/emote_3173.png"
+    },
+    {
+     "nome": "Emote Andando de Poro",
+     "img": "painel-saas/midia/colecoes/emote_3210.png"
+    },
+    {
+     "nome": "Emote Infusão de poro",
+     "img": "painel-saas/midia/colecoes/emote_4551.png"
+    },
+    {
+     "nome": "Emote Poro revigorado BRO",
+     "img": "painel-saas/midia/colecoes/emote_4956.png"
+    },
+    {
+     "nome": "Emote Carinho no poro",
+     "img": "painel-saas/midia/colecoes/emote_5009.png"
+    },
+    {
+     "nome": "Emote Poro espectral",
+     "img": "painel-saas/midia/colecoes/emote_5124.png"
+    }
+   ]
+  },
+  {
+   "id": "icone-regioes",
+   "nome": "Ícone Regiões de Runeterra",
+   "tipo": "icone",
+   "raridade": "epica",
+   "preco": null,
+   "custo_fixo": 3,
+   "evolucoes": [
+    {
+     "nome": "Ícone Demacia",
+     "img": "painel-saas/midia/colecoes/icon_1594.jpg"
+    },
+    {
+     "nome": "Ícone Noxus",
+     "img": "painel-saas/midia/colecoes/icon_3368.jpg"
+    },
+    {
+     "nome": "Ícone Freljord",
+     "img": "painel-saas/midia/colecoes/icon_3556.jpg"
+    },
+    {
+     "nome": "Ícone de Piltover",
+     "img": "painel-saas/midia/colecoes/icon_1448.jpg"
+    },
+    {
+     "nome": "Ícone de Zaun",
+     "img": "painel-saas/midia/colecoes/icon_1449.jpg"
+    },
+    {
+     "nome": "Ícone Ionia",
+     "img": "painel-saas/midia/colecoes/icon_3382.jpg"
+    },
+    {
+     "nome": "Ícone Shurima",
+     "img": "painel-saas/midia/colecoes/icon_3555.jpg"
+    },
+    {
+     "nome": "Ícone Monte Targon",
+     "img": "painel-saas/midia/colecoes/icon_3551.jpg"
+    },
+    {
+     "nome": "Ícone Ilhas das Sombras",
+     "img": "painel-saas/midia/colecoes/icon_3554.jpg"
+    },
+    {
+     "nome": "Ícone do Vazio",
+     "img": "painel-saas/midia/colecoes/icon_3369.jpg"
+    }
+   ]
+  },
+  {
+   "id": "icone-cblol",
+   "nome": "Ícone CBLoL",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "custo_fixo": 2,
+   "evolucoes": [
+    {
+     "nome": "CBLoL 2014 - Keyd Stars",
+     "img": "painel-saas/midia/colecoes/icon_674.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - paiN Gaming",
+     "img": "painel-saas/midia/colecoes/icon_675.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - LegendsBR",
+     "img": "painel-saas/midia/colecoes/icon_676.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - KaBuM! e-Sports",
+     "img": "painel-saas/midia/colecoes/icon_677.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - INTZ e-Sports",
+     "img": "painel-saas/midia/colecoes/icon_678.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - CNB e-Sports Club",
+     "img": "painel-saas/midia/colecoes/icon_679.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - Ban Karma Gaming",
+     "img": "painel-saas/midia/colecoes/icon_680.jpg"
+    },
+    {
+     "nome": "CBLoL 2014 - Team awp",
+     "img": "painel-saas/midia/colecoes/icon_681.jpg"
+    },
+    {
+     "nome": "Ícone Final da Primeira Etapa - CBLoL",
+     "img": "painel-saas/midia/colecoes/icon_4064.jpg"
+    },
+    {
+     "nome": "Ícone Troféu CBLoL 2022",
+     "img": "painel-saas/midia/colecoes/icon_5398.jpg"
+    }
+   ]
+  },
+  {
+   "id": "sent-1",
+   "nome": "Sentinela Bat-Lanterna",
+   "tipo": "sentinela",
+   "raridade": "comum",
+   "preco": 250,
+   "img": "painel-saas/midia/colecoes/ward_1.png"
+  },
+  {
+   "id": "sent-8",
+   "nome": "Sentinela Lanterna da Serpente",
+   "tipo": "sentinela",
+   "raridade": "comum",
+   "preco": 300,
+   "img": "painel-saas/midia/colecoes/ward_8.png"
+  },
+  {
+   "id": "sent-43",
+   "nome": "Sentinela Frota Carniceira",
+   "tipo": "sentinela",
+   "raridade": "epica",
+   "preco": null,
+   "img": "painel-saas/midia/colecoes/ward_43.png"
+  },
+  {
+   "id": "sent-98",
+   "nome": "Sentinela Rei Rena",
+   "tipo": "sentinela",
+   "raridade": "epica",
+   "preco": null,
+   "img": "painel-saas/midia/colecoes/ward_98.png"
+  },
+  {
+   "id": "sent-128",
+   "nome": "Sentinela Ano do Porco",
+   "tipo": "sentinela",
+   "raridade": "lendaria",
+   "preco": null,
+   "img": "painel-saas/midia/colecoes/ward_128.png"
+  },
+  {
+   "id": "sent-171",
+   "nome": "Sentinela Oh My God",
+   "tipo": "sentinela",
+   "raridade": "mitica",
+   "preco": null,
+   "img": "painel-saas/midia/colecoes/ward_171.png"
+  },
+  {
+   "id": "emote-1443",
+   "nome": "Emote Amumu Presente de Grego",
+   "tipo": "emote",
+   "raridade": "comum",
+   "preco": 150,
+   "codigo": "amumu_presente_de_gr",
+   "img": "painel-saas/midia/colecoes/emote_1443.png"
+  },
+  {
+   "id": "emote-1467",
+   "nome": "Emote Desespero",
+   "tipo": "emote",
+   "raridade": "comum",
+   "preco": 200,
+   "codigo": "desespero",
+   "img": "painel-saas/midia/colecoes/emote_1467.png"
+  },
+  {
+   "id": "emote-1468",
+   "nome": "Emote Não faz sentido",
+   "tipo": "emote",
+   "raridade": "epica",
+   "preco": null,
+   "codigo": "n_o_faz_sentido",
+   "img": "painel-saas/midia/colecoes/emote_1468.png"
+  },
+  {
+   "id": "emote-3270",
+   "nome": "Emote De novo, não!",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "codigo": "de_novo_n_o",
+   "img": "painel-saas/midia/colecoes/emote_3270.png"
+  },
+  {
+   "id": "icone-udyr",
+   "nome": "Ícone Udyr Guardião Espiritual",
+   "tipo": "icone",
+   "raridade": "ultimate",
+   "preco": null,
+   "custo_fixo": 3,
+   "evolucoes": [
+    {
+     "nome": "Skin - Udyr Guardião Espiritual Tigre",
+     "img": "painel-saas/midia/colecoes/icon_549.jpg"
+    },
+    {
+     "nome": "Skin - Udyr Guardião Espiritual Tartaruga",
+     "img": "painel-saas/midia/colecoes/icon_551.jpg"
+    },
+    {
+     "nome": "Skin - Udyr Guardião Espiritual Urso",
+     "img": "painel-saas/midia/colecoes/icon_550.jpg"
+    },
+    {
+     "nome": "Skin - Udyr Guardião Espiritual Fênix",
+     "img": "painel-saas/midia/colecoes/icon_552.jpg"
+    },
+    {
+     "nome": "Ícone Udyr Guardião Espiritual – Garra do Tigre",
+     "img": "painel-saas/midia/colecoes/icon_5491.jpg"
+    },
+    {
+     "nome": "Ícone Udyr Guardião Espiritual – Manto da Tartaruga",
+     "img": "painel-saas/midia/colecoes/icon_5492.jpg"
+    },
+    {
+     "nome": "Ícone Udyr Guardião Espiritual – Investida do Urso",
+     "img": "painel-saas/midia/colecoes/icon_5493.jpg"
+    },
+    {
+     "nome": "Ícone Udyr Guardião Espiritual – Tempestade da Fênix",
+     "img": "painel-saas/midia/colecoes/icon_5494.jpg"
+    },
+    {
+     "nome": "Ícone Udyr Guardião Espiritual",
+     "img": "painel-saas/midia/colecoes/icon_5495.jpg"
+    }
+   ]
+  },
+  {
+   "id": "icone-dj-sona",
+   "nome": "Ícone DJ Sona",
+   "tipo": "icone",
+   "raridade": "ultimate",
+   "preco": null,
+   "custo_fixo": 3,
+   "evolucoes": [
+    {
+     "nome": "Ícone DJ Sona",
+     "img": "painel-saas/midia/colecoes/icon_4286.jpg"
+    },
+    {
+     "nome": "DJ Sona - Etérea",
+     "img": "painel-saas/midia/colecoes/icon_778.jpg"
+    },
+    {
+     "nome": "DJ Sona - Concussiva",
+     "img": "painel-saas/midia/colecoes/icon_779.jpg"
+    },
+    {
+     "nome": "DJ Sona - Cinética",
+     "img": "painel-saas/midia/colecoes/icon_780.jpg"
+    }
+   ]
+  },
+  {
+   "id": "icone-samira",
+   "nome": "Ícone Samira Soul Fighter",
+   "tipo": "icone",
+   "raridade": "ultimate",
+   "preco": null,
+   "custo_fixo": 3,
+   "evolucoes": [
+    {
+     "nome": "Ícone Moldura Samira Soul Fighter",
+     "img": "painel-saas/midia/colecoes/icon_5905.jpg"
+    },
+    {
+     "nome": "Ícone de Combate Samira Soul Fighter",
+     "img": "painel-saas/midia/colecoes/icon_5914.jpg"
+    },
+    {
+     "nome": "Ícone Samira Soul Fighter Procurada",
+     "img": "painel-saas/midia/colecoes/icon_5929.jpg"
+    }
+   ]
+  },
+  {
+   "id": "sent-elementalista",
+   "nome": "Sentinela Elementalista",
+   "tipo": "sentinela",
+   "raridade": "ultimate",
+   "preco": null,
+   "img": "painel-saas/midia/colecoes/ward_69.png"
+  },
+  {
+   "id": "rank-emote-2019-etapa-1",
+   "nome": "Emote Ranqueada 2019 - Etapa 1",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20191",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3217.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3218.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3219.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3220.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3221.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3222.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3223.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3224.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3225.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2019-etapa-2",
+   "nome": "Emote Ranqueada 2019 - Etapa 2",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20192",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3248.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3249.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3250.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3251.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3252.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3253.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3254.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3255.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3256.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2019-etapa-3",
+   "nome": "Emote Ranqueada 2019 - Etapa 3",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20193",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3340.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3341.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3342.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3343.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3344.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3345.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3346.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3347.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2019 - Etapa 3: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3348.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2020-etapa-1",
+   "nome": "Emote Ranqueada 2020 - Etapa 1",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20201",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3438.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3439.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3440.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3441.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3442.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3443.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3444.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3445.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3446.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2020-etapa-2",
+   "nome": "Emote Ranqueada 2020 - Etapa 2",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20202",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3458.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3459.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3460.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3461.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3462.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3463.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3464.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3465.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3466.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2020-etapa-3",
+   "nome": "Emote Ranqueada 2020 - Etapa 3",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20203",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3503.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3504.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3505.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3506.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3507.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3508.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3509.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3510.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2020 - Etapa 3: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3511.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2021-etapa-1",
+   "nome": "Emote Ranqueada 2021 – Etapa 1",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20211",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3572.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3573.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3574.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3575.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3576.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3577.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3578.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3579.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3580.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2021-etapa-2",
+   "nome": "Emote Ranqueada 2021 – Etapa 2",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20212",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3606.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3607.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3608.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3609.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3610.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3611.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3612.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3613.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3614.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2021-etapa-3",
+   "nome": "Emote Ranqueada 2021 – Etapa 3",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20213",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3665.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3666.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3667.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3668.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3669.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3670.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3671.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3672.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2021 – Etapa 3: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3673.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2022-etapa-1",
+   "nome": "Emote Ranqueada 2022 – Etapa 1",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20221",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3771.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3772.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3773.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3774.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3775.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3776.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3777.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3778.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3779.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2022-etapa-2",
+   "nome": "Emote Ranqueada 2022 – Etapa 2",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20222",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3817.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3818.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3819.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3820.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3821.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3822.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3823.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3824.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3825.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2022-etapa-3",
+   "nome": "Emote Ranqueada 2022 – Etapa 3",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20223",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_3944.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_3945.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_3946.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_3947.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_3948.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_3949.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3950.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_3951.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2022 – Etapa 3: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_3952.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2023-etapa-1",
+   "nome": "Emote Ranqueada 2023 – Etapa 1",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20231",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_4073.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_4074.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_4075.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_4076.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_4077.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_4078.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4079.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4080.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_4081.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-2023-etapa-2",
+   "nome": "Emote Ranqueada 2023 – Etapa 2",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank20232",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_4280.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_4281.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_4282.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_4283.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_4284.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/emote_4285.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_4286.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4287.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4288.png"
+    },
+    {
+     "nome": "Emote Ranqueada 2023 – Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_4289.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-temporada-2024-fim-de-ano",
+   "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank2024",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_4717.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_4718.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_4719.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_4720.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_4721.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/emote_4722.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_4723.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4724.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_4725.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2024 – Fim de Ano: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_4726.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-emote-temporada-2025-fim-de-ano",
+   "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano",
+   "tipo": "emote",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "codigo": "rank2025",
+   "evolucoes": [
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/emote_5015.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/emote_5016.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/emote_5017.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/emote_5018.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/emote_5019.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/emote_5020.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/emote_5021.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/emote_5022.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/emote_5023.png"
+    },
+    {
+     "nome": "Emote Ranqueada Temporada 2025 – Fim de Ano: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/emote_5024.png"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-2026-ranqueada-5",
+   "nome": "Ícone Ranqueada 2026 – Ranqueada-5",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_7200.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_7201.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_7202.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_7203.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_7204.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/icon_7205.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_7206.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_7207.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_7208.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada 2026 – Ranqueada-5: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_7209.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-ano-da-temporada-2024",
+   "nome": "Ícone Ranqueada Ano da Temporada 2024",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_6787.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_6788.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_6789.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_6790.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_6791.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/icon_6792.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_6793.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_6794.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_6795.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2024: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_6796.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-ano-da-temporada-2025",
+   "nome": "Ícone Ranqueada Ano da Temporada 2025",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_7041.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_7042.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_7043.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_7044.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_7045.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/icon_7046.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_7047.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_7048.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_7049.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Ano da Temporada 2025: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_7050.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2019",
+   "nome": "Ícone Ranqueada Temporada 2019",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_4420.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_4421.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_4422.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_4423.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_4424.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_4425.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_4426.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_4427.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2019: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_4428.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2020",
+   "nome": "Ícone Ranqueada Temporada 2020",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_4809.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_4810.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_4811.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_4812.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_4813.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_4814.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_4815.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_4816.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2020: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_4817.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2021",
+   "nome": "Ícone Ranqueada Temporada 2021",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_5123.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_5124.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_5125.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_5126.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_5127.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_5128.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5129.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5130.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2021: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_5131.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2022",
+   "nome": "Ícone Ranqueada Temporada 2022",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_5577.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_5578.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_5579.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_5580.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_5581.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_5582.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5583.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5584.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2022: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_5585.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2023-etapa-1",
+   "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_5876.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_5877.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_5878.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_5879.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_5880.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_5881.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5882.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_5883.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 1: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_5884.jpg"
+    }
+   ]
+  },
+  {
+   "id": "rank-icone-temporada-2023-etapa-2",
+   "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2",
+   "tipo": "icone",
+   "raridade": "lendaria",
+   "preco": null,
+   "ranqueada": true,
+   "evolucoes": [
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Ferro",
+     "elo": "Ferro",
+     "img": "painel-saas/midia/colecoes/icon_6428.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Bronze",
+     "elo": "Bronze",
+     "img": "painel-saas/midia/colecoes/icon_6429.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Prata",
+     "elo": "Prata",
+     "img": "painel-saas/midia/colecoes/icon_6430.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Ouro",
+     "elo": "Ouro",
+     "img": "painel-saas/midia/colecoes/icon_6431.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Platina",
+     "elo": "Platina",
+     "img": "painel-saas/midia/colecoes/icon_6432.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Esmeralda",
+     "elo": "Esmeralda",
+     "img": "painel-saas/midia/colecoes/icon_6471.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Diamante",
+     "elo": "Diamante",
+     "img": "painel-saas/midia/colecoes/icon_6433.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Mestre",
+     "elo": "Mestre",
+     "img": "painel-saas/midia/colecoes/icon_6434.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Grão-Mestre",
+     "elo": "Grão-Mestre",
+     "img": "painel-saas/midia/colecoes/icon_6435.jpg"
+    },
+    {
+     "nome": "Ícone Ranqueada Temporada 2023 – Etapa 2: Desafiante",
+     "elo": "Desafiante",
+     "img": "painel-saas/midia/colecoes/icon_6436.jpg"
+    }
+   ]
+  }
+ ]
+}

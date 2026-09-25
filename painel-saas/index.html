@@ -195,6 +195,27 @@ td.r,th.r{text-align:right}
 .lvl i.on{background:var(--rc);border-color:var(--rc)}
 .evo-tag{font-size:11px;font-weight:600;color:var(--gold);display:inline-flex;align-items:center;gap:3px}
 .mini-evo{display:flex;gap:3px;flex-wrap:wrap}
+@property --ang{syntax:"<angle>";initial-value:0deg;inherits:false}
+.ult{border:2px solid transparent!important;background:linear-gradient(var(--panel),var(--panel)) padding-box,conic-gradient(from var(--ang),#ff9d2e,#ffe37a,#ff4fd8,#8a5cff,#46d6ff,#ff9d2e) border-box!important;animation:ultGiro 3.5s linear infinite;box-shadow:0 0 18px rgba(255,157,46,.35)}
+@keyframes ultGiro{to{--ang:360deg}}
+.ult .pic,.pic.ult{position:relative}
+.ult .pic::after,.pic.ult::after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 30%,rgba(255,255,255,.45) 45%,rgba(255,236,170,.25) 52%,transparent 65%);background-size:250% 100%;animation:brilho 2.8s ease-in-out infinite;pointer-events:none;mix-blend-mode:screen}
+@keyframes brilho{0%{background-position:150% 0}100%{background-position:-60% 0}}
+.rar.ultimate{background:linear-gradient(90deg,#ff9d2e,#ffe37a,#ff4fd8,#46d6ff,#ff9d2e);background-size:200% auto;-webkit-background-clip:text;background-clip:text;color:transparent;animation:ultTexto 3s linear infinite}
+.rar.ultimate img{filter:drop-shadow(0 0 4px #ffb347)}
+@keyframes ultTexto{to{background-position:200% center}}
+.medal.ult,.em.ult{filter:drop-shadow(0 0 4px #ffe37a) drop-shadow(0 0 10px #ff9d2e)}
+.grupo-h{display:flex;align-items:center;justify-content:space-between;margin:14px 0 8px;font-weight:600;font-size:13px;color:var(--ink-2)}
+.grupo-h:first-child{margin-top:0}
+.rank-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:10px}
+.rank-card{border:1px solid var(--line);border-radius:10px;padding:10px;display:grid;grid-template-columns:56px 1fr;gap:10px;align-items:center;background:var(--panel)}
+.rank-card .pic{width:56px;aspect-ratio:1;border-radius:8px}
+.rank-card.lock{opacity:.55}
+.rank-card small{display:block;color:var(--ink-3);font-size:11.5px}
+.rank-card .mini-evo button{width:18px;height:18px;border-width:1px}
+.rank-card .mini-evo button:disabled{opacity:1;cursor:default}
+.rank-card .mini-evo button.lock{opacity:.28;filter:grayscale(1)}
+@media (prefers-reduced-motion:reduce){.ult,.ult .pic::after,.pic.ult::after,.rar.ultimate{animation:none!important}}
 .packs{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:14px}
 .pack{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--panel);display:grid;grid-template-rows:auto 1fr}
 .pack .capa{aspect-ratio:16/7;background:#0a1a1d center/cover;position:relative;display:flex;align-items:flex-end;padding:12px}
@@ -205,13 +226,14 @@ td.r,th.r{text-align:right}
 .pack .linha{display:flex;align-items:center;gap:8px;font-size:12.5px}
 .pack .linha .pic{width:40px;height:40px;aspect-ratio:1;border-radius:8px;flex:none}
 .pack .linha .pic > img,.pack .linha .pic > .em{max-width:88%;max-height:88%;width:auto!important;height:auto!important}
-.pack .linha .pic .ring{transform:scale(.55)}
 .mini-evo button{width:26px;height:26px;padding:0;border-radius:6px;border:2px solid var(--line);background:#0a1a1d;overflow:hidden;display:grid;place-items:center}
 .mini-evo button[aria-pressed="true"]{border-color:var(--rc)}
 .mini-evo .pic{width:100%;height:100%;aspect-ratio:auto}
 .mini-evo .pic > img,.mini-evo .pic > .em{max-width:90%;max-height:90%;width:auto!important;height:auto!important}
-.mini-evo .ring{transform:scale(.42)}
-.forge{display:grid;gap:14px;align-content:start}
+.forge{display:grid;gap:14px;align-content:start;min-width:0;grid-template-columns:minmax(0,1fr);align-self:start;position:sticky;top:calc(16px + env(safe-area-inset-top,0px))}
+.grid.two > *{min-width:0}
+.forge .evo{max-width:100%}
+.forge .pic.forge-pic{max-height:280px;width:100%}
 .forge .pic{border-radius:8px;aspect-ratio:16/10}
 .forge .pic.flash{animation:forged .9s ease-out}
 .evo{display:flex;gap:4px;align-items:flex-start;overflow-x:auto;padding-bottom:4px}
@@ -321,7 +343,6 @@ td.r,th.r{text-align:right}
 .card-r video{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 .card-r .art .pic > img{max-width:82%;max-height:82%}
 .card-r .art .pic > .em{width:78%!important;height:78%!important}
-.card-r .art .ring{transform:scale(2.2)}
 .reveal h2{font:700 22px var(--display);letter-spacing:.04em;margin:0;max-width:80vw}
 .reveal .rar{font-size:14px}
 .reveal .rar img{width:22px;height:22px}
@@ -442,7 +463,7 @@ textarea.json{width:100%;min-height:420px;font:12.5px/1.5 var(--mono);background
 
 <script>
 (function(){
-const STORE = "lsp-painel-v10";
+const STORE = "lsp-painel-v11";
 const NOW = new Date("2026-09-25T09:00:00");
 const NOW_ISO = "2026-09-25T09:00:00";
 let db = null, seed = null, S = null;
@@ -506,12 +527,25 @@ function rew(r){
   const keys = [["pp",S.reputacao.icone,"P.P."],["pm",S.miticos.icone,"Pontos Míticos"],["moedas",S.moedas.moedas.img,"Moedas"],["essencia",S.moedas.essencia.img,"Essência Mítica"],["fragmentos",S.moedas.fragmentos.img,"Fragmentos"],["estelares",S.moedas.estelares.img,"Fragmentos Estelares"]];
   return `<span class="rew">${keys.filter(([k])=>r[k]).map(([k,i,n])=>`<span title="${n}"><img src="${src(i)}" alt="">${r[k]>0?"+":""}${r[k]}</span>`).join("")}</span>`;
 }
-function rarTag(id){ const r=rar(id); return `<span class="rar" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
+function rarTag(id){ const r=rar(id); return `<span class="rar ${id}" style="${rc(id)}"><img src="${src(r.img)}" alt="">${esc(r.nome)}</span>`; }
 function lvl(n, id, max=S.forja.nivel_max){ return `<span class="lvl" style="${rc(id)}" aria-label="Estágio ${n} de ${max}">${Array.from({length:max},(_,i)=>`<i class="${i<n?"on":""}"></i>`).join("")}</span>`; }
 const TIPO = {tema:"tema", borda:"borda", icone:"ícone", sentinela:"sentinela", emote:"emote"};
 const TIPOS_PL = {todos:"Todos", tema:"Temas", borda:"Bordas", icone:"Ícones", sentinela:"Sentinelas", emote:"Emotes"};
 const evolui = it => !!(it.evolucoes && it.evolucoes.length);
 const dePack = it => !!it.pack;
+const ranq = it => !!it.ranqueada;
+const especial = it => dePack(it) || ranq(it);
+const ult = it => it.raridade === "ultimate";
+/* recompensas de ranqueada: cada estágio exige um elo mítico (Esmeralda fica junto de Diamante) */
+const ELO_REQ = {Ferro:1, Bronze:2, Prata:3, Ouro:4, Platina:5, Esmeralda:6, Diamante:6, Mestre:7, "Grão-Mestre":8, Desafiante:9};
+const liberadosRanq = (it, m) => it.evolucoes.filter(e => ELO_REQ[e.elo] <= elo(m).i).length;
+function syncRanq(m){
+  for (const it of db.cosmeticos.filter(ranq)){
+    const n = liberadosRanq(it, m), x = m.inventario.find(y=>y.item===it.id);
+    if (n > 0 && !x) m.inventario.push({item:it.id, nivel:n});
+    else if (x) { x.nivel = Math.max(1, n); if (x.ativo > x.nivel) x.ativo = x.nivel; }
+  }
+}
 const custoEvo = (it, nivel) => it.custo_fixo || rar(it.raridade).custo * nivel;
 /* nivel = estágios desbloqueados; ativo = estágio em uso (dá para voltar a qualquer um já desbloqueado) */
 const nivelDe = (m, id) => { const x = m.inventario.find(y=>y.item===id); return x ? (x.ativo || x.nivel) : 1; };
@@ -523,12 +557,13 @@ function vis(it, nivel=1){
 }
 const POSE = {nome:"Poro", foto:"assets/users/02.png", id:"poro"};
 function emo(it, nivel, size){ const v=vis(it,nivel); return `<img class="em ${v.anim?"anim-"+v.anim:""} ${v.aura?"aura-"+v.aura:""}" src="${src(v.img)}" alt="${esc(v.nome)}" title="${esc(v.nome)}" style="width:${size}px;height:${size}px">`; }
-function ring(inner, estilo){ return estilo ? `<span class="ring b-${esc(estilo)}">${inner}</span>` : inner; }
+function ring(inner, estilo, pad){ return estilo ? `<span class="ring b-${esc(estilo)}"${pad!=null?` style="padding:${pad}px"`:""}>${inner}</span>` : inner; }
 /* arte do cosmético para cartões, vitrine e revelação */
-function pic(it, nivel=1, extra=""){
+/* tam: tamanho da foto quando o cosmético é uma borda (desenhada no tamanho certo, sem encolher com CSS) */
+function pic(it, nivel=1, extra="", tam=58){
   const v = vis(it, nivel);
   if (it.tipo==="tema") return `<div class="pic ${extra}" style="${bg(v.img)}"></div>`;
-  if (it.tipo==="borda") return `<div class="pic ${extra}">${ring(avatar(POSE,58), v.estilo)}</div>`;
+  if (it.tipo==="borda") return `<div class="pic ${extra}">${ring(avatar(POSE,tam), v.estilo, Math.max(2, Math.round(tam/14)))}</div>`;
   if (it.tipo==="emote") return `<div class="pic ${extra}">${emo(it,nivel,76)}</div>`;
   return `<div class="pic ${it.tipo==="sentinela"?"sent":"icone"} ${extra}"><img src="${src(v.img)}" alt=""></div>`;
 }
@@ -627,6 +662,7 @@ function wsDot(w, px){ const d=px?`width:${px}px;height:${px}px;font-size:11px;`
 function navBtn(v,count){ return `<button data-view="${v.id}" ${session.view===v.id?'aria-current="page"':""}><img src="${src(v.ico)}" alt="">${v.nome}${count?`<span class="count">${count}</span>`:""}</button>`; }
 function render(){
   const c = ws(), me = meIn(c), adm = isAdmin(c);
+  c.membros.forEach(syncRanq);
   if (VIEWS.find(v=>v.id===session.view)?.admin && !adm) session.view="inicio";
   $("#ws-btn").innerHTML = `${wsDot(c)}<span><b>${esc(c.nome)}</b><small>Plano ${c.plano==="pro"?"Pro":"Grátis"} · ${c.membros.length} membros</small></span><span style="margin-left:auto">▾</span>`;
   $("#ws-menu").innerHTML = myWorkspaces().map(w=>`<button data-ws="${w.id}">${wsDot(w,22)}${esc(w.nome)}</button>`).join("") + `<button data-ws="__new"><span style="width:22px;text-align:center">+</span>Criar comunidade</button>`;
@@ -768,7 +804,7 @@ function profile(c, m, opts={}){
   const vit = (it, rot) => it ? `<div>${it.tipo==="emote"?emo(it,nivelDe(m,it.id),72):`<img src="${src(vis(it,nivelDe(m,it.id)).img)}" alt="" ${it.tipo==="icone"?'style="border-radius:50%"':""}>`}<small><b>${esc(vis(it,nivelDe(m,it.id)).nome)}</b><br>${rot}</small></div>` : `<div><small>Sem ${rot.toLowerCase()}</small></div>`;
   return `<div class="prof">
     <div class="banner" style="${tema?bg(tema.img):""}"></div>
-    <div class="idrow"><div class="ava">${avatarR(m,84)}${ic?`<img class="medal" src="${src(vis(ic,nivelDe(m,ic.id)).img)}" alt="${esc(ic.nome)}" title="${esc(vis(ic,nivelDe(m,ic.id)).nome)}">`:""}</div>
+    <div class="idrow"><div class="ava">${avatarR(m,84)}${ic?`<img class="medal ${ult(ic)?"ult":""}" src="${src(vis(ic,nivelDe(m,ic.id)).img)}" alt="${esc(ic.nome)}" title="${esc(vis(ic,nivelDe(m,ic.id)).nome)}">`:""}</div>
       <div style="padding-bottom:4px;min-width:0;flex:1"><h2>${esc(m.nome)}${tags(m)}</h2><div class="row" style="gap:6px;margin-top:4px"><span class="pill teal"><img class="ico" style="width:16px;height:16px" src="${src(cargoImg(m.cargo)||S.reputacao.icone)}" alt="">${esc(m.cargo)}</span><span class="pill">${esc(m.acesso)}</span>${pos?`<span class="pill gold">${pos}º em reputação</span>`:""}</div></div>${em?`<span style="align-self:flex-end">${emo(em,nivelDe(m,em.id),64)}</span>`:""}</div>
     <div class="inner">
       ${m.bio||opts.editavel?`<div class="bio" id="bio-view">${bioHtml(m)||`<span class="note">Escreva algo sobre você ao lado.</span>`}</div>`:""}
@@ -818,7 +854,7 @@ function vMercado(c, me){
   /* vitrine: 15 por categoria. Primeiro os vendidos por Moedas, depois raros de raridades variadas. */
   const VITRINE = 15;
   const vitrine = tipo => {
-    const todos = db.cosmeticos.filter(it=>it.tipo===tipo && !dePack(it));
+    const todos = db.cosmeticos.filter(it=>it.tipo===tipo && !especial(it));
     const venda = todos.filter(it=>it.preco!=null);
     const raros = S.raridades.map(r=>todos.filter(it=>it.preco==null && it.raridade===r.id));
     const esc = [...venda];
@@ -826,7 +862,7 @@ function vMercado(c, me){
     return esc.sort((a,b)=> (ordemR[a.raridade]-ordemR[b.raridade]) || ((a.preco??1e9)-(b.preco??1e9)));
   };
   const loja = (t==="todos" ? ordemT : [t]).flatMap(vitrine);
-  const fora = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n + db.cosmeticos.filter(it=>it.tipo===tp && !dePack(it)).length - vitrine(tp).length, 0);
+  const fora = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n + db.cosmeticos.filter(it=>it.tipo===tp && !especial(it)).length - vitrine(tp).length, 0);
   const qtd = k => (k==="todos"?ordemT:[k]).reduce((n,tp)=>n+vitrine(tp).length,0);
   const has = id => me.inventario.some(x=>x.item===id);
   const podeAbrir = me.materiais.baus>0 && me.materiais.chaves>0;
@@ -846,15 +882,20 @@ function vMercado(c, me){
     <div class="packs">${db.packs.map(pk=>{ const its = pk.itens.map(item), falta = its.filter(it=>!has(it.id)), moeda = S.moedas[pk.moeda];
       return `<div class="pack"><div class="capa" style="${bg(pk.capa)}"><h3>${esc(pk.nome)}</h3></div><div class="corpo">
         <p class="note" style="margin:0">${esc(pk.descricao)}</p>
-        <div class="conteudo">${its.map(it=>`<div class="linha" style="${rc(it.raridade)}">${pic(it, evolui(it)?it.evolucoes.length:1)}<span style="min-width:0"><b>${esc(it.nome)}</b><br><span class="note">${TIPO[it.tipo]}${evolui(it)?` · ${it.evolucoes.length} estágios`:""}${has(it.id)?" · já é seu":""}</span></span></div>`).join("")}</div>
+        <div class="conteudo">${its.map(it=>`<div class="linha" style="${rc(it.raridade)}">${pic(it, evolui(it)?it.evolucoes.length:1, "", 22)}<span style="min-width:0"><b>${esc(it.nome)}</b><br><span class="note">${TIPO[it.tipo]}${evolui(it)?` · ${it.evolucoes.length} estágios`:""}${has(it.id)?" · já é seu":""}</span></span></div>`).join("")}</div>
         ${falta.length ? `<button class="btn ${pk.moeda==="essencia"?"btn-blue":"btn-primary"}" data-pack="${pk.id}" ${me.carteira[pk.moeda]<pk.preco?"disabled":""}><img class="ico" style="width:18px;height:18px" src="${src(moeda.img)}" alt="">Comprar por ${fmt(pk.preco)} ${esc(moeda.nome)}</button>` : `<button class="btn" disabled>Coleção completa</button>`}
       </div></div>`; }).join("")}</div>
   </div>
+  ${(()=>{ const rk = db.cosmeticos.filter(ranq), e = elo(me);
+    return `<div class="card" style="margin-bottom:16px"><h2><span class="row"><img class="ico" src="${src(e.t.img)}" alt="">Recompensas de ranqueada</span><span class="note">Não são vendidas: cada estágio é liberado pelo seu elo mítico. Você está em ${esc(e.t.nome)}.</span></h2>
+    <div class="rank-grid">${rk.map(it=>{ const n = liberadosRanq(it, me), ultimo = it.evolucoes[Math.max(0,n-1)];
+      return `<div class="rank-card ${n?"":"lock"}" style="${rc(it.raridade)}">${pic(it, Math.max(1,n))}<div style="min-width:0"><b style="font-size:13px">${esc(it.nome.replace(/^(Emote|Ícone) Ranqueada /,""))}</b><small>${TIPO[it.tipo]} · ${n?`liberado até ${esc(ultimo.elo)}`:`chegue em ${esc(it.evolucoes[0].elo)}`}</small>
+        <div class="mini-evo" style="margin-top:4px">${it.evolucoes.map((ev,i)=>`<button type="button" class="${i<n?"":"lock"}" title="${esc(ev.nome)}${i<n?"":" (bloqueado)"}" disabled>${pic(it,i+1,"",10)}</button>`).join("")}</div></div></div>`; }).join("")}</div></div>`; })()}
   <div class="card"><h2><span class="row"><img class="ico" src="${src(S.moedas.moedas.img)}" alt="">Loja</span><span class="note">${db.cosmeticos.filter(x=>has(x.id)).length} de ${db.cosmeticos.length} cosméticos na sua coleção · comuns e temas com Moedas, os raros só no Baú Hextech</span></h2>
     <div class="chips">${Object.entries(TIPOS_PL).map(([k,n])=>`<button data-loja="${k}" aria-pressed="${t===k}">${n} (${qtd(k)})</button>`).join("")}</div>
     ${fora(t)?`<p class="note" style="margin-bottom:10px">Mais ${fora(t)} ${t==="todos"?"cosméticos":TIPOS_PL[t].toLowerCase()} fora da vitrine: esses só saem no Baú Hextech.</p>`:""}
-    <div class="items">${loja.map(it=>{ const lp = session.lojaPrev[it.id] || 1; return `<div class="item" style="${rc(it.raridade)}">${pic(it, lp)}<div class="body"><b>${esc(evolui(it)?vis(it,lp).nome:it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
-      ${evolui(it)?`<span class="evo-tag">⬆ Evolui na Forja: ${it.evolucoes.length} estágios</span><div class="mini-evo">${it.evolucoes.map((e,i)=>`<button type="button" data-mprev="${it.id}:${i+1}" aria-pressed="${lp===i+1}" title="${esc(e.nome)}">${pic(it,i+1)}</button>`).join("")}</div>`:""}
+    <div class="items">${loja.map(it=>{ const lp = session.lojaPrev[it.id] || 1; return `<div class="item ${ult(it)?"ult":""}" style="${rc(it.raridade)}">${pic(it, lp)}<div class="body"><b>${esc(evolui(it)?vis(it,lp).nome:it.nome)}</b><div class="row" style="justify-content:space-between">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div>
+      ${evolui(it)?`<span class="evo-tag">⬆ Evolui na Forja: ${it.evolucoes.length} estágios</span><div class="mini-evo">${it.evolucoes.map((e,i)=>`<button type="button" data-mprev="${it.id}:${i+1}" aria-pressed="${lp===i+1}" title="${esc(e.nome)}">${pic(it,i+1,"",14)}</button>`).join("")}</div>`:""}
       ${has(it.id)?`<button class="btn btn-sm" disabled>Já é seu</button>`
         : it.preco ? `<button class="btn btn-sm btn-primary" data-buy="${it.id}" ${me.carteira.moedas<it.preco?"disabled":""}><img class="ico" style="width:16px;height:16px" src="${src(S.moedas.moedas.img)}" alt="">${fmt(it.preco)} Moedas</button>`
         : it.preco===0 ? `<button class="btn btn-sm" disabled>Padrão</button>`
@@ -875,7 +916,8 @@ function miniPerfil(m, it, nivel){
 function rotulo(it, i){
   const e = it.evolucoes[i];
   if (it.evolucoes.some(x=>x.aura)) return e.aura ? "Aura " + e.aura[0].toUpperCase() + e.aura.slice(1) : "Sem aura";
-  return e.nome.replace(/^(Emote|Ícone|Sentinela|Borda Arcana:)\s+/, "");
+  if (e.elo) return e.elo;
+  return e.nome.replace(/^(Skin|Friaca \d{4})\s*-\s*/, "").replace(/^(Emote|Ícone|Sentinela|Borda Arcana:)\s+/, "");
 }
 function vForja(c, me){
   const inv = me.inventario;
@@ -886,19 +928,25 @@ function vForja(c, me){
   const ativo = sel.ativo || sel.nivel;
   const prev = evolui(it) && session.forjaPrev && session.forjaPrev!==ativo ? session.forjaPrev : null;
   const nv = prev || ativo, v = vis(it, nv);
-  const ordem = [...inv].sort((a,b)=> (evolui(item(b.item))-evolui(item(a.item))));
+  const ordemR = Object.fromEntries(S.raridades.map((r,i)=>[r.id,i])), ft = session.forjaTipo || "todos";
+  const lista = inv.filter(x=>{ const t=item(x.item); return ft==="todos" || (ft==="evoluem" ? evolui(t) && !ranq(t) : ft==="ranqueada" ? ranq(t) : t.tipo===ft && !ranq(t)); });
+  const ordenar = (a,b)=> (ordemR[item(b.item).raridade]-ordemR[item(a.item).raridade]) || (evolui(item(b.item))-evolui(item(a.item))) || item(a.item).nome.localeCompare(item(b.item).nome);
+  const grupos = [...Object.keys(TIPO).map(tp=>[TIPOS_PL[tp], lista.filter(x=>item(x.item).tipo===tp && !ranq(item(x.item))).sort(ordenar)]), ["Ranqueada", lista.filter(x=>ranq(item(x.item))).sort(ordenar)]].filter(([,l])=>l.length);
+  const qtdF = k => inv.filter(x=>{ const t=item(x.item); return k==="todos" || (k==="evoluem" ? evolui(t) && !ranq(t) : k==="ranqueada" ? ranq(t) : t.tipo===k && !ranq(t)); }).length;
+  const cartao = x => { const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""} ${ult(t)?"ult":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.ativo||x.nivel)}<div class="body"><b>${esc(vis(t,x.ativo||x.nivel).nome)}</b>${rarTag(t.raridade)}<div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${t.evolucoes.length>5?`<span class="num note">${x.nivel}/${t.evolucoes.length}</span>`:lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:ranq(t)?`<span class="pill gold">ranqueada</span>`:""}</div></div></button>`; };
   const onde = {tema:"como tema do painel", borda:"como borda da foto", icone:"como ícone", emote:"como emote do perfil", sentinela:"na vitrine do perfil"};
   return head("Forja", "Aprimorar desbloqueia o próximo estágio visual do cosmético. Os estágios anteriores continuam seus: escolha qual usar quando quiser. Só cosméticos com linha de evolução podem ser aprimorados.") + walletBar(me) +
   `<div class="grid two">
     <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens · ${inv.filter(x=>evolui(item(x.item))).length} evoluem</span></h2>
-      <div class="items">${ordem.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.ativo||x.nivel)}<div class="body"><b>${esc(vis(t,x.ativo||x.nivel).nome)}</b><div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
-    <div class="card forge" style="${rc(it.raridade)}">
+      <div class="chips">${[["todos","Todos"],["evoluem","⬆ Evoluem"],["ranqueada","Ranqueada"],...Object.entries(TIPOS_PL).filter(([k])=>k!=="todos")].map(([k,n])=>`<button data-ftipo="${k}" aria-pressed="${ft===k}">${n} (${qtdF(k)})</button>`).join("")}</div>
+      ${grupos.map(([tp,l])=>`<div class="grupo-h"><span>${tp}</span><span class="note">${l.length}</span></div><div class="items">${l.map(cartao).join("")}</div>`).join("") || `<p class="note">Nada nesta categoria.</p>`}</div>
+    <div class="card forge ${ult(it)?"ult":""}" style="${rc(it.raridade)}">
       ${prev?`<div class="prev-bar"><span>👁 Pré-visualização: estágio ${prev} de ${max}${prev>sel.nivel?" (ainda bloqueado)":" (desbloqueado)"}</span><span class="row" style="gap:6px">${prev<=sel.nivel?`<button class="btn btn-sm btn-gold" data-usar="${prev}">Usar este estágio</button>`:""}<button class="btn btn-sm" data-prev="0">Voltar ao que está em uso</button></span></div>`:""}
       ${pic(it, nv, "forge-pic")}
       <div><h2 style="margin-bottom:4px">${esc(v.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
-      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===ativo?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span class="rot">${esc(rotulo(it,i))}</span>${i+1===ativo?"<b>em uso</b>":i+1>sel.nivel?"<span>🔒</span>":""}</button>`).join("")}</div><p class="note" style="margin-top:4px">${sel.nivel} de ${max} estágios desbloqueados. Clique num estágio para ver como fica; os desbloqueados podem ser usados a qualquer momento.</p></div>
+      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===ativo?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1,"",32)}<span class="rot">${esc(rotulo(it,i))}</span>${i+1===ativo?"<b>em uso</b>":i+1>sel.nivel?"<span>🔒</span>":""}</button>`).join("")}</div><p class="note" style="margin-top:4px">${sel.nivel} de ${max} estágios desbloqueados. Clique num estágio para ver como fica; os desbloqueados podem ser usados a qualquer momento.</p></div>
         <div><span class="label">Como fica no seu perfil</span><div style="margin-top:6px">${miniPerfil(me, it, nv)}</div></div>
-        ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Desbloquear <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar (desbloquear estágio ${sel.nivel+1})</button></div>` : `<p class="note">Todos os estágios desbloqueados.</p>`}`
+        ${ranq(it) ? `<div class="admin-box"><span>Recompensa de ranqueada: os estágios são liberados pelo seu <b>elo mítico</b>, não por fragmentos.</span><span class="note">${sel.nivel<max?`Próximo: ${esc(it.evolucoes[sel.nivel].nome)} ao chegar em ${esc(it.evolucoes[sel.nivel].elo)}.`:"Todos os estágios liberados."}</span></div>` : sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Desbloquear <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar (desbloquear estágio ${sel.nivel+1})</button></div>` : `<p class="note">Todos os estágios desbloqueados.</p>`}`
       : `<p class="note">Este cosmético não tem linha de evolução, então não pode ser aprimorado. Procure os que têm o selo ⬆ na loja.</p>`}
       <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${onde[it.tipo]}`}</button>
     </div>
@@ -994,7 +1042,7 @@ async function abrirBau(c, me){
   if (session.abrindo || !(me.materiais.baus>0 && me.materiais.chaves>0)) return;
   session.abrindo = true; const token = ++session.hx;
   me.materiais.baus--; me.materiais.chaves--;
-  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !dePack(x)));
+  const it = sortear(db.cosmeticos.filter(x=>x.id!=="tema-oficial" && !especial(x)));
   save();
   const ov = document.createElement("div"); ov.className="hx"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label","Abrindo Baú Hextech");
   ov.innerHTML = `<div class="top"><button data-hx-mute>${mudo?"🔇":"🔊"}</button><button data-hx-skip>Pular</button></div>
@@ -1034,7 +1082,7 @@ function revelar(c, me, it, ov){
   save();
   const podeMais = me.materiais.baus>0 && me.materiais.chaves>0;
   ov.querySelector("#hx-stage").outerHTML = `<div class="reveal" style="${rc(it.raridade)}">
-      <div class="card-r"><div class="art">${pic(it,1)}</div><video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
+      <div class="card-r"><div class="art ${ult(it)?"ult":""}">${pic(it,1,"",120)}</div><video muted playsinline id="v-rev" src="${vidUrl("reveal_"+VID[it.raridade]+"_intro")}"></video></div>
       <h2>${esc(it.nome)}</h2>${rarTag(it.raridade)}<span class="badge">${esc(badge)}</span>
       <div class="acts">${!ja?`<button class="btn btn-hex" data-hx-equip>Equipar agora</button>`:""}${podeMais?`<button class="btn btn-blue" data-hx-again>Abrir outro (${me.materiais.baus} baús, ${me.materiais.chaves} chaves)</button>`:""}<button class="btn" data-hx-close style="background:rgba(255,255,255,.1);color:#e6ebf3;border-color:rgba(255,255,255,.25)">Continuar</button></div>
     </div>`;
@@ -1088,10 +1136,11 @@ function bindView(c, me){
     const y=scrollY; render(); scrollTo(0,y); toast(`${pk.nome}: ${novos.length} ${novos.length>1?"itens novos":"item novo"} na sua coleção. Evolua na Forja.`); }));
   const bk=$("#buy-kit"); if(bk) bk.addEventListener("click",()=>comprarKit(c, me));
   const oc=$("#open-chest"); if(oc) oc.addEventListener("click",()=>abrirBau(c, me));
+  $$("[data-ftipo]").forEach(b=>b.addEventListener("click",()=>{ session.forjaTipo=b.dataset.ftipo; som("click",{vol:.4}); render(); }));
   $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; som("click",{vol:.5}); render(); }));
   $$("[data-prev]").forEach(b=>b.addEventListener("click",()=>{ const n=+b.dataset.prev; session.forjaPrev = n||null; som("hover",{vol:.4}); render(); }));
   $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=custoEvo(it,x.nivel);
-    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
+    if(!evolui(it) || ranq(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
     const nome = vis(it,x.nivel).nome; log(c, `${me.nome} desbloqueou ${nome}`); save();
     som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
     render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Desbloqueado: ${nome}!`); }));

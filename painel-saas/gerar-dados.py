@@ -164,50 +164,21 @@ cosmeticos = [
     cos("borda-estelar", "Borda Guardiã Estelar", "borda", "ultimate", estilo="estelar"),
 
     # Ícones de perfil (medalhão na foto)
-    cos("icone-poro", "Ícone Poro", "icone", "comum", preco=250, evolucoes=evo(
-        ("Ícone Poro Iniciante", C + "icon_3521.jpg"), ("Ícone Poro Cavalheiro", C + "icon_744.jpg"),
-        ("Ícone Poro Máquina de Combate", C + "icon_743.jpg"), ("Ícone Poro Fliperama", C + "icon_2094.jpg"),
-        ("Ícone Poro Gamer", C + "icon_4226.jpg"))),
-    cos("icone-realeza", "Ícone Realeza Poro", "icone", "lendaria", evolucoes=evo(
-        ("Ícone Poro Sakura", C + "icon_1626.jpg"), ("Ícone Poro Pirata", C + "icon_3493.jpg"),
-        ("Ícone Poro Barão", C + "icon_3233.jpg"), ("Ícone Rei Poro", C + "icon_1441.jpg"),
-        ("Ícone Rainha Poro", C + "icon_3901.jpg"))),
     cos("icone-poro-classico", "Ícone Poro do PoroMaster", "icone", "comum", "assets/users/02.png", 200),
-    cos("icone-poro-rena", "Ícone Poro Rena", "icone", "comum", C + "icon_3232.jpg", 250),
-    cos("icone-piltover", "Ícone de Piltover", "icone", "comum", C + "icon_1448.jpg", 300),
-    cos("icone-zaun", "Ícone de Zaun", "icone", "comum", C + "icon_1449.jpg", 300),
     cos("icone-rosa", "Ícone Brasão da Rosa", "icone", "comum", W + "Crest_Of_The_Rose_profileicon.jpg", 300),
     cos("icone-academia", "Ícone Academia de Batalha", "icone", "comum", W + "Battle_Academia_profileicon.png", 300),
-    cos("icone-porofissional", "Ícone Porofissional", "icone", "epica", C + "icon_4149.jpg"),
-    cos("icone-dj-poro", "Ícone DJ Poro", "icone", "epica", C + "icon_5710.jpg"),
-    cos("icone-poro-estelar", "Ícone Poro Guardião Estelar", "icone", "epica", C + "icon_1446.jpg"),
-    cos("icone-vazio", "Ícone do Vazio", "icone", "epica", C + "icon_3369.jpg"),
     cos("icone-aspectos", "Ícone Convergência dos Aspectos", "icone", "epica", W + "Aspects_Converge_profileicon.jpg"),
     cos("icone-heartsteel", "Ícone HEARTSTEEL", "icone", "epica", W + "HEARTSTEEL_Brand_profileicon.jpg"),
-    cos("icone-poronauta", "Ícone Poronauta", "icone", "lendaria", C + "icon_4081.jpg"),
-    cos("icone-poro-chamas", "Ícone Poro em Chamas", "icone", "lendaria", C + "icon_3872.jpg"),
     cos("icone-lucian", "Ícone Lucian Velho Oeste", "icone", "lendaria", W + "High_Noon_Lucian_Mythic_Chroma_profileicon.jpg"),
     cos("icone-mf", "Ícone Miss Fortune MVP", "icone", "lendaria", W + "MVP_T1_Miss_Fortune_Signature_profileicon.jpg"),
-    cos("icone-poro-negro", "Ícone Poro Estrela Negra", "icone", "mitica", C + "icon_1447.jpg"),
-    cos("icone-teclado", "Ícone Poro Rei do Teclado", "icone", "mitica", C + "icon_5755.jpg"),
     cos("icone-riven", "Ícone Riven Alvorecer", "icone", "mitica", W + "Dawnbringer_Riven_Mythic_Chroma_profileicon.jpg"),
     cos("icone-zed", "Ícone Zed Matador de Galáxias", "icone", "mitica", W + "Galaxy_Slayer_Zed_Mythic_Chroma_profileicon.jpg"),
     cos("icone-maestria", "Ícone Maestria 7", "icone", "mitica", B + "Rank_7.png"),
-    cos("icone-veigar", "Ícone Veigar Chefão Final", "icone", "ultimate", W + "Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg"),
-    cos("icone-urf", "Ícone Imperador Urf", "icone", "ultimate", B + "Imperador.png"),
+    cos("icone-veigar", "Ícone Veigar Chefão Final", "icone", "mitica", W + "Final_Boss_Veigar_Mythic_Chroma_profileicon.jpg"),
+    cos("icone-urf", "Ícone Imperador Urf", "icone", "mitica", B + "Imperador.png"),
 
     # Sentinelas: aparecem na vitrine do perfil
-    cos("sent-poro", "Sentinela Poro", "sentinela", "comum", preco=300, evolucoes=evo(
-        ("Sentinela Poro", C + "ward_33.png"), ("Sentinela Poro Cavalheiro", C + "ward_35.png"),
-        ("Sentinela Poro Máquina de Combate", C + "ward_36.png"), ("Sentinela Poro Fliperama", C + "ward_85.png"),
-        ("Sentinela Poro Fã de Games", C + "ward_252.png"))),
-    cos("sent-el-poro", "Sentinela El Poro", "sentinela", "comum", C + "ward_58.png", 350),
-    cos("sent-astronauta", "Sentinela Poro Astronauta", "sentinela", "epica", C + "ward_34.png"),
-    cos("sent-vamporo", "Sentinela Vamporo", "sentinela", "epica", C + "ward_70.png"),
-    cos("sent-submundo", "Sentinela Poro do Submundo", "sentinela", "epica", C + "ward_38.png"),
-    cos("sent-dragao", "Sentinela Poro Matador de Dragões", "sentinela", "lendaria", C + "ward_37.png"),
-    cos("sent-rainha", "Sentinela Rainha Poro", "sentinela", "mitica", C + "ward_123.png"),
-    cos("sent-durandal", "Sentinela Durandal da Academia", "sentinela", "ultimate", C + "ward_136.png"),
+    cos("sent-durandal", "Sentinela Durandal da Academia", "sentinela", "lendaria", C + "ward_136.png"),
     cos("sent-olho-dragao", "Sentinela Olho do Dragão", "sentinela", "comum", C + "ward_76.png", 350),
     cos("sent-arcane", "Sentinela Arcane", "sentinela", "epica", C + "ward_218.png"),
     cos("sent-pulsefire", "Sentinela Pulsefire", "sentinela", "epica", C + "ward_77.png"),
@@ -217,28 +188,15 @@ cosmeticos = [
     cos("sent-akana", "Sentinela Akana", "sentinela", "epica", C + "ward_201.png"),
 
     # Emotes: ao lado do nome e na biografia (:codigo:). Os raros são animados.
-    cos("emote-poro", "Emote Poro", "emote", "comum", preco=100, codigo="poro", anim="flutuar", evolucoes=evo(
-        ("Emote Poro da Paz", C + "emote_1498.png"), ("Emote Poro Bochechudo", C + "emote_1499.png"),
-        ("Emote Poro Dorminhoco", C + "emote_3173.png"), ("Emote Andando de Poro", C + "emote_3210.png"),
-        ("Emote Poropido", C + "emote_3126.png"))),
     cos("emote-gg", "Emote GG <3", "emote", "comum", C + "emote_3124.png", 120, codigo="gg"),
     cos("emote-flex", "Emote Pose de Força", "emote", "comum", W + "Big_Flex_Emote.png", 150, codigo="flex", evolucoes=evo_aura("Emote Pose de Força", W + "Big_Flex_Emote.png")),
     cos("emote-espiada", "Emote Só uma Espiada", "emote", "comum", W + "Just_A_Peek_Emote.png", 150, codigo="espiada"),
     cos("emote-trabalho", "Emote De Volta ao Trabalho", "emote", "lendaria", W + "Back_To_Business_Emote.png", codigo="trabalho", anim="pulsar"),
     # Mordekaiser de elo: as auras vêm da própria arte do jogo (emotes "2019 - Etapa 2")
-    cos("emote-morde", "Emote Mordekaiser", "emote", "comum", preco=200, codigo="morde", evolucoes=evo(
-        ("Emote Mordekaiser de Ferro", C + "emote_3248.png"), ("Emote Mordekaiser de Diamante", C + "emote_3253.png"),
-        ("Emote Mordekaiser Grão-Mestre", C + "emote_3255.png"), ("Emote Mordekaiser Mestre", C + "emote_3254.png"),
-        ("Emote Mordekaiser Desafiante", C + "emote_3256.png"))),
     cos("emote-brinde", "Emote Um Brinde", "emote", "comum", W + "Cheers_Dears_Emote.png", 200, codigo="brinde"),
-    cos("emote-carinho", "Emote Carinho no Poro", "emote", "comum", C + "emote_5009.png", 150, codigo="carinho"),
-    cos("emote-infusao", "Emote Infusão de Poro", "emote", "epica", C + "emote_4551.png", codigo="infusao", anim="flutuar"),
-    cos("emote-revigorado", "Emote Poro Revigorado", "emote", "epica", C + "emote_4956.png", codigo="revigorado", anim="pular"),
     cos("emote-emoteemo", "Emote Emoteemo", "emote", "epica", C + "emote_3212.png", codigo="emoteemo", anim="pular", evolucoes=evo_aura("Emote Emoteemo", C + "emote_3212.png")),
     cos("emote-petala", "Emote Leve como Pétala", "emote", "epica", W + "Light_As_A_Petal_Emote.png", codigo="petala", anim="flutuar"),
     cos("emote-comigo", "Emote Fica Comigo", "emote", "epica", W + "Be_With_Me_Emote.png", codigo="fica_comigo", anim="pulsar"),
-    cos("emote-espectral", "Emote Poro Espectral", "emote", "lendaria", C + "emote_5124.png", codigo="espectral", anim="balancar"),
-    cos("emote-vamporo", "Emote Vamporo", "emote", "lendaria", C + "emote_3106.png", codigo="vamporo", anim="balancar"),
     cos("emote-guma", "Emote Deusa Guma", "emote", "lendaria", W + "Guma-Goddess_Emote.png", codigo="guma", anim="pulsar", evolucoes=evo_aura("Emote Deusa Guma", W + "Guma-Goddess_Emote.png")),
     # Pack Guardiãs Estelares: itens exclusivos, só vêm no pack
     cos("icone-guardias", "Ícone Guardiãs Estelares", "icone", "epica", pack="guardias", custo_fixo=4, evolucoes=evo(
@@ -312,8 +270,8 @@ poromaster = {
     "membros": [
         membro("m1", "Luckey", "Dono", "Dev", None, 72, 4, [1240, 10, 26, 9],
                [14, 18, 12, 22, 19, 24, 21, 27], "2022-01-15", foto="image/Profile/01.png", tags=["Booster"], conta="u1",
-               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-poronauta", 1), ("emote-flex", 2), ("emote-guma", 4),
-                               ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-rainha", 1), ("sent-poro", 3)),
+               inventario=inv(("tema-oficial", 1), ("tema-sentina", 3), ("tema-ionia", 1), ("icone-poro", 4), ("icone-urf", 1), ("icone-udyr", 4), ("emote-flex", 2), ("emote-guma", 4),
+                               ("emote-poro", 2), ("emote-gg", 1), ("borda-chama", 1), ("borda-arcana", 3), ("sent-elementalista", 1), ("sent-poro", 3)),
                equipado={"tema": "tema-sentina", "icone": "icone-urf", "emote": "emote-guma", "borda": "borda-arcana", "sentinela": "sent-poro"},
                materiais=(2, 2), bio="Dev do PoroMaster desde 2022 :poro: Atualizo o ModSkin toda noite de patch. Bug? Manda no Discord :gg:"),
         membro("m2", "Bruch", "Admin", "Dev", None, 55, 2, [610, 3, 12, 2],
@@ -322,8 +280,8 @@ poromaster = {
                equipado={"tema": "tema-oficial", "icone": "icone-poro"}),
         membro("m3", "Jake", "Admin", "Mod", 84, 41, 3, [480, 2, 9, 3],
                [6, 9, 7, 11, 8, 6, 10, 12], "2022-02-03", foto="image/Profile/04.png", tags=["Corretor"], conta="u2",
-               inventario=inv(("tema-oficial", 1), ("tema-ionia", 2), ("icone-rosa", 2), ("emote-trabalho", 1), ("emote-morde", 3), ("borda-hextech", 1), ("sent-vamporo", 1)),
-               equipado={"tema": "tema-ionia", "icone": "icone-rosa", "emote": "emote-trabalho", "borda": "borda-hextech", "sentinela": "sent-vamporo"},
+               inventario=inv(("tema-oficial", 1), ("tema-ionia", 2), ("icone-rosa", 2), ("emote-trabalho", 1), ("borda-hextech", 1), ("sent-poro", 2)),
+               equipado={"tema": "tema-ionia", "icone": "icone-rosa", "emote": "emote-trabalho", "borda": "borda-hextech", "sentinela": "sent-poro"},
                materiais=(1, 0), bio="Moderador. Corrijo texto torto :trabalho:"),
         membro("m4", "Finger", "Membro", "Suporte", 67, 23, 1, [320, 1, 6, 0],
                [4, 6, 5, 7, 8, 6, 7, 9], "2022-02-11"),
@@ -332,8 +290,8 @@ poromaster = {
                inventario=inv(("tema-oficial", 1)), equipado={"tema": "tema-oficial"}),
         membro("m6", "Khyago", "Membro", "Tester", 100, 64, 3, [410, 4, 11, 3],
                [9, 7, 11, 8, 12, 10, 13, 14], "2022-02-24", foto="image/Profile/03.png", conta="u3",
-               inventario=inv(("tema-oficial", 1), ("icone-teclado", 1), ("emote-espiada", 1), ("borda-pulso", 1), ("sent-astronauta", 2)),
-               equipado={"tema": "tema-oficial", "icone": "icone-teclado", "emote": "emote-espiada", "borda": "borda-pulso", "sentinela": "sent-astronauta"},
+               inventario=inv(("tema-oficial", 1), ("icone-regioes", 3), ("emote-espiada", 1), ("borda-pulso", 1), ("sent-poro", 4)),
+               equipado={"tema": "tema-oficial", "icone": "icone-regioes", "emote": "emote-espiada", "borda": "borda-pulso", "sentinela": "sent-poro"},
                materiais=(1, 1), bio="Tester caçador de bugs :espiada: 100 P.P. e contando."),
         membro("m7", "TaikunX3", "Membro", "Tester", 27, 12, 0, [90, 0, 2, 0],
                [3, 4, 2, 5, 1, 2, 0, 3], "2022-05-09", foto="image/Profile/02.png", penalidade=True),
@@ -398,6 +356,14 @@ dados = {
     "packs": packs,
     "comunidades": [poromaster, tradutores]
 }
+
+# coleções geradas por gerar-colecoes.py (Poro, regiões, CBLoL, Ultimates e ranqueada)
+colecoes = os.path.join(os.path.dirname(os.path.abspath(__file__)), "colecoes.json")
+if os.path.exists(colecoes):
+    with open(colecoes, encoding="utf-8") as f:
+        novos = json.load(f)["cosmeticos"]
+    ids_novos = {c["id"] for c in novos}
+    dados["cosmeticos"] = [c for c in dados["cosmeticos"] if c["id"] not in ids_novos] + novos
 
 # packs temáticos gerados por gerar-packs.py a partir dos dados do cliente do LoL
 extra = os.path.join(os.path.dirname(os.path.abspath(__file__)), "packs.json")
