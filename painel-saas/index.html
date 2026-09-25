@@ -484,7 +484,8 @@ function lvl(n, id, max=S.forja.nivel_max){ return `<span class="lvl" style="${r
 const TIPO = {tema:"tema", borda:"borda", icone:"ícone", sentinela:"sentinela", emote:"emote"};
 const TIPOS_PL = {todos:"Todos", tema:"Temas", borda:"Bordas", icone:"Ícones", sentinela:"Sentinelas", emote:"Emotes"};
 const evolui = it => !!(it.evolucoes && it.evolucoes.length);
-const nivelDe = (m, id) => { const x = m.inventario.find(y=>y.item===id); return x ? x.nivel : 1; };
+/* nivel = estágios desbloqueados; ativo = estágio em uso (dá para voltar a qualquer um já desbloqueado) */
+const nivelDe = (m, id) => { const x = m.inventario.find(y=>y.item===id); return x ? (x.ativo || x.nivel) : 1; };
 /* visual do cosmético no nível: nas linhas de evolução, cada nível troca nome, imagem, estilo ou aura */
 function vis(it, nivel=1){
   if (!evolui(it)) return {nome:it.nome, img:it.img, estilo:it.estilo, aura:null, anim:it.anim};
@@ -820,21 +821,22 @@ function vForja(c, me){
   const sel = inv.find(x=>x.item===session.forjaSel), it = item(sel.item), r = rar(it.raridade), max = it.evolucoes ? it.evolucoes.length : 1;
   const custo = r.custo * sel.nivel, moeda = S.moedas[r.frag], tem = me.carteira[r.frag];
   const eq = me.equipado && me.equipado[it.tipo] === it.id;
-  const prev = evolui(it) && session.forjaPrev && session.forjaPrev!==sel.nivel ? session.forjaPrev : null;
-  const nv = prev || sel.nivel, v = vis(it, nv);
+  const ativo = sel.ativo || sel.nivel;
+  const prev = evolui(it) && session.forjaPrev && session.forjaPrev!==ativo ? session.forjaPrev : null;
+  const nv = prev || ativo, v = vis(it, nv);
   const ordem = [...inv].sort((a,b)=> (evolui(item(b.item))-evolui(item(a.item))));
   const onde = {tema:"como tema do painel", borda:"como borda da foto", icone:"como ícone", emote:"como emote do perfil", sentinela:"na vitrine do perfil"};
-  return head("Forja", "Aprimorar muda o visual do cosmético para o próximo estágio da linha dele. Só cosméticos com linha de evolução podem ser aprimorados.") + walletBar(me) +
+  return head("Forja", "Aprimorar desbloqueia o próximo estágio visual do cosmético. Os estágios anteriores continuam seus: escolha qual usar quando quiser. Só cosméticos com linha de evolução podem ser aprimorados.") + walletBar(me) +
   `<div class="grid two">
     <div class="card"><h2>Seus cosméticos <span class="note">${inv.length} itens · ${inv.filter(x=>evolui(item(x.item))).length} evoluem</span></h2>
-      <div class="items">${ordem.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.nivel)}<div class="body"><b>${esc(vis(t,x.nivel).nome)}</b><div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
+      <div class="items">${ordem.map(x=>{ const t=item(x.item); const on = me.equipado && me.equipado[t.tipo]===t.id; return `<button class="item ${x.item===sel.item?"sel":""}" style="${rc(t.raridade)}" data-forja="${t.id}" aria-pressed="${x.item===sel.item}">${pic(t,x.ativo||x.nivel)}<div class="body"><b>${esc(vis(t,x.ativo||x.nivel).nome)}</b><div class="row" style="justify-content:space-between">${evolui(t)?`<span class="row" style="gap:4px">${lvl(x.nivel,t.raridade,t.evolucoes.length)}</span>`:`<span class="note">Sem evolução</span>`}${on?`<span class="pill ok">Equipado</span>`:`<span class="pill">${TIPO[t.tipo]}</span>`}</div></div></button>`; }).join("")}</div></div>
     <div class="card forge" style="${rc(it.raridade)}">
-      ${prev?`<div class="prev-bar"><span>👁 Pré-visualização: estágio ${prev} de ${max}${prev>sel.nivel?" (ainda bloqueado)":""}</span><button class="btn btn-sm" data-prev="0">Voltar ao atual</button></div>`:""}
+      ${prev?`<div class="prev-bar"><span>👁 Pré-visualização: estágio ${prev} de ${max}${prev>sel.nivel?" (ainda bloqueado)":" (desbloqueado)"}</span><span class="row" style="gap:6px">${prev<=sel.nivel?`<button class="btn btn-sm btn-gold" data-usar="${prev}">Usar este estágio</button>`:""}<button class="btn btn-sm" data-prev="0">Voltar ao que está em uso</button></span></div>`:""}
       ${pic(it, nv, "forge-pic")}
       <div><h2 style="margin-bottom:4px">${esc(v.nome)}</h2><div class="row">${rarTag(it.raridade)}<span class="pill">${TIPO[it.tipo]}</span></div></div>
-      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===sel.nivel?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}${i+1===sel.nivel?"<br><b>atual</b>":""}</span></button>`).join("")}</div><p class="note" style="margin-top:4px">Clique num estágio para ver como fica.</p></div>
+      ${evolui(it) ? `<div><span class="label">Linha de evolução</span><div class="evo" style="margin-top:6px">${it.evolucoes.map((e,i)=>`${i?`<span class="arrow">→</span>`:""}<button type="button" class="st ${i+1===ativo?"on":""} ${i+1>sel.nivel?"lock":""} ${i+1===prev?"prev":""}" style="${rc(it.raridade)}" data-prev="${i+1}" title="Ver ${esc(e.nome)}">${pic(it,i+1)}<span>${esc(e.nome.replace(it.nome,"").replace(/^[: ]+/,"")||"Base")}${i+1===ativo?"<br><b>em uso</b>":i+1>sel.nivel?"<br>🔒":""}</span></button>`).join("")}</div><p class="note" style="margin-top:4px">${sel.nivel} de ${max} estágios desbloqueados. Clique num estágio para ver como fica; os desbloqueados podem ser usados a qualquer momento.</p></div>
         <div><span class="label">Como fica no seu perfil</span><div style="margin-top:6px">${miniPerfil(me, it, nv)}</div></div>
-        ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Evoluir para <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar</button></div>` : `<p class="note">Estágio final alcançado.</p>`}`
+        ${sel.nivel<max ? `<div class="admin-box"><div class="row" style="justify-content:space-between"><span>Desbloquear <b>${esc(it.evolucoes[sel.nivel].nome)}</b></span><span class="row" style="gap:4px"><img class="ico" src="${src(moeda.img)}" alt=""><b class="num">${custo}</b> ${esc(moeda.nome)}</span></div><span class="note">Você tem ${tem}.${tem<custo?` Faltam ${custo-tem}.`:""}</span><button class="btn btn-gold" data-upgrade="${it.id}" ${tem<custo?"disabled":""}>Aprimorar (desbloquear estágio ${sel.nivel+1})</button></div>` : `<p class="note">Todos os estágios desbloqueados.</p>`}`
       : `<p class="note">Este cosmético não tem linha de evolução, então não pode ser aprimorado. Procure os que têm o selo ⬆ na loja.</p>`}
       <button class="btn ${eq?"":"btn-primary"}" data-equip="${it.id}" ${eq?"disabled":""}>${eq?"Equipado":`Equipar ${onde[it.tipo]}`}</button>
     </div>
@@ -1019,10 +1021,11 @@ function bindView(c, me){
   $$("[data-forja]").forEach(b=>b.addEventListener("click",()=>{ session.forjaSel=b.dataset.forja; session.forjaPrev=null; som("click",{vol:.5}); render(); }));
   $$("[data-prev]").forEach(b=>b.addEventListener("click",()=>{ const n=+b.dataset.prev; session.forjaPrev = n||null; som("hover",{vol:.4}); render(); }));
   $$("[data-upgrade]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.upgrade), r=rar(it.raridade), x=me.inventario.find(y=>y.item===it.id), custo=r.custo*x.nivel;
-    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; session.forjaPrev=null;
-    const nome = vis(it,x.nivel).nome; log(c, `${me.nome} evoluiu ${it.nome} para ${nome}`); save();
+    if(!evolui(it) || me.carteira[r.frag]<custo || x.nivel>=it.evolucoes.length) return; me.carteira[r.frag]-=custo; x.nivel++; x.ativo=x.nivel; session.forjaPrev=null;
+    const nome = vis(it,x.nivel).nome; log(c, `${me.nome} desbloqueou ${nome}`); save();
     som("upIntro"); setTimeout(()=>som(x.nivel>=it.evolucoes.length?"upMax":"upOutro"), 650);
-    render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Evoluiu para ${nome}!`); }));
+    render(); const fp=$(".forge-pic"); if(fp) fp.classList.add("flash"); toast(`Desbloqueado: ${nome}!`); }));
+  $$("[data-usar]").forEach(b=>b.addEventListener("click",()=>{ const it=item(session.forjaSel), x=me.inventario.find(y=>y.item===it.id), n=+b.dataset.usar; if(!x || n>x.nivel) return; x.ativo=n; session.forjaPrev=null; save(); som("upOutro",{vol:.5}); render(); toast(`Agora usando: ${vis(it,n).nome}.`); }));
   $$("[data-equip]").forEach(b=>b.addEventListener("click",()=>{ const it=item(b.dataset.equip); me.equipado = me.equipado||{}; me.equipado[it.tipo]=it.id; save(); som("click",{vol:.5}); render(); toast(`${it.nome} equipado.`); }));
   $$("[data-eqsel]").forEach(s=>s.addEventListener("change",()=>{ const t=s.dataset.eqsel; if(s.value) me.equipado[t]=s.value; else delete me.equipado[t]; save(); som("click",{vol:.5}); render(); toast("Perfil atualizado."); }));
   const be=$("#bio-edit");
