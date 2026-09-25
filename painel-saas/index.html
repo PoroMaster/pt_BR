@@ -452,7 +452,9 @@ const $$ = s => [...document.querySelectorAll(s)];
 const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
 const fmt = n => Number(n).toLocaleString("pt-BR");
 const BASE = /\/painel-saas\//.test(location.pathname) ? "../" : "";
-const src = p => esc(BASE + p);
+/* na versão publicada, as imagens pequenas vêm empacotadas em atlas/*.json (data: URIs); localmente, dos arquivos */
+const ATLAS = {};
+const src = p => ATLAS[p] || esc(BASE + p);
 const bg = p => `background-image:url('${src(p)}')`;
 const clamp = (v,a,b) => Math.max(a, Math.min(b, v));
 const PALETTE = ["#b8862b","#2f8f84","#6a5acd","#c0504d","#3f7cc0","#8a6d3b","#4c9a5a","#a35d9a","#5d6f8a"];
@@ -591,7 +593,7 @@ function promover(c, m){
 
 /* ---------- login ---------- */
 function renderLogin(){
-  $("#brand-login").src = BASE + "image/tester.ico"; $("#brand-side").src = BASE + "image/tester.ico";
+  $("#brand-login").src = ATLAS["image/tester.ico"] || BASE + "image/tester.ico"; $("#brand-side").src = ATLAS["image/tester.ico"] || BASE + "image/tester.ico";
   $("#demo-accounts").innerHTML = db.contas.map(a=>{
     const roles = db.comunidades.map(c=>{ const m=c.membros.find(x=>x.conta===a.id); return m ? `${m.cargo} em ${c.nome}` : null; }).filter(Boolean).join(" · ");
     return `<button class="demo-acc" data-acc="${a.id}">${avatar({id:a.id,nome:a.nome,foto:a.foto},40)}<span><b>${esc(a.nome)}</b><small>${esc(roles)}</small></span></button>`;
@@ -1110,7 +1112,9 @@ function bindView(c, me){
 }
 
 /* ---------- início ---------- */
-fetch(BASE + "painel-saas/data.json").then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(j=>{
+const carregarAtlas = () => fetch(BASE + "painel-saas/atlas/index.json").then(r=>r.ok?r.json():[]).catch(()=>[])
+  .then(partes => Promise.all(partes.map(n => fetch(BASE + "painel-saas/atlas/" + n).then(r=>r.json()).then(m=>Object.assign(ATLAS, m)).catch(()=>{}))));
+carregarAtlas().then(()=>fetch(BASE + "painel-saas/data.json")).then(r=>{ if(!r.ok) throw new Error(r.status); return r.json(); }).then(j=>{
   seed=j; db=structuredClone(j);
   try{ const s=localStorage.getItem(STORE); if(s) db=JSON.parse(s); }catch(e){}
   S=db.sistema; renderLogin();
