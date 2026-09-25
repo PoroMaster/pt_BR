@@ -1403,16 +1403,18 @@ function vDados(){
 /* itens de pack também saem do baú, com peso menor (sistema.hextech.peso_pack) */
 const pesoBau = it => rar(it.raridade).peso * (dePack(it) ? (S.hextech.peso_pack ?? .25) : 1);
 function sortear(pool){ const tot=pool.reduce((s,it)=>s+pesoBau(it),0); let r=Math.random()*tot; for(const it of pool){ r-=pesoBau(it); if(r<=0) return it; } return pool.at(-1); }
+/* contador é o seletor do número: a tela pode ser redesenhada durante o voo, então ele é buscado de novo na chegada */
 function voarPara(img, origem, contador, video, somK, atraso, pousou){
-  const tile = contador && contador.closest(".mat");
-  if (!origem || !tile) { pousou(); return; }
+  const achar = () => { const n = $(contador); return n && n.closest(".mat"); };
+  if (!origem || !achar()) { pousou(); return; }
   setTimeout(() => {
+    const tile = achar(); if (!tile) { pousou(); return; }
     const alvo = tile.querySelector("img"), a = origem.getBoundingClientRect(), b = alvo.getBoundingClientRect(), tam = 128;
     const ax = a.left + a.width/2, ay = a.top + a.height/2, bx = b.left + b.width/2, by = b.top + b.height/2;
     const el = document.createElement("img"); el.className = "voo"; el.src = src(img); el.alt = "";
     el.style.cssText = `left:${ax-tam/2}px;top:${ay-tam/2}px;width:${tam}px;height:${tam}px`;
     document.body.appendChild(el); som(somK);
-    const chegar = () => { el.remove(); pousou();
+    const chegar = () => { el.remove(); pousou(); const tile = achar(); if (!tile) return;
       tile.classList.remove("pop"); void tile.offsetWidth; tile.classList.add("pop");
       const v = document.createElement("video"); v.className = "fx-tile"; v.muted = true; v.playsInline = true; v.src = vidUrl(video);
       const vt = 260; v.style.cssText = `left:${bx-vt/2}px;top:${by-vt/2}px;width:${vt}px;height:${vt}px`;
@@ -1436,7 +1438,7 @@ function kitAjustar(me, n){
   const menos = $('[data-kq="-1"]'), mais = $('[data-kq="1"]'), bk = $("#buy-kit");
   if (menos) menos.disabled = n<=1; if (mais) mais.disabled = n>=mx; if (bk && !travado("kit")) bk.innerHTML = kitRotulo(n);
 }
-function subirTexto(el, txt){ const r = el.getBoundingClientRect(), t = document.createElement("div"); t.className = "sobe"; t.textContent = txt;
+function subirTexto(el, txt){ if (!el.isConnected) return; const r = el.getBoundingClientRect(), t = document.createElement("div"); t.className = "sobe"; t.textContent = txt;
   t.style.cssText = `left:${r.left + r.width/2}px;top:${r.top}px`; document.body.appendChild(t); setTimeout(()=>t.remove(), 1300); }
 /* compra de pack: tela cheia no estilo "ultimate kill" do TFT (carga, impacto, raios, nome gigante e os itens saindo em leque) */
 function animacaoPack(pk, novos){
@@ -1475,17 +1477,16 @@ function animacaoPack(pk, novos){
 }
 function comprarKit(c, me){
   const custo = S.hextech.kit_custo_essencia, n = kitQtd(me); if (travado("kit") || kitMax(me) < 1) return;
-  travar("kit", 1900);
+  travar("kit", 2200);
   me.carteira.essencia -= custo*n; me.materiais.baus += n; me.materiais.chaves += n;
   log(c, `${me.nome} comprou ${n>1?`${n} Kits Hextech`:"um Kit Hextech"}`); save();
   som("purchase");
   render();
   /* o baú e a chave saem do botão, crescem e voam até os contadores do Hextech */
-  const botao = $("#buy-kit"), nb = $("#n-baus"), nc = $("#n-chaves");
-  if (nb) nb.textContent = me.materiais.baus - n;
-  if (nc) nc.textContent = me.materiais.chaves - n;
-  voarPara(S.hextech.bau.img, botao, nb, "resource_add_chest_generic", "chest", 120, () => { if (nb){ nb.textContent = me.materiais.baus; subirTexto(nb, `+${n}`); } });
-  voarPara(S.hextech.chave.img, botao, nc, "resource_add_material_key", "key", 620, () => { if (nc){ nc.textContent = me.materiais.chaves; subirTexto(nc, `+${n}`); } });
+  const botao = $("#buy-kit"), set = (sel, v) => { const e = $(sel); if (e) e.textContent = v; return e; };
+  set("#n-baus", me.materiais.baus - n); set("#n-chaves", me.materiais.chaves - n);
+  voarPara(S.hextech.bau.img, botao, "#n-baus", "resource_add_chest_generic", "chest", 120, () => { const e = set("#n-baus", me.materiais.baus); if (e) subirTexto(e, `+${n}`); });
+  voarPara(S.hextech.chave.img, botao, "#n-chaves", "resource_add_material_key", "key", 620, () => { const e = set("#n-chaves", me.materiais.chaves); if (e) subirTexto(e, `+${n}`); });
 }
 /* sorteia o bônus de um baú (Essência Mítica ou outro Baú + Chave), conforme as chances do sistema */
 function sortearBonus(){
