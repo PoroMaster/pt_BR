@@ -78,10 +78,11 @@ img{max-width:100%}
 .pk-ov{position:fixed;inset:0;z-index:70;display:grid;place-items:center;background:radial-gradient(circle at 50% 42%,rgba(18,26,44,.9),rgba(2,5,10,.98) 70%);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);opacity:0;transition:opacity .35s;overflow:hidden}
 .pk-ov.carga{opacity:1}
 .pk-ov.sai{opacity:0}
-.pk-palco{position:relative;display:grid;justify-items:center;gap:14px;width:min(980px,calc(100vw - 32px));max-height:100dvh;overflow:auto;padding:28px 0}
-.pk-raios{position:fixed;left:50%;top:40%;width:220vmax;height:220vmax;margin:-110vmax 0 0 -110vmax;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--rc) 35%,transparent) 0deg 6deg,transparent 6deg 18deg);mask:radial-gradient(circle,#000 0,transparent 45%);-webkit-mask:radial-gradient(circle,#000 0,transparent 45%);opacity:0;pointer-events:none}
+.pk-palco{position:relative;z-index:1;display:grid;justify-items:center;gap:14px;width:min(980px,calc(100vw - 32px));max-height:100dvh;overflow-x:hidden;overflow-y:auto;scrollbar-width:none;padding:28px 0}
+.pk-palco::-webkit-scrollbar{display:none}
+.pk-raios{position:absolute;left:50%;top:40%;width:220vmax;height:220vmax;margin:-110vmax 0 0 -110vmax;background:repeating-conic-gradient(from 0deg,color-mix(in srgb,var(--rc) 35%,transparent) 0deg 6deg,transparent 6deg 18deg);mask:radial-gradient(circle,#000 0,transparent 45%);-webkit-mask:radial-gradient(circle,#000 0,transparent 45%);opacity:0;pointer-events:none}
 .pk-ov.impacto .pk-raios{opacity:.9;animation:pk-gira 14s linear infinite}
-.pk-nucleo{position:fixed;left:50%;top:40%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:radial-gradient(circle,#fff,var(--rc) 40%,transparent 70%);opacity:0;pointer-events:none}
+.pk-nucleo{position:absolute;z-index:2;left:50%;top:40%;width:60px;height:60px;margin:-30px 0 0 -30px;border-radius:50%;background:radial-gradient(circle,#fff,var(--rc) 40%,transparent 70%);opacity:0;pointer-events:none}
 .pk-ov.carga .pk-nucleo{animation:pk-carga 1.2s ease-in forwards}
 .pk-ov.impacto .pk-nucleo{animation:pk-flash .6s ease-out forwards}
 .pk-capa{width:min(560px,86vw);aspect-ratio:16/9;border-radius:14px;background:#0a1a1d center/cover no-repeat;border:2px solid var(--rc);box-shadow:0 0 0 1px rgba(0,0,0,.5),0 0 60px var(--rc),0 20px 50px rgba(0,0,0,.7);opacity:0;transform:scale(2.8);filter:blur(12px) brightness(3)}
@@ -1443,9 +1444,8 @@ function animacaoPack(pk, novos){
   const its = novos.map(item).sort((a,b)=>ordemRar(a.raridade)-ordemRar(b.raridade));
   const topo = its.at(-1);
   const ov = document.createElement("div"); ov.className = "pk-ov"; ov.setAttribute("role","dialog"); ov.setAttribute("aria-label", `${pk.nome} desbloqueado`);
-  ov.style.setProperty("--rc", `var(--r-${topo.raridade}, #e8c35e)`);
-  ov.innerHTML = `<div class="pk-palco" style="${rc(topo.raridade)}">
-      <div class="pk-raios"></div><div class="pk-nucleo"></div>
+  ov.innerHTML = `<div class="pk-raios" style="${rc(topo.raridade)}"></div><div class="pk-nucleo" style="${rc(topo.raridade)}"></div>
+    <div class="pk-palco" style="${rc(topo.raridade)}">
       <div class="pk-capa" style="${bg(pk.capa)}"></div>
       <div class="pk-titulo"><small>Pack desbloqueado</small><h1>${esc(pk.nome.replace(/^Pack /,""))}</h1></div>
       <div class="pk-itens">${its.map((it,i)=>`<div class="pk-card ${ult(it)?"ult":""}" style="${rc(it.raridade)};--i:${i};--n:${its.length}">${pic(it,1,"",56)}<b>${esc(it.nome)}</b>${rarTag(it.raridade)}${evolui(it)?`<small>${it.evolucoes.length} estágios na Forja</small>`:""}</div>`).join("")}</div>
